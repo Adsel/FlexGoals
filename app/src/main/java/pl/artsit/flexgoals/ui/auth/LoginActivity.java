@@ -8,13 +8,30 @@ import android.widget.Button;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.model.user.AuthData;
+import pl.artsit.flexgoals.model.user.User;
 
 public class LoginActivity extends AppCompatActivity {
+    private HttpClient httpClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // HTTP
+        httpClient = new HttpClient();
+
+        // EXAMPLE OF USAGE:
+        //        httpClient.registerUser( new User(
+        //                0, "qwe", "MARCINEK", 0, "marcinek@gmail.com"
+        //        ));
+
+
+        //        httpClient.getUser(
+        //                new AuthData("MARCINEK", "qwe")
+        //        );
 
 
         Button buttonRegister = findViewById(R.id.registerBtn);
