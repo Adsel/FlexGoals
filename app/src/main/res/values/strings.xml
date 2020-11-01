@@ -13,4 +13,6 @@
     <string name="register">Zarejestruj</string>
     <string name="password">Haslo</string>
     <string name="passwordRepeat">Powtórz hasło</string>
+    <string name="passwordNotSame">Hasła nie są identyczne</string>
+    <string name="loginIsEmpty">Login jest pusty</string>
 </resources>
