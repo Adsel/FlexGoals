@@ -37,14 +37,14 @@
             android:id="@+id/textViewLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_gravity="right|end"
             android:background="@drawable/edit_round_warn"
             android:fontFamily="sans-serif-thin"
+            android:gravity="right|end"
             android:paddingLeft="10dp"
             android:paddingTop="1dp"
             android:paddingRight="10dp"
             android:paddingBottom="1dp"
-            android:text="TextView"
             android:textColor="@color/colorPrimary"
             android:visibility="visible" />
 
@@ -55,7 +55,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/edit_round"
-            android:contentDescription="Login"
             android:drawableStart="@drawable/ic_user_solid"
             android:drawableLeft="@drawable/ic_user_solid"
             android:drawableEnd="@drawable/ic_times_circle_solid"
@@ -74,6 +73,8 @@
             android:shadowDy="20"
             android:shadowRadius="20"
             android:textColor="@color/colorPrimary"
+            android:hint="Login"
+            android:textColorHint="@color/colorAccent"
             android:textSize="18sp" />
 
 
@@ -81,14 +82,14 @@
             android:id="@+id/textViewPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:layout_gravity="right|end"
             android:background="@drawable/edit_round_warn"
             android:fontFamily="sans-serif-thin"
+            android:gravity="right|end"
             android:paddingLeft="10dp"
             android:paddingTop="1dp"
             android:paddingRight="10dp"
             android:paddingBottom="1dp"
-            android:text="TextView"
             android:textColor="@color/colorPrimary"
             android:visibility="visible" />
 
@@ -98,7 +99,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/edit_round"
-            android:contentDescription="password"
             android:drawableStart="@drawable/ic_lock_solid"
             android:drawableLeft="@drawable/ic_lock_solid"
             android:drawableEnd="@drawable/ic_eye_solid"
@@ -106,6 +106,7 @@
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="sans-serif-thin"
+            android:importantForAutofill="no"
             android:inputType="textVisiblePassword"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
@@ -116,7 +117,9 @@
             android:shadowDy="20"
             android:shadowRadius="20"
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:hint="Password"
+            android:textColorHint="@color/colorAccent"/>
 
         <EditText
             android:id="@+id/editTextPasswordRepeat"
@@ -125,12 +128,12 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/edit_round"
-            android:contentDescription="password"
             android:drawableStart="@drawable/ic_lock_solid"
             android:drawableLeft="@drawable/ic_lock_solid"
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="sans-serif-thin"
+            android:importantForAutofill="no"
             android:inputType="textPersonName|textPassword"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
@@ -140,9 +143,10 @@
             android:shadowDx="20"
             android:shadowDy="20"
             android:shadowRadius="20"
-            android:text="Test"
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:hint="@string/passwordRepeat"
+            android:textColorHint="@color/colorAccent"/>
 
         <Button
             android:id="@+id/button"
@@ -152,7 +156,7 @@
             android:layout_marginTop="30dp"
             android:background="@drawable/gradient"
             android:fontFamily="sans-serif-light"
-            android:text="Zarejestruj"
+            android:text="@string/register"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             app:backgroundTint="@color/black"
