@@ -95,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 login = editTextLogin.getText().toString();
-                if(!login.equals("")){
+                if(login.equals("")){
                     textViewLogin.setVisibility(TextView.VISIBLE);
                     textViewLogin.setText(R.string.loginIsEmpty);
                 } else {
