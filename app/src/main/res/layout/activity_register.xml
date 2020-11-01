@@ -94,6 +94,7 @@
             android:visibility="visible" />
 
         <EditText
+            android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -106,6 +107,7 @@
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="sans-serif-thin"
+            android:hint="Password"
             android:importantForAutofill="no"
             android:inputType="textVisiblePassword"
             android:paddingLeft="20dp"
@@ -117,9 +119,8 @@
             android:shadowDy="20"
             android:shadowRadius="20"
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
-            android:hint="Password"
-            android:textColorHint="@color/colorAccent"/>
+            android:textColorHint="@color/colorAccent"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/editTextPasswordRepeat"
@@ -149,7 +150,7 @@
             android:textColorHint="@color/colorAccent"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonRegister"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
