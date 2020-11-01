@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
+import pl.artsit.flexgoals.ui.auth.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
             NavigationUI.setupWithNavController(navigationView, navController);
         } else {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
             startActivity(intent);
         }
     }
