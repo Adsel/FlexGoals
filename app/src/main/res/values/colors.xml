@@ -15,5 +15,6 @@
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorAccent">#b6b6b6</color>
     <color name="colorWarn">#be2829</color>
+    <color name="colorCorrect">#37BE28</color>
 
 </resources>

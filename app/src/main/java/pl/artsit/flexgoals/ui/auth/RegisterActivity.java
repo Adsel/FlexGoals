@@ -40,11 +40,28 @@ public class RegisterActivity extends AppCompatActivity {
         if (!a.equals(b) && !a.equals("") && !b.equals("")){
             textViewPassword.setVisibility(TextView.VISIBLE);
             textViewPassword.setText(R.string.passwordNotSame);
+            editTextPasswordRepeat.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_solid, 0, R.drawable.ic_times_circle_solid, 0);
             return false;
         } else {
             textViewPassword.setVisibility(TextView.INVISIBLE);
+            editTextPasswordRepeat.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_solid, 0, 0, 0);
+
             return true;
         }
+    }
+
+    private boolean checkLogin(String a){
+        System.out.println("XDDD: " + a);
+        if(login.equals("")){
+            textViewLogin.setVisibility(TextView.VISIBLE);
+            editTextLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid, 0, R.drawable.ic_times_circle_solid, 0);
+            return false;
+        } else {
+            textViewLogin.setVisibility(TextView.INVISIBLE);
+            editTextLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid,0, R.drawable.ic_check_circle_solid, 0);
+            return true;
+        }
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -59,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPasswordRepeat= (EditText) findViewById(R.id.editTextPasswordRepeat);
         buttonRegister= (Button) findViewById(R.id.buttonRegister);
 
-        textViewLogin.addTextChangedListener(new TextWatcher() {
+        editTextLogin.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -68,16 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 login = editTextLogin.getText().toString();
-                if(login.equals("")){
-                    textViewLogin.setVisibility(TextView.VISIBLE);
-                    editTextLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid, 0, R.drawable.ic_times_circle_solid, 0);
-
-                } else {
-                    textViewLogin.setVisibility(TextView.INVISIBLE);
-                    editTextLogin.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-
-                }
-
+                checkLogin(login);
             }
 
             @Override
@@ -105,33 +113,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        editTextPasswordRepeat.setOnTouchListener((v, event) -> {
-            final int DRAWABLE_RIGHT = 2;
-            if(event.getAction() == MotionEvent.ACTION_UP) {
-                if(event.getRawX() >= (editTextPasswordRepeat.getRight() - editTextPasswordRepeat.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-
-                    Drawable unwrappedDrawable = AppCompatResources.getDrawable(getBaseContext(), R.drawable.ic_eye_solid);
-                    Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
-
-                    if(editTextPasswordRepeat.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
-
-                        DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorAccent));
-                        editTextPasswordRepeat.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    }
-                    else{
-
-                        DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorPrimary));
-                        editTextPasswordRepeat.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    }
-                    editTextPasswordRepeat.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_solid, 0, R.drawable.ic_eye_solid, 0);
-
-                    return true;
-                }
-                else {
-                }
-            }
-            return false;
-        });
 
         editTextPassword.addTextChangedListener(new TextWatcher() {
             @Override
@@ -164,11 +145,14 @@ public class RegisterActivity extends AppCompatActivity {
 
                         DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorAccent));
                         editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        editTextPasswordRepeat.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     }
                     else{
 
                         DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorPrimary));
                         editTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        editTextPasswordRepeat.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+
                     }
                     editTextPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_solid, 0, R.drawable.ic_eye_solid, 0);
 
