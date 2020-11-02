@@ -73,7 +73,7 @@
             android:shadowDy="20"
             android:shadowRadius="20"
             android:textColor="@color/colorPrimary"
-            android:hint="Login"
+            android:hint="@string/login"
             android:textColorHint="@color/colorAccent"
             android:textSize="18sp" />
 
@@ -107,7 +107,7 @@
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="sans-serif-thin"
-            android:hint="Password"
+            android:hint="@string/password"
             android:importantForAutofill="no"
             android:inputType="textVisiblePassword"
             android:paddingLeft="20dp"
