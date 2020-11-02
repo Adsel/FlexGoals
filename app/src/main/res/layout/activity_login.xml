@@ -6,33 +6,116 @@
     android:layout_height="match_parent"
     tools:context=".ui.auth.LoginActivity">
 
-    <TextView
-        android:id="@+id/identyficator"
-        android:layout_width="369dp"
-        android:layout_height="435dp"
-        android:text="Login Component"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/registerBtn"
+    <View
+        android:id="@+id/view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="312dp"
-        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/background"/>
 
-    <Button
-        android:id="@+id/homeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="312dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginRight="64dp"
-        android:text="HOME"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+    android:id="@+id/linearLayout"
+    android:layout_width="0dp"
+    android:layout_height="622dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="100dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginRight="16dp"
+    android:orientation="vertical"
+    android:padding="10dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_bias="1.0">>
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/edit_round"
+        android:contentDescription="Login"
+        android:drawableStart="@drawable/ic_user_solid"
+        android:drawableLeft="@drawable/ic_user_solid"
+        android:drawableEnd="@drawable/ic_times_circle_solid"
+        android:drawableRight="@drawable/ic_times_circle_solid"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-thin"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:shadowColor="#9A1717"
+        android:shadowDx="20"
+        android:shadowDy="20"
+        android:shadowRadius="20"
+        android:text="nazwa"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="306dp" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:background="@drawable/edit_round"
+        android:contentDescription="password"
+        android:drawableStart="@drawable/ic_lock_solid"
+        android:drawableLeft="@drawable/ic_lock_solid"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:fontFamily="sans-serif-thin"
+        android:inputType="textPersonName|textPassword"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:shadowColor="#9A1717"
+        android:shadowDx="20"
+        android:shadowDy="20"
+        android:shadowRadius="20"
+        android:text="haslo"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="22dp"
+        tools:layout_editor_absoluteY="384dp" />
+
+        <Button
+            android:id="@+id/loginBtn"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/gradient_blue"
+            android:text="Zaloguj"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:backgroundTint="@color/black"
+            app:backgroundTintMode="add" />
+
+        <Button
+            android:id="@+id/registrationBtn"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/gradient"
+            android:text="Rejestracja"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:backgroundTint="@color/black"
+            app:backgroundTintMode="add" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
