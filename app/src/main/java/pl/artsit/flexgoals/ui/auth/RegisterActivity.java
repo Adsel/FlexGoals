@@ -1,10 +1,20 @@
 package pl.artsit.flexgoals.ui.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
+
+import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.View;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -37,6 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +58,33 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPassword= (EditText) findViewById(R.id.editTextPassword);
         editTextPasswordRepeat= (EditText) findViewById(R.id.editTextPasswordRepeat);
         buttonRegister= (Button) findViewById(R.id.buttonRegister);
+
+        textViewLogin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                login = editTextLogin.getText().toString();
+                if(login.equals("")){
+                    textViewLogin.setVisibility(TextView.VISIBLE);
+                    editTextLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid, 0, R.drawable.ic_times_circle_solid, 0);
+
+                } else {
+                    textViewLogin.setVisibility(TextView.INVISIBLE);
+                    editTextLogin.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         editTextPasswordRepeat.addTextChangedListener(new TextWatcher() {
             @Override
@@ -67,6 +105,34 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        editTextPasswordRepeat.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_RIGHT = 2;
+            if(event.getAction() == MotionEvent.ACTION_UP) {
+                if(event.getRawX() >= (editTextPasswordRepeat.getRight() - editTextPasswordRepeat.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+
+                    Drawable unwrappedDrawable = AppCompatResources.getDrawable(getBaseContext(), R.drawable.ic_eye_solid);
+                    Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
+
+                    if(editTextPasswordRepeat.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
+
+                        DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorAccent));
+                        editTextPasswordRepeat.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    }
+                    else{
+
+                        DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorPrimary));
+                        editTextPasswordRepeat.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    }
+                    editTextPasswordRepeat.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_solid, 0, R.drawable.ic_eye_solid, 0);
+
+                    return true;
+                }
+                else {
+                }
+            }
+            return false;
+        });
+
         editTextPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -84,6 +150,34 @@ public class RegisterActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
 
             }
+        });
+
+        editTextPassword.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_RIGHT = 2;
+            if(event.getAction() == MotionEvent.ACTION_UP) {
+                if(event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+
+                    Drawable unwrappedDrawable = AppCompatResources.getDrawable(getBaseContext(), R.drawable.ic_eye_solid);
+                    Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
+
+                    if(editTextPassword.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
+
+                        DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorAccent));
+                        editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    }
+                    else{
+
+                        DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorPrimary));
+                        editTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    }
+                    editTextPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_solid, 0, R.drawable.ic_eye_solid, 0);
+
+                    return true;
+                }
+                else {
+                }
+            }
+            return false;
         });
 
         editTextLogin.addTextChangedListener(new TextWatcher() {
@@ -106,15 +200,14 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (checkPasswords(password,passwordRepeat) && !login.equals("")){
-                    User user = new User(null,password,login,null,null);
-                    new HttpClient().registerUser(user);
-                }
+        buttonRegister.setOnClickListener(view -> {
+            if (checkPasswords(password,passwordRepeat) && !login.equals("")){
+                User user = new User(null,password,login,null,null);
+                new HttpClient().registerUser(user);
             }
         });
+
+
 
     }
 }

@@ -23,15 +23,13 @@
         android:layout_height="622dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:orientation="vertical"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/textViewLogin"
@@ -57,11 +55,10 @@
             android:background="@drawable/edit_round"
             android:drawableStart="@drawable/ic_user_solid"
             android:drawableLeft="@drawable/ic_user_solid"
-            android:drawableEnd="@drawable/ic_times_circle_solid"
-            android:drawableRight="@drawable/ic_times_circle_solid"
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="sans-serif-thin"
+            android:hint="@string/login"
             android:importantForAutofill="no"
             android:inputType="textPersonName"
             android:paddingLeft="20dp"
@@ -73,7 +70,6 @@
             android:shadowDy="20"
             android:shadowRadius="20"
             android:textColor="@color/colorPrimary"
-            android:hint="Login"
             android:textColorHint="@color/colorAccent"
             android:textSize="18sp" />
 
@@ -109,7 +105,7 @@
             android:fontFamily="sans-serif-thin"
             android:hint="@string/password"
             android:importantForAutofill="no"
-            android:inputType="textVisiblePassword"
+            android:inputType="textPassword"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingRight="20dp"
@@ -131,9 +127,12 @@
             android:background="@drawable/edit_round"
             android:drawableStart="@drawable/ic_lock_solid"
             android:drawableLeft="@drawable/ic_lock_solid"
+            android:drawableEnd="@drawable/ic_eye_solid"
+            android:drawableRight="@drawable/ic_eye_solid"
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="sans-serif-thin"
+            android:hint="@string/passwordRepeat"
             android:importantForAutofill="no"
             android:inputType="textPersonName|textPassword"
             android:paddingLeft="20dp"
@@ -145,9 +144,8 @@
             android:shadowDy="20"
             android:shadowRadius="20"
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp"
-            android:hint="@string/passwordRepeat"
-            android:textColorHint="@color/colorAccent"/>
+            android:textColorHint="@color/colorAccent"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/buttonRegister"
