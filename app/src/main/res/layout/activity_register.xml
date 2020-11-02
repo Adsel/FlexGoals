@@ -107,7 +107,7 @@
             android:drawablePadding="10dp"
             android:ems="10"
             android:fontFamily="sans-serif-thin"
-            android:hint="Password"
+            android:hint="@string/password"
             android:importantForAutofill="no"
             android:inputType="textVisiblePassword"
             android:paddingLeft="20dp"
