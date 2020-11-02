@@ -1,22 +1,18 @@
 package pl.artsit.flexgoals.model;
 
-public class predefinedQuantitativeGoal {
+public class PredefinedFinalGoal {
     private Integer id;
     private String name;
     private String description;
     private String goal;
     private Integer days;
-    private Integer target;
-    private Integer step;
 
-    public predefinedQuantitativeGoal(Integer id, String name, String description, String goal, Integer days, Integer target, Integer step) {
+    public PredefinedFinalGoal(Integer id, String name, String description, String goal, Integer days) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.goal = goal;
         this.days = days;
-        this.target = target;
-        this.step = step;
     }
 
     public Integer getId() {
@@ -59,32 +55,14 @@ public class predefinedQuantitativeGoal {
         this.days = days;
     }
 
-    public Integer getTarget() {
-        return target;
-    }
-
-    public void setTarget(Integer target) {
-        this.target = target;
-    }
-
-    public Integer getStep() {
-        return step;
-    }
-
-    public void setStep(Integer step) {
-        this.step = step;
-    }
-
     @Override
     public String toString() {
-        return "predefinedQuantitativeGoal{" +
+        return "predefinedFinalGoal{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", goal='" + goal + '\'' +
                 ", days=" + days +
-                ", target=" + target +
-                ", step=" + step +
                 '}';
     }
 }

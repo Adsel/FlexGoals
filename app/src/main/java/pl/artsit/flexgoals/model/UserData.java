@@ -2,13 +2,13 @@ package pl.artsit.flexgoals.model;
 
 import java.util.Date;
 
-public class userData {
+public class UserData {
     private Integer id;
     private String name;
     private Date dateOfBirth;
     private Boolean sex;
 
-    public userData(Integer id, String name, Date dateOfBirth, Boolean sex) {
+    public UserData(Integer id, String name, Date dateOfBirth, Boolean sex) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;

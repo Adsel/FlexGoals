@@ -2,14 +2,13 @@ package pl.artsit.flexgoals.model;
 
 import java.util.Date;
 
-public class choosenPath {
+public class ChoosenQuantitative {
+    private Integer id;
+    private Integer idGoal;
+    private Integer idUser;
+    private Date date;
 
-   private Integer id;
-   private Integer idGoal;
-   private Integer idUser;
-   private Date date;
-
-    public choosenPath(Integer id, Integer idGoal, Integer idUser, Date date) {
+    public ChoosenQuantitative(Integer id, Integer idGoal, Integer idUser, Date date) {
         this.id = id;
         this.idGoal = idGoal;
         this.idUser = idUser;
@@ -50,7 +49,7 @@ public class choosenPath {
 
     @Override
     public String toString() {
-        return "choosenPath{" +
+        return "choosenQuantitative{" +
                 "id=" + id +
                 ", idGoal=" + idGoal +
                 ", idUser=" + idUser +

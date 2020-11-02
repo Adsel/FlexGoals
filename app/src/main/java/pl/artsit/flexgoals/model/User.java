@@ -1,13 +1,13 @@
 package pl.artsit.flexgoals.model;
 
-public class user {
+public class User {
     private Integer id;
     private String login;
     private String password;
     private Integer points;
     private String email;
 
-    public user(Integer id, String login, String password, Integer points, String email) {
+    public User(Integer id, String login, String password, Integer points, String email) {
         this.id = id;
         this.login = login;
         this.password = password;
