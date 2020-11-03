@@ -14,6 +14,7 @@
     <string name="register">Zarejestruj</string>
     <string name="mail">Mail</string>
     <string name="mailIncorrect">Mail jest nieprawidłowy</string>
+    <string name="mailIsEmpty">Mail jest pusty</string>
     <string name="password">Haslo</string>
     <string name="passwordRepeat">Powtórz hasło</string>
     <string name="passwordNotSame">Hasła nie są identyczne</string>

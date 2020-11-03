@@ -10,24 +10,32 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.http.HttpClient;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView textViewLogin;
+    TextView textViewMail;
     TextView textViewPassword;
     EditText editTextLogin;
+    EditText editTextMail;
     EditText editTextPassword;
     EditText editTextPasswordRepeat;
     Button buttonRegister;
 
     String login = "";
+    String mail = "";
     String password = "";
     String passwordRepeat = "";
+    public static final Pattern emailRegex =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-    private boolean checkPasswords(String a,String b){
-        if (!a.equals(b) && !a.equals("") && !b.equals("")){
+    private boolean checkPasswords(){
+        if (!password.equals(passwordRepeat) && !password.equals("") && !passwordRepeat.equals("")){
             textViewPassword.setVisibility(TextView.VISIBLE);
             textViewPassword.setText(R.string.passwordNotSame);
             return false;
@@ -37,16 +45,45 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    private boolean checkMail(){
+        Matcher matcher = emailRegex.matcher(mail);
+        if(mail.equals("")){
+            textViewMail.setVisibility(TextView.VISIBLE);
+            textViewMail.setText(R.string.mailIsEmpty);
+        } else if (!matcher.find()){
+            textViewMail.setVisibility(TextView.VISIBLE);
+            textViewMail.setText(R.string.mailIncorrect);
+        } else {
+            textViewMail.setVisibility(TextView.INVISIBLE);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkLogin(){
+        if(login.equals("")){
+            textViewLogin.setVisibility(TextView.VISIBLE);
+            textViewLogin.setText(R.string.loginIsEmpty);
+        } else {
+            textViewLogin.setVisibility(TextView.INVISIBLE);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         textViewLogin= (TextView) findViewById(R.id.textViewLogin);
+        textViewMail= (TextView) findViewById(R.id.textViewMail);
         textViewPassword= (TextView) findViewById(R.id.textViewPassword);
         editTextLogin= (EditText) findViewById(R.id.editTextLogin);
+        editTextMail = (EditText) findViewById(R.id.editTextMail);
         editTextPassword= (EditText) findViewById(R.id.editTextPassword);
         editTextPasswordRepeat= (EditText) findViewById(R.id.editTextPasswordRepeat);
         buttonRegister= (Button) findViewById(R.id.buttonRegister);
+
 
         editTextPasswordRepeat.addTextChangedListener(new TextWatcher() {
             @Override
@@ -57,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 passwordRepeat = editTextPasswordRepeat.getText().toString();
-                checkPasswords(password,passwordRepeat);
+                checkPasswords();
 
             }
 
@@ -76,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 password = editTextPassword.getText().toString();
-                checkPasswords(password,passwordRepeat);
+                checkPasswords();
 
             }
 
@@ -95,28 +132,36 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 login = editTextLogin.getText().toString();
-                if(login.equals("")){
-                    textViewLogin.setVisibility(TextView.VISIBLE);
-                    textViewLogin.setText(R.string.loginIsEmpty);
-                } else {
-                    textViewLogin.setVisibility(TextView.INVISIBLE);
-                }
+
+
+
+            }
+        });
+        editTextMail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {}
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                mail = editTextMail.getText().toString();
+                checkMail();
+
 
 
             }
         });
 
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //      EXAMPLE OF USAGE:
-                //        httpClient.registerUser( new User(
-                //                0, "qwe", "MARCINEK", 0, "marcinek@gmail.com"
-                //        ));
-                if (checkPasswords(password,passwordRepeat) && !login.equals("")){
-                    User user = new User(null,password,login,null,null);
-                    new HttpClient().registerUser(user);
-                }
+        buttonRegister.setOnClickListener(view -> {
+            System.out.println(password+login+mail);
+            //      EXAMPLE OF USAGE:
+            //        httpClient.registerUser( new User(
+            //                0, "qwe", "MARCINEK", 0, "marcinek@gmail.com"
+            //        ));
+            if (checkPasswords() && checkLogin() && checkMail()) {
+                User user = new User(0,password,login,0,mail);
+                new HttpClient().registerUser(user);
             }
         });
 
