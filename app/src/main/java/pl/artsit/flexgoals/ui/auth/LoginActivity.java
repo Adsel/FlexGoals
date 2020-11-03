@@ -9,8 +9,6 @@ import android.widget.Button;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.HttpClient;
-import pl.artsit.flexgoals.model.user.AuthData;
-import pl.artsit.flexgoals.model.user.User;
 
 public class LoginActivity extends AppCompatActivity {
     private HttpClient httpClient;
