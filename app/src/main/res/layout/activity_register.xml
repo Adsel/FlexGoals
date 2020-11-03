@@ -73,10 +73,54 @@
             android:shadowDy="20"
             android:shadowRadius="20"
             android:textColor="@color/colorPrimary"
-            android:hint="Login"
+            android:hint="@string/login"
             android:textColorHint="@color/colorAccent"
             android:textSize="18sp" />
 
+
+        <TextView
+            android:id="@+id/textViewMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|end"
+            android:background="@drawable/edit_round_warn"
+            android:fontFamily="sans-serif-thin"
+            android:gravity="right|end"
+            android:paddingLeft="10dp"
+            android:paddingTop="1dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="1dp"
+            android:textColor="@color/colorPrimary"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/editTextMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/edit_round"
+            android:drawableStart="@android:drawable/ic_dialog_email"
+            android:drawableLeft="@android:drawable/ic_dialog_email"
+            android:drawableEnd="@drawable/ic_times_circle_solid"
+            android:drawableRight="@drawable/ic_times_circle_solid"
+            android:drawablePadding="10dp"
+            android:ems="10"
+            android:fontFamily="sans-serif-thin"
+            android:hint="@string/mail"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="10dp"
+            android:shadowColor="#9A1717"
+            android:shadowDx="20"
+            android:shadowDy="20"
+            android:shadowRadius="20"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorAccent"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/textViewPassword"
