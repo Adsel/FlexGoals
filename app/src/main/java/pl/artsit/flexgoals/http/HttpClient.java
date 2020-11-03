@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
+import pl.artsit.flexgoals.ui.auth.LoginActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,6 +18,7 @@ public class HttpClient {
     private String path = "http://147.135.208.69:8080/"; //8080
     private JsonPlaceholderAPI jsonPlaceholderAPI;
     private Gson gson;
+    private LoginActivity loginActivity;
 
     public HttpClient(){
         gson = new GsonBuilder()
@@ -29,13 +31,16 @@ public class HttpClient {
         jsonPlaceholderAPI = retrofit.create(JsonPlaceholderAPI.class);
     }
 
-
+    public HttpClient(LoginActivity loginActivity) {
+        this();
+        this.loginActivity = loginActivity;
+    }
 
     public void getUser(AuthData authData){
         Call<User> call = jsonPlaceholderAPI.getUser(authData);
 
         System.out.println("STRUCTURE OF USER" + authData.toString());
-
+        LoginActivity ref = this.loginActivity;
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -44,12 +49,16 @@ public class HttpClient {
                     return;
                 }
                 User user = response.body();
-                System.out.println("RESPONSE FROM SERVER" + user.getLogin());
+                if(user != null) {
+                    ref.redirectToMain();
+                } else {
+                    ref.informAboutFailedLogin();
+                }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                System.out.println("Nieprawidłowe dane logowania");
+                ref.informAboutFailedLogin();
             }
         });
     }

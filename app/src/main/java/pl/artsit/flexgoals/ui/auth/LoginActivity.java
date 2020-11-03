@@ -9,6 +9,8 @@ import android.widget.EditText;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.model.user.AuthData;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -26,11 +28,13 @@ public class LoginActivity extends AppCompatActivity {
          passwordEditText = findViewById(R.id.editTextPasswordRepeat);
 
         loginBtn = findViewById(R.id.loginBtn);
+        LoginActivity ref = this;
         loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                new HttpClient(ref).getUser(
+                        new AuthData(nameEditText.getText().toString(), passwordEditText.getText().toString())
+                );
             }
         });
         registrationBtn = findViewById(R.id.registrationBtn);
@@ -41,5 +45,16 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void redirectToMain() {
+        MainActivity.isUser = true;
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void informAboutFailedLogin() {
+        // TODO: zrobić do tego Modal/Popup
+        System.out.println("Nieprawidłowe dane logowania");
     }
 }
