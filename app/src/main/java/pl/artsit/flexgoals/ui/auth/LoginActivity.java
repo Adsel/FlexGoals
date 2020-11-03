@@ -7,11 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.ArrayList;
-
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.ui.home.HomeFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -25,8 +22,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-         nameEditText = findViewById(R.id.nameEditText);
-         passwordEditText = findViewById(R.id.passwordEditText);
+         nameEditText = findViewById(R.id.editTextLogin);
+         passwordEditText = findViewById(R.id.editTextPasswordRepeat);
 
         loginBtn = findViewById(R.id.loginBtn);
         loginBtn.setOnClickListener(new View.OnClickListener(){

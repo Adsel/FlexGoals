@@ -35,7 +35,7 @@
     app:layout_constraintVertical_bias="1.0">>
 
     <EditText
-        android:id="@+id/nameEditText"
+        android:id="@+id/editTextLogin"
         android:layout_width="360dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
@@ -66,7 +66,7 @@
         tools:layout_editor_absoluteY="306dp" />
 
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/editTextPasswordRepeat"
         android:layout_width="360dp"
         android:layout_height="48dp"
         android:background="@drawable/edit_round"
