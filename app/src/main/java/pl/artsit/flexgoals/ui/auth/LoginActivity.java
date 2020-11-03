@@ -8,45 +8,35 @@ import android.widget.Button;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.http.HttpClient;
 
 public class LoginActivity extends AppCompatActivity {
-    private HttpClient httpClient;
+
+    private EditText passwordEditText;
+    private EditText nameEditText;
+    private Button loginBtn;
+    private Button registrationBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // HTTP
-        httpClient = new HttpClient();
+         nameEditText = findViewById(R.id.editTextLogin);
+         passwordEditText = findViewById(R.id.editTextPasswordRepeat);
 
-        // EXAMPLE OF USAGE:
-        //        httpClient.registerUser( new User(
-        //                0, "qwe", "MARCINEK", 0, "marcinek@gmail.com"
-        //        ));
-
-
-        //        httpClient.getUser(
-        //                new AuthData("MARCINEK", "qwe")
-        //        );
-
-
-        Button buttonRegister = findViewById(R.id.registerBtn);
-        buttonRegister.setOnClickListener(new View.OnClickListener(){
+        loginBtn = findViewById(R.id.loginBtn);
+        loginBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
-
-        Button buttonHome = findViewById(R.id.homeBtn);
-        buttonHome.setOnClickListener(new View.OnClickListener(){
+        registrationBtn = findViewById(R.id.registrationBtn);
+        registrationBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                MainActivity.isUser = true;
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intent);
             }
         });
