@@ -109,6 +109,10 @@ public class RegisterActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //      EXAMPLE OF USAGE:
+                //        httpClient.registerUser( new User(
+                //                0, "qwe", "MARCINEK", 0, "marcinek@gmail.com"
+                //        ));
                 if (checkPasswords(password,passwordRepeat) && !login.equals("")){
                     User user = new User(null,password,login,null,null);
                     new HttpClient().registerUser(user);
