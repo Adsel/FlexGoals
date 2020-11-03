@@ -5,6 +5,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -68,34 +69,26 @@ public class RegisterActivity extends AppCompatActivity {
             textViewMail.setText(R.string.mailIncorrect);
         } else {
             textViewMail.setVisibility(TextView.INVISIBLE);
+            editTextMail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_email_24, 0, R.drawable.ic_check_circle_solid, 0);
+
             return true;
         }
+        editTextMail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_email_24, 0, R.drawable.ic_times_circle_solid, 0);
+
         return false;
     }
 
     private boolean checkLogin(){
         if(login.equals("")){
             textViewLogin.setVisibility(TextView.VISIBLE);
-            textViewLogin.setText(R.string.loginIsEmpty);
+            editTextLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid, 0, R.drawable.ic_times_circle_solid, 0);
+
         } else {
+            editTextLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid,0, R.drawable.ic_check_circle_solid, 0);
             textViewLogin.setVisibility(TextView.INVISIBLE);
             return true;
         }
         return false;
-    }
-
-    private boolean checkLogin(String a){
-        System.out.println("XDDD: " + a);
-        if(login.equals("")){
-            textViewLogin.setVisibility(TextView.VISIBLE);
-            editTextLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid, 0, R.drawable.ic_times_circle_solid, 0);
-            return false;
-        } else {
-            textViewLogin.setVisibility(TextView.INVISIBLE);
-            editTextLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid,0, R.drawable.ic_check_circle_solid, 0);
-            return true;
-        }
-
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -122,7 +115,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 login = editTextLogin.getText().toString();
-                checkLogin(login);
+                checkLogin();
             }
 
             @Override
@@ -233,13 +226,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         buttonRegister.setOnClickListener(view -> {
             System.out.println(password+login+mail);
-            //      EXAMPLE OF USAGE:
-            //        httpClient.registerUser( new User(
-            //                0, "qwe", "MARCINEK", 0, "marcinek@gmail.com"
-            //        ));
             if (checkPasswords() && checkLogin() && checkMail()) {
                 User user = new User(0,password,login,0,mail);
                 new HttpClient().registerUser(user);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
             }
         });
 
