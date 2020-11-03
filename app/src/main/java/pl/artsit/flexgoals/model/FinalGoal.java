@@ -2,7 +2,7 @@ package pl.artsit.flexgoals.model;
 
 import java.util.Date;
 
-public class finalGoal {
+public class FinalGoal {
     private Integer id;
     private String name;
     private String description;
@@ -14,7 +14,7 @@ public class finalGoal {
     private Integer idUser;
     private Date date;
 
-    public finalGoal(Integer id, String name, String description, String goal, Integer days, Integer points, Boolean isShared, String progress, Integer idUser, Date date) {
+    public FinalGoal(Integer id, String name, String description, String goal, Integer days, Integer points, Boolean isShared, String progress, Integer idUser, Date date) {
         this.id = id;
         this.name = name;
         this.description = description;

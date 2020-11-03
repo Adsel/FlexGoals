@@ -2,7 +2,7 @@ package pl.artsit.flexgoals.model;
 
 import java.util.Date;
 
-public class quantitative_qoal {
+public class QuantitativeGoal {
 
     private Integer id;
     private String name;
@@ -17,7 +17,11 @@ public class quantitative_qoal {
     private Integer step;
     private Date date;
 
-    public quantitative_qoal(Integer id, String name, String description, Integer points, Boolean isShared, Integer idUser, Integer days, String goal, String progress, Integer target, Integer step, Date date) {
+    public QuantitativeGoal(
+            Integer id, String name, String description, Integer points,
+            Boolean isShared, Integer idUser, Integer days, String goal,
+            String progress, Integer target, Integer step, Date date
+    ) {
         this.id = id;
         this.name = name;
         this.description = description;
