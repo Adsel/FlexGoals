@@ -3,6 +3,7 @@ package pl.artsit.flexgoals.http;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
@@ -19,6 +20,7 @@ public class HttpClient {
     private JsonPlaceholderAPI jsonPlaceholderAPI;
     private Gson gson;
     private LoginActivity loginActivity;
+    private MainActivity mainActivity;
 
     public HttpClient(){
         gson = new GsonBuilder()
@@ -36,6 +38,11 @@ public class HttpClient {
         this.loginActivity = loginActivity;
     }
 
+    public HttpClient(MainActivity mainActivity) {
+        this();
+        this.mainActivity = mainActivity;
+    }
+
     public void getUser(AuthData authData){
         Call<User> call = jsonPlaceholderAPI.getUser(authData);
 
@@ -50,7 +57,7 @@ public class HttpClient {
                 }
                 User user = response.body();
                 if(user != null) {
-                    ref.redirectToMain();
+                    ref.redirectToMain(user);
                 } else {
                     ref.informAboutFailedLogin();
                 }
@@ -83,6 +90,29 @@ public class HttpClient {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 System.out.println("Failed request");
+            }
+        });
+    }
+
+    public void getUserPoints(User user){
+        Call<Integer> call = jsonPlaceholderAPI.getUserPoints(user.getId());
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+                Integer points = response.body();
+                if(points != null) {
+                    mainActivity.setPoints(points);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
             }
         });
     }
