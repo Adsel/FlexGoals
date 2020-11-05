@@ -1,26 +1,22 @@
-package pl.artsit.flexgoals.model;
+package pl.artsit.flexgoals.model.goal;
 
-import java.util.Date;
-
-public class Path {
+public class PredefinedQuantitativeGoal {
     private Integer id;
     private String name;
     private String description;
     private String goal;
     private Integer days;
+    private Integer target;
     private Integer step;
-    private Integer path;
-    private Boolean type;
 
-    public Path(Integer id, String name, String description, String goal, Integer days, Integer step, Integer path, Boolean type) {
+    public PredefinedQuantitativeGoal(Integer id, String name, String description, String goal, Integer days, Integer target, Integer step) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.goal = goal;
         this.days = days;
+        this.target = target;
         this.step = step;
-        this.path = path;
-        this.type = type;
     }
 
     public Integer getId() {
@@ -63,6 +59,14 @@ public class Path {
         this.days = days;
     }
 
+    public Integer getTarget() {
+        return target;
+    }
+
+    public void setTarget(Integer target) {
+        this.target = target;
+    }
+
     public Integer getStep() {
         return step;
     }
@@ -71,33 +75,16 @@ public class Path {
         this.step = step;
     }
 
-    public Integer getPath() {
-        return path;
-    }
-
-    public void setPath(Integer path) {
-        this.path = path;
-    }
-
-    public Boolean getType() {
-        return type;
-    }
-
-    public void setType(Boolean type) {
-        this.type = type;
-    }
-
     @Override
     public String toString() {
-        return "path{" +
+        return "predefinedQuantitativeGoal{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", goal='" + goal + '\'' +
                 ", days=" + days +
+                ", target=" + target +
                 ", step=" + step +
-                ", path=" + path +
-                ", type=" + type +
                 '}';
     }
 }

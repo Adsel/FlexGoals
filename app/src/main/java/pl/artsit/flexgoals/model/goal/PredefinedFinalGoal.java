@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.model;
+package pl.artsit.flexgoals.model.goal;
 
 public class PredefinedFinalGoal {
     private Integer id;
