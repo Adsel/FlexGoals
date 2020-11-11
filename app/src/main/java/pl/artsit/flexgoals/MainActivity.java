@@ -2,7 +2,6 @@ package pl.artsit.flexgoals;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -17,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
-import pl.artsit.flexgoals.ui.auth.RegisterActivity;
 
 public class MainActivity extends AppCompatActivity {
 
