@@ -17,4 +17,7 @@
     <color name="colorWarn">#be2829</color>
     <color name="colorCorrect">#37BE28</color>
 
+    <color name="gradientEnd">#616161</color>
+    <color name="gradientStart">#0E0E0E</color>
+
 </resources>
