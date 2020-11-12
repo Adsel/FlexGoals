@@ -11,6 +11,7 @@ import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.model.user.AuthData;
+import pl.artsit.flexgoals.model.user.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -47,8 +48,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void redirectToMain() {
+    public void redirectToMain(User loggedUser) {
         MainActivity.isUser = true;
+        MainActivity.currentUser = loggedUser;
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }
