@@ -4,6 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.MainActivity;
+import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.FinalGoalData;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
@@ -112,6 +116,52 @@ public class HttpClient {
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void addFinalGoal(FinalGoalData finalGoalData) {
+        Call<FinalGoal> call = jsonPlaceholderAPI.addFinalGoal(finalGoalData);
+
+        call.enqueue(new Callback<FinalGoal>() {
+            @Override
+            public void onResponse(Call<FinalGoal> call, Response<FinalGoal> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+                FinalGoal addedGoal = response.body();
+                if(addedGoal != null) {
+                    System.out.println("Added FinalGoal" + addedGoal);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FinalGoal> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void addQuantitativeGoal(QuantitativeGoalData quantitativeGoalData) {
+        Call<QuantitativeGoal> call = jsonPlaceholderAPI.addQuantitativeGoal(quantitativeGoalData);
+
+        call.enqueue(new Callback<QuantitativeGoal>() {
+            @Override
+            public void onResponse(Call<QuantitativeGoal> call, Response<QuantitativeGoal> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+                QuantitativeGoal addedGoal = response.body();
+                if(addedGoal != null) {
+                    System.out.println("Added QuantitativeGoal" + addedGoal);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<QuantitativeGoal> call, Throwable t) {
 
             }
         });

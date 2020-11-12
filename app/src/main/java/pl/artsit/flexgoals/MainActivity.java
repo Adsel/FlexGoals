@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.model.goal.FinalGoalData;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
 
@@ -59,6 +61,27 @@ public class MainActivity extends AppCompatActivity {
             NavigationUI.setupWithNavController(navigationView, navController);
             new HttpClient(this).getUserPoints(MainActivity.currentUser);
 
+            // ADD GOALS
+            new HttpClient().addFinalGoal(
+                    new FinalGoalData(
+                            currentUser.getId(),
+                            "EXAMPLE GOAL",
+                            "FINAL GOAL TO SHOW HOW IT WORKS",
+                            "READ SOME IT ARTICLES",
+                            10
+                    )
+            );
+
+            new HttpClient().addQuantitativeGoal(
+                    new QuantitativeGoalData(
+                            currentUser.getId(),
+                            "SECOND EXAMPLE GOAL",
+                            "QUANTITATIVE GOAL TO SHOW HOW IT WORKS",
+                            "DO 20 PUSH UP",
+                            30,
+                            20
+                    )
+            );
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
