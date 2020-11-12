@@ -52,8 +52,9 @@ public class MainActivity extends AppCompatActivity {
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
             NavigationUI.setupWithNavController(navigationView, navController);
-            new HttpClient(this).getUserPoints(MainActivity.currentUser);
-
+            new HttpClient(this).getUserPoints(currentUser);
+            new HttpClient().getFinalGoals(currentUser);
+            new HttpClient().getQuantitativeGoals(currentUser);
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
