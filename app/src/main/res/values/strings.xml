@@ -22,5 +22,7 @@
     <string name="passwordRepeat">Powtórz hasło</string>
     <string name="passwordNotSame">Hasła nie są identyczne</string>
     <string name="loginIsEmpty">Login jest pusty</string>
+    <string name="todo">TODO</string>
+
 
 </resources>
