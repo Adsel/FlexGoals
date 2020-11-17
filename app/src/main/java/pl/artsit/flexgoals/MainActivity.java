@@ -21,21 +21,23 @@ import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     public static User currentUser;
     public static boolean isUser = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
+        System.out.println("HEELLO");
 
 
 
-
-        if(MainActivity.isUser) {
+        if(!MainActivity.isUser) {
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             FloatingActionButton fab = findViewById(R.id.fab);
@@ -47,12 +49,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.setDrawerListener(this);
+            System.out.println("HEELLO");
+            System.out.println("HEELLO");
+
             NavigationView navigationView = findViewById(R.id.nav_view);
             // Passing each menu ID as a set of Ids because each
             // menu should be considered as top level destinations.
             mAppBarConfiguration = new AppBarConfiguration.Builder(
                     R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                    .setDrawerLayout(drawer)
+                    .setOpenableLayout(drawer)
                     .build();
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
@@ -63,6 +69,26 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             //startActivity(intent);
         }
+    }
+
+    @Override
+    public void onDrawerOpened(View arg0) {
+        System.out.println("open");
+    }
+
+    @Override
+    public void onDrawerClosed(View arg0) {
+        System.out.println("closed");
+    }
+
+    @Override
+    public void onDrawerSlide(View arg0, float arg1) {
+        System.out.println("slide");
+    }
+
+    @Override
+    public void onDrawerStateChanged(int arg0) {
+        System.out.println("chance");
     }
 
     @Override
