@@ -1,17 +1,32 @@
 package pl.artsit.flexgoals.ui.auth;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.http.JsonPlaceholderAPI;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static android.nfc.NfcAdapter.EXTRA_ID;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -56,7 +71,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void informAboutFailedLogin() {
-        // TODO: zrobić do tego Modal/Popup
         System.out.println("Nieprawidłowe dane logowania");
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context,"Niepoprawne Dane!!", duration);
+        toast.show();
     }
+
 }
