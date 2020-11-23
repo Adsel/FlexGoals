@@ -1,17 +1,10 @@
 package pl.artsit.flexgoals.ui.auth;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -21,13 +14,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.modal.Popup;
+import pl.artsit.flexgoals.model.user.User;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView textViewLogin;
@@ -39,12 +36,14 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editTextPasswordRepeat;
     Button buttonRegister;
 
+    Popup popup;
     String login = "";
     String mail = "";
     String password = "";
     String passwordRepeat = "";
     public static final Pattern emailRegex =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
 
     private boolean checkPasswords(){
         if (!password.equals(passwordRepeat) && !password.equals("") && !passwordRepeat.equals("")){
@@ -92,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
         return false;
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPassword= (EditText) findViewById(R.id.editTextPassword);
         editTextPasswordRepeat= (EditText) findViewById(R.id.editTextPasswordRepeat);
         buttonRegister= (Button) findViewById(R.id.buttonRegister);
-
+        popup =  new Popup(getApplicationContext());
 
         editTextLogin.addTextChangedListener(new TextWatcher() {
             @Override
@@ -231,6 +230,15 @@ public class RegisterActivity extends AppCompatActivity {
 
         buttonRegister.setOnClickListener(view -> {
             System.out.println(password+login+mail);
+            if(!checkPasswords()){
+                popup.show(getString(R.string.passwordNotSame));
+            }
+            if(!checkLogin()){
+                popup.show(getString(R.string.loginIsEmpty));
+            }
+            if(!checkMail()){
+                popup.show(getString(R.string.mailIncorrect));
+            }
             if (checkPasswords() && checkLogin() && checkMail()) {
                 User user = new User(0,password,login,0,mail);
                 new HttpClient().registerUser(user);
