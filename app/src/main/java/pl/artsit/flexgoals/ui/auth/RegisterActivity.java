@@ -1,17 +1,10 @@
 package pl.artsit.flexgoals.ui.auth;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -21,13 +14,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.model.user.User;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView textViewLogin;
@@ -106,7 +102,7 @@ public class RegisterActivity extends AppCompatActivity {
         textViewPassword= (TextView) findViewById(R.id.textViewPassword);
         editTextLogin= (EditText) findViewById(R.id.editTextLogin);
         editTextMail = (EditText) findViewById(R.id.editTextMail);
-        editTextPassword= (EditText) findViewById(R.id.editTextPassword);
+        editTextPassword= (EditText) findViewById (R.id.editTextPassword);
         editTextPasswordRepeat= (EditText) findViewById(R.id.editTextPasswordRepeat);
         buttonRegister= (Button) findViewById(R.id.buttonRegister);
 
