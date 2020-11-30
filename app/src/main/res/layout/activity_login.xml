@@ -1,119 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--TODO Add background and add gradient to button-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bacground"
     tools:context=".ui.auth.LoginActivity">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/background"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-    android:id="@+id/linearLayout"
-    android:layout_width="0dp"
-    android:layout_height="622dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginTop="100dp"
-    android:layout_marginEnd="16dp"
-    android:layout_marginRight="16dp"
-    android:orientation="vertical"
-    android:padding="10dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.0"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="1.0">>
-
-    <EditText
-        android:id="@+id/editTextLogin"
-        android:layout_width="360dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/edit_round"
-        android:contentDescription="Login"
-        android:drawableStart="@drawable/ic_user_solid"
-        android:drawableLeft="@drawable/ic_user_solid"
-        android:drawableEnd="@drawable/ic_times_circle_solid"
-        android:drawableRight="@drawable/ic_times_circle_solid"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:fontFamily="sans-serif-thin"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="10dp"
-        android:shadowDx="20"
-        android:shadowDy="20"
-        android:shadowRadius="20"
-        android:text="nazwa"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="19dp"
-        tools:layout_editor_absoluteY="306dp" />
-
-    <EditText
-        android:id="@+id/editTextPasswordRepeat"
-        android:layout_width="360dp"
-        android:layout_height="48dp"
-        android:background="@drawable/edit_round"
-        android:contentDescription="password"
-        android:drawableStart="@drawable/ic_lock_solid"
-        android:drawableLeft="@drawable/ic_lock_solid"
-        android:drawablePadding="10dp"
-        android:ems="10"
-        android:fontFamily="sans-serif-thin"
-        android:inputType="textPersonName|textPassword"
-        android:paddingLeft="20dp"
-        android:paddingTop="10dp"
-        android:paddingRight="20dp"
-        android:paddingBottom="10dp"
-        android:shadowDx="20"
-        android:shadowDy="20"
-        android:shadowRadius="20"
-        android:text="haslo"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="22dp"
-        tools:layout_editor_absoluteY="384dp" />
-
-        <Button
-            android:id="@+id/loginBtn"
-            style="@style/Widget.AppCompat.Button"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/gradient_blue"
-            android:text="Zaloguj"
-            android:textSize="18sp"
-            android:textStyle="normal"
-            app:backgroundTint="@color/black"
-            app:backgroundTintMode="add" />
+            android:orientation="vertical"
+            android:padding="10dp">
 
-        <Button
-            android:id="@+id/registrationBtn"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/gradient"
-            android:text="Rejestracja"
-            android:textSize="18sp"
-            android:textStyle="normal"
-            app:backgroundTint="@color/black"
-            app:backgroundTintMode="add" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp">
 
-    </LinearLayout>
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="77dp"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_logo1_ps" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="bottom"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:lineSpacingExtra="8sp"
+                        android:text="@string/loginTitle"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="36sp"
+                        android:typeface="normal" />
+
+                    <TextView
+                        android:id="@+id/textViewInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="left"
+                        android:lineSpacingExtra="8sp"
+                        android:text="@string/loginInfo"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"
+                        android:typeface="normal" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+            <TextView
+                android:id="@+id/textViewLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|end"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/edit_round_warn"
+                android:elevation="6dp"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="right|end"
+                android:paddingLeft="10dp"
+                android:paddingTop="1dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="1dp"
+                android:text="@string/loginIsEmpty"
+                android:textColor="@color/colorPrimary"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/editTextLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_round"
+                android:drawableStart="@drawable/ic_user_solid"
+                android:drawableLeft="@drawable/ic_user_solid"
+                android:drawablePadding="10dp"
+                android:elevation="6dp"
+                android:ems="10"
+                android:fontFamily="sans-serif-thin"
+                android:hint="@string/login"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+                android:shadowDx="20"
+                android:shadowDy="20"
+                android:shadowRadius="20"
+                android:textColor="@color/colorPrimary"
+                android:textColorHighlight="@color/colorAccent"
+                android:textColorHint="@color/colorAccent"
+                android:textColorLink="#FFFFFF"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:id="@+id/textViewPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|end"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/edit_round_warn"
+                android:elevation="6dp"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="right|end"
+                android:paddingLeft="10dp"
+                android:paddingTop="1dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="1dp"
+                android:textColor="@color/colorPrimary"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/editTextPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_round"
+                android:drawableStart="@drawable/ic_lock_solid"
+                android:drawableLeft="@drawable/ic_lock_solid"
+                android:drawableEnd="@drawable/ic_eye_solid"
+                android:drawableRight="@drawable/ic_eye_solid"
+                android:drawablePadding="10dp"
+                android:elevation="6dp"
+                android:ems="10"
+                android:fontFamily="sans-serif-thin"
+                android:hint="@string/password"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+                android:shadowDx="20"
+                android:shadowDy="20"
+                android:shadowRadius="20"
+                android:textColor="@color/colorPrimary"
+                android:textColorHint="@color/colorAccent"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/buttonLogin"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/gradient_blue"
+                android:elevation="6dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/loginLogin"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                app:backgroundTint="@color/black"
+                app:backgroundTintMode="add" />
+
+            <Button
+                android:id="@+id/buttonRegister"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/gradient"
+                android:elevation="6dp"
+                android:fontFamily="sans-serif-light"
+                android:text="@string/register"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                app:backgroundTint="@color/black"
+                app:backgroundTintMode="add" />
+
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
