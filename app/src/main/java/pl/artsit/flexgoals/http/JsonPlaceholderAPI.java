@@ -25,4 +25,5 @@ public interface JsonPlaceholderAPI {
 
     @DELETE("/api/goals/quantitative-delete/{id_goal}")
     Call<Void> deleteQuantitativeGoal(@Path("id_goal") Integer goalId);
+
 }

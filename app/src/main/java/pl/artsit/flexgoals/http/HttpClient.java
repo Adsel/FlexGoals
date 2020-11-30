@@ -143,7 +143,7 @@ public class HttpClient {
     }
 
     public void deleteQuantitativeGoal(QuantitativeGoal quantitativeGoal){
-        Call<Void> call = jsonPlaceholderAPI.deleteFinalGoal(quantitativeGoal.getId());
+        Call<Void> call = jsonPlaceholderAPI.deleteQuantitativeGoal(quantitativeGoal.getId());
 
         call.enqueue(new Callback<Void>() {
             @Override
