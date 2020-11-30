@@ -1,5 +1,7 @@
 package pl.artsit.flexgoals.http;
 
+import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
+import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import retrofit2.Call;
@@ -19,6 +21,12 @@ public interface JsonPlaceholderAPI {
 
     @GET("/api/users/points/{userId}")
     Call<Integer> getUserPoints(@Path("userId") Integer userId);
+
+    @GET("/api/goals/predefined-final")
+    Call<PredefinedFinalGoal[]> getPredefinedFinalGoals();
+
+    @GET("/api/goals/predefined-quantitative")
+    Call<PredefinedQuantitativeGoal[]> getQuantitativeGoals();
 
     @DELETE("/api/goals/final-delete/{id_goal}")
     Call<Void> deleteFinalGoal(@Path("id_goal") Integer goalId);

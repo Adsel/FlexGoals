@@ -1,12 +1,12 @@
 package pl.artsit.flexgoals.http;
 
-import android.content.Intent;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
+import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
@@ -116,6 +116,50 @@ public class HttpClient {
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getPredefinedFinalGoals() {
+        Call<PredefinedFinalGoal[]> call = jsonPlaceholderAPI.getPredefinedFinalGoals();
+
+        call.enqueue(new Callback<PredefinedFinalGoal[]>() {
+            @Override
+            public void onResponse(Call<PredefinedFinalGoal[]> call, Response<PredefinedFinalGoal[]> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+                PredefinedFinalGoal[] points = response.body();
+
+                // TODO: set goals
+            }
+
+            @Override
+            public void onFailure(Call<PredefinedFinalGoal[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getQuantitativeGoals() {
+        Call<PredefinedQuantitativeGoal[]> call = jsonPlaceholderAPI.getQuantitativeGoals();
+
+        call.enqueue(new Callback<PredefinedQuantitativeGoal[]>() {
+            @Override
+            public void onResponse(Call<PredefinedQuantitativeGoal[]> call, Response<PredefinedQuantitativeGoal[]> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+                PredefinedQuantitativeGoal[] points = response.body();
+
+                // TODO: set goals
+            }
+
+            @Override
+            public void onFailure(Call<PredefinedQuantitativeGoal[]> call, Throwable t) {
 
             }
         });
