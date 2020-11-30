@@ -1,9 +1,13 @@
 package pl.artsit.flexgoals.http;
 
+import android.content.Intent;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.MainActivity;
+import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
@@ -112,6 +116,48 @@ public class HttpClient {
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void deleteFinalGoal(FinalGoal finalGoal){
+        Call<Void> call = jsonPlaceholderAPI.deleteFinalGoal(finalGoal.getId());
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                mainActivity.goToMain();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void deleteQuantitativeGoal(QuantitativeGoal quantitativeGoal){
+        Call<Void> call = jsonPlaceholderAPI.deleteFinalGoal(quantitativeGoal.getId());
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                mainActivity.goToMain();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
 
             }
         });

@@ -85,4 +85,8 @@ public class MainActivity extends AppCompatActivity {
         // refresh text view with points
         System.out.println("Points: " + points);
     }
+
+    public void goToMain() {
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+    }
 }
