@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.MainActivity;
+import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
@@ -108,6 +110,48 @@ public class HttpClient {
                 if(points != null) {
                     mainActivity.setPoints(points);
                 }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void saveQuantitativeGoal(QuantitativeGoal quantitativeGoal) {
+        Call<Integer> call = jsonPlaceholderAPI.updateQuantitativeGoal(quantitativeGoal);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                // Retrive success behaviour (ex. Toast)
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void saveFinalGoal(FinalGoal finalGoal) {
+        Call<Integer> call = jsonPlaceholderAPI.updateFinalGoal(finalGoal);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                // Retrive success behaviour (ex. Toast)
             }
 
             @Override
