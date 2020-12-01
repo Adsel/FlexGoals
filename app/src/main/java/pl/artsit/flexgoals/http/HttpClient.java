@@ -1,7 +1,5 @@
 package pl.artsit.flexgoals.http;
 
-import android.content.Intent;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -116,6 +114,57 @@ public class HttpClient {
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getFinalGoals(User user){
+        Call<FinalGoal[]> call = jsonPlaceholderAPI.getUserFinalGoals(user.getId());
+
+        call.enqueue(new Callback<FinalGoal[]>() {
+            @Override
+            public void onResponse(Call<FinalGoal[]> call, Response<FinalGoal[]> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+                FinalGoal[] goals = response.body();
+                if(goals != null) {
+                    for(FinalGoal finalG: goals) {
+                        System.out.println(finalG);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FinalGoal[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    public void getQuantitativeGoals(User user){
+        Call<QuantitativeGoal[]> call = jsonPlaceholderAPI.getUserQuantitativeGoals(user.getId());
+
+        call.enqueue(new Callback<QuantitativeGoal[]>() {
+            @Override
+            public void onResponse(Call<QuantitativeGoal[]> call, Response<QuantitativeGoal[]> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+                QuantitativeGoal[] goals = response.body();
+                if(goals != null) {
+                    for(QuantitativeGoal quantitativeGoal: goals) {
+                        System.out.println(quantitativeGoal);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<QuantitativeGoal[]> call, Throwable t) {
 
             }
         });
