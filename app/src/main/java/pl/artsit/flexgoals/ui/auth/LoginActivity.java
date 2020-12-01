@@ -1,11 +1,20 @@
 package pl.artsit.flexgoals.ui.auth;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
@@ -15,36 +24,57 @@ import pl.artsit.flexgoals.model.user.User;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText passwordEditText;
-    private EditText nameEditText;
-    private Button loginBtn;
-    private Button registrationBtn;
+    private EditText editTextPassword;
+    private EditText editTextLogin;
+    private Button buttonLogin;
+    private Button buttonRegister;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-         nameEditText = findViewById(R.id.editTextLogin);
-         passwordEditText = findViewById(R.id.editTextPasswordRepeat);
+         editTextLogin = findViewById(R.id.editTextLogin);
+         editTextPassword = findViewById(R.id.editTextPassword);
 
-        loginBtn = findViewById(R.id.loginBtn);
+        buttonLogin = findViewById(R.id.buttonLogin);
         LoginActivity ref = this;
-        loginBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                new HttpClient(ref).getUser(
-                        new AuthData(nameEditText.getText().toString(), passwordEditText.getText().toString())
-                );
-            }
+        buttonLogin.setOnClickListener(view -> new HttpClient(ref).getUser(
+                new AuthData(editTextLogin.getText().toString(), editTextPassword.getText().toString())
+        ));
+
+        buttonRegister = findViewById(R.id.buttonRegister);
+        buttonRegister.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+            startActivity(intent);
         });
-        registrationBtn = findViewById(R.id.registrationBtn);
-        registrationBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intent);
+
+        editTextPassword.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_RIGHT = 2;
+            if(event.getAction() == MotionEvent.ACTION_UP) {
+                if(event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+
+                    Drawable unwrappedDrawable = AppCompatResources.getDrawable(getBaseContext(), R.drawable.ic_eye_solid);
+                    Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
+
+                    if(editTextPassword.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
+
+                        DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorAccent));
+                        editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    }
+                    else{
+
+                        DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorPrimary));
+                        editTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+
+                    }
+                    editTextPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_solid, 0, R.drawable.ic_eye_solid, 0);
+
+                    return true;
+                }
             }
+            return false;
         });
     }
 
@@ -56,7 +86,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void informAboutFailedLogin() {
-        // TODO: zrobić do tego Modal/Popup
         System.out.println("Nieprawidłowe dane logowania");
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_LONG;
+        Toast toast = Toast.makeText(context,"Niepoprawne Dane!!", duration);
+        toast.show();
     }
+
 }
