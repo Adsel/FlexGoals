@@ -6,15 +6,14 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:background="@color/dodajCel"
             android:icon="@drawable/ic_baseline_add_circle_24"
             android:title="@string/menu_dodajCel"
-            android:visible="true" />
+            android:visible="true" > @color/dodajCel</item>
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_baseline_check_circle_24"
             android:title="@string/menu_celeIlosciowe"
-            android:visible="true" />
+            android:visible="true"></item>
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_baseline_check_circle_outline_24"
