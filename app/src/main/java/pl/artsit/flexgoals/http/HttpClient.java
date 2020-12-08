@@ -160,4 +160,97 @@ public class HttpClient {
             }
         });
     }
+
+    public void getFinalGoals(User user){
+        Call<FinalGoal[]> call = jsonPlaceholderAPI.getUserFinalGoals(user.getId());
+
+        call.enqueue(new Callback<FinalGoal[]>() {
+            @Override
+            public void onResponse(Call<FinalGoal[]> call, Response<FinalGoal[]> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+                FinalGoal[] goals = response.body();
+                if(goals != null) {
+                    for(FinalGoal finalG: goals) {
+                        System.out.println(finalG);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FinalGoal[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    public void getQuantitativeGoals(User user){
+        Call<QuantitativeGoal[]> call = jsonPlaceholderAPI.getUserQuantitativeGoals(user.getId());
+
+        call.enqueue(new Callback<QuantitativeGoal[]>() {
+            @Override
+            public void onResponse(Call<QuantitativeGoal[]> call, Response<QuantitativeGoal[]> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+                QuantitativeGoal[] goals = response.body();
+                if(goals != null) {
+                    for(QuantitativeGoal quantitativeGoal: goals) {
+                        System.out.println(quantitativeGoal);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<QuantitativeGoal[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void deleteFinalGoal(FinalGoal finalGoal){
+        Call<Void> call = jsonPlaceholderAPI.deleteFinalGoal(finalGoal.getId());
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                mainActivity.goToMain();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void deleteQuantitativeGoal(QuantitativeGoal quantitativeGoal){
+        Call<Void> call = jsonPlaceholderAPI.deleteQuantitativeGoal(quantitativeGoal.getId());
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                mainActivity.goToMain();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+    }
 }
