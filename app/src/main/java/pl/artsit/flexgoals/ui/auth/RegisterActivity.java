@@ -1,17 +1,10 @@
 package pl.artsit.flexgoals.ui.auth;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.graphics.drawable.DrawableCompat;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -21,13 +14,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.model.user.User;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView textViewLogin;
@@ -101,14 +97,14 @@ public class RegisterActivity extends AppCompatActivity {
             this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
 
         setContentView(R.layout.activity_register);
-        textViewLogin= (TextView) findViewById(R.id.textViewLogin);
-        textViewMail= (TextView) findViewById(R.id.textViewMail);
-        textViewPassword= (TextView) findViewById(R.id.textViewPassword);
-        editTextLogin= (EditText) findViewById(R.id.editTextLogin);
-        editTextMail = (EditText) findViewById(R.id.editTextMail);
-        editTextPassword= (EditText) findViewById(R.id.editTextPassword);
-        editTextPasswordRepeat= (EditText) findViewById(R.id.editTextPasswordRepeat);
-        buttonRegister= (Button) findViewById(R.id.buttonRegister);
+        textViewLogin= findViewById(R.id.textViewLogin);
+        textViewMail= findViewById(R.id.textViewMail);
+        textViewPassword= findViewById(R.id.textViewPassword);
+        editTextLogin= findViewById(R.id.editTextLogin);
+        editTextMail = findViewById(R.id.editTextMail);
+        editTextPassword= findViewById(R.id.editTextPassword);
+        editTextPasswordRepeat= findViewById(R.id.editTextPasswordRepeat);
+        buttonRegister= findViewById(R.id.buttonRegister);
 
 
         editTextLogin.addTextChangedListener(new TextWatcher() {
@@ -192,8 +188,6 @@ public class RegisterActivity extends AppCompatActivity {
                     editTextPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_solid, 0, R.drawable.ic_eye_solid, 0);
 
                     return true;
-                }
-                else {
                 }
             }
             return false;
