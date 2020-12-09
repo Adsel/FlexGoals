@@ -119,6 +119,48 @@ public class HttpClient {
         });
     }
 
+    public void saveQuantitativeGoal(QuantitativeGoal quantitativeGoal) {
+        Call<Integer> call = jsonPlaceholderAPI.updateQuantitativeGoal(quantitativeGoal);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                // Retrive success behaviour (ex. Toast)
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void saveFinalGoal(FinalGoal finalGoal) {
+        Call<Integer> call = jsonPlaceholderAPI.updateFinalGoal(finalGoal);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                // Retrive success behaviour (ex. Toast)
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
+    }
+
     public void getFinalGoals(User user){
         Call<FinalGoal[]> call = jsonPlaceholderAPI.getUserFinalGoals(user.getId());
 
