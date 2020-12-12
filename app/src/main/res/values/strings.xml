@@ -11,7 +11,7 @@
     <string name="performance_goals">Cele ilościowe</string>
     <string name="quantitative_goals">Cele zaliczeniowe</string>
     <string name="statistics">Statystyki</string>
-    <string name="calendar">Kalendarz</string>
+    <string name="menu_home">Strona Główna</string>
     <string name="logout">Wyloguj</string>
 
     <string name="registerTitle">Załóż konto</string>
