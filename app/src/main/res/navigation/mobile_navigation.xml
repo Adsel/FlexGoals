@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/performance_goals">
+    app:startDestination="@+id/add_goald">
 
 
 
@@ -35,3 +35,4 @@
         android:label="@string/calendar"
         tools:layout="@layout/fragment_calendar" />
 </navigation>
+
