@@ -13,20 +13,20 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.ui.slideshow.SlideshowViewModel;
+import pl.artsit.flexgoals.ui.statistic.StatisticViewModel;
 
 
 public class AppBarViewFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private StatisticViewModel statisticViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
+        statisticViewModel =
+                new ViewModelProvider(this).get(StatisticViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_quantitative_goals, container, false);
         final TextView textView = root.findViewById(R.id.text_slideshow);
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        statisticViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

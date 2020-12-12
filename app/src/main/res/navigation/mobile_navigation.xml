@@ -3,23 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/performance_goals">
+
+
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="pl.artsit.flexgoals.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/add_goal"
+        android:name="pl.artsit.flexgoals.ui.addGoal.AddGoalFragment"
+        android:label="@string/add_goal"
+        tools:layout="@layout/fragment_add_goal" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="pl.artsit.flexgoals.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/performance_goals"
+        android:name="pl.artsit.flexgoals.ui.performanceGoals.PerformanceGoalsFragment"
+        android:label="@string/performance_goals"
+        tools:layout="@layout/fragment_performance_goals" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="pl.artsit.flexgoals.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/quantitative_goals"
+        android:name="pl.artsit.flexgoals.ui.quantitativeGoals.QuantitativeGoalsFragment"
+        android:label="@string/quantitative_goals"
+        tools:layout="@layout/fragment_quantitative_goals" />
+    <fragment
+        android:id="@+id/statistics"
+        android:name="pl.artsit.flexgoals.ui.statistic.StatisticFragment"
+        android:label="@string/statistics"
+        tools:layout="@layout/fragment_statistic" />
+    <fragment
+        android:id="@+id/calendar"
+        android:name="pl.artsit.flexgoals.ui.calendar.CalendarFragment"
+        android:label="@string/calendar"
+        tools:layout="@layout/fragment_calendar" />
 </navigation>

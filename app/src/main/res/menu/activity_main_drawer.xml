@@ -3,18 +3,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single" >
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/add_goal"
+            android:icon="@drawable/add_goal"
+            android:onClick="onDrawerOpened"
+            android:title="@string/add_goal"></item>
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:id="@+id/performance_goals"
+            android:icon="@drawable/check_two"
+            android:onClick="onDrawerOpened"
+            android:title="@string/performance_goals" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:id="@+id/quantitative_goals"
+            android:icon="@drawable/check_one"
+            android:onClick="onDrawerOpened"
+            android:title="@string/quantitative_goals" />
+        <item
+            android:id="@+id/statistics"
+            android:icon="@drawable/ic_baseline_insert_chart_outlined_24"
+            android:onClick="onDrawerOpened"
+            android:title="@string/statistics" />
+        <item
+            android:id="@+id/calendar"
+            android:icon="@drawable/cal_icon"
+            android:onClick="onDrawerOpened"
+            android:title="@string/calendar" />
+        <item
+            android:paddingTop="100dp"
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_baseline_login_24"
+            android:onClick="onDrawerOpened"
+            android:title="@string/logout" />
     </group>
+
 </menu>

@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.gallery;
+package pl.artsit.flexgoals.ui.calendar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import pl.artsit.flexgoals.R;
 
-public class GalleryFragment extends Fragment {
+public class CalendarFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private CalendarViewModel calendarViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        calendarViewModel =
+                new ViewModelProvider(this).get(CalendarViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_add_goal, container, false);
+        final TextView textView = root.findViewById(R.id.text_home);
+        calendarViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

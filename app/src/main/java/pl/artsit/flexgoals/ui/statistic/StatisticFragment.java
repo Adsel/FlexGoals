@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.slideshow;
+package pl.artsit.flexgoals.ui.statistic;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 
 import pl.artsit.flexgoals.R;
 
-public class SlideshowFragment extends Fragment {
+public class StatisticFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private StatisticViewModel statisticViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
+        statisticViewModel =
+                new ViewModelProvider(this).get(StatisticViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_quantitative_goals, container, false);
         final TextView textView = root.findViewById(R.id.text_slideshow);
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        statisticViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

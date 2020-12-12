@@ -3,8 +3,10 @@ package pl.artsit.flexgoals;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     private AppBarConfiguration mAppBarConfiguration;
     public static User currentUser;
     public static boolean isUser = false;
+    private ActionBarDrawerToggle actionBarDrawerToggle;
 
 
     @Override
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
             // Passing each menu ID as a set of Ids because each
             // menu should be considered as top level destinations.
             mAppBarConfiguration = new AppBarConfiguration.Builder(
-                    R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                     R.id.add_goal, R.id.performance_goals,R.id.quantitative_goals,R.id.statistics,R.id.calendar)
                     .setOpenableLayout(drawer)
                     .build();
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -111,4 +114,5 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         // refresh text view with points
         System.out.println("Points: " + points);
     }
+
 }
