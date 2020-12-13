@@ -138,7 +138,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 passwordRepeat = editTextPasswordRepeat.getText().toString();
                 checkPasswords();
-
             }
 
             @Override

@@ -30,8 +30,7 @@
     <string name="password_not_same">Hasła nie są identyczne</string>
 
     <string name="incorrect_data">Dane nieprawidłowe!</string>
-
-
+    <string name="password_is_empty">Hasło jest puste</string>
 
 
 </resources>
