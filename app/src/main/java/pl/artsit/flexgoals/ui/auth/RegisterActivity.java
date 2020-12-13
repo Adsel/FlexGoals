@@ -135,7 +135,6 @@ public class RegisterActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 passwordRepeat = editTextPasswordRepeat.getText().toString();
                 checkPasswords();
-
             }
 
             @Override
@@ -224,7 +223,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         buttonRegister.setOnClickListener(view -> {
-            System.out.println(password+login+mail);
             if (checkPasswords() && checkLogin() && checkMail()) {
                 User user = new User(0,password,login,0,mail);
                 new HttpClient().registerUser(user);

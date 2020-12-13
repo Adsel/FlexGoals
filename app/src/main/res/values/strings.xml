@@ -25,6 +25,7 @@
     <string name="login">Nazwa użytkownika</string>
     <string name="loginIsEmpty">Login jest pusty</string>
     <string name="password">Haslo</string>
+    <string name="passwordIsEmpty">Hasło jest puste</string>
 
     <string name="loginTitle">Zaloguj się</string>
     <string name="loginLogin">Zaloguj</string>

@@ -10,6 +10,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextLogin;
     private Button buttonLogin;
     private Button buttonRegister;
+    private TextView textViewLogin;
+    private TextView textViewPassword;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -35,14 +38,23 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-         editTextLogin = findViewById(R.id.editTextLogin);
-         editTextPassword = findViewById(R.id.editTextPassword);
+        editTextLogin = findViewById(R.id.editTextLogin);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        textViewLogin = findViewById(R.id.textViewLogin);
+        textViewPassword = findViewById(R.id.textViewPassword);
 
         buttonLogin = findViewById(R.id.buttonLogin);
         LoginActivity ref = this;
-        buttonLogin.setOnClickListener(view -> new HttpClient(ref).getUser(
-                new AuthData(editTextLogin.getText().toString(), editTextPassword.getText().toString())
-        ));
+        buttonLogin.setOnClickListener(view -> {
+            boolean isCorrectLogin = checkLogin();
+            boolean isCorrectPassword = checkPassword();
+
+            if (checkPassword() && checkLogin()) {
+                new HttpClient(ref).getUser(
+                        new AuthData(editTextLogin.getText().toString(), editTextPassword.getText().toString())
+                );
+            }
+        });
 
         buttonRegister = findViewById(R.id.buttonRegister);
         buttonRegister.setOnClickListener(view -> {
@@ -52,22 +64,19 @@ public class LoginActivity extends AppCompatActivity {
 
         editTextPassword.setOnTouchListener((v, event) -> {
             final int DRAWABLE_RIGHT = 2;
-            if(event.getAction() == MotionEvent.ACTION_UP) {
-                if(event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
 
                     Drawable unwrappedDrawable = AppCompatResources.getDrawable(getBaseContext(), R.drawable.ic_eye_solid);
                     Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
 
-                    if(editTextPassword.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
-
+                    if (editTextPassword.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
                         DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorAccent));
                         editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     }
                     else{
-
                         DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorPrimary));
                         editTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-
                     }
                     editTextPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_solid, 0, R.drawable.ic_eye_solid, 0);
 
@@ -86,11 +95,36 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void informAboutFailedLogin() {
-        System.out.println("Nieprawidłowe dane logowania");
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_LONG;
         Toast toast = Toast.makeText(context,"Niepoprawne Dane!!", duration);
         toast.show();
+    }
+
+    private boolean checkPassword(){
+        if (editTextPassword.getText().toString().equals("")){
+            textViewPassword.setVisibility(TextView.VISIBLE);
+            editTextPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid, 0, R.drawable.ic_times_circle_solid, 0);
+
+            return false;
+        }
+        textViewPassword.setVisibility(TextView.INVISIBLE);
+        editTextPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid,0, R.drawable.ic_check_circle_solid, 0);
+
+        return true;
+    }
+
+    private boolean checkLogin(){
+        if (editTextLogin.getText().toString().equals("")){
+            textViewLogin.setVisibility(TextView.VISIBLE);
+            editTextLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid, 0, R.drawable.ic_times_circle_solid, 0);
+
+            return false;
+        }
+        editTextLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid,0, R.drawable.ic_check_circle_solid, 0);
+        textViewLogin.setVisibility(TextView.INVISIBLE);
+
+        return true;
     }
 
 }

@@ -50,7 +50,6 @@ public class HttpClient {
     public void getUser(AuthData authData){
         Call<User> call = jsonPlaceholderAPI.getUser(authData);
 
-        System.out.println("STRUCTURE OF USER" + authData.toString());
         LoginActivity ref = this.loginActivity;
         call.enqueue(new Callback<User>() {
             @Override
