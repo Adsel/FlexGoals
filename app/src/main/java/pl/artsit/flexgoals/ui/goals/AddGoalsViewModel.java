@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.addGoals;
+package pl.artsit.flexgoals.ui.goals;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
