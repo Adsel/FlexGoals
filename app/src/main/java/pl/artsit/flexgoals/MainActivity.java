@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     public static User currentUser;
     public static boolean isUser = false;
+    private TextView drawerPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            TextView drawerUsername = findViewById(R.id.username);
+            TextView drawerEmail = findViewById(R.id.userEmail);
+            drawerPoints = findViewById(R.id.userPoints);
+            drawerUsername.setText(currentUser.getLogin());
+            drawerEmail.setText(currentUser.getEmail());
             NavigationView navigationView = findViewById(R.id.nav_view);
             // Passing each menu ID as a set of Ids because each
             // menu should be considered as top level destinations.
@@ -80,9 +87,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setPoints(Integer points) {
-        // TODO:
-        // set points
-        // refresh text view with points
-        System.out.println("Points: " + points);
+        drawerPoints.setText(points);
     }
 }
