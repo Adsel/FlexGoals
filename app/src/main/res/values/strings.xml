@@ -32,5 +32,15 @@
     <string name="incorrect_data">Dane nieprawidłowe!</string>
     <string name="password_is_empty">Hasło jest puste</string>
 
-
+    <string name="add_goals_title">Dodaj Cel</string>
+    <string name="add_goals_name">Wprowadź nazwę</string>
+    <string name="add_goalsI_info">Dodaj Cel</string>
+    <string name="add_goals_type">Wybierz Rodzaj</string>
+    <string name="add_goals_submit">Zatwierdź</string>
+    <string name="menu_button">menu</string>
+    <string name="todo">TODO</string>
+    <string-array name="add_goals_options">
+        <item>Cele Ilościowe</item>
+        <item>Cele Jakieś takieś TODO</item>
+    </string-array>
 </resources>
