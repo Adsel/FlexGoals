@@ -43,6 +43,7 @@
     <string name="add_goals_add_desc">Dodaj opis</string>
     <string name="add_goals_add_days">Dodaj ilość dni</string>
     <string name="add_goals_add_step">Podaj liczbe króków</string>
+    <string name="add_goals_add_goal">Dodaj cel</string>
     <string-array name="add_goals_options">
         <item>Cele Ilościowe</item>
         <item>Cele Zaliczeniowe</item>
