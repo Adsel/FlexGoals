@@ -42,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         if(MainActivity.isUser) {
             activity = this;
-
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().hide();
 //            FloatingActionButton fab = findViewById(R.id.fab);
 //            fab.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -63,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
             new HttpClient(this).getUserPoints(currentUser);
             new HttpClient().getFinalGoals(currentUser);
             new HttpClient().getQuantitativeGoals(currentUser);
-
 
             navController.navigate(R.id.nav_add_goal);
 

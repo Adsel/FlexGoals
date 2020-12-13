@@ -382,14 +382,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/app_bar_main"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:onClick="createGoal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewAddGoalsTitle" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
