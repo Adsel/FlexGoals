@@ -22,9 +22,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.http.HttpClient;
-import pl.artsit.flexgoals.modal.Popup;
+import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.user.User;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -37,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editTextPasswordRepeat;
     Button buttonRegister;
 
-    Popup popup;
+    ModalWidgets modalWidgets;
     String login = "";
     String mail = "";
     String password = "";
@@ -48,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
     private boolean checkPasswords(){
         if (!password.equals(passwordRepeat) && !password.equals("") && !passwordRepeat.equals("")){
             textViewPassword.setVisibility(TextView.VISIBLE);
-            textViewPassword.setText(R.string.passwordNotSame);
+            textViewPassword.setText(R.string.password_not_same);
             editTextPasswordRepeat.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_solid, 0, R.drawable.ic_times_circle_solid, 0);
             return false;
         } else {
@@ -63,10 +62,10 @@ public class RegisterActivity extends AppCompatActivity {
         Matcher matcher = emailRegex.matcher(mail);
         if(mail.equals("")){
             textViewMail.setVisibility(TextView.VISIBLE);
-            textViewMail.setText(R.string.mailIsEmpty);
+            textViewMail.setText(R.string.mail_is_empty);
         } else if (!matcher.find()){
             textViewMail.setVisibility(TextView.VISIBLE);
-            textViewMail.setText(R.string.mailIncorrect);
+            textViewMail.setText(R.string.mail_incorrect);
         } else {
             textViewMail.setVisibility(TextView.INVISIBLE);
             editTextMail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_email_24, 0, R.drawable.ic_check_circle_solid, 0);
@@ -108,7 +107,8 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPassword= findViewById(R.id.editTextPassword);
         editTextPasswordRepeat= findViewById(R.id.editTextPasswordRepeat);
         buttonRegister= findViewById(R.id.buttonRegister);
-        popup =  new Popup(getApplicationContext());
+
+        modalWidgets =  new ModalWidgets(getApplicationContext());
 
         editTextLogin.addTextChangedListener(new TextWatcher() {
             @Override
@@ -229,13 +229,13 @@ public class RegisterActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(view -> {
             System.out.println(password+login+mail);
             if(!checkPasswords()){
-                popup.show(getString(R.string.passwordNotSame));
+                modalWidgets.showToast(getString(R.string.password_not_same));
             }
             if(!checkLogin()){
-                popup.show(getString(R.string.loginIsEmpty));
+                modalWidgets.showToast(getString(R.string.login_is_empty));
             }
             if(!checkMail()){
-                popup.show(getString(R.string.mailIncorrect));
+                modalWidgets.showToast(getString(R.string.mail_is_empty));
             }
             if (checkPasswords() && checkLogin() && checkMail()) {
                 User user = new User(0,password,login,0,mail);
