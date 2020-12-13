@@ -4,6 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.MainActivity;
+import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
+import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
@@ -112,6 +116,185 @@ public class HttpClient {
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void saveQuantitativeGoal(QuantitativeGoal quantitativeGoal) {
+        Call<Integer> call = jsonPlaceholderAPI.updateQuantitativeGoal(quantitativeGoal);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                // Retrive success behaviour (ex. Toast)
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void saveFinalGoal(FinalGoal finalGoal) {
+        Call<Integer> call = jsonPlaceholderAPI.updateFinalGoal(finalGoal);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                // Retrive success behaviour (ex. Toast)
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getFinalGoals(User user){
+        Call<FinalGoal[]> call = jsonPlaceholderAPI.getUserFinalGoals(user.getId());
+
+        call.enqueue(new Callback<FinalGoal[]>() {
+            @Override
+            public void onResponse(Call<FinalGoal[]> call, Response<FinalGoal[]> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+                FinalGoal[] goals = response.body();
+                if(goals != null) {
+                    for(FinalGoal finalG: goals) {
+                        System.out.println(finalG);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FinalGoal[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    public void getQuantitativeGoals(User user){
+        Call<QuantitativeGoal[]> call = jsonPlaceholderAPI.getUserQuantitativeGoals(user.getId());
+
+        call.enqueue(new Callback<QuantitativeGoal[]>() {
+            @Override
+            public void onResponse(Call<QuantitativeGoal[]> call, Response<QuantitativeGoal[]> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+                QuantitativeGoal[] goals = response.body();
+                if(goals != null) {
+                    for(QuantitativeGoal quantitativeGoal: goals) {
+                        System.out.println(quantitativeGoal);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<QuantitativeGoal[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getPredefinedFinalGoals() {
+        Call<PredefinedFinalGoal[]> call = jsonPlaceholderAPI.getPredefinedFinalGoals();
+
+        call.enqueue(new Callback<PredefinedFinalGoal[]>() {
+            @Override
+            public void onResponse(Call<PredefinedFinalGoal[]> call, Response<PredefinedFinalGoal[]> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+                PredefinedFinalGoal[] points = response.body();
+
+                // TODO: set goals
+            }
+
+            @Override
+            public void onFailure(Call<PredefinedFinalGoal[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getQuantitativeGoals() {
+        Call<PredefinedQuantitativeGoal[]> call = jsonPlaceholderAPI.getQuantitativeGoals();
+
+        call.enqueue(new Callback<PredefinedQuantitativeGoal[]>() {
+            @Override
+            public void onResponse(Call<PredefinedQuantitativeGoal[]> call, Response<PredefinedQuantitativeGoal[]> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+                PredefinedQuantitativeGoal[] points = response.body();
+
+                // TODO: set goals
+            }
+
+            @Override
+            public void onFailure(Call<PredefinedQuantitativeGoal[]> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void deleteFinalGoal(FinalGoal finalGoal){
+        Call<Void> call = jsonPlaceholderAPI.deleteFinalGoal(finalGoal.getId());
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                mainActivity.goToMain();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void deleteQuantitativeGoal(QuantitativeGoal quantitativeGoal){
+        Call<Void> call = jsonPlaceholderAPI.deleteQuantitativeGoal(quantitativeGoal.getId());
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                mainActivity.goToMain();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
 
             }
         });

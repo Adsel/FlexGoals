@@ -22,6 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.modal.Popup;
 import pl.artsit.flexgoals.model.user.User;
@@ -43,7 +44,6 @@ public class RegisterActivity extends AppCompatActivity {
     String passwordRepeat = "";
     public static final Pattern emailRegex =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-
 
     private boolean checkPasswords(){
         if (!password.equals(passwordRepeat) && !password.equals("") && !passwordRepeat.equals("")){
@@ -100,14 +100,14 @@ public class RegisterActivity extends AppCompatActivity {
             this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
 
         setContentView(R.layout.activity_register);
-        textViewLogin= (TextView) findViewById(R.id.textViewLogin);
-        textViewMail= (TextView) findViewById(R.id.textViewMail);
-        textViewPassword= (TextView) findViewById(R.id.textViewPassword);
-        editTextLogin= (EditText) findViewById(R.id.editTextLogin);
-        editTextMail = (EditText) findViewById(R.id.editTextMail);
-        editTextPassword= (EditText) findViewById(R.id.editTextPassword);
-        editTextPasswordRepeat= (EditText) findViewById(R.id.editTextPasswordRepeat);
-        buttonRegister= (Button) findViewById(R.id.buttonRegister);
+        textViewLogin= findViewById(R.id.textViewLogin);
+        textViewMail= findViewById(R.id.textViewMail);
+        textViewPassword= findViewById(R.id.textViewPassword);
+        editTextLogin= findViewById(R.id.editTextLogin);
+        editTextMail = findViewById(R.id.editTextMail);
+        editTextPassword= findViewById(R.id.editTextPassword);
+        editTextPasswordRepeat= findViewById(R.id.editTextPasswordRepeat);
+        buttonRegister= findViewById(R.id.buttonRegister);
         popup =  new Popup(getApplicationContext());
 
         editTextLogin.addTextChangedListener(new TextWatcher() {
@@ -191,8 +191,6 @@ public class RegisterActivity extends AppCompatActivity {
                     editTextPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_solid, 0, R.drawable.ic_eye_solid, 0);
 
                     return true;
-                }
-                else {
                 }
             }
             return false;
