@@ -31,7 +31,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class HttpClient extends AppCompatActivity {
+public class HttpClient {
     private Retrofit retrofit;
     private String path = "http://147.135.208.69:8080/"; //8080
     private JsonPlaceholderAPI jsonPlaceholderAPI;
@@ -39,7 +39,6 @@ public class HttpClient extends AppCompatActivity {
     private LoginActivity loginActivity;
     private MainActivity mainActivity;
     List<QuantitativeGoal> models;
-    QuantitativeGoalsAdapter adapter;
     RecyclerView recyclerViewProfile;
 
 
