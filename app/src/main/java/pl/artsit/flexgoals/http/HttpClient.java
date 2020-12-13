@@ -1,13 +1,28 @@
 package pl.artsit.flexgoals.http;
 
+import android.os.Build;
+import android.os.Bundle;
+import android.text.Layout;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
 import pl.artsit.flexgoals.MainActivity;
+import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
+import pl.artsit.flexgoals.ui.QuantitativeGoalsAdapter;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,13 +31,17 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class HttpClient {
+public class HttpClient extends AppCompatActivity {
     private Retrofit retrofit;
     private String path = "http://147.135.208.69:8080/"; //8080
     private JsonPlaceholderAPI jsonPlaceholderAPI;
     private Gson gson;
     private LoginActivity loginActivity;
     private MainActivity mainActivity;
+    List<QuantitativeGoal> models;
+    QuantitativeGoalsAdapter adapter;
+    RecyclerView recyclerViewProfile;
+
 
     public HttpClient(){
         gson = new GsonBuilder()
@@ -144,8 +163,7 @@ public class HttpClient {
         });
     }
 
-
-    public void getQuantitativeGoals(User user){
+    public QuantitativeGoal[] getQuantitativeGoals(User user) throws IOException {
         Call<QuantitativeGoal[]> call = jsonPlaceholderAPI.getUserQuantitativeGoals(user.getId());
 
         call.enqueue(new Callback<QuantitativeGoal[]>() {
@@ -168,7 +186,11 @@ public class HttpClient {
 
             }
         });
+
+        return call.execute().body();
     }
+
+
 
     public void deleteFinalGoal(FinalGoal finalGoal){
         Call<Void> call = jsonPlaceholderAPI.deleteFinalGoal(finalGoal.getId());

@@ -17,6 +17,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import java.io.IOException;
+
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
@@ -58,8 +60,12 @@ public class MainActivity extends AppCompatActivity {
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
             NavigationUI.setupWithNavController(navigationView, navController);
             new HttpClient(this).getUserPoints(currentUser);
-            new HttpClient().getFinalGoals(currentUser);
-            new HttpClient().getQuantitativeGoals(currentUser);
+            new HttpClient().getFinalGoals();
+            try {
+                new HttpClient().getQuantitativeGoals(currentUser);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
