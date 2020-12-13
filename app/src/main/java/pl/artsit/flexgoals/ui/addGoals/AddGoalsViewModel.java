@@ -8,11 +8,8 @@ public class AddGoalsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-
-
     public AddGoalsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
     }
 
     public LiveData<String> getText() {

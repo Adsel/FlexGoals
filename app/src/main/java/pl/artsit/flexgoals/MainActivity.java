@@ -1,12 +1,21 @@
 package pl.artsit.flexgoals;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.Window;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,18 +32,16 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     public static User currentUser;
     public static boolean isUser = false;
+    public static MainActivity activity;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
         if(MainActivity.isUser) {
-            Toolbar toolbar = findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+            activity = this;
 
 //            FloatingActionButton fab = findViewById(R.id.fab);
 //            fab.setOnClickListener(new View.OnClickListener() {
@@ -44,20 +51,22 @@ public class MainActivity extends AppCompatActivity {
 //                            .setAction("Action", null).show();
 //                }
 //            });
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer = findViewById(R.id.drawer_layout);
             NavigationView navigationView = findViewById(R.id.nav_view);
-            // Passing each menu ID as a set of Ids because each
-            // menu should be considered as top level destinations.
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
             mAppBarConfiguration = new AppBarConfiguration.Builder(
                     R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                     .setDrawerLayout(drawer)
                     .build();
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-            NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-            NavigationUI.setupWithNavController(navigationView, navController);
+
             new HttpClient(this).getUserPoints(currentUser);
             new HttpClient().getFinalGoals(currentUser);
             new HttpClient().getQuantitativeGoals(currentUser);
+
+
+            navController.navigate(R.id.nav_add_goal);
+
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
@@ -68,24 +77,35 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        ((TextView) findViewById(R.id.userName)).setText(currentUser.getLogin());
+        ((TextView) findViewById(R.id.userEmail)).setText(currentUser.getEmail());
+        ((TextView) findViewById(R.id.userPoints)).setText(currentUser.getPoints().toString());
+
         return true;
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
 
     public void setPoints(Integer points) {
-        // TODO:
-        // set points
-        // refresh text view with points
-        System.out.println("Points: " + points);
+        currentUser.setPoints(points);
     }
 
     public void goToMain() {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
+    }
+
+    public void toggleDrawer(View view) {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            drawer.openDrawer(GravityCompat.START);
+        }
     }
 }

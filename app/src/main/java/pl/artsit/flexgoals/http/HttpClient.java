@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
 import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
@@ -157,6 +158,27 @@ public class HttpClient {
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void addFinalGoal(FinalGoalData finalGoal) {
+        Call<FinalGoal> call = jsonPlaceholderAPI.addFinalGoal(finalGoal);
+
+        call.enqueue(new Callback<FinalGoal>() {
+            @Override
+            public void onResponse(Call<FinalGoal> call, Response<FinalGoal> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                // Retrive success behaviour (ex. Toast)
+            }
+
+            @Override
+            public void onFailure(Call<FinalGoal> call, Throwable t) {
 
             }
         });

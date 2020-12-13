@@ -49,8 +49,9 @@
                 android:cropToPadding="false"
                 android:paddingStart="15dp"
                 android:paddingLeft="15dp"
+                android:onClick="toggleDrawer"
                 app:srcCompat="@drawable/ic_menu_icon"
-                tools:ignore="RtlSymmetry,VectorDrawableCompat" />
+                tools:ignore="OnClick,RtlSymmetry,VectorDrawableCompat" />
 
         </FrameLayout>
 
