@@ -11,24 +11,27 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
-    <string name="registerTitle">Załóż konto</string>
-    <string name="registerInfo">Wprowadź dane abu utworzyć twoje nowe konto</string>
-
     <string name="register">Zarejestruj</string>
-    <string name="mail">Mail</string>
-    <string name="mailIncorrect">Mail jest nieprawidłowy</string>
-    <string name="mailIsEmpty">Mail jest pusty</string>
-    <string name="passwordRepeat">Powtórz hasło</string>
-    <string name="passwordNotSame">Hasła nie są identyczne</string>
-
+    <string name="register_title">Załóż konto</string>
+    <string name="register_info">Wprowadź dane abu utworzyć twoje nowe konto</string>
 
     <string name="login">Nazwa użytkownika</string>
-    <string name="loginIsEmpty">Login jest pusty</string>
-    <string name="password">Haslo</string>
-    <string name="passwordIsEmpty">Hasło jest puste</string>
+    <string name="login_is_empty">Login jest pusty</string>
+    <string name="login_title">Zaloguj się</string>
+    <string name="login_login">Zaloguj</string>
+    <string name="login_info">Wprowadź dane logowania aby przejść na twoje konto</string>
 
-    <string name="loginTitle">Zaloguj się</string>
-    <string name="loginLogin">Zaloguj</string>
-    <string name="loginInfo">Wprowadź dane logowania aby przejść na twoje konto</string>
+    <string name="mail">Mail</string>
+    <string name="mail_incorrect">Mail jest nieprawidłowy</string>
+    <string name="mail_is_empty">Mail jest pusty</string>
+
+    <string name="password">Haslo</string>
+    <string name="password_repeat">Powtórz hasło</string>
+    <string name="password_not_same">Hasła nie są identyczne</string>
+
+    <string name="incorrect_data">Dane nieprawidłowe!</string>
+
+
+
 
 </resources>

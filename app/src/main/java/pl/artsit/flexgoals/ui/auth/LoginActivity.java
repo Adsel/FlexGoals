@@ -20,6 +20,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 
@@ -31,12 +32,16 @@ public class LoginActivity extends AppCompatActivity {
     private Button buttonRegister;
     private TextView textViewLogin;
     private TextView textViewPassword;
+    private ModalWidgets modalWidgets;
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        modalWidgets = new ModalWidgets(getApplicationContext());
 
         editTextLogin = findViewById(R.id.editTextLogin);
         editTextPassword = findViewById(R.id.editTextPassword);
@@ -95,6 +100,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void informAboutFailedLogin() {
+        System.out.println("Nieprawidłowe dane logowania");
+        modalWidgets.showToast(getString(R.string.incorrect_data));
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_LONG;
         Toast toast = Toast.makeText(context,"Niepoprawne Dane!!", duration);
