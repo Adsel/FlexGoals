@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.MainActivity;
+import pl.artsit.flexgoals.http.goals.AddGoalCallback;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
@@ -164,7 +165,7 @@ public class HttpClient {
         });
     }
 
-    public void addFinalGoal(FinalGoalData finalGoal) {
+    public void addFinalGoal(AddGoalCallback addGoalCallback, FinalGoalData finalGoal) {
         Call<FinalGoal> call = jsonPlaceholderAPI.addFinalGoal(finalGoal);
 
         call.enqueue(new Callback<FinalGoal>() {
@@ -175,8 +176,7 @@ public class HttpClient {
                     return;
                 }
 
-                System.out.println("ADDED FINAL GOAL");
-                // Retrive success behaviour (ex. Toast)
+                addGoalCallback.onAddedFinalGoalCallback(response.body());
             }
 
             @Override
@@ -186,8 +186,7 @@ public class HttpClient {
         });
     }
 
-
-    public void addQuantitativeGoal(QuantitativeGoalData quantitativeGoalData) {
+    public void addQuantitativeGoal(AddGoalCallback addGoalCallback, QuantitativeGoalData quantitativeGoalData) {
         Call<QuantitativeGoal> call = jsonPlaceholderAPI.addQuantitativeGoal(quantitativeGoalData);
 
         call.enqueue(new Callback<QuantitativeGoal>() {
@@ -198,8 +197,7 @@ public class HttpClient {
                     return;
                 }
 
-                System.out.println("ADDED QUANTITATIVE GOAL");
-                // Retrive success behaviour (ex. Toast)
+                addGoalCallback.onAddedQuantitativeGoalCallback(response.body());
             }
 
             @Override
@@ -292,7 +290,7 @@ public class HttpClient {
                     System.out.println("Unsuccessfull response code" + response.message());
                     return;
                 }
-                PredefinedQuantitativeGoal[] points = response.body();
+                PredefinedQuantitativeGoal[] goals = response.body();
 
                 // TODO: set goals
             }

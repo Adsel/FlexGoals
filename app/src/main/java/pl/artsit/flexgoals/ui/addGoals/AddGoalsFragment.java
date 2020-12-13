@@ -1,6 +1,5 @@
 package pl.artsit.flexgoals.ui.addGoals;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,22 +7,23 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.http.goals.AddGoalCallback;
 import pl.artsit.flexgoals.model.ModalWidgets;
+import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.FinalGoalData;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 
-public class AddGoalsFragment extends Fragment {
+public class AddGoalsFragment extends Fragment implements AddGoalCallback {
 
     private EditText newGoalName;
     private EditText newGoalDesc;
@@ -31,6 +31,7 @@ public class AddGoalsFragment extends Fragment {
     private EditText newGoalDays;
     private ModalWidgets modal;
     private AddGoalsViewModel addGoalsViewModel;
+
     private enum GOAL_TYPE {
         FINAL,
         QUANTITATIVE
@@ -39,23 +40,10 @@ public class AddGoalsFragment extends Fragment {
     private GOAL_TYPE currentTaskType;
 
     public View onCreateView(@NonNull LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
-
         addGoalsViewModel = new ViewModelProvider(this).get(AddGoalsViewModel.class);
-
         View root = inflater.inflate(R.layout.fragment_add_goals, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
 
-
-        final TextView textViewAddingGoalsTitle = root.findViewById(R.id.textViewAddGoalsTitle);
-
-        //textViewAddingGoalsTitle.getRootView().setBackgroundColor(getResources().getColor(R.color.addGoals));
-
-        final TextView textViewAddGoalsMess1 = root.findViewById(R.id.textViewAddGoalsMess1);
-        final TextView editTextAddGoalsName  = root.findViewById(R.id.textViewAddGoalsMess3);
-        final LinearLayout addGoalsName = root.findViewById(R.id.LinearLayoutQ);
         final Spinner spinnerAddGoals = root.findViewById(R.id.spinnerAddGoals);
-        final EditText editTextAddGoalsMess3 = root.findViewById(R.id.editTextAddGoalsQDescription);
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(root.getContext(),
                 android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.add_goals_options));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -63,14 +51,15 @@ public class AddGoalsFragment extends Fragment {
 
         newGoalName = root.findViewById(R.id.newGoalName);
         newGoalDesc = root.findViewById(R.id.editTextAddGoalsQDescription);
-        newGoalTarget = root.findViewById(R.id.editTextAddGoalsQDescription);
+        newGoalTarget = root.findViewById(R.id.editTextAddGoalsQTarget);
         newGoalDays = root.findViewById(R.id.editTextAddGoalsQDays);
         modal = new ModalWidgets(root.getContext());
 
+        View view = this.getView();
         root.findViewById(R.id.buttonAddGoalsSubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createGoal();
+                createGoal(v);
             }
         });
 
@@ -89,7 +78,7 @@ public class AddGoalsFragment extends Fragment {
                     root.findViewById(R.id.LinearLayoutQ).setVisibility(View.VISIBLE);
                 } else {
                     currentTaskType = GOAL_TYPE.FINAL;
-                    root.findViewById(R.id.LinearLayoutQ).setVisibility(View.INVISIBLE);
+                    root.findViewById(R.id.LinearLayoutQ).setVisibility(View.GONE);
                 }
             }
 
@@ -103,7 +92,7 @@ public class AddGoalsFragment extends Fragment {
         return root;
     }
 
-    public void createGoal() {
+    public void createGoal(View view) {
         String name = newGoalName.getText().toString();
         String description = newGoalDesc.getText().toString();
         String goal = newGoalTarget.getText().toString();
@@ -117,20 +106,22 @@ public class AddGoalsFragment extends Fragment {
         if (isCorrect) {
             if (this.currentTaskType == GOAL_TYPE.FINAL) {
                 new HttpClient().addFinalGoal(
-                        new FinalGoalData(
+                        this, new FinalGoalData(
                                 MainActivity.currentUser.getId(), name,
                                 description, goal, days
                         )
                 );
+                Navigation.findNavController(view).navigate(R.id.nav_home);
             } else if (this.currentTaskType == GOAL_TYPE.QUANTITATIVE) {
                 Integer step = Integer.parseInt(newGoalDays.getText().toString());
                 if (step > 0){
                     new HttpClient().addQuantitativeGoal(
-                            new QuantitativeGoalData(
+                            this, new QuantitativeGoalData(
                                     name, description, MainActivity.currentUser.getId(),
                                     days, goal, step
                             )
                     );
+                    Navigation.findNavController(view).navigate(R.id.nav_home);
                 } else {
                     notify("Nieprawidłowe dane");
                 }
@@ -143,5 +134,15 @@ public class AddGoalsFragment extends Fragment {
 
     public void notify(String msg) {
         this.modal.showToast(msg);
+    }
+
+    @Override
+    public void onAddedFinalGoalCallback(FinalGoal finalGoalData) {
+        notify("ADDED FINAL GOAL");
+    }
+
+    @Override
+    public void onAddedQuantitativeGoalCallback(QuantitativeGoal quantitativeGoalData) {
+        notify("ADDED Quantitative GOAL");
     }
 }
