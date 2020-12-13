@@ -53,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
 //                            .setAction("Action", null).show();
 //                }
 //            });
+
+            NavigationView navigationViewOld = findViewById(R.id.nav_view);
+            NavController navControllerOld = Navigation.findNavController(this, R.id.nav_host_fragment);
+//            NavigationUI.setupActionBarWithNavController(this, navControllerOld, mAppBarConfiguration);
+            NavigationUI.setupWithNavController(navigationViewOld, navControllerOld);
+
+
             drawer = findViewById(R.id.drawer_layout);
             NavigationView navigationView = findViewById(R.id.nav_view);
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -65,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             new HttpClient(this).getUserPoints(currentUser);
             new HttpClient().getFinalGoals(currentUser);
             new HttpClient().getQuantitativeGoals(currentUser);
+
 
             navController.navigate(R.id.nav_add_goal);
 
