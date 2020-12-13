@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         if(MainActivity.isUser) {
             activity = this;
 
+//            Toolbar toolbar = findViewById(R.id.toolbar);
+//            setSupportActionBar(toolbar);
 //            FloatingActionButton fab = findViewById(R.id.fab);
 //            fab.setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -51,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
 //                            .setAction("Action", null).show();
 //                }
 //            });
+
+            NavigationView navigationViewOld = findViewById(R.id.nav_view);
+            NavController navControllerOld = Navigation.findNavController(this, R.id.nav_host_fragment);
+//            NavigationUI.setupActionBarWithNavController(this, navControllerOld, mAppBarConfiguration);
+            NavigationUI.setupWithNavController(navigationViewOld, navControllerOld);
+
+
             drawer = findViewById(R.id.drawer_layout);
             NavigationView navigationView = findViewById(R.id.nav_view);
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
