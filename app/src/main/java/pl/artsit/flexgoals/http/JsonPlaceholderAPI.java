@@ -1,9 +1,11 @@
 package pl.artsit.flexgoals.http;
 
+import pl.artsit.flexgoals.model.goal.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
 import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import retrofit2.Call;
@@ -11,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
+import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
@@ -47,5 +50,12 @@ public interface JsonPlaceholderAPI {
 
     @DELETE("/api/goals/quantitative-delete/{id_goal}")
     Call<Void> deleteQuantitativeGoal(@Path("id_goal") Integer goalId);
+
+    @POST("/api/goals/final-add")
+    Call<FinalGoal> addFinalGoal(@Body FinalGoalData finalGoalData);
+
+    @POST("/api/goals/quantitative-add")
+    Call<QuantitativeGoal> addQuantitativeGoal(@Body QuantitativeGoalData quantitativeGoalData);
+
 
 }
