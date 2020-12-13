@@ -22,7 +22,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.modal.Popup;
 import pl.artsit.flexgoals.model.user.User;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -35,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editTextPasswordRepeat;
     Button buttonRegister;
 
+    Popup popup;
     String login = "";
     String mail = "";
     String password = "";
@@ -88,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
         return false;
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPassword= findViewById(R.id.editTextPassword);
         editTextPasswordRepeat= findViewById(R.id.editTextPasswordRepeat);
         buttonRegister= findViewById(R.id.buttonRegister);
-
+        popup =  new Popup(getApplicationContext());
 
         editTextLogin.addTextChangedListener(new TextWatcher() {
             @Override
@@ -225,6 +228,15 @@ public class RegisterActivity extends AppCompatActivity {
 
         buttonRegister.setOnClickListener(view -> {
             System.out.println(password+login+mail);
+            if(!checkPasswords()){
+                popup.show(getString(R.string.passwordNotSame));
+            }
+            if(!checkLogin()){
+                popup.show(getString(R.string.loginIsEmpty));
+            }
+            if(!checkMail()){
+                popup.show(getString(R.string.mailIncorrect));
+            }
             if (checkPasswords() && checkLogin() && checkMail()) {
                 User user = new User(0,password,login,0,mail);
                 new HttpClient().registerUser(user);

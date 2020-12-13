@@ -13,18 +13,17 @@
 
     <string name="registerTitle">Załóż konto</string>
     <string name="registerInfo">Wprowadź dane abu utworzyć twoje nowe konto</string>
-
+    <string name="login">Nazwa użytkownika</string>
     <string name="register">Zarejestruj</string>
     <string name="mail">Mail</string>
     <string name="mailIncorrect">Mail jest nieprawidłowy</string>
     <string name="mailIsEmpty">Mail jest pusty</string>
+    <string name="password">Haslo</string>
     <string name="passwordRepeat">Powtórz hasło</string>
     <string name="passwordNotSame">Hasła nie są identyczne</string>
 
 
-    <string name="login">Nazwa użytkownika</string>
     <string name="loginIsEmpty">Login jest pusty</string>
-    <string name="password">Haslo</string>
 
     <string name="loginTitle">Zaloguj się</string>
     <string name="loginLogin">Zaloguj</string>
