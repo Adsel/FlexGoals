@@ -15,12 +15,24 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.model.goal.FinalGoalData;
 
 public class AddGoalsFragment extends Fragment {
 
-
+    private EditText newGoalName;
+    private EditText newGoalDesc;
+    private EditText newGoalTarget;
+    private EditText newGoalDays;
     private AddGoalsViewModel addGoalsViewModel;
+    private enum GOAL_TYPE {
+        FINAL,
+        QUANTITATIVE
+    }
+
+    private GOAL_TYPE currentTaskType;
 
     public View onCreateView(@NonNull LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
 
@@ -45,6 +57,11 @@ public class AddGoalsFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerAddGoals.setAdapter(adapter);
 
+        newGoalName = root.findViewById(R.id.newGoalName);
+        newGoalDesc = root.findViewById(R.id.editTextAddGoalsQDescription);
+        newGoalTarget = root.findViewById(R.id.editTextAddGoalsQDescription);
+        newGoalDays = root.findViewById(R.id.editTextAddGoalsQDays);
+
 
 
 //        ModalWidgets modalWidgets = new ModalWidgets(root.getContext());
@@ -57,7 +74,13 @@ public class AddGoalsFragment extends Fragment {
         spinnerAddGoals.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                System.out.println("xd " + position + " XD " + id);
+                if (position == 0) {
+                    currentTaskType = GOAL_TYPE.QUANTITATIVE;
+                    root.findViewById(R.id.LinearLayoutQ).setVisibility(View.VISIBLE);
+                } else {
+                    currentTaskType = GOAL_TYPE.FINAL;
+                    root.findViewById(R.id.LinearLayoutQ).setVisibility(View.INVISIBLE);
+                }
             }
 
             @Override
@@ -66,6 +89,27 @@ public class AddGoalsFragment extends Fragment {
             }
 
         });
+
         return root;
+    }
+
+    public void createGoal() {
+        String name = newGoalName.getText().toString();
+        String description = newGoalDesc.getText().toString();
+        String goal = newGoalTarget.getText().toString();
+        String days = newGoalDays.getText().toString();
+        // TODO: VALIDATION
+
+        if (this.currentTaskType == GOAL_TYPE.FINAL) {
+            new HttpClient().addFinalGoal(
+                    new FinalGoalData(
+                        MainActivity.currentUser.getId(),
+                        name,
+                        description,
+                        goal,
+                        Integer.parseInt(days)
+                    )
+            );
+        }
     }
 }

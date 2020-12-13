@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -39,24 +40,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
         if(MainActivity.isUser) {
             activity = this;
 
-            FloatingActionButton fab = findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                }
-            });
+//            FloatingActionButton fab = findViewById(R.id.fab);
+//            fab.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                            .setAction("Action", null).show();
+//                }
+//            });
             drawer = findViewById(R.id.drawer_layout);
             NavigationView navigationView = findViewById(R.id.nav_view);
-            // Passing each menu ID as a set of Ids because each
-            // menu should be considered as top level destinations.
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
             mAppBarConfiguration = new AppBarConfiguration.Builder(
                     R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                     .setDrawerLayout(drawer)
@@ -65,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
             new HttpClient(this).getUserPoints(currentUser);
             new HttpClient().getFinalGoals(currentUser);
             new HttpClient().getQuantitativeGoals(currentUser);
+
+
+            navController.navigate(R.id.nav_add_goal);
+
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
@@ -79,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.userName)).setText(currentUser.getLogin());
         ((TextView) findViewById(R.id.userEmail)).setText(currentUser.getEmail());
         ((TextView) findViewById(R.id.userPoints)).setText(currentUser.getPoints().toString());
+
         return true;
     }
 
