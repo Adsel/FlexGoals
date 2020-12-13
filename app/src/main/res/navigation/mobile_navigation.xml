@@ -8,25 +8,28 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="pl.artsit.flexgoals.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label=""
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="pl.artsit.flexgoals.ui.addGoals.AddGoalsFragment"
-        android:label="@string/menu_gallery"
+        android:name="pl.artsit.flexgoals.ui.gallery.GalleryFragment"
+        android:label="@string/menu_celeIlosciowe"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="pl.artsit.flexgoals.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:label="@string/menu_celeZaliczeniowe"
         tools:layout="@layout/fragment_slideshow" />
-
     <fragment
-        android:id="@+id/nav_add_goal"
-        android:name="pl.artsit.flexgoals.ui.addGoals.AddGoalsFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
-
+        android:id="@+id/nav_statistic"
+        android:name="pl.artsit.flexgoals.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_statystyka"
+        tools:layout="@layout/fragment_statistic" />
+    <fragment
+        android:id="@+id/nav_calender"
+        android:name="pl.artsit.flexgoals.ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_kalendarz"
+        tools:layout="@layout/fragment_calender" />
 </navigation>
