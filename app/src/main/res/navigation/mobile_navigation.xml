@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="pl.artsit.flexgoals.ui.gallery.GalleryFragment"
+        android:name="pl.artsit.flexgoals.ui.addGoals.AddGoalsFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
