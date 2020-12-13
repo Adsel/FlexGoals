@@ -39,6 +39,7 @@ public class HttpClient {
     private LoginActivity loginActivity;
     private MainActivity mainActivity;
     List<QuantitativeGoal> models;
+    QuantitativeGoalsAdapter adapter;
     RecyclerView recyclerViewProfile;
 
 
