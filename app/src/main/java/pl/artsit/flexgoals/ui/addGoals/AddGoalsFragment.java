@@ -36,7 +36,7 @@ public class AddGoalsFragment extends Fragment {
 
         final TextView textViewAddGoalsMess1 = root.findViewById(R.id.textViewAddGoalsMess1);
         final TextView editTextAddGoalsName  = root.findViewById(R.id.textViewAddGoalsMess3);
-        final LinearLayout addGoalsName = root.findViewById(R.id.AddGoalsName);
+        final LinearLayout addGoalsName = root.findViewById(R.id.LinearLayoutQ);
         final Spinner spinnerAddGoals = root.findViewById(R.id.spinnerAddGoals);
         final EditText editTextAddGoalsMess3 = root.findViewById(R.id.editTextAddGoalsQDescription);
 

@@ -50,41 +50,31 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
 
-            <LinearLayout
-                android:id="@+id/AddGoalsName"
+            <EditText
+                android:id="@+id/editTextAddGoalsName2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@drawable/edit_round_flat"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/editTextAddGoalsName2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/edit_round_flat"
-                    android:drawablePadding="10dp"
-                    android:elevation="6dp"
-                    android:ems="10"
-                    android:fontFamily="sans-serif-light"
-                    android:hint="@string/add_goals_name"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="10dp"
-                    android:shadowDx="20"
-                    android:shadowDy="20"
-                    android:shadowRadius="20"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textColorHint="@color/colorAccent"
-                    android:textCursorDrawable="@drawable/color_cursor"
-                    android:textSize="18sp"
-                    tools:targetApi="lollipop" />
-            </LinearLayout>
+                android:drawablePadding="10dp"
+                android:elevation="6dp"
+                android:ems="10"
+                android:fontFamily="sans-serif-light"
+                android:hint="@string/add_goals_name"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="10dp"
+                android:shadowDx="20"
+                android:shadowDy="20"
+                android:shadowRadius="20"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorAccent"
+                android:textCursorDrawable="@drawable/color_cursor"
+                android:textSize="18sp"
+                tools:targetApi="lollipop" />
 
             <TextView
                 android:id="@+id/textViewAddGoalsMessQDescription"
