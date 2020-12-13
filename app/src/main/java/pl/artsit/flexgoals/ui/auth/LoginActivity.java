@@ -1,17 +1,17 @@
 package pl.artsit.flexgoals.ui.auth;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.content.res.AppCompatResources;
@@ -48,13 +48,52 @@ public class LoginActivity extends AppCompatActivity {
         textViewLogin = findViewById(R.id.textViewLogin);
         textViewPassword = findViewById(R.id.textViewPassword);
 
+        editTextPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkPassword();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        editTextLogin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkLogin();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
         buttonLogin = findViewById(R.id.buttonLogin);
         LoginActivity ref = this;
         buttonLogin.setOnClickListener(view -> {
             boolean isCorrectLogin = checkLogin();
             boolean isCorrectPassword = checkPassword();
-
-            if (checkPassword() && checkLogin()) {
+            if(!isCorrectLogin){
+                modalWidgets.showToast(getString(R.string.login_is_empty));
+            }
+            if(!isCorrectPassword){
+                modalWidgets.showToast(getString(R.string.password_is_empty));
+            }
+            if (isCorrectLogin && isCorrectPassword) {
                 new HttpClient(ref).getUser(
                         new AuthData(editTextLogin.getText().toString(), editTextPassword.getText().toString())
                 );
@@ -102,10 +141,6 @@ public class LoginActivity extends AppCompatActivity {
     public void informAboutFailedLogin() {
         System.out.println("Nieprawidłowe dane logowania");
         modalWidgets.showToast(getString(R.string.incorrect_data));
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_LONG;
-        Toast toast = Toast.makeText(context,"Niepoprawne Dane!!", duration);
-        toast.show();
     }
 
     private boolean checkPassword(){
