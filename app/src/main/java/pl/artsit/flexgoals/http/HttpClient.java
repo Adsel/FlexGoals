@@ -9,6 +9,7 @@ import pl.artsit.flexgoals.model.goal.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
 import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
@@ -174,11 +175,35 @@ public class HttpClient {
                     return;
                 }
 
+                System.out.println("ADDED FINAL GOAL");
                 // Retrive success behaviour (ex. Toast)
             }
 
             @Override
             public void onFailure(Call<FinalGoal> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    public void addQuantitativeGoal(QuantitativeGoalData quantitativeGoalData) {
+        Call<QuantitativeGoal> call = jsonPlaceholderAPI.addQuantitativeGoal(quantitativeGoalData);
+
+        call.enqueue(new Callback<QuantitativeGoal>() {
+            @Override
+            public void onResponse(Call<QuantitativeGoal> call, Response<QuantitativeGoal> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                System.out.println("ADDED QUANTITATIVE GOAL");
+                // Retrive success behaviour (ex. Toast)
+            }
+
+            @Override
+            public void onFailure(Call<QuantitativeGoal> call, Throwable t) {
 
             }
         });

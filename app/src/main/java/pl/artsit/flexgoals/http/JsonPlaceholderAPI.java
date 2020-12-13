@@ -5,6 +5,7 @@ import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
 import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import retrofit2.Call;
@@ -52,6 +53,9 @@ public interface JsonPlaceholderAPI {
 
     @POST("/api/goals/final-add")
     Call<FinalGoal> addFinalGoal(@Body FinalGoalData finalGoalData);
+
+    @POST("/api/goals/quantitative-add")
+    Call<QuantitativeGoal> addQuantitativeGoal(@Body QuantitativeGoalData quantitativeGoalData);
 
 
 }

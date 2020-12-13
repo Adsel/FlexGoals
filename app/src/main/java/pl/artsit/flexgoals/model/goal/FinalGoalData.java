@@ -19,11 +19,11 @@ public class FinalGoalData {
         this.days = days;
     }
 
-    public Integer getIdUser() {
+    public Integer getId_user() {
         return id_user;
     }
 
-    public Boolean getIsShared() {
+    public Boolean getIs_shared() {
         return is_shared;
     }
 
@@ -43,11 +43,11 @@ public class FinalGoalData {
         return days;
     }
 
-    public void setIdUser(Integer id_user) {
+    public void setId_user(Integer id_user) {
         this.id_user = id_user;
     }
 
-    public void setIsShared(Boolean is_shared) {
+    public void setIs_shared(Boolean is_shared) {
         this.is_shared = is_shared;
     }
 

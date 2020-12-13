@@ -1,5 +1,6 @@
 package pl.artsit.flexgoals.ui.addGoals;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,9 @@ import androidx.lifecycle.ViewModelProvider;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.goal.FinalGoalData;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 
 public class AddGoalsFragment extends Fragment {
 
@@ -26,6 +29,7 @@ public class AddGoalsFragment extends Fragment {
     private EditText newGoalDesc;
     private EditText newGoalTarget;
     private EditText newGoalDays;
+    private ModalWidgets modal;
     private AddGoalsViewModel addGoalsViewModel;
     private enum GOAL_TYPE {
         FINAL,
@@ -61,8 +65,14 @@ public class AddGoalsFragment extends Fragment {
         newGoalDesc = root.findViewById(R.id.editTextAddGoalsQDescription);
         newGoalTarget = root.findViewById(R.id.editTextAddGoalsQDescription);
         newGoalDays = root.findViewById(R.id.editTextAddGoalsQDays);
+        modal = new ModalWidgets(root.getContext());
 
-
+        root.findViewById(R.id.buttonAddGoalsSubmit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createGoal();
+            }
+        });
 
 //        ModalWidgets modalWidgets = new ModalWidgets(root.getContext());
 //        modalWidgets.setBackColor(textViewAddingGoalsTitle,R.color.addGoals,R.drawable.title );
@@ -97,19 +107,41 @@ public class AddGoalsFragment extends Fragment {
         String name = newGoalName.getText().toString();
         String description = newGoalDesc.getText().toString();
         String goal = newGoalTarget.getText().toString();
-        String days = newGoalDays.getText().toString();
-        // TODO: VALIDATION
+        int days = Integer.parseInt(newGoalDays.getText().toString());
 
-        if (this.currentTaskType == GOAL_TYPE.FINAL) {
-            new HttpClient().addFinalGoal(
-                    new FinalGoalData(
-                        MainActivity.currentUser.getId(),
-                        name,
-                        description,
-                        goal,
-                        Integer.parseInt(days)
-                    )
-            );
+        boolean isCorrect = true;
+        if (name.equals("") || description.equals("") || goal.equals("") || days <= 0){
+            isCorrect = false;
         }
+
+        if (isCorrect) {
+            if (this.currentTaskType == GOAL_TYPE.FINAL) {
+                new HttpClient().addFinalGoal(
+                        new FinalGoalData(
+                                MainActivity.currentUser.getId(), name,
+                                description, goal, days
+                        )
+                );
+            } else if (this.currentTaskType == GOAL_TYPE.QUANTITATIVE) {
+                Integer step = Integer.parseInt(newGoalDays.getText().toString());
+                if (step > 0){
+                    new HttpClient().addQuantitativeGoal(
+                            new QuantitativeGoalData(
+                                    name, description, MainActivity.currentUser.getId(),
+                                    days, goal, step
+                            )
+                    );
+                } else {
+                    notify("Nieprawidłowe dane");
+                }
+
+            }
+        } else {
+            notify("Nieprawidłowe dane");
+        }
+    }
+
+    public void notify(String msg) {
+        this.modal.showToast(msg);
     }
 }
