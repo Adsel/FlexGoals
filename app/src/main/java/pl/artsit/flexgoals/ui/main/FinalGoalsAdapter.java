@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals;
+package pl.artsit.flexgoals.ui.main;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,9 +7,12 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
+import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.model.goal.FinalGoal;
 
-    private String[] localDataSet;
+public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.ViewHolder> {
+
+    private FinalGoal[] localDataSet;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -36,7 +39,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
      * @param dataSet String[] containing the data to populate views to be used
      * by RecyclerView.
      */
-    public CustomAdapter(String[] dataSet) {
+    public FinalGoalsAdapter(FinalGoal[] dataSet) {
         localDataSet = dataSet;
     }
 
@@ -56,7 +59,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.getTextView().setText(localDataSet[position]);
+        viewHolder.getTextView().setText(localDataSet[position].getName());
     }
 
     // Return the size of your dataset (invoked by the layout manager)

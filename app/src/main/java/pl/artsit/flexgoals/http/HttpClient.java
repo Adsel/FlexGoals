@@ -11,6 +11,7 @@ import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
+import pl.artsit.flexgoals.ui.main.GalleryFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +26,7 @@ public class HttpClient {
     private Gson gson;
     private LoginActivity loginActivity;
     private MainActivity mainActivity;
+    private GalleryFragment galleryFragment;
 
     public HttpClient(){
         gson = new GsonBuilder()
@@ -35,6 +37,7 @@ public class HttpClient {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         jsonPlaceholderAPI = retrofit.create(JsonPlaceholderAPI.class);
+        System.out.println("DONT WOKRS");
     }
 
     public HttpClient(LoginActivity loginActivity) {
@@ -45,6 +48,12 @@ public class HttpClient {
     public HttpClient(MainActivity mainActivity) {
         this();
         this.mainActivity = mainActivity;
+    }
+
+    public HttpClient(GalleryFragment galleryFragment) {
+        this();
+        System.out.println("WOKRS");
+        this.galleryFragment = galleryFragment;
     }
 
     public void getUser(AuthData authData){
@@ -164,6 +173,7 @@ public class HttpClient {
 
     public void getFinalGoals(User user){
         Call<FinalGoal[]> call = jsonPlaceholderAPI.getUserFinalGoals(user.getId());
+        GalleryFragment fragment = this.galleryFragment;
 
         call.enqueue(new Callback<FinalGoal[]>() {
             @Override
@@ -177,6 +187,7 @@ public class HttpClient {
                     for(FinalGoal finalG: goals) {
                         System.out.println(finalG);
                     }
+                    fragment.showGoals(goals);
                 }
             }
 
@@ -203,6 +214,7 @@ public class HttpClient {
                     for(QuantitativeGoal quantitativeGoal: goals) {
                         System.out.println(quantitativeGoal);
                     }
+                    galleryFragment.showQuantitativeGoals(goals);
                 }
             }
 

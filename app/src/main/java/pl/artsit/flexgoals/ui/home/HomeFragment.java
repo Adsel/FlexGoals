@@ -11,16 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import pl.artsit.flexgoals.CustomAdapter;
 import pl.artsit.flexgoals.R;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,18 +30,6 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         });
-
-//        String[] arr = {"1", "2", "3", "4", "5"};
-
-//        CustomAdapter customAdapter = new CustomAdapter(arr);
-////        View view = inflater.inflate(R.layout.fragment_second, container, false);
-//
-//        // Add the following lines to create RecyclerView
-//        recyclerView = root.findViewById(R.id.text_recyclerview);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
-//        recyclerView.setAdapter(customAdapter);
-
 
         return root;
     }

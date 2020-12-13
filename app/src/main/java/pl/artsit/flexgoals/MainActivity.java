@@ -9,8 +9,13 @@ import android.view.WindowManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -20,6 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
+import pl.artsit.flexgoals.ui.home.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,8 +64,12 @@ public class MainActivity extends AppCompatActivity {
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
             NavigationUI.setupWithNavController(navigationView, navController);
             new HttpClient(this).getUserPoints(currentUser);
-            new HttpClient().getFinalGoals(currentUser);
-            new HttpClient().getQuantitativeGoals(currentUser);
+
+            navController.navigate(R.id.nav_gallery);
+
+
+
+
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
