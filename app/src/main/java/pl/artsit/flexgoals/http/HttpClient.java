@@ -11,7 +11,7 @@ import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
-import pl.artsit.flexgoals.ui.main.GalleryFragment;
+import pl.artsit.flexgoals.ui.main.MainFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,7 +26,7 @@ public class HttpClient {
     private Gson gson;
     private LoginActivity loginActivity;
     private MainActivity mainActivity;
-    private GalleryFragment galleryFragment;
+    private MainFragment mainFragment;
 
     public HttpClient(){
         gson = new GsonBuilder()
@@ -50,10 +50,10 @@ public class HttpClient {
         this.mainActivity = mainActivity;
     }
 
-    public HttpClient(GalleryFragment galleryFragment) {
+    public HttpClient(MainFragment mainFragment) {
         this();
         System.out.println("WOKRS");
-        this.galleryFragment = galleryFragment;
+        this.mainFragment = mainFragment;
     }
 
     public void getUser(AuthData authData){
@@ -173,7 +173,7 @@ public class HttpClient {
 
     public void getFinalGoals(User user){
         Call<FinalGoal[]> call = jsonPlaceholderAPI.getUserFinalGoals(user.getId());
-        GalleryFragment fragment = this.galleryFragment;
+        MainFragment fragment = this.mainFragment;
 
         call.enqueue(new Callback<FinalGoal[]>() {
             @Override
@@ -214,7 +214,7 @@ public class HttpClient {
                     for(QuantitativeGoal quantitativeGoal: goals) {
                         System.out.println(quantitativeGoal);
                     }
-                    galleryFragment.showQuantitativeGoals(goals);
+                    mainFragment.showQuantitativeGoals(goals);
                 }
             }
 

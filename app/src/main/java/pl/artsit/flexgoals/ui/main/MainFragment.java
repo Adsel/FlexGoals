@@ -20,19 +20,19 @@ import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 
-public class GalleryFragment extends Fragment {
+public class MainFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private MainViewModel mainViewModel;
     private RecyclerView finalGoalRecyclerView;
     private RecyclerView quantitativeGoalRecyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+        mainViewModel =
+                new ViewModelProvider(this).get(MainViewModel.class);
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        mainViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
