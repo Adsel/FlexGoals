@@ -5,12 +5,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bacground"
+    android:background="@drawable/background"
     tools:context=".ui.auth.RegisterActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/app_bar_clear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -31,6 +54,7 @@
                     android:id="@+id/imageView2"
                     android:layout_width="77dp"
                     android:layout_height="wrap_content"
+                    android:contentDescription="Logo"
                     app:srcCompat="@drawable/ic_logo1_ps" />
 
                 <LinearLayout
@@ -49,7 +73,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="sans-serif-medium"
                         android:lineSpacingExtra="8sp"
-                        android:text="@string/registerTitle"
+                        android:text="@string/register_title"
                         android:textAllCaps="true"
                         android:textColor="@color/colorAccent"
                         android:textSize="36sp"
@@ -62,7 +86,7 @@
                         android:fontFamily="sans-serif-light"
                         android:gravity="left"
                         android:lineSpacingExtra="8sp"
-                        android:text="@string/registerInfo"
+                        android:text="@string/register_info"
                         android:textAllCaps="true"
                         android:textColor="@color/colorAccent"
                         android:textSize="14sp"
@@ -88,7 +112,7 @@
                 android:paddingTop="1dp"
                 android:paddingRight="10dp"
                 android:paddingBottom="1dp"
-                android:text="@string/loginIsEmpty"
+                android:text="@string/login_is_empty"
                 android:textColor="@color/colorPrimary"
                 android:visibility="invisible" />
 
@@ -246,7 +270,7 @@
                 android:elevation="6dp"
                 android:ems="10"
                 android:fontFamily="sans-serif-thin"
-                android:hint="@string/passwordRepeat"
+                android:hint="@string/password_repeat"
                 android:importantForAutofill="no"
                 android:inputType="textPersonName|textPassword"
                 android:paddingLeft="20dp"
