@@ -28,5 +28,6 @@
     <color name="kalendarz">#00DCFF</color>
     <color name="wyloguj">#5248D8</color>
 
-    <color name="addGoals">#a904d1</color>
+    <color name="addGoals">#FF79047C</color>
+    <color name="adselBlue">#68B8E3</color>
 </resources>
