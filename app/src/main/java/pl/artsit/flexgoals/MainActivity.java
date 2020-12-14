@@ -14,15 +14,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
 import com.google.android.material.navigation.NavigationView;
-
+import androidx.core.view.GravityCompat;
 import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.http.user.UserCallback;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements UserCallback {
     private AppBarConfiguration mAppBarConfiguration;
     public static User currentUser;
     public static boolean isUser = false;
@@ -63,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     .setDrawerLayout(drawer)
                     .build();
 
-            new HttpClient(this).getUserPoints(currentUser);
+            new HttpClient().getUserPoints(this, currentUser);
             new HttpClient().getFinalGoals(currentUser);
             new HttpClient().getQuantitativeGoals(currentUser);
 
