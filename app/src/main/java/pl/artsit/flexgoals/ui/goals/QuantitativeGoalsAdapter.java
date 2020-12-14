@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.main;
+package pl.artsit.flexgoals.ui.goals;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,10 +7,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -108,7 +104,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         viewHolder.getGetDescriptionToPercentage().setText("");
         // viewHolder.getProgressBar().setProgress();
     }
-
 
 
 
