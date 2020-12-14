@@ -1,21 +1,15 @@
 package pl.artsit.flexgoals;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -74,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             new HttpClient().getQuantitativeGoals(currentUser);
 
 
-            navController.navigate(R.id.nav_add_goal);
+            navController.navigate(R.id.nav_edit_goal);
 
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

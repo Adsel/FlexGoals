@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.goals;
+package pl.artsit.flexgoals.ui.editGoals;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,14 +24,14 @@ import pl.artsit.flexgoals.model.goal.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 
-public class AddGoalsFragment extends Fragment implements AddGoalCallback {
+public class editGoalsFragment extends Fragment implements AddGoalCallback {
 
     private EditText newGoalName;
     private EditText newGoalDesc;
     private EditText newGoalTarget;
     private EditText newGoalDays;
     private ModalWidgets modal;
-    private AddGoalsViewModel addGoalsViewModel;
+    private editGoalsViewModel addGoalsViewModel;
 
     private enum GOAL_TYPE {
         FINAL,
@@ -40,7 +41,7 @@ public class AddGoalsFragment extends Fragment implements AddGoalCallback {
     private GOAL_TYPE currentTaskType;
 
     public View onCreateView(@NonNull LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
-        addGoalsViewModel = new ViewModelProvider(this).get(AddGoalsViewModel.class);
+        addGoalsViewModel = new ViewModelProvider(this).get(editGoalsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_add_goals, container, false);
 
         final Spinner spinnerAddGoals = root.findViewById(R.id.spinnerAddGoals);
