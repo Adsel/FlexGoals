@@ -3,11 +3,10 @@ package pl.artsit.flexgoals.http;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
-import pl.artsit.flexgoals.http.goals.UserCallback;
-import pl.artsit.flexgoals.http.goals.UserLoginCallback;
-import pl.artsit.flexgoals.http.goals.UserRegistryCallback;
+import pl.artsit.flexgoals.http.user.UserCallback;
+import pl.artsit.flexgoals.http.user.UserLoginCallback;
+import pl.artsit.flexgoals.http.user.UserRegistryCallback;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
@@ -16,7 +15,6 @@ import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
-import pl.artsit.flexgoals.ui.auth.LoginActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,6 +51,7 @@ public class HttpClient {
                 }
                 User user = response.body();
                 if(user != null) {
+                    userLoginCallback.saveUserCredentials(authData.getLogin(), authData.getPassword());
                     userLoginCallback.redirectToMain(user);
                 } else {
                     userLoginCallback.informAboutFailedLogin();
