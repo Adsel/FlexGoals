@@ -4,10 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,20 +16,30 @@ import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
+import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
 import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 
-public class editGoalsFragment extends Fragment implements AddGoalCallback {
+public class EditGoalsFragment extends Fragment implements AddGoalCallback, GoalUpdateCallback {
 
     private EditText newGoalName;
     private EditText newGoalDesc;
     private EditText newGoalTarget;
     private EditText newGoalDays;
     private ModalWidgets modal;
-    private editGoalsViewModel addGoalsViewModel;
+    private EditGoalsViewModel editGoalsViewModel;
+
+    @Override
+    public void goToMain() {
+        Navigation.findNavController(this.getView()).navigate(R.id.nav_home);
+    }
+
+    @Override
+    public void informAboutFailed() {
+
+    }
 
     private enum GOAL_TYPE {
         FINAL,
@@ -41,14 +49,13 @@ public class editGoalsFragment extends Fragment implements AddGoalCallback {
     private GOAL_TYPE currentTaskType;
 
     public View onCreateView(@NonNull LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
-        addGoalsViewModel = new ViewModelProvider(this).get(editGoalsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_add_goals, container, false);
+        editGoalsViewModel = new ViewModelProvider(this).get(EditGoalsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_edit_goals, container, false);
 
-        final Spinner spinnerAddGoals = root.findViewById(R.id.spinnerAddGoals);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(root.getContext(),
                 android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.add_goals_options));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerAddGoals.setAdapter(adapter);
+
 
         newGoalName = root.findViewById(R.id.newGoalName);
         newGoalDesc = root.findViewById(R.id.editTextAddGoalsQDescription);
@@ -60,7 +67,11 @@ public class editGoalsFragment extends Fragment implements AddGoalCallback {
         root.findViewById(R.id.buttonAddGoalsSubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createGoal(v);
+
+                //TODO Callback
+                goToMain();
+
+
             }
         });
 
@@ -70,25 +81,6 @@ public class editGoalsFragment extends Fragment implements AddGoalCallback {
 //        modalWidgets.setBackColor(editTextAddGoalsMess3,R.color.addGoals, R.drawable.edit_round_flat);
 //        modalWidgets.setBackColor(editTextAddGoalsName,R.color.colorPrimary, R.drawable.edit_round_flat);
 //        modalWidgets.setBackColor(addGoalsName,R.color.addGoals, R.drawable.edit_round_flat);
-
-        spinnerAddGoals.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                if (position == 0) {
-                    currentTaskType = GOAL_TYPE.QUANTITATIVE;
-                    root.findViewById(R.id.LinearLayoutQ).setVisibility(View.VISIBLE);
-                } else {
-                    currentTaskType = GOAL_TYPE.FINAL;
-                    root.findViewById(R.id.LinearLayoutQ).setVisibility(View.GONE);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
-        });
 
         return root;
     }
@@ -106,6 +98,7 @@ public class editGoalsFragment extends Fragment implements AddGoalCallback {
 
         if (isCorrect) {
             if (this.currentTaskType == GOAL_TYPE.FINAL) {
+                //TODO to change
                 new HttpClient().addFinalGoal(
                         this, new FinalGoalData(
                                 MainActivity.currentUser.getId(), name,
@@ -116,12 +109,15 @@ public class editGoalsFragment extends Fragment implements AddGoalCallback {
             } else if (this.currentTaskType == GOAL_TYPE.QUANTITATIVE) {
                 Integer step = Integer.parseInt(newGoalDays.getText().toString());
                 if (step > 0){
-                    new HttpClient().addQuantitativeGoal(
-                            this, new QuantitativeGoalData(
-                                    name, description, MainActivity.currentUser.getId(),
-                                    days, goal, step
-                            )
-                    );
+                    //TODO to edit
+//                    new HttpClient().saveQuantitativeGoal(this, new QuantitativeGoal(
+//                                        MainActivity.GOAL_ID,
+//                                        name,
+//                                        description,
+//                                        MainActivity.currentUser.getId(),
+//                                days, goal, step
+//                            )
+//                    );
                     Navigation.findNavController(view).navigate(R.id.nav_home);
                 } else {
                     notify(getString(R.string.incorrect_data));

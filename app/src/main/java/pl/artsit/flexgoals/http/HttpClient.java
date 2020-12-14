@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
+import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
 import pl.artsit.flexgoals.http.user.UserCallback;
 import pl.artsit.flexgoals.http.user.UserLoginCallback;
 import pl.artsit.flexgoals.http.user.UserRegistryCallback;
@@ -114,7 +115,7 @@ public class HttpClient {
         });
     }
 
-    public void saveQuantitativeGoal(QuantitativeGoal quantitativeGoal) {
+    public void saveQuantitativeGoal(GoalUpdateCallback goalUpdateCallback, QuantitativeGoal quantitativeGoal) {
         Call<Integer> call = jsonPlaceholderAPI.updateQuantitativeGoal(quantitativeGoal);
 
         call.enqueue(new Callback<Integer>() {
@@ -122,15 +123,17 @@ public class HttpClient {
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (!response.isSuccessful()){
                     System.out.println("Unsuccessfull response code" + response.message());
+                    goalUpdateCallback.informAboutFailed();
+
                     return;
                 }
-
+                goalUpdateCallback.goToMain();
                 // Retrive success behaviour (ex. Toast)
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-
+                goalUpdateCallback.informAboutFailed();
             }
         });
     }

@@ -4,11 +4,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class editGoalsViewModel extends ViewModel {
+public class EditGoalsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public editGoalsViewModel() {
+    public EditGoalsViewModel() {
         mText = new MutableLiveData<>();
     }
 

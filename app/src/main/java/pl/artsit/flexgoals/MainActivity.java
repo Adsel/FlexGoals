@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
     public static MainActivity activity;
     private DrawerLayout drawer;
 
+    //TODO GOAL
+    public static Integer GOAL_ID = 22;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
 
 
             navController.navigate(R.id.nav_edit_goal);
+
 
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
