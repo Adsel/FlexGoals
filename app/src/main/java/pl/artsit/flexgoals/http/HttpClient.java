@@ -5,9 +5,9 @@ import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
-import pl.artsit.flexgoals.http.goals.UserCallback;
-import pl.artsit.flexgoals.http.goals.UserLoginCallback;
-import pl.artsit.flexgoals.http.goals.UserRegistryCallback;
+import pl.artsit.flexgoals.http.user.UserCallback;
+import pl.artsit.flexgoals.http.user.UserLoginCallback;
+import pl.artsit.flexgoals.http.user.UserRegistryCallback;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
