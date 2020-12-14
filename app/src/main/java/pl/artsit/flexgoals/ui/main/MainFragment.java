@@ -11,12 +11,14 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements GoalGetCallback {
 
     private MainViewModel mainViewModel;
     private RecyclerView finalGoalRecyclerView;
@@ -28,32 +30,54 @@ public class MainFragment extends Fragment {
                 new ViewModelProvider(this).get(MainViewModel.class);
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
 
-        HttpClient httpClient = new HttpClient(this);
+        HttpClient httpClient = new HttpClient();
         finalGoalRecyclerView = root.findViewById(R.id.final_goals_recycleview);
         finalGoalRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         finalGoalRecyclerView.setHasFixedSize(true);
-        httpClient.getFinalGoals(MainActivity.currentUser);
+        httpClient.getFinalGoals(this, MainActivity.currentUser);
 
         quantitativeGoalRecyclerView = root.findViewById(R.id.final_goals_recycleview);
         quantitativeGoalRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         quantitativeGoalRecyclerView.setHasFixedSize(true);
-        httpClient.getQuantitativeGoals(MainActivity.currentUser);
+        httpClient.getQuantitativeGoals(this, MainActivity.currentUser);
 
 
         return root;
     }
 
-    public void showGoals(FinalGoal[] goals) {
-        FinalGoalsAdapter finalGoalsAdapter = new FinalGoalsAdapter(goals);
+    @Override
+    public void informAboutFailedGetFinalGoals() {
+
+    }
+
+    @Override
+    public void drawFinalGoals(FinalGoal[] finalGoals) {
+        FinalGoalsAdapter finalGoalsAdapter = new FinalGoalsAdapter(finalGoals);
 
         finalGoalRecyclerView.setAdapter(finalGoalsAdapter);
         finalGoalRecyclerView.setVisibility(View.VISIBLE);
     }
 
-    public void showQuantitativeGoals(QuantitativeGoal[] quantitativeGoal) {
-        QuantitativeGoalsAdapter quantitativeGoalsAdapter = new QuantitativeGoalsAdapter(quantitativeGoal);
+    @Override
+    public void informAboutEmptyFinalGoals() {
+
+    }
+
+    @Override
+    public void informAboutFailedGetQuantitativeGoals() {
+
+    }
+
+    @Override
+    public void drawQuantitativeGoals(QuantitativeGoal[] quantitativeGoals) {
+        QuantitativeGoalsAdapter quantitativeGoalsAdapter = new QuantitativeGoalsAdapter(quantitativeGoals);
 
         quantitativeGoalRecyclerView.setAdapter(quantitativeGoalsAdapter);
         quantitativeGoalRecyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void informAboutEmptyQuantitativeGoals() {
+
     }
 }

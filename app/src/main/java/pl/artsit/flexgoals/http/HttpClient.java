@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
+import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.goals.UserCallback;
 import pl.artsit.flexgoals.http.goals.UserLoginCallback;
 import pl.artsit.flexgoals.http.goals.UserRegistryCallback;
@@ -15,8 +16,6 @@ import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
-import pl.artsit.flexgoals.ui.auth.LoginActivity;
-import pl.artsit.flexgoals.ui.main.MainFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,7 +38,6 @@ public class HttpClient {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         jsonPlaceholderAPI = retrofit.create(JsonPlaceholderAPI.class);
-        System.out.println("DONT WOKRS");
     }
 
     public void getUser(UserLoginCallback userLoginCallback, AuthData authData){
@@ -116,7 +114,7 @@ public class HttpClient {
         });
     }
 
-    public void saveQuantitativeGoal(QuantitativeGoal quantitativeGoal) {
+    public void saveQuantitativeGoal( QuantitativeGoal quantitativeGoal) {
         Call<Integer> call = jsonPlaceholderAPI.updateQuantitativeGoal(quantitativeGoal);
 
         call.enqueue(new Callback<Integer>() {
@@ -200,15 +198,15 @@ public class HttpClient {
         });
     }
 
-    public void getFinalGoals(User user){
+    public void getFinalGoals(GoalGetCallback goalGetCallback, User user){
         Call<FinalGoal[]> call = jsonPlaceholderAPI.getUserFinalGoals(user.getId());
-        MainFragment fragment = this.mainFragment;
 
         call.enqueue(new Callback<FinalGoal[]>() {
             @Override
             public void onResponse(Call<FinalGoal[]> call, Response<FinalGoal[]> response) {
                 if (!response.isSuccessful()){
                     System.out.println("Unsuccessfull response code" + response.message());
+                    goalGetCallback.informAboutFailedGetFinalGoals();
                     return;
                 }
                 FinalGoal[] goals = response.body();
@@ -216,19 +214,22 @@ public class HttpClient {
                     for(FinalGoal finalG: goals) {
                         System.out.println(finalG);
                     }
-                    fragment.showGoals(goals);
+
+                    goalGetCallback.drawFinalGoals(goals);
+                } else {
+                    goalGetCallback.informAboutEmptyFinalGoals();
                 }
             }
 
             @Override
             public void onFailure(Call<FinalGoal[]> call, Throwable t) {
-
+                goalGetCallback.informAboutFailedGetFinalGoals();
             }
         });
     }
 
 
-    public void getQuantitativeGoals(User user){
+    public void getQuantitativeGoals(GoalGetCallback goalGetCallback, User user){
         Call<QuantitativeGoal[]> call = jsonPlaceholderAPI.getUserQuantitativeGoals(user.getId());
 
         call.enqueue(new Callback<QuantitativeGoal[]>() {
@@ -236,6 +237,7 @@ public class HttpClient {
             public void onResponse(Call<QuantitativeGoal[]> call, Response<QuantitativeGoal[]> response) {
                 if (!response.isSuccessful()){
                     System.out.println("Unsuccessfull response code" + response.message());
+                    goalGetCallback.informAboutFailedGetQuantitativeGoals();
                     return;
                 }
                 QuantitativeGoal[] goals = response.body();
@@ -243,13 +245,15 @@ public class HttpClient {
                     for(QuantitativeGoal quantitativeGoal: goals) {
                         System.out.println(quantitativeGoal);
                     }
-                    mainFragment.showQuantitativeGoals(goals);
+                    goalGetCallback.drawQuantitativeGoals(goals);
+                } else {
+                    goalGetCallback.informAboutEmptyQuantitativeGoals();
                 }
             }
 
             @Override
             public void onFailure(Call<QuantitativeGoal[]> call, Throwable t) {
-
+                goalGetCallback.informAboutFailedGetQuantitativeGoals();
             }
         });
     }

@@ -65,9 +65,6 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
                     .build();
 
             new HttpClient().getUserPoints(this, currentUser);
-            new HttpClient().getFinalGoals(currentUser);
-            new HttpClient().getQuantitativeGoals(currentUser);
-
 
             navController.navigate(R.id.nav_add_goal);
 

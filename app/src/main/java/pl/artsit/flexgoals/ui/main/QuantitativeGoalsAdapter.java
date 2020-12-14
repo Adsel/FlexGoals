@@ -80,7 +80,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_goal, viewGroup, false);
+                .inflate(R.layout.item_quantitative_goal, viewGroup, false);
 
         return new ViewHolder(view);
     }
@@ -92,9 +92,9 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
-        viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
-        viewHolder.getDescriptionDayToChange().setText(localDataSet[position].getDays());
-        viewHolder.getGetDescriptionToPercentage().setText(localDataSet[position].getProgress());
+//        viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
+//        viewHolder.getDescriptionDayToChange().setText(localDataSet[position].getDays());
+//        viewHolder.getGetDescriptionToPercentage().setText(localDataSet[position].getProgress());
        // viewHolder.getProgressBar().setProgress(localDataSet[position].getProgress().);
     }
 
