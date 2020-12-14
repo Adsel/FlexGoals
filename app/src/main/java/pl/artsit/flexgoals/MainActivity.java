@@ -14,8 +14,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
 import com.google.android.material.navigation.NavigationView;
-import androidx.core.view.GravityCompat;
+
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.user.UserCallback;
 import pl.artsit.flexgoals.model.user.User;

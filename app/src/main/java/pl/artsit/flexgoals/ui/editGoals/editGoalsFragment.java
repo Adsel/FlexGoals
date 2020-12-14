@@ -124,12 +124,12 @@ public class editGoalsFragment extends Fragment implements AddGoalCallback {
                     );
                     Navigation.findNavController(view).navigate(R.id.nav_home);
                 } else {
-                    notify("Nieprawidłowe dane");
+                    notify(getString(R.string.incorrect_data));
                 }
 
             }
         } else {
-            notify("Nieprawidłowe dane");
+            getString(R.string.incorrect_data);
         }
     }
 
@@ -139,11 +139,11 @@ public class editGoalsFragment extends Fragment implements AddGoalCallback {
 
     @Override
     public void onAddedFinalGoalCallback(FinalGoal finalGoalData) {
-        notify("ADDED FINAL GOAL");
+        notify(getString(R.string.added_goal));
     }
 
     @Override
     public void onAddedQuantitativeGoalCallback(QuantitativeGoal quantitativeGoalData) {
-        notify("ADDED Quantitative GOAL");
+        notify(getString(R.string.added_goal));
     }
 }

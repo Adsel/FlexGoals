@@ -48,7 +48,7 @@
                 android:paddingTop="5dp"
                 android:paddingRight="30dp"
                 android:paddingBottom="5dp"
-                android:text="@string/add_goalsI_info"
+                android:text="@string/modify_goals_title"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
@@ -93,7 +93,7 @@
                 android:paddingTop="5dp"
                 android:paddingRight="30dp"
                 android:paddingBottom="5dp"
-                android:text="@string/add_goals_add_desc"
+                android:text="@string/modify_goals_desc"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
@@ -187,7 +187,7 @@
                 android:paddingTop="5dp"
                 android:paddingRight="30dp"
                 android:paddingBottom="5dp"
-                android:text="@string/add_goals_add_days"
+                android:text="@string/modify_goals_days"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
@@ -221,35 +221,6 @@
                 tools:targetApi="lollipop" />
 
             <TextView
-                android:id="@+id/textViewAddGoalsMess3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/edit_round"
-                android:fontFamily="@font/roboto_light"
-                android:gravity="center"
-                android:paddingLeft="30dp"
-                android:paddingTop="5dp"
-                android:paddingRight="30dp"
-                android:paddingBottom="5dp"
-                android:text="@string/add_goals_type"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
-            <Spinner
-                android:id="@+id/spinnerAddGoals"
-                style="@style/Widget.AppCompat.Spinner.DropDown.ActionBar"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/edit_round_flat"
-                android:dropDownWidth="match_parent"
-                android:spinnerMode="dropdown" />
-
-            <TextView
                 android:id="@+id/textViewAddGoalsMessQTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -263,7 +234,7 @@
                 android:paddingTop="5dp"
                 android:paddingRight="30dp"
                 android:paddingBottom="5dp"
-                android:text="@string/add_goals_add_days"
+                android:text="@string/modify_goals_days"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
@@ -316,7 +287,7 @@
                     android:paddingTop="5dp"
                     android:paddingRight="30dp"
                     android:paddingBottom="5dp"
-                    android:text="@string/add_goals_add_step"
+                    android:text="@string/modify_goals_step"
                     android:textAllCaps="true"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp" />
@@ -375,7 +346,7 @@
         android:paddingTop="60dp"
         android:paddingRight="20dp"
         android:paddingBottom="10dp"
-        android:text="@string/add_goals_title"
+        android:text="@string/modify_goals_goal"
         android:textColor="@color/colorPrimary"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
