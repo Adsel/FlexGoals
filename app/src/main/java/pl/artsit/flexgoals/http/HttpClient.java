@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
+import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.user.UserCallback;
 import pl.artsit.flexgoals.http.user.UserLoginCallback;
 import pl.artsit.flexgoals.http.user.UserRegistryCallback;
@@ -245,6 +246,60 @@ public class HttpClient {
             @Override
             public void onFailure(Call<QuantitativeGoal[]> call, Throwable t) {
 
+            }
+        });
+    }
+
+    public void getQuantitativeGoal(GoalGetCallback goalGetCallback, Integer goalId){
+        Call<QuantitativeGoal> call = jsonPlaceholderAPI.getQuantitativeGoal(goalId);
+
+        call.enqueue(new Callback<QuantitativeGoal>() {
+            @Override
+            public void onResponse(Call<QuantitativeGoal> call, Response<QuantitativeGoal> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    goalGetCallback.informAboutFailedPreview("quantitative");
+                    return;
+                }
+                QuantitativeGoal goal = response.body();
+                if(goal != null) {
+                    goalGetCallback.drawQuantitativeProgress();
+                } else {
+                    goalGetCallback.informAboutFailedPreview("quantitative");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<QuantitativeGoal> call, Throwable t) {
+                goalGetCallback.informAboutFailedPreview("quantitative");
+            }
+        });
+    }
+
+    public void getFinalGoal(GoalGetCallback goalGetCallback, Integer goalId){
+        Call<FinalGoal> call = jsonPlaceholderAPI.getFinalGoal(goalId);
+
+        call.enqueue(new Callback<FinalGoal>() {
+            @Override
+            public void onResponse(Call<FinalGoal> call, Response<FinalGoal> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    goalGetCallback.informAboutFailedPreview("final");
+                    return;
+                }
+                FinalGoal goal = response.body();
+                if(goal != null) {
+                    goalGetCallback.drawFinalProgress();
+                } else {
+                    goalGetCallback.informAboutFailedPreview("final");
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<FinalGoal> call, Throwable t) {
+                goalGetCallback.informAboutFailedPreview("final");
             }
         });
     }

@@ -36,6 +36,12 @@ public interface JsonPlaceholderAPI {
     @GET("/api/goals/final/{userId}")
     Call<FinalGoal[]> getUserFinalGoals(@Path("userId") Integer userId);
 
+    @GET("api/goals/quantitative-id/{id_goal}")
+    Call<QuantitativeGoal> getQuantitativeGoal(@Path("id_goal") Integer goalId);
+
+    @GET("api/goals/final-id/{id_goal}")
+    Call<FinalGoal> getFinalGoal(@Path("id_goal") Integer goalId);
+
     @GET("/api/goals/quantitative/{userId}")
     Call<QuantitativeGoal[]> getUserQuantitativeGoals(@Path("userId") Integer userId);
 
