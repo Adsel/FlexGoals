@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
     private AppBarConfiguration mAppBarConfiguration;
     public static User currentUser;
     public static boolean isUser = false;
-    public static MainActivity activity;
+    public static Integer previewGoalId;
+    public static String previewGoalType;
     private DrawerLayout drawer;
 
     @Override
@@ -36,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
         setContentView(R.layout.activity_main);
 
         if(MainActivity.isUser) {
-            activity = this;
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().hide();
@@ -69,7 +69,9 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
             new HttpClient().getQuantitativeGoals(currentUser);
 
 
-            navController.navigate(R.id.nav_add_goal);
+            previewGoalId = 1;
+            previewGoalType = "final";
+            navController.navigate(R.id.nav_goal_preview);
 
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

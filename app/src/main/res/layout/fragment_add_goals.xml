@@ -36,7 +36,7 @@
             android:paddingBottom="20dp">
 
             <TextView
-                android:id="@+id/textViewAddGoalsMess1"
+                android:id="@+id/goalPreviewName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -80,7 +80,7 @@
                 tools:targetApi="lollipop" />
 
             <TextView
-                android:id="@+id/textViewAddGoalsMessQDescription"
+                android:id="@+id/goalPreviewGoal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -127,7 +127,7 @@
                 tools:targetApi="lollipop" />
 
             <TextView
-                android:id="@+id/textViewAddGoalsMessQTitle4"
+                android:id="@+id/goalPreviewDescription"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
