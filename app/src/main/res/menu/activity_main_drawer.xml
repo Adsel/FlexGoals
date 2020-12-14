@@ -5,16 +5,27 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:id="@+id/nav_add_goal"
+            android:icon="@drawable/ic_baseline_add_circle_24"
+            android:title="@string/menu_dodajCel"
+            android:visible="true" > @color/dodajCel</item>
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:icon="@drawable/ic_baseline_check_circle_24"
+            android:title="@string/menu_celeIlosciowe"
+            android:visible="true"></item>
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:icon="@drawable/ic_baseline_check_circle_outline_24"
+            android:title="@string/menu_celeZaliczeniowe" />
+        <item
+            android:id="@+id/nav_statistic"
+            android:icon="@drawable/ic_baseline_insert_chart_outlined_24"
+            android:title="@string/menu_statystyka"
+            android:visible="true" />
+        <item
+            android:id="@+id/nav_calender"
+            android:icon="@drawable/ic_baseline_date_range_24"
+            android:title="@string/menu_kalendarz" />
     </group>
 </menu>

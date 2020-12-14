@@ -3,11 +3,13 @@ package pl.artsit.flexgoals.http;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import pl.artsit.flexgoals.MainActivity;
+import pl.artsit.flexgoals.http.goals.AddGoalCallback;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
 import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
@@ -171,6 +173,48 @@ public class HttpClient {
         });
     }
 
+    public void addFinalGoal(AddGoalCallback addGoalCallback, FinalGoalData finalGoal) {
+        Call<FinalGoal> call = jsonPlaceholderAPI.addFinalGoal(finalGoal);
+
+        call.enqueue(new Callback<FinalGoal>() {
+            @Override
+            public void onResponse(Call<FinalGoal> call, Response<FinalGoal> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                addGoalCallback.onAddedFinalGoalCallback(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<FinalGoal> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void addQuantitativeGoal(AddGoalCallback addGoalCallback, QuantitativeGoalData quantitativeGoalData) {
+        Call<QuantitativeGoal> call = jsonPlaceholderAPI.addQuantitativeGoal(quantitativeGoalData);
+
+        call.enqueue(new Callback<QuantitativeGoal>() {
+            @Override
+            public void onResponse(Call<QuantitativeGoal> call, Response<QuantitativeGoal> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    return;
+                }
+
+                addGoalCallback.onAddedQuantitativeGoalCallback(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<QuantitativeGoal> call, Throwable t) {
+
+            }
+        });
+    }
+
     public void getFinalGoals(User user){
         Call<FinalGoal[]> call = jsonPlaceholderAPI.getUserFinalGoals(user.getId());
         MainFragment fragment = this.mainFragment;
@@ -257,7 +301,7 @@ public class HttpClient {
                     System.out.println("Unsuccessfull response code" + response.message());
                     return;
                 }
-                PredefinedQuantitativeGoal[] points = response.body();
+                PredefinedQuantitativeGoal[] goals = response.body();
 
                 // TODO: set goals
             }

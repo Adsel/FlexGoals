@@ -14,7 +14,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="?attr/actionBarSize">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -49,21 +49,22 @@
                 android:cropToPadding="false"
                 android:paddingStart="15dp"
                 android:paddingLeft="15dp"
+                android:onClick="toggleDrawer"
                 app:srcCompat="@drawable/ic_menu_icon"
-                tools:ignore="RtlSymmetry,VectorDrawableCompat" />
+                tools:ignore="OnClick,RtlSymmetry,VectorDrawableCompat" />
 
         </FrameLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|start"
         android:layout_margin="@dimen/fab_margin"
-        android:contentDescription="@string/todo"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:contentDescription="@string/"
+        app:srcCompat="@android:drawable/ic_dialog_email" />-->
 
     <include
         layout="@layout/content_main"

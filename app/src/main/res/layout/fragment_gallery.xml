@@ -29,7 +29,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/final_goals_recycleview"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="vertical">
 
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="1dp"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="1dp"
                 android:scrollbars="vertical"
                 android:visibility="visible">
