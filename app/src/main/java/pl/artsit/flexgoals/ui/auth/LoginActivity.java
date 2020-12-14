@@ -2,6 +2,7 @@ package pl.artsit.flexgoals.ui.auth;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -167,6 +168,27 @@ public class LoginActivity extends AppCompatActivity {
         textViewLogin.setVisibility(TextView.INVISIBLE);
 
         return true;
+    }
+
+    public void saveUserCredentials(String login, String password) {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("USER_CREDENTIALS_LOGIN", login);
+        editor.putString("USER_CREDENTIALS_PASSWORD", password);
+        editor.apply();
+    }
+
+    public boolean loadUserWhenCredentialsAreSaved() {
+        SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
+        String login = sharedPreferences.getString("USER_CREDENTIALS_LOGIN", "");
+        String password = sharedPreferences.getString("USER_CREDENTIALS_PASSWORD", "");
+
+        if (!login.equals("") && !password.equals("")) {
+            new HttpClient().getUser(new AuthData(login, password));
+            return true;
+        }
+
+        return false;
     }
 
 }
