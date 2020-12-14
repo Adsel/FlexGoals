@@ -48,7 +48,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_final_goal, viewGroup, false);
+                .inflate(R.layout.item_goal, viewGroup, false);
 
         return new ViewHolder(view);
     }

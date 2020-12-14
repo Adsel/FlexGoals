@@ -31,16 +31,15 @@ public class MainFragment extends Fragment implements GoalGetCallback {
         View root = inflater.inflate(R.layout.fragment_gallery, container, false);
 
         HttpClient httpClient = new HttpClient();
-        finalGoalRecyclerView = root.findViewById(R.id.final_goals_recycleview);
-        finalGoalRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
-        finalGoalRecyclerView.setHasFixedSize(true);
-        httpClient.getFinalGoals(this, MainActivity.currentUser);
+//        finalGoalRecyclerView = root.findViewById(R.id.final_goals_recycleview);
+//        finalGoalRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
+//        finalGoalRecyclerView.setHasFixedSize(true);
+//        httpClient.getFinalGoals(this, MainActivity.currentUser);
 
         quantitativeGoalRecyclerView = root.findViewById(R.id.final_goals_recycleview);
         quantitativeGoalRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         quantitativeGoalRecyclerView.setHasFixedSize(true);
         httpClient.getQuantitativeGoals(this, MainActivity.currentUser);
-
 
         return root;
     }
@@ -52,10 +51,10 @@ public class MainFragment extends Fragment implements GoalGetCallback {
 
     @Override
     public void drawFinalGoals(FinalGoal[] finalGoals) {
-        FinalGoalsAdapter finalGoalsAdapter = new FinalGoalsAdapter(finalGoals);
-
-        finalGoalRecyclerView.setAdapter(finalGoalsAdapter);
-        finalGoalRecyclerView.setVisibility(View.VISIBLE);
+//        FinalGoalsAdapter finalGoalsAdapter = new FinalGoalsAdapter(finalGoals);
+//
+//        finalGoalRecyclerView.setAdapter(finalGoalsAdapter);
+//        finalGoalRecyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override

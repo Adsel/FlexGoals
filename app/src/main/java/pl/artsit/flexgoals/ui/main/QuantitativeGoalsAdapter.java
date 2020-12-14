@@ -7,10 +7,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
+import pl.artsit.flexgoals.shared.Helper;
 
 public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeGoalsAdapter.ViewHolder> {
 
@@ -33,13 +41,11 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             super(view);
             // Define click listener for the ViewHolder's View
 
-            nameOfGoal = (TextView) view.findViewById(R.id.name_of_goal);
-            descriptionOfGoal = (TextView) view.findViewById(R.id.description_of_goal);
+            nameOfGoal = view.findViewById(R.id.name_of_goal);
+            descriptionOfGoal = view.findViewById(R.id.description_of_goal);
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
-
-
         }
 
 
@@ -88,14 +94,43 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
         viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
-//        viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
-//        viewHolder.getDescriptionDayToChange().setText(localDataSet[position].getDays());
-//        viewHolder.getGetDescriptionToPercentage().setText(localDataSet[position].getProgress());
-       // viewHolder.getProgressBar().setProgress(localDataSet[position].getProgress().);
+        viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
+        viewHolder.descriptionDayToChange.setText(localDataSet[position].getDays().toString());
+
+
+
+        Date date1 = new Date(System.currentTimeMillis());
+        Date date2 = localDataSet[position].getDate();
+        Helper.getDateDiff(date1, date2, TimeUnit.DAYS);
+
+
+        viewHolder.getGetDescriptionToPercentage().setText("");
+        // viewHolder.getProgressBar().setProgress();
+    }
+
+
+
+
+    // ITERATING AFTER PROGRESS TABLE
+    private int estaminateQuantitative(String progressString){
+        String str = "";
+        List<Integer> numbers = new ArrayList<>();
+        for(int i = 0; i < progressString.length(); i++){
+            if(progressString.charAt(i) == ','){
+                numbers.add(Integer.parseInt(str));
+                str = "";
+            }
+            else{
+                str += progressString.charAt(i);
+            }
+        }
+        numbers.add(Integer.parseInt(str));
+
+//        for(int i = 0; i < numbers.length(); i++){
+//            this.labels[this.labels.length] = "Dzień " + (i + 1);
+//        }
+        return numbers.size();
     }
 
     // Return the size of your dataset (invoked by the layout manager)
