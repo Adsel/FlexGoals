@@ -248,12 +248,13 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
 
     @Override
     public void informAboutFailedRegistered() {
-        // TODO: TOAST
+        modalWidgets.showToast(getString(R.string.register_failed));
     }
 
     @Override
     public void informAboutSuccessfulRegistered() {
-        // TODO: TOAST
+        modalWidgets.showToast(getString(R.string.register_successful));
+
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
     }
