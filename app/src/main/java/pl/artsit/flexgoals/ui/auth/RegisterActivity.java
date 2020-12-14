@@ -23,10 +23,11 @@ import java.util.regex.Pattern;
 
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.http.goals.UserRegistryCallback;
 import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.user.User;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements UserRegistryCallback {
     TextView textViewLogin;
     TextView textViewMail;
     TextView textViewPassword;
@@ -238,11 +239,22 @@ public class RegisterActivity extends AppCompatActivity {
             }
             if (checkPasswords() && checkLogin() && checkMail()) {
                 User user = new User(0,password,login,0,mail);
-                new HttpClient().registerUser(user);
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+                new HttpClient().registerUser(this, user);
+
             }
         });
 
+    }
+
+    @Override
+    public void informAboutFailedRegistered() {
+        // TODO: TOAST
+    }
+
+    @Override
+    public void informAboutSuccessfulRegistered() {
+        // TODO: TOAST
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
     }
 }

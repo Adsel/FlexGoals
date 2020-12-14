@@ -96,29 +96,31 @@ public class AddGoalsFragment extends Fragment implements AddGoalCallback {
         String name = newGoalName.getText().toString();
         String description = newGoalDesc.getText().toString();
         String goal = newGoalTarget.getText().toString();
-        int days = Integer.parseInt(newGoalDays.getText().toString());
+
+        String days = newGoalDays.getText().toString();
 
         boolean isCorrect = true;
-        if (name.equals("") || description.equals("") || goal.equals("") || days <= 0){
+        if (name.equals("") || description.equals("") || goal.equals("") || days.equals("")){
             isCorrect = false;
         }
 
         if (isCorrect) {
+            Integer countOfDays = Integer.parseInt(days);
             if (this.currentTaskType == GOAL_TYPE.FINAL) {
                 new HttpClient().addFinalGoal(
                         this, new FinalGoalData(
                                 MainActivity.currentUser.getId(), name,
-                                description, goal, days
+                                description, goal, countOfDays
                         )
                 );
                 Navigation.findNavController(view).navigate(R.id.nav_home);
             } else if (this.currentTaskType == GOAL_TYPE.QUANTITATIVE) {
-                Integer step = Integer.parseInt(newGoalDays.getText().toString());
-                if (step > 0){
+                String step =newGoalDays.getText().toString();
+                if (!step.equals("") && Integer.parseInt(step) > 0){
                     new HttpClient().addQuantitativeGoal(
                             this, new QuantitativeGoalData(
                                     name, description, MainActivity.currentUser.getId(),
-                                    days, goal, step
+                                    countOfDays, goal,  Integer.parseInt(step)
                             )
                     );
                     Navigation.findNavController(view).navigate(R.id.nav_home);

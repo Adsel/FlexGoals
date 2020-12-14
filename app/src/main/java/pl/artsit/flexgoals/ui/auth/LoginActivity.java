@@ -21,11 +21,12 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.http.goals.UserLoginCallback;
 import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements UserLoginCallback {
 
     private EditText editTextPassword;
     private EditText editTextLogin;
@@ -95,7 +96,8 @@ public class LoginActivity extends AppCompatActivity {
                 modalWidgets.showToast(getString(R.string.password_is_empty));
             }
             if (isCorrectLogin && isCorrectPassword) {
-                new HttpClient(ref).getUser(
+                new HttpClient().getUser(
+                        this,
                         new AuthData(editTextLogin.getText().toString(), editTextPassword.getText().toString())
                 );
             }
