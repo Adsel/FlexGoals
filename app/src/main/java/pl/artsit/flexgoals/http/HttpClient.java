@@ -3,8 +3,10 @@ package pl.artsit.flexgoals.http;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
+import pl.artsit.flexgoals.http.user.UserCallback;
+import pl.artsit.flexgoals.http.user.UserLoginCallback;
+import pl.artsit.flexgoals.http.user.UserRegistryCallback;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
@@ -13,7 +15,6 @@ import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
-import pl.artsit.flexgoals.ui.auth.LoginActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,8 +27,6 @@ public class HttpClient {
     private String path = "http://147.135.208.69:8080/"; //8080
     private JsonPlaceholderAPI jsonPlaceholderAPI;
     private Gson gson;
-    private LoginActivity loginActivity;
-    private MainActivity mainActivity;
 
     public HttpClient(){
         gson = new GsonBuilder()
@@ -40,20 +39,9 @@ public class HttpClient {
         jsonPlaceholderAPI = retrofit.create(JsonPlaceholderAPI.class);
     }
 
-    public HttpClient(LoginActivity loginActivity) {
-        this();
-        this.loginActivity = loginActivity;
-    }
-
-    public HttpClient(MainActivity mainActivity) {
-        this();
-        this.mainActivity = mainActivity;
-    }
-
-    public void getUser(AuthData authData){
+    public void getUser(UserLoginCallback userLoginCallback, AuthData authData){
         Call<User> call = jsonPlaceholderAPI.getUser(authData);
 
-        LoginActivity ref = this.loginActivity;
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -63,20 +51,21 @@ public class HttpClient {
                 }
                 User user = response.body();
                 if(user != null) {
-                    ref.redirectToMain(user);
+                    userLoginCallback.saveUserCredentials(authData.getLogin(), authData.getPassword());
+                    userLoginCallback.redirectToMain(user);
                 } else {
-                    ref.informAboutFailedLogin();
+                    userLoginCallback.informAboutFailedLogin();
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                ref.informAboutFailedLogin();
+                userLoginCallback.informAboutFailedLogin();
             }
         });
     }
 
-    public void registerUser(User user){
+    public void registerUser(UserRegistryCallback userRegistryCallback, User user){
         Call<User> call = jsonPlaceholderAPI.registerUser(user);
 
         System.out.println("STRUCTURE OF USER" + user.toString());
@@ -86,21 +75,23 @@ public class HttpClient {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (!response.isSuccessful()){
                     System.out.println("Unsuccessfull response code");
+                    userRegistryCallback.informAboutFailedRegistered();
                     return;
                 }
 
-                User user = response.body();
-                System.out.printf("RESPONSE FROM SERVER" + user.getLogin());
+                // User user = response.body();
+                userRegistryCallback.informAboutSuccessfulRegistered();
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 System.out.println("Failed request");
+                userRegistryCallback.informAboutFailedRegistered();
             }
         });
     }
 
-    public void getUserPoints(User user){
+    public void getUserPoints(UserCallback userCallback, User user){
         Call<Integer> call = jsonPlaceholderAPI.getUserPoints(user.getId());
 
         call.enqueue(new Callback<Integer>() {
@@ -112,7 +103,7 @@ public class HttpClient {
                 }
                 Integer points = response.body();
                 if(points != null) {
-                    mainActivity.setPoints(points);
+                    userCallback.setPoints(points);
                 }
             }
 
@@ -302,7 +293,7 @@ public class HttpClient {
         });
     }
 
-    public void deleteFinalGoal(FinalGoal finalGoal){
+    public void deleteFinalGoal(UserCallback userCallback, FinalGoal finalGoal){
         Call<Void> call = jsonPlaceholderAPI.deleteFinalGoal(finalGoal.getId());
 
         call.enqueue(new Callback<Void>() {
@@ -313,7 +304,7 @@ public class HttpClient {
                     return;
                 }
 
-                mainActivity.goToMain();
+                userCallback.goToMain();
             }
 
             @Override
@@ -323,7 +314,7 @@ public class HttpClient {
         });
     }
 
-    public void deleteQuantitativeGoal(QuantitativeGoal quantitativeGoal){
+    public void deleteQuantitativeGoal(UserCallback userCallback, QuantitativeGoal quantitativeGoal){
         Call<Void> call = jsonPlaceholderAPI.deleteQuantitativeGoal(quantitativeGoal.getId());
 
         call.enqueue(new Callback<Void>() {
@@ -334,7 +325,7 @@ public class HttpClient {
                     return;
                 }
 
-                mainActivity.goToMain();
+                userCallback.goToMain();
             }
 
             @Override
