@@ -45,6 +45,8 @@
     <string name="add_goals_add_step">Podaj krok</string>
     <string name="add_goals_add_goal">Dodaj cel</string>
     <string name="logo">Logo</string>
+    <string name="register_failed">Nie udało się zarejestrować</string>
+    <string name="register_successful">Rejestracja przebiegła pomyślnie</string>
     <string-array name="add_goals_options">
         <item>Cele Ilościowe</item>
         <item>Cele Zaliczeniowe</item>
