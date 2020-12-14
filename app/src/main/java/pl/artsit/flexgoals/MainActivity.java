@@ -19,7 +19,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import pl.artsit.flexgoals.http.HttpClient;
-import pl.artsit.flexgoals.http.goals.UserCallback;
+import pl.artsit.flexgoals.http.user.UserCallback;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
 

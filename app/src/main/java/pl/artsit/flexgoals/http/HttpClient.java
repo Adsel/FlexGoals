@@ -52,6 +52,7 @@ public class HttpClient {
                 }
                 User user = response.body();
                 if(user != null) {
+                    userLoginCallback.saveUserCredentials(authData.getLogin(), authData.getPassword());
                     userLoginCallback.redirectToMain(user);
                 } else {
                     userLoginCallback.informAboutFailedLogin();
