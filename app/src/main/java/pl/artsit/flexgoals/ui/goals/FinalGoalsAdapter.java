@@ -3,12 +3,17 @@ package pl.artsit.flexgoals.ui.goals;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.shared.Helper;
 
 public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.ViewHolder> {
 
@@ -19,17 +24,44 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
      * (custom ViewHolder).
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
+
+        private  TextView nameOfGoal;
+        private TextView descriptionOfGoal;
+        private ProgressBar progressBar;
+        private TextView descriptionDayToChange;
+        private TextView getDescriptionToPercentage;
+
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
 
-            textView = (TextView) view.findViewById(R.id.name_of_goal);
+
+            nameOfGoal = view.findViewById(R.id.name_of_goal);
+            descriptionOfGoal = view.findViewById(R.id.description_of_goal);
+            progressBar = view.findViewById(R.id.progress_bar);
+            descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
+            getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
         }
 
-        public TextView getTextView() {
-            return textView;
+        public TextView getNameOfGoal() {
+            return nameOfGoal;
+        }
+
+        public TextView getDescriptionOfGoal() {
+            return descriptionOfGoal;
+        }
+
+        public ProgressBar getProgressBar() {
+            return progressBar;
+        }
+
+        public TextView getDescriptionDayToChange() {
+            return descriptionDayToChange;
+        }
+
+        public TextView getGetDescriptionToPercentage() {
+            return getDescriptionToPercentage;
         }
     }
 
@@ -60,6 +92,29 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         // ADD DATA:
         //        viewHolder.getTextView().setText(localDataSet[position].getName());
         //        viewHolder.getTextView().setText(localDataSet[position].getDescription());
+        viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
+        viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
+        viewHolder.descriptionDayToChange.setText(localDataSet[position].getDays().toString());
+
+        int progressCount = 0;
+        String progress = localDataSet[position].getProgress();
+        for(int i =0; i<progress.length();i++){
+            if(progress.matches("1")){
+                progressCount+=1;
+            }
+        }
+        int finishCount = progressCount/localDataSet[position].getDays();
+        viewHolder.progressBar.setProgress(finishCount);
+
+      //  finishCount=finishCount*100;
+
+        viewHolder.getDescriptionToPercentage.setText(String.valueOf(finishCount));
+
+
+        Date date1 = new Date(System.currentTimeMillis());
+        Date date2 = localDataSet[position].getDate();
+        Helper.getDateDiff(date1, date2, TimeUnit.DAYS);
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
