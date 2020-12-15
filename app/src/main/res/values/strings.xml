@@ -47,6 +47,14 @@
     <string name="logo">Logo</string>
     <string name="register_failed">Nie udało się zarejestrować</string>
     <string name="register_successful">Rejestracja przebiegła pomyślnie</string>
+
+    <!-- STATISTIC FRAGMENT -->
+    <string name="statistic_header">Statystyka użytkownika</string>
+    <string name="statistic_title">Statystyka</string>
+    <string name="statistic_username_title">Użytkownik</string>
+    <string name="statistic_email_title">Mail</string>
+    <string name="statistic_points_title">Liczba punktów</string>
+
     <string-array name="add_goals_options">
         <item>Cele Ilościowe</item>
         <item>Cele Zaliczeniowe</item>
