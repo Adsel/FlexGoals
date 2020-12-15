@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 
-public class GoalPreviewFragment extends Fragment {
+public class GoalQuantitativePreviewFragment extends Fragment {
 
     private AddGoalsViewModel addGoalsViewModel;
 
