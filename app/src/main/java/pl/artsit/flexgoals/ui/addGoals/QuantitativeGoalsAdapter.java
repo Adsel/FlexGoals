@@ -15,16 +15,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
+import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.shared.Helper;
 
 public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeGoalsAdapter.ViewHolder> {
 
-    private QuantitativeGoal[] localDataSet;
-    private QuantitativeGoal quantitativeGoal;
+    private QuantitativeGoalFlag[] localDataSet;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -38,7 +37,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         private ProgressBar progressBar;
         private TextView descriptionDayToChange;
         private TextView getDescriptionToPercentage;
-        private QuantitativeGoal quantitativeGoal;
+        private QuantitativeGoalFlag quantitativeGoal;
 
         public ViewHolder(View view) {
             super(view);
@@ -65,6 +64,15 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                     MainActivity.previewQuantitativeGoal = quantitativeGoal;
                     MainActivity.previewGoalType = MainActivity.GOAL_TYPE.QUANTITATIVE;
                     Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
+                }
+            });
+
+            ((Button) view.findViewById(R.id.accept_button)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                  //  new HttpClient().
+                    // TODO:
+                    // ACHIEVE
                 }
             });
         }
@@ -98,7 +106,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
      * @param dataSet String[] containing the data to populate views to be used
      * by RecyclerView.
      */
-    public QuantitativeGoalsAdapter(QuantitativeGoal[] dataSet) {
+    public QuantitativeGoalsAdapter(QuantitativeGoalFlag[] dataSet) {
         localDataSet = dataSet;
     }
 

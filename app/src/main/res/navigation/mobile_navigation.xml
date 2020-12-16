@@ -58,6 +58,7 @@
         android:name="pl.artsit.flexgoals.ui.addGoals.GoalQuantitativePreviewFragment"
         android:label="Postep"
         tools:layout="@layout/fragment_add_goals" />
+
     <fragment
         android:id="@+id/nav_edit_goal"
         android:name="pl.artsit.flexgoals.ui.editGoals.EditGoalsFragment"

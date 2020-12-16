@@ -1,11 +1,13 @@
 package pl.artsit.flexgoals.http;
 
 import pl.artsit.flexgoals.model.goal.FinalGoalData;
+import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
 import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
 import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import retrofit2.Call;
@@ -33,8 +35,11 @@ public interface JsonPlaceholderAPI {
     @PUT("/api/goals/update-fgoal")
     Call<Integer> updateFinalGoal(@Body FinalGoal finalGoal);
 
+    @PUT("/api/goals/update-prog-fgoal")
+    Call<Integer> scoreFinalGoal(@Body Integer integer);
+
     @GET("/api/goals/final/{userId}")
-    Call<FinalGoal[]> getUserFinalGoals(@Path("userId") Integer userId);
+    Call<FinalGoalFlag[]> getUserFinalGoals(@Path("userId") Integer userId);
 
     @GET("api/goals/quantitative-id/{id_goal}")
     Call<QuantitativeGoal> getQuantitativeGoal(@Path("id_goal") Integer goalId);
@@ -43,7 +48,7 @@ public interface JsonPlaceholderAPI {
     Call<FinalGoal> getFinalGoal(@Path("id_goal") Integer goalId);
 
     @GET("/api/goals/quantitative/{userId}")
-    Call<QuantitativeGoal[]> getUserQuantitativeGoals(@Path("userId") Integer userId);
+    Call<QuantitativeGoalFlag[]> getUserQuantitativeGoals(@Path("userId") Integer userId);
 
     @GET("/api/goals/predefined-final")
     Call<PredefinedFinalGoal[]> getPredefinedFinalGoals();

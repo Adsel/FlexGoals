@@ -16,7 +16,9 @@ import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.ui.main.MainViewModel;
 
 public class GoalQuantitativeFragment extends Fragment implements GoalGetCallback {
@@ -44,7 +46,7 @@ public class GoalQuantitativeFragment extends Fragment implements GoalGetCallbac
     }
 
     @Override
-    public void drawFinalGoals(FinalGoal[] finalGoals) {
+    public void drawFinalGoals(FinalGoalFlag[] finalGoals) {
     }
 
     @Override
@@ -58,7 +60,7 @@ public class GoalQuantitativeFragment extends Fragment implements GoalGetCallbac
     }
 
     @Override
-    public void drawQuantitativeGoals(QuantitativeGoal[] quantitativeGoals) {
+    public void drawQuantitativeGoals(QuantitativeGoalFlag[] quantitativeGoals) {
         QuantitativeGoalsAdapter quantitativeGoalsAdapter = new QuantitativeGoalsAdapter(quantitativeGoals);
 
         quantitativeGoalRecyclerView.setAdapter(quantitativeGoalsAdapter);
