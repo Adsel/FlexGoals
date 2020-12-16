@@ -1,11 +1,14 @@
-package pl.artsit.flexgoals.ui.goals;
+package pl.artsit.flexgoals.ui.addGoals;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -53,6 +56,15 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                     MainActivity.previewQuantitativeGoal = quantitativeGoal;
                     Intent intent = new Intent(view.getContext(), PreviewQuantitativeActivity.class);
                     view.getContext().startActivity(intent);
+                }
+            });
+
+            ((Button) view.findViewById(R.id.edit_button)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.previewQuantitativeGoal = quantitativeGoal;
+                    MainActivity.previewGoalType = MainActivity.GOAL_TYPE.QUANTITATIVE;
+                    Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
                 }
             });
         }

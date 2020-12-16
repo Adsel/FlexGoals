@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.addGoals;
+package pl.artsit.flexgoals.ui.editGoals;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

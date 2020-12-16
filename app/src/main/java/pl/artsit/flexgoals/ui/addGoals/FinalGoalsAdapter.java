@@ -1,12 +1,14 @@
-package pl.artsit.flexgoals.ui.goals;
+package pl.artsit.flexgoals.ui.addGoals;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Date;
@@ -26,7 +28,6 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
      * (custom ViewHolder).
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
         private  TextView nameOfGoal;
         private TextView descriptionOfGoal;
         private ProgressBar progressBar;
@@ -34,11 +35,8 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         private TextView getDescriptionToPercentage;
         private FinalGoal finalGoal;
 
-
         public ViewHolder(View view) {
             super(view);
-            // Define click listener for the ViewHolder's View
-
 
             nameOfGoal = view.findViewById(R.id.name_of_goal);
             descriptionOfGoal = view.findViewById(R.id.description_of_goal);
@@ -52,6 +50,15 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
                     MainActivity.previewFinalGoal = finalGoal;
                     Intent intent = new Intent(view.getContext(), PreviewFinalActivity.class);
                     view.getContext().startActivity(intent);
+                }
+            });
+
+            ((Button) view.findViewById(R.id.edit_button)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.previewFinalGoal = finalGoal;
+                    MainActivity.previewGoalType = MainActivity.GOAL_TYPE.FINAL;
+                    Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
                 }
             });
         }

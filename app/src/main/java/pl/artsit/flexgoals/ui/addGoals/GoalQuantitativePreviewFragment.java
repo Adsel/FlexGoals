@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.goals;
+package pl.artsit.flexgoals.ui.addGoals;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -14,11 +14,10 @@ import androidx.fragment.app.Fragment;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 
 public class GoalQuantitativePreviewFragment extends Fragment {
-
-    private AddGoalsViewModel addGoalsViewModel;
-
+    private QuantitativeGoal quantitativeGoal;
     private enum GOAL_TYPE {
         FINAL,
         QUANTITATIVE
@@ -33,9 +32,6 @@ public class GoalQuantitativePreviewFragment extends Fragment {
         setHeaderBackgroundColor(header, R.color.colorHeaderAction, R.drawable.title, getContext());
 
         MainActivity mainActivity = (MainActivity) getActivity();
-        // TODO:
-        // JUMP HERE
-        // GET DATA VIA HTTP
 
         return root;
     }

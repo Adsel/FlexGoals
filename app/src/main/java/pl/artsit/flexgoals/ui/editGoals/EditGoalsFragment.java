@@ -38,54 +38,55 @@ public class EditGoalsFragment extends Fragment implements AddGoalCallback, Goal
 
     @Override
     public void informAboutFailed() {
-
+        notify("Nie udało się zapisać");
     }
 
-    private enum GOAL_TYPE {
-        FINAL,
-        QUANTITATIVE
-    }
-
-    private GOAL_TYPE currentTaskType;
+    private MainActivity.GOAL_TYPE currentTaskType;
 
     public View onCreateView(@NonNull LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
         editGoalsViewModel = new ViewModelProvider(this).get(EditGoalsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_edit_goals, container, false);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(root.getContext(),
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(root.getContext(),
                 android.R.layout.simple_dropdown_item_1line, getResources().getStringArray(R.array.add_goals_options));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-
-        newGoalName = root.findViewById(R.id.newGoalName);
+        currentTaskType = MainActivity.previewGoalType;
+        newGoalName = root.findViewById(R.id.editGoalName);
         newGoalDesc = root.findViewById(R.id.editTextAddGoalsQDescription);
         newGoalTarget = root.findViewById(R.id.editTextAddGoalsQTarget);
-        newGoalDays = root.findViewById(R.id.editTextAddGoalsQDays);
+        newGoalDays = root.findViewById(R.id.editTextAddGoalsDays);
         modal = new ModalWidgets(root.getContext());
 
-        View view = this.getView();
+        if (currentTaskType == MainActivity.GOAL_TYPE.FINAL) {
+            FinalGoal finalGoal = MainActivity.previewFinalGoal;
+            newGoalName.setText(finalGoal.getName());
+            newGoalDesc.setText(finalGoal.getDescription());
+            newGoalTarget.setText(finalGoal.getGoal());
+            newGoalDays.setText(finalGoal.getDays().toString());
+        } else if (currentTaskType == MainActivity.GOAL_TYPE.QUANTITATIVE) {
+            QuantitativeGoal quantitativeGoal = MainActivity.previewQuantitativeGoal;
+            newGoalName.setText(quantitativeGoal.getName());
+            newGoalDesc.setText(quantitativeGoal.getDescription());
+            newGoalTarget.setText(quantitativeGoal.getGoal());
+            newGoalDays.setText(quantitativeGoal.getDays().toString());
+            EditText step = root.findViewById(R.id.editTextEditStep);
+            step.setVisibility(View.VISIBLE);
+            step.setText(quantitativeGoal.getStep().toString());
+            root.findViewById(R.id.editTextEditStepTitle).setVisibility(View.VISIBLE);
+        }
+
         root.findViewById(R.id.buttonAddGoalsSubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //TODO Callback
-                goToMain();
-
-
+                updateGoal(v);
             }
         });
-
-//        ModalWidgets modalWidgets = new ModalWidgets(root.getContext());
-//        modalWidgets.setBackColor(textViewAddingGoalsTitle,R.color.addGoals,R.drawable.title );
-//        modalWidgets.setBackColor(textViewAddGoalsMess1,R.color.addGoals, R.drawable.title);
-//        modalWidgets.setBackColor(editTextAddGoalsMess3,R.color.addGoals, R.drawable.edit_round_flat);
-//        modalWidgets.setBackColor(editTextAddGoalsName,R.color.colorPrimary, R.drawable.edit_round_flat);
-//        modalWidgets.setBackColor(addGoalsName,R.color.addGoals, R.drawable.edit_round_flat);
 
         return root;
     }
 
-    public void createGoal(View view) {
+    public void updateGoal(View view) {
         String name = newGoalName.getText().toString();
         String description = newGoalDesc.getText().toString();
         String goal = newGoalTarget.getText().toString();
@@ -97,32 +98,59 @@ public class EditGoalsFragment extends Fragment implements AddGoalCallback, Goal
         }
 
         if (isCorrect) {
-            if (this.currentTaskType == GOAL_TYPE.FINAL) {
-                //TODO to change
-                new HttpClient().addFinalGoal(
-                        this, new FinalGoalData(
-                                MainActivity.currentUser.getId(), name,
-                                description, goal, days
-                        )
-                );
-                Navigation.findNavController(view).navigate(R.id.nav_home);
-            } else if (this.currentTaskType == GOAL_TYPE.QUANTITATIVE) {
+            if (this.currentTaskType == MainActivity.GOAL_TYPE.FINAL) {
+                FinalGoal finalGoal = MainActivity.previewFinalGoal;
+                if (!finalGoal.getName().equals(name)) {
+                    finalGoal.setName(name);
+                }
+
+                if (!finalGoal.getDescription().equals(description)) {
+                    finalGoal.setDescription(description);
+                }
+
+                if (!finalGoal.getGoal().equals(goal)) {
+                    finalGoal.setGoal(goal);
+                }
+
+                if (finalGoal.getDays() != days) {
+                    finalGoal.setDays(days);
+                }
+
+                finalGoal.setIdUser(MainActivity.currentUser.getId());
+                finalGoal.setShared(false);
+
+                new HttpClient().saveFinalGoal(this, finalGoal);
+            } else if (this.currentTaskType == MainActivity.GOAL_TYPE.QUANTITATIVE) {
                 Integer step = Integer.parseInt(newGoalDays.getText().toString());
                 if (step > 0){
-                    //TODO to edit
-//                    new HttpClient().saveQuantitativeGoal(this, new QuantitativeGoal(
-//                                        MainActivity.GOAL_ID,
-//                                        name,
-//                                        description,
-//                                        MainActivity.currentUser.getId(),
-//                                days, goal, step
-//                            )
-//                    );
-                    Navigation.findNavController(view).navigate(R.id.nav_home);
+                    QuantitativeGoal quantitativeGoal = MainActivity.previewQuantitativeGoal;
+                    if (!quantitativeGoal.getName().equals(name)) {
+                        quantitativeGoal.setName(name);
+                    }
+
+                    if (!quantitativeGoal.getDescription().equals(description)) {
+                        quantitativeGoal.setDescription(description);
+                    }
+
+                    if (!quantitativeGoal.getGoal().equals(goal)) {
+                        quantitativeGoal.setGoal(goal);
+                    }
+
+                    if (quantitativeGoal.getDays() != days) {
+                        quantitativeGoal.setDays(days);
+                    }
+
+                    if (quantitativeGoal.getStep() != step) {
+                        quantitativeGoal.setStep(step);
+                    }
+
+                    quantitativeGoal.setIdUser(MainActivity.currentUser.getId());
+                    quantitativeGoal.setShared(false);
+
+                    new HttpClient().saveQuantitativeGoal(this, quantitativeGoal);
                 } else {
                     notify(getString(R.string.incorrect_data));
                 }
-
             }
         } else {
             getString(R.string.incorrect_data);

@@ -8,8 +8,8 @@ public class QuantitativeGoal {
     private String name;
     private String description;
     private Integer points;
-    private Boolean isShared;
-    private Integer idUser;
+    private Boolean is_shared;
+    private Integer id_user;
     private Integer days;
     private String goal;
     private String progress;
@@ -19,15 +19,15 @@ public class QuantitativeGoal {
 
     public QuantitativeGoal(
             Integer id, String name, String description, Integer points,
-            Boolean isShared, Integer idUser, Integer days, String goal,
+            Boolean is_shared, Integer id_user, Integer days, String goal,
             String progress, Integer target, Integer step, Date date
     ) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.points = points;
-        this.isShared = isShared;
-        this.idUser = idUser;
+        this.is_shared = is_shared;
+        this.id_user = id_user;
         this.days = days;
         this.goal = goal;
         this.progress = progress;
@@ -69,19 +69,19 @@ public class QuantitativeGoal {
     }
 
     public Boolean getShared() {
-        return isShared;
+        return is_shared;
     }
 
     public void setShared(Boolean shared) {
-        isShared = shared;
+        is_shared = shared;
     }
 
     public Integer getIdUser() {
-        return idUser;
+        return id_user;
     }
 
     public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+        this.id_user = idUser;
     }
 
     public Integer getDays() {
@@ -139,8 +139,8 @@ public class QuantitativeGoal {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", points=" + points +
-                ", isShared=" + isShared +
-                ", idUser=" + idUser +
+                ", is_shared=" + is_shared +
+                ", id_user=" + id_user +
                 ", days=" + days +
                 ", goal='" + goal + '\'' +
                 ", progress='" + progress + '\'' +
