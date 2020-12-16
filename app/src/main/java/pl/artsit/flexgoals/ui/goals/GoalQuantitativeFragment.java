@@ -69,4 +69,19 @@ public class GoalQuantitativeFragment extends Fragment implements GoalGetCallbac
     public void informAboutEmptyQuantitativeGoals() {
 
     }
+
+    @Override
+    public void informAboutFailedPreview(String flag) {
+
+    }
+
+    @Override
+    public void drawQuantitativeProgress() {
+
+    }
+
+    @Override
+    public void drawFinalProgress() {
+
+    }
 }
