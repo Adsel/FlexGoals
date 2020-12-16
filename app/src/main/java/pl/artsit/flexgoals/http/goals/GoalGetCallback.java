@@ -11,4 +11,8 @@ public interface GoalGetCallback {
     void informAboutFailedGetQuantitativeGoals();
     void drawQuantitativeGoals(QuantitativeGoal[] quantitativeGoals);
     void informAboutEmptyQuantitativeGoals();
+
+    void informAboutFailedPreview(String flag);
+    void drawQuantitativeProgress();
+    void drawFinalProgress();
 }
