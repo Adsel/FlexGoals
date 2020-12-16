@@ -20,6 +20,8 @@ import com.google.android.material.navigation.NavigationView;
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.user.UserCallback;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
+import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
     public static GOAL_TYPE previewGoalType;
     public static QuantitativeGoal previewQuantitativeGoal;
     public static FinalGoal previewFinalGoal;
+    public static PredefinedFinalGoal previewPredefinedFinalGoal;
+    public static PredefinedQuantitativeGoal previewPredefinedQuantitativeGoal;
+
     private DrawerLayout drawer;
 
     @Override

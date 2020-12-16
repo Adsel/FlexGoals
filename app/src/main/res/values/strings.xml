@@ -86,4 +86,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="predefined_goal_time">Czas</string>
+    <string name="predefined_goal_time_days">dni</string>
+    <string name="predefined_goal_time_left">Pozostało</string>
 </resources>

@@ -4,31 +4,43 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import pl.artsit.flexgoals.R;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class HomeFragment extends Fragment {
+import pl.artsit.flexgoals.MainActivity;
+import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.http.goals.GoalPredefinedGetCallback;
+import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
+import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
+
+public class HomeFragment extends Fragment implements GoalPredefinedGetCallback {
 
     private HomeViewModel homeViewModel;
+    private RecyclerView predefinedFinalGoalRecyclerView;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
+
+        predefinedFinalGoalRecyclerView = root.findViewById(R.id.recyclerViewPredefinedFinal);
+        predefinedFinalGoalRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        predefinedFinalGoalRecyclerView.setHasFixedSize(true);
+        new HttpClient().get(this, MainActivity.currentUser);
 
         return root;
     }
@@ -36,5 +48,38 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void informAboutFailedGetPredefinedFinalGoals() {
+
+    }
+
+    @Override
+    public void drawPredefinedFinalGoals(PredefinedFinalGoal[] predefinedFinalGoals) {
+        PredefinedFinalGoalsAdapter predefinedGoalsAdapter = new PredefinedFinalGoalsAdapter(predefinedFinalGoals);
+
+        predefinedFinalGoalRecyclerView.setAdapter(predefinedGoalsAdapter);
+        predefinedFinalGoalRecyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void informAboutEmptyPredefinedFinalGoals() {
+
+    }
+
+    @Override
+    public void informAboutFailedGetPredefinedQuantitativeGoals() {
+
+    }
+
+    @Override
+    public void drawPredefinedQuantitativeGoals(PredefinedQuantitativeGoal[] predefinedQuantitativeGoals){
+
+    }
+
+    @Override
+    public void informAboutEmptyPredefinedQuantitativeGoals() {
+
     }
 }
