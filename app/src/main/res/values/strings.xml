@@ -52,11 +52,6 @@
     <string name="goal_preview_final_chart_failed">Nie wykonano</string>
     <string name="goal_preview_final_chart_todo">Do wykonania</string>
 
-
-    <string name="logo">Logo</string>
-    <string name="register_failed">Nie udało się zarejestrować</string>
-    <string name="register_successful">Rejestracja przebiegła pomyślnie</string>
-
     <!-- STATISTIC FRAGMENT -->
     <string name="statistic_header">Statystyka użytkownika</string>
     <string name="statistic_title">Statystyka</string>
