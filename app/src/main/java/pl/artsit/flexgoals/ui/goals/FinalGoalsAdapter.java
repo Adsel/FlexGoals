@@ -42,6 +42,14 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Intent intent= new Intent(view.getContext(), MainActivity.class);
+//                    view.getContext().startActivity(intent);
+                }
+            });
         }
 
         public TextView getNameOfGoal() {

@@ -1,10 +1,13 @@
 package pl.artsit.flexgoals.ui.goals;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.shared.Helper;
+import pl.artsit.flexgoals.ui.auth.LoginActivity;
 
 public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeGoalsAdapter.ViewHolder> {
 
@@ -42,6 +46,14 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Intent intent= new Intent(view.getContext(), MainActivity.class);
+//                    view.getContext().startActivity(intent);
+                }
+            });
         }
 
 
@@ -133,5 +145,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     public int getItemCount() {
         return localDataSet.length;
     }
+
 }
 
