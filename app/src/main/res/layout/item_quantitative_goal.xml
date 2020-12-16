@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+    android:layout_marginStart="15dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="50dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginRight="15dp"
+    android:gravity="center_vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bcg_to_card_view"
+        android:minHeight="300dp">
+
+        <TextView
+            android:id="@+id/name_of_goal"
+            android:layout_width="337dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/rounted_blue"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="Zostań programistą"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/description_of_goal"
+            android:layout_width="337dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="Napisz program w ciagu tygodnia"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_of_goal" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1"
+            android:indeterminate="false"
+            android:max="100"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:progress="30"
+            app:layout_constraintTop_toTopOf="@+id/description_of_goal"
+            tools:layout_editor_absoluteX="0dp" />
+
+        <TextView
+            android:id="@+id/description_day_to_change"
+            android:layout_width="110dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/open_sans_light"
+            android:gravity="center"
+            android:text="7 dni"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@+id/description_to_change_percent"
+            app:layout_constraintHorizontal_bias="0.377"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/left" />
+
+        <TextView
+            android:id="@+id/description_to_change_percent"
+            android:layout_width="110dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="44dp"
+            android:layout_marginRight="44dp"
+            android:fontFamily="@font/open_sans_light"
+            android:gravity="center"
+            android:text="0%"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/now" />
+
+        <TextView
+            android:id="@+id/left"
+            android:layout_width="149dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/violet_element_card"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="Pozostało"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+
+        <TextView
+            android:id="@+id/now"
+            android:layout_width="149dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/violet_element_card"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="Obecnie"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.59"
+            app:layout_constraintStart_toEndOf="@+id/left"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="149dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:background="@drawable/delete_bcg_card"
+            android:fontFamily="@font/open_sans"
+            android:hapticFeedbackEnabled="false"
+            android:text="Usun"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:backgroundTint="#FFD324D8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/accept_button"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_day_to_change" />
+
+        <Button
+            android:id="@+id/accept_button"
+            android:layout_width="149dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/accept_bcg_card"
+            android:fontFamily="@font/open_sans"
+            android:text="Zatwierdz"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:backgroundTint="@color/purple_500"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_to_change_percent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
