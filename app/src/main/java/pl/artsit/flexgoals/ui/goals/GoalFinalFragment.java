@@ -70,4 +70,19 @@ public class GoalFinalFragment extends Fragment implements GoalGetCallback {
     public void informAboutEmptyQuantitativeGoals() {
 
     }
+
+    @Override
+    public void informAboutFailedPreview(String flag) {
+
+    }
+
+    @Override
+    public void drawQuantitativeProgress() {
+
+    }
+
+    @Override
+    public void drawFinalProgress() {
+
+    }
 }
