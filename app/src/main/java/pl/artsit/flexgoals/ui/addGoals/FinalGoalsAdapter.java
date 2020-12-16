@@ -17,11 +17,12 @@ import java.util.concurrent.TimeUnit;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
 import pl.artsit.flexgoals.shared.Helper;
 
 public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.ViewHolder> {
 
-    private FinalGoal[] localDataSet;
+    private FinalGoalFlag[] localDataSet;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -33,7 +34,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         private ProgressBar progressBar;
         private TextView descriptionDayToChange;
         private TextView getDescriptionToPercentage;
-        private FinalGoal finalGoal;
+        private FinalGoalFlag finalGoal;
 
         public ViewHolder(View view) {
             super(view);
@@ -59,6 +60,13 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
                     MainActivity.previewFinalGoal = finalGoal;
                     MainActivity.previewGoalType = MainActivity.GOAL_TYPE.FINAL;
                     Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
+                }
+            });
+
+            ((Button) view.findViewById(R.id.accept_button)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
                 }
             });
         }
@@ -90,7 +98,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
      * @param dataSet String[] containing the data to populate views to be used
      * by RecyclerView.
      */
-    public FinalGoalsAdapter(FinalGoal[] dataSet) {
+    public FinalGoalsAdapter(FinalGoalFlag[] dataSet) {
         localDataSet = dataSet;
     }
 

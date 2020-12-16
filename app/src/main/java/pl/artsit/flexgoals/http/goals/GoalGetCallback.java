@@ -1,15 +1,15 @@
 package pl.artsit.flexgoals.http.goals;
 
-import pl.artsit.flexgoals.model.goal.FinalGoal;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
 
 public interface GoalGetCallback {
     void informAboutFailedGetFinalGoals();
-    void drawFinalGoals(FinalGoal[] finalGoals);
+    void drawFinalGoals(FinalGoalFlag[] finalGoals);
     void informAboutEmptyFinalGoals();
 
     void informAboutFailedGetQuantitativeGoals();
-    void drawQuantitativeGoals(QuantitativeGoal[] quantitativeGoals);
+    void drawQuantitativeGoals(QuantitativeGoalFlag[] quantitativeGoals);
     void informAboutEmptyQuantitativeGoals();
 
     void informAboutFailedPreview(String flag);

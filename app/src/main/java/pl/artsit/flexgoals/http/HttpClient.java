@@ -11,10 +11,12 @@ import pl.artsit.flexgoals.http.user.UserLoginCallback;
 import pl.artsit.flexgoals.http.user.UserRegistryCallback;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.FinalGoalData;
+import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
 import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
 import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import retrofit2.Call;
@@ -204,19 +206,19 @@ public class HttpClient {
     }
 
     public void getFinalGoals(GoalGetCallback goalGetCallback, User user){
-        Call<FinalGoal[]> call = jsonPlaceholderAPI.getUserFinalGoals(user.getId());
+        Call<FinalGoalFlag[]> call = jsonPlaceholderAPI.getUserFinalGoals(user.getId());
 
-        call.enqueue(new Callback<FinalGoal[]>() {
+        call.enqueue(new Callback<FinalGoalFlag[]>() {
             @Override
-            public void onResponse(Call<FinalGoal[]> call, Response<FinalGoal[]> response) {
+            public void onResponse(Call<FinalGoalFlag[]> call, Response<FinalGoalFlag[]> response) {
                 if (!response.isSuccessful()){
                     System.out.println("Unsuccessfull response code" + response.message());
                     goalGetCallback.informAboutFailedGetFinalGoals();
                     return;
                 }
-                FinalGoal[] goals = response.body();
+                FinalGoalFlag[] goals = response.body();
                 if(goals != null) {
-                    for(FinalGoal finalG: goals) {
+                    for(FinalGoalFlag finalG: goals) {
                         System.out.println(finalG);
                     }
 
@@ -227,7 +229,7 @@ public class HttpClient {
             }
 
             @Override
-            public void onFailure(Call<FinalGoal[]> call, Throwable t) {
+            public void onFailure(Call<FinalGoalFlag[]> call, Throwable t) {
                 goalGetCallback.informAboutFailedGetFinalGoals();
             }
         });
@@ -235,19 +237,19 @@ public class HttpClient {
 
 
     public void getQuantitativeGoals(GoalGetCallback goalGetCallback, User user){
-        Call<QuantitativeGoal[]> call = jsonPlaceholderAPI.getUserQuantitativeGoals(user.getId());
+        Call<QuantitativeGoalFlag[]> call = jsonPlaceholderAPI.getUserQuantitativeGoals(user.getId());
 
-        call.enqueue(new Callback<QuantitativeGoal[]>() {
+        call.enqueue(new Callback<QuantitativeGoalFlag[]>() {
             @Override
-            public void onResponse(Call<QuantitativeGoal[]> call, Response<QuantitativeGoal[]> response) {
+            public void onResponse(Call<QuantitativeGoalFlag[]> call, Response<QuantitativeGoalFlag[]> response) {
                 if (!response.isSuccessful()){
                     System.out.println("Unsuccessfull response code" + response.message());
                     goalGetCallback.informAboutFailedGetQuantitativeGoals();
                     return;
                 }
-                QuantitativeGoal[] goals = response.body();
+                QuantitativeGoalFlag[] goals = response.body();
                 if(goals != null) {
-                    for(QuantitativeGoal quantitativeGoal: goals) {
+                    for(QuantitativeGoalFlag quantitativeGoal: goals) {
                         System.out.println(quantitativeGoal);
                     }
                     goalGetCallback.drawQuantitativeGoals(goals);
@@ -257,7 +259,7 @@ public class HttpClient {
             }
 
             @Override
-            public void onFailure(Call<QuantitativeGoal[]> call, Throwable t) {
+            public void onFailure(Call<QuantitativeGoalFlag[]> call, Throwable t) {
                 goalGetCallback.informAboutFailedGetQuantitativeGoals();
             }
         });
