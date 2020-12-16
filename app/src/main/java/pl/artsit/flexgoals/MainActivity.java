@@ -19,14 +19,21 @@ import com.google.android.material.navigation.NavigationView;
 
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.user.UserCallback;
+import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
+import pl.artsit.flexgoals.ui.goals.PreviewFinalActivity;
+import pl.artsit.flexgoals.ui.goals.PreviewQuantitativeActivity;
 
 public class MainActivity extends AppCompatActivity implements UserCallback {
     private AppBarConfiguration mAppBarConfiguration;
     public static User currentUser;
     public static boolean isUser = false;
-    public static MainActivity activity;
+    public static Integer previewGoalId;
+    public static String previewGoalType;
+    public static QuantitativeGoal previewQuantitativeGoal;
+    public static FinalGoal previewFinalGoal;
     private DrawerLayout drawer;
 
     //TODO GOAL
@@ -38,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
         setContentView(R.layout.activity_main);
 
         if(MainActivity.isUser) {
-            activity = this;
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().hide();
@@ -67,10 +73,10 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
                     .build();
 
             new HttpClient().getUserPoints(this, currentUser);
-            new HttpClient().getFinalGoals(currentUser);
-            new HttpClient().getQuantitativeGoals(currentUser);
 
-
+//            previewGoalId = 1;
+//            previewGoalType = "final";
+//            navController.navigate(R.id.nav_goal_preview);
             navController.navigate(R.id.nav_edit_goal);
 
 

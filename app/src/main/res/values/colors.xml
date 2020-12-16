@@ -13,9 +13,11 @@
 
     <color name="colorPrimaryDark">#404040</color>
     <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorWhite">#FFFFFF</color>
     <color name="colorAccent">#b6b6b6</color>
     <color name="colorWarn">#be2829</color>
     <color name="colorCorrect">#37BE28</color>
+    <color name="colorHeaderAction">#a904d1</color>
 
     <color name="gradientEnd">#616161</color>
     <color name="gradientStart">#0E0E0E</color>
