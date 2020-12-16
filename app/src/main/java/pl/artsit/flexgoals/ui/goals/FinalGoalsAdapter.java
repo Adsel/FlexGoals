@@ -1,5 +1,6 @@
 package pl.artsit.flexgoals.ui.goals;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.shared.Helper;
@@ -30,6 +32,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         private ProgressBar progressBar;
         private TextView descriptionDayToChange;
         private TextView getDescriptionToPercentage;
+        private FinalGoal finalGoal;
 
 
         public ViewHolder(View view) {
@@ -46,8 +49,9 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent= new Intent(view.getContext(), MainActivity.class);
-//                    view.getContext().startActivity(intent);
+                    MainActivity.previewFinalGoal = finalGoal;
+                    Intent intent = new Intent(view.getContext(), PreviewFinalActivity.class);
+                    view.getContext().startActivity(intent);
                 }
             });
         }
@@ -100,6 +104,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         // ADD DATA:
         //        viewHolder.getTextView().setText(localDataSet[position].getName());
         //        viewHolder.getTextView().setText(localDataSet[position].getDescription());
+        viewHolder.finalGoal = localDataSet[position];
         viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
         viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
         viewHolder.descriptionDayToChange.setText(localDataSet[position].getDays().toString());

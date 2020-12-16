@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -15,14 +13,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.shared.Helper;
-import pl.artsit.flexgoals.ui.auth.LoginActivity;
 
 public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeGoalsAdapter.ViewHolder> {
 
     private QuantitativeGoal[] localDataSet;
+    private QuantitativeGoal quantitativeGoal;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -36,6 +35,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         private ProgressBar progressBar;
         private TextView descriptionDayToChange;
         private TextView getDescriptionToPercentage;
+        private QuantitativeGoal quantitativeGoal;
 
         public ViewHolder(View view) {
             super(view);
@@ -50,8 +50,9 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Intent intent= new Intent(view.getContext(), MainActivity.class);
-//                    view.getContext().startActivity(intent);
+                    MainActivity.previewQuantitativeGoal = quantitativeGoal;
+                    Intent intent = new Intent(view.getContext(), PreviewQuantitativeActivity.class);
+                    view.getContext().startActivity(intent);
                 }
             });
         }
@@ -102,6 +103,8 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        viewHolder.quantitativeGoal = localDataSet[position];
+
         viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
         viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
         viewHolder.descriptionDayToChange.setText(localDataSet[position].getDays().toString());

@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FlexGoals"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChartActivity"></activity>
+        <activity android:name=".ui.goals.PreviewQuantitativeActivity"/>
+        <activity android:name=".ui.goals.PreviewFinalActivity"/>
         <activity android:name=".ui.auth.RegisterActivity" />
         <activity android:name=".ui.auth.LoginActivity" />
         <activity
