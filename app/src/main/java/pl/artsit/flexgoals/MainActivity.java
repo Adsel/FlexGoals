@@ -20,6 +20,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.user.UserCallback;
+import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
     public static Integer previewGoalId;
     public static String previewGoalType;
     public static QuantitativeGoal previewQuantitativeGoal;
+    public static FinalGoal previewFinalGoal;
     private DrawerLayout drawer;
 
     @Override
@@ -73,9 +75,6 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
 //            previewGoalId = 1;
 //            previewGoalType = "final";
 //            navController.navigate(R.id.nav_goal_preview);
-
-            Intent intent = new Intent(getApplicationContext(), PreviewFinalActivity.class);
-            startActivity(intent);
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);

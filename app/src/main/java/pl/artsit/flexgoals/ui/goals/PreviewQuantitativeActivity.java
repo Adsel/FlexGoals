@@ -16,14 +16,17 @@ import java.util.List;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 
 
 public class PreviewQuantitativeActivity extends AppCompatActivity {
+    private QuantitativeGoal quantitativeGoal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preview_quantitative);
+        quantitativeGoal = MainActivity.previewQuantitativeGoal;
 
         // DATA
         BarDataSet dataset = new BarDataSet(getEntries(), "ilość");
@@ -42,14 +45,12 @@ public class PreviewQuantitativeActivity extends AppCompatActivity {
         // COLORS AND ANIMATION (OF DRAWING CHART)
         dataset.setColors(ColorTemplate.COLORFUL_COLORS);
         chart.animateY(5000);
-
-
     }
 
     private List<String> getLabels() {
         List<String> labels = new ArrayList<>();
 
-        for (int i = 0; i < MainActivity.previewQuantitativeGoal.getDays(); i++) {
+        for (int i = 0; i < quantitativeGoal.getDays(); i++) {
             labels.add("Dzień" + (i + 1));
         }
 
@@ -58,14 +59,33 @@ public class PreviewQuantitativeActivity extends AppCompatActivity {
 
     private ArrayList<BarEntry> getEntries() {
         ArrayList<BarEntry> entries = new ArrayList<>();
+        List<Integer> progress = getProgress(quantitativeGoal.getProgress());
 
         // TODO: read a progress
-        for (int i = 0; i < MainActivity.previewQuantitativeGoal.getDays(); i++) {
+        for (int i = 0; i < quantitativeGoal.getDays(); i++) {
             entries.add(
-                    new BarEntry(i, 5)
+                    new BarEntry(i, progress.get(i))
             );
+            System.out.println(progress.get(i));
         }
 
         return entries;
+    }
+
+    private List<Integer> getProgress(String progressString){
+        String str = "";
+        List<Integer> numbers = new ArrayList<>();
+        for(int i = 0; i < progressString.length(); i++){
+            if(progressString.charAt(i) == ','){
+                numbers.add(Integer.parseInt(str));
+                str = "";
+            }
+            else{
+                str += progressString.charAt(i);
+            }
+        }
+        numbers.add(Integer.parseInt(str));
+
+        return numbers;
     }
 }
