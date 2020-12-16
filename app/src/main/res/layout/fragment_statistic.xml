@@ -264,7 +264,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/roboto_light"
                         android:gravity="center|left"
-                        android:text="TextView"
+                        android:text=""
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"
                         tools:text="123" />
@@ -327,7 +327,6 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/roboto_light"
                         android:gravity="center|left"
-                        android:text="TextView"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"
                         tools:text="123" />
