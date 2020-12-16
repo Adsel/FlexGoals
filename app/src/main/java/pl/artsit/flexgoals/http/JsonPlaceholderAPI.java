@@ -35,6 +35,9 @@ public interface JsonPlaceholderAPI {
     @PUT("/api/goals/update-fgoal")
     Call<Integer> updateFinalGoal(@Body FinalGoal finalGoal);
 
+    @PUT("/api/goals/update-prog-fgoal")
+    Call<Integer> scoreFinalGoal(@Body Integer integer);
+
     @GET("/api/goals/final/{userId}")
     Call<FinalGoalFlag[]> getUserFinalGoals(@Path("userId") Integer userId);
 

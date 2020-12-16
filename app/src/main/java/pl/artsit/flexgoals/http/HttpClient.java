@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
+import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.user.UserCallback;
@@ -401,6 +402,29 @@ public class HttpClient {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
 
+            }
+        });
+    }
+
+    public void scoreFinalGoal(GoalAchieveCallback achieveCallback, Integer goalId) {
+        Call<Integer> call = jsonPlaceholderAPI.scoreFinalGoal(goalId);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    achieveCallback.informAboutFailedUpdated();
+
+                    return;
+                }
+
+                achieveCallback.informAboutGoalUpdated();
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                achieveCallback.informAboutFailedUpdated();
             }
         });
     }

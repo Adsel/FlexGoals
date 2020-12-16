@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.shared.Helper;
 
@@ -63,6 +64,15 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                     MainActivity.previewQuantitativeGoal = quantitativeGoal;
                     MainActivity.previewGoalType = MainActivity.GOAL_TYPE.QUANTITATIVE;
                     Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
+                }
+            });
+
+            ((Button) view.findViewById(R.id.accept_button)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                  //  new HttpClient().
+                    // TODO:
+                    // ACHIEVE
                 }
             });
         }
