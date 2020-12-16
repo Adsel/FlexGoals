@@ -38,23 +38,23 @@
                 android:paddingRight="20dp"
                 android:paddingBottom="20dp">
 
-                <TextView
-                    android:id="@+id/textViewAddGoalsMess1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/edit_round"
-                    android:fontFamily="@font/roboto_light"
-                    android:gravity="center"
-                    android:paddingLeft="30dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="30dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/add_goalsI_info"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
+            <TextView
+                android:id="@+id/goalPreviewName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_round"
+                android:fontFamily="@font/roboto_light"
+                android:gravity="center"
+                android:paddingLeft="30dp"
+                android:paddingTop="5dp"
+                android:paddingRight="30dp"
+                android:paddingBottom="5dp"
+                android:text="@string/add_goalsI_info"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/newGoalName"
@@ -82,24 +82,24 @@
                     android:textSize="18sp"
                     tools:targetApi="lollipop" />
 
-                <TextView
-                    android:id="@+id/textViewAddGoalsMessQDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/edit_round"
-                    android:fontFamily="@font/roboto_light"
-                    android:gravity="center"
-                    android:paddingLeft="30dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="30dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/add_goals_add_desc"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
+            <TextView
+                android:id="@+id/goalPreviewGoal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/edit_round"
+                android:fontFamily="@font/roboto_light"
+                android:gravity="center"
+                android:paddingLeft="30dp"
+                android:paddingTop="5dp"
+                android:paddingRight="30dp"
+                android:paddingBottom="5dp"
+                android:text="@string/add_goals_add_desc"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/editTextAddGoalsQDescription"
@@ -129,24 +129,24 @@
                     android:textSize="18sp"
                     tools:targetApi="lollipop" />
 
-                <TextView
-                    android:id="@+id/textViewAddGoalsMessQTitle4"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/edit_round"
-                    android:fontFamily="@font/roboto_light"
-                    android:gravity="center"
-                    android:paddingLeft="30dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="30dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/add_goals_add_goal"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
+            <TextView
+                android:id="@+id/goalPreviewDescription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/edit_round"
+                android:fontFamily="@font/roboto_light"
+                android:gravity="center"
+                android:paddingLeft="30dp"
+                android:paddingTop="5dp"
+                android:paddingRight="30dp"
+                android:paddingBottom="5dp"
+                android:text="@string/add_goals_add_goal"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/editTextAddGoalsQTarget"
