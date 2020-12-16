@@ -1,19 +1,18 @@
-package pl.artsit.flexgoals.ui.home;
+package pl.artsit.flexgoals.ui.editGoals;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class EditGoalsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public EditGoalsViewModel() {
         mText = new MutableLiveData<>();
     }
 
     public LiveData<String> getText() {
         return mText;
     }
-
 }

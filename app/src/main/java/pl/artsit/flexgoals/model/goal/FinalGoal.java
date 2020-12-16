@@ -9,21 +9,21 @@ public class FinalGoal {
     private String goal;
     private Integer days;
     private Integer points;
-    private Boolean isShared;
+    private Boolean is_shared;
     private String progress;
-    private Integer idUser;
+    private Integer id_user;
     private Date date;
 
-    public FinalGoal(Integer id, String name, String description, String goal, Integer days, Integer points, Boolean isShared, String progress, Integer idUser, Date date) {
+    public FinalGoal(Integer id, String name, String description, String goal, Integer days, Integer points, Boolean is_shared, String progress, Integer id_user, Date date) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.goal = goal;
         this.days = days;
         this.points = points;
-        this.isShared = isShared;
+        this.is_shared = is_shared;
         this.progress = progress;
-        this.idUser = idUser;
+        this.id_user = id_user;
         this.date = date;
     }
 
@@ -76,11 +76,11 @@ public class FinalGoal {
     }
 
     public Boolean getShared() {
-        return isShared;
+        return is_shared;
     }
 
     public void setShared(Boolean shared) {
-        isShared = shared;
+        is_shared = shared;
     }
 
     public String getProgress() {
@@ -92,11 +92,11 @@ public class FinalGoal {
     }
 
     public Integer getIdUser() {
-        return idUser;
+        return id_user;
     }
 
     public void setIdUser(Integer idUser) {
-        this.idUser = idUser;
+        this.id_user = idUser;
     }
 
     public Date getDate() {
@@ -116,9 +116,9 @@ public class FinalGoal {
                 ", goal='" + goal + '\'' +
                 ", days=" + days +
                 ", points=" + points +
-                ", isShared=" + isShared +
+                ", is_shared=" + is_shared +
                 ", progress='" + progress + '\'' +
-                ", idUser=" + idUser +
+                ", id_user=" + id_user +
                 ", date=" + date +
                 '}';
     }

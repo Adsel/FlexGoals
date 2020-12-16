@@ -2,10 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_add_goal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="10dp"
-    android:id="@+id/nav_add_goal"
     android:background="@drawable/background">
 
     <ScrollView
@@ -16,8 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAddGoalsTitle"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="@+id/textViewAddGoalsTitle">
 
         <LinearLayout
             android:id="@+id/linearLayout3"
@@ -25,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="120dp"
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/edit_round"
@@ -33,10 +31,10 @@
             android:paddingLeft="20dp"
             android:paddingTop="0dp"
             android:paddingRight="20dp"
-            android:paddingBottom="20dp">
+            android:paddingBottom="150dp">
 
             <TextView
-                android:id="@+id/goalPreviewName"
+                android:id="@+id/textViewAddGoalsMess1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -48,13 +46,13 @@
                 android:paddingTop="5dp"
                 android:paddingRight="30dp"
                 android:paddingBottom="5dp"
-                android:text="@string/add_goalsI_info"
+                android:text="@string/modify_goals_title"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/newGoalName"
+                android:id="@+id/editGoalName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -80,7 +78,7 @@
                 tools:targetApi="lollipop" />
 
             <TextView
-                android:id="@+id/goalPreviewGoal"
+                android:id="@+id/textViewAddGoalsMessQDescription"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -93,7 +91,7 @@
                 android:paddingTop="5dp"
                 android:paddingRight="30dp"
                 android:paddingBottom="5dp"
-                android:text="@string/add_goals_add_desc"
+                android:text="@string/modify_goals_desc"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
@@ -127,7 +125,7 @@
                 tools:targetApi="lollipop" />
 
             <TextView
-                android:id="@+id/goalPreviewDescription"
+                android:id="@+id/textViewAddGoalsMessQTitle4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -174,82 +172,6 @@
                 tools:targetApi="lollipop" />
 
             <TextView
-                android:id="@+id/textViewAddGoalsMessQTitle2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/edit_round"
-                android:fontFamily="@font/roboto_light"
-                android:gravity="center"
-                android:paddingLeft="30dp"
-                android:paddingTop="5dp"
-                android:paddingRight="30dp"
-                android:paddingBottom="5dp"
-                android:text="@string/add_goals_add_days"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
-            <EditText
-                android:id="@+id/editTextAddGoalsQDays"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/edit_round_flat"
-                android:drawablePadding="10dp"
-                android:elevation="6dp"
-                android:ems="10"
-                android:fontFamily="sans-serif-light"
-                android:hint="@string/add_goals_add_days"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="10dp"
-                android:shadowDx="20"
-                android:shadowDy="20"
-                android:shadowRadius="20"
-                android:textColor="@color/colorPrimaryDark"
-                android:textColorHint="@color/colorAccent"
-                android:textCursorDrawable="@drawable/color_cursor"
-                android:textSize="18sp"
-                tools:targetApi="lollipop" />
-
-            <TextView
-                android:id="@+id/textViewAddGoalsMess3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/edit_round"
-                android:fontFamily="@font/roboto_light"
-                android:gravity="center"
-                android:paddingLeft="30dp"
-                android:paddingTop="5dp"
-                android:paddingRight="30dp"
-                android:paddingBottom="5dp"
-                android:text="@string/add_goals_type"
-                android:textAllCaps="true"
-                android:textColor="@color/colorPrimary"
-                android:textSize="14sp" />
-
-            <Spinner
-                android:id="@+id/spinnerAddGoals"
-                style="@style/Widget.AppCompat.Spinner.DropDown.ActionBar"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/edit_round_flat"
-                android:dropDownWidth="match_parent"
-                android:spinnerMode="dropdown" />
-
-            <TextView
                 android:id="@+id/textViewAddGoalsMessQTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -263,13 +185,13 @@
                 android:paddingTop="5dp"
                 android:paddingRight="30dp"
                 android:paddingBottom="5dp"
-                android:text="@string/add_goals_add_days"
+                android:text="@string/modify_goals_days"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/editTextAddGoalsQTitle"
+                android:id="@+id/editTextAddGoalsDays"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
@@ -303,7 +225,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textViewAddGoalsMessQTitle5"
+                    android:id="@+id/editTextEditStepTitle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -316,13 +238,14 @@
                     android:paddingTop="5dp"
                     android:paddingRight="30dp"
                     android:paddingBottom="5dp"
-                    android:text="@string/add_goals_add_step"
+                    android:text="@string/modify_goals_step"
                     android:textAllCaps="true"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
                 <EditText
-                    android:id="@+id/editTextAddGoalsQTitle4"
+                    android:id="@+id/editTextEditStep"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
@@ -347,6 +270,7 @@
                     android:textColorHint="@color/colorAccent"
                     android:textCursorDrawable="@drawable/color_cursor"
                     android:textSize="18sp"
+                    android:visibility="gone"
                     tools:targetApi="lollipop" />
 
             </LinearLayout>
@@ -375,7 +299,7 @@
         android:paddingTop="60dp"
         android:paddingRight="20dp"
         android:paddingBottom="10dp"
-        android:text="@string/add_goals_title"
+        android:text="@string/modify_goals_goal"
         android:textColor="@color/colorPrimary"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
