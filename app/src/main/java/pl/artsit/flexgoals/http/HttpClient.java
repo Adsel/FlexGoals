@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
+import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.user.UserCallback;
 import pl.artsit.flexgoals.http.user.UserLoginCallback;
@@ -69,7 +70,7 @@ public class HttpClient {
     public void registerUser(UserRegistryCallback userRegistryCallback, User user){
         Call<User> call = jsonPlaceholderAPI.registerUser(user);
 
-        System.out.println("STRUCTURE OF USER" + user.toString());
+        System.out.println("STRUCTURE OF USsaveQuaER" + user.toString());
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -115,7 +116,7 @@ public class HttpClient {
         });
     }
 
-    public void saveQuantitativeGoal( QuantitativeGoal quantitativeGoal) {
+    public void saveQuantitativeGoal(GoalUpdateCallback goalUpdateCallback, QuantitativeGoal quantitativeGoal) {
         Call<Integer> call = jsonPlaceholderAPI.updateQuantitativeGoal(quantitativeGoal);
 
         call.enqueue(new Callback<Integer>() {
@@ -123,20 +124,21 @@ public class HttpClient {
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (!response.isSuccessful()){
                     System.out.println("Unsuccessfull response code" + response.message());
+                    goalUpdateCallback.informAboutFailed();
+
                     return;
                 }
-
-                // Retrive success behaviour (ex. Toast)
+                goalUpdateCallback.goToMain();
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-
+                goalUpdateCallback.informAboutFailed();
             }
         });
     }
 
-    public void saveFinalGoal(FinalGoal finalGoal) {
+    public void saveFinalGoal(GoalUpdateCallback updateCallback, FinalGoal finalGoal) {
         Call<Integer> call = jsonPlaceholderAPI.updateFinalGoal(finalGoal);
 
         call.enqueue(new Callback<Integer>() {
@@ -144,15 +146,17 @@ public class HttpClient {
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (!response.isSuccessful()){
                     System.out.println("Unsuccessfull response code" + response.message());
+                    updateCallback.informAboutFailed();
+
                     return;
                 }
 
-                // Retrive success behaviour (ex. Toast)
+                updateCallback.goToMain();
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-
+                updateCallback.informAboutFailed();
             }
         });
     }

@@ -1,44 +1,48 @@
-package pl.artsit.flexgoals.ui.goals;
+package pl.artsit.flexgoals.ui.addGoals;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.shared.Helper;
 
-public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.ViewHolder> {
+public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeGoalsAdapter.ViewHolder> {
 
-    private FinalGoal[] localDataSet;
+    private QuantitativeGoal[] localDataSet;
+    private QuantitativeGoal quantitativeGoal;
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private  TextView nameOfGoal;
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView nameOfGoal;
         private TextView descriptionOfGoal;
         private ProgressBar progressBar;
         private TextView descriptionDayToChange;
         private TextView getDescriptionToPercentage;
-        private FinalGoal finalGoal;
-
+        private QuantitativeGoal quantitativeGoal;
 
         public ViewHolder(View view) {
             super(view);
             // Define click listener for the ViewHolder's View
-
 
             nameOfGoal = view.findViewById(R.id.name_of_goal);
             descriptionOfGoal = view.findViewById(R.id.description_of_goal);
@@ -49,12 +53,23 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity.previewFinalGoal = finalGoal;
-                    Intent intent = new Intent(view.getContext(), PreviewFinalActivity.class);
+                    MainActivity.previewQuantitativeGoal = quantitativeGoal;
+                    Intent intent = new Intent(view.getContext(), PreviewQuantitativeActivity.class);
                     view.getContext().startActivity(intent);
                 }
             });
+
+            ((Button) view.findViewById(R.id.edit_button)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MainActivity.previewQuantitativeGoal = quantitativeGoal;
+                    MainActivity.previewGoalType = MainActivity.GOAL_TYPE.QUANTITATIVE;
+                    Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
+                }
+            });
         }
+
+
 
         public TextView getNameOfGoal() {
             return nameOfGoal;
@@ -83,7 +98,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
      * @param dataSet String[] containing the data to populate views to be used
      * by RecyclerView.
      */
-    public FinalGoalsAdapter(FinalGoal[] dataSet) {
+    public QuantitativeGoalsAdapter(QuantitativeGoal[] dataSet) {
         localDataSet = dataSet;
     }
 
@@ -92,7 +107,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_final_goal, viewGroup, false);
+                .inflate(R.layout.item_quantitative_goal, viewGroup, false);
 
         return new ViewHolder(view);
     }
@@ -100,34 +115,44 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        viewHolder.quantitativeGoal = localDataSet[position];
 
-        // ADD DATA:
-        //        viewHolder.getTextView().setText(localDataSet[position].getName());
-        //        viewHolder.getTextView().setText(localDataSet[position].getDescription());
-        viewHolder.finalGoal = localDataSet[position];
         viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
         viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
         viewHolder.descriptionDayToChange.setText(localDataSet[position].getDays().toString());
 
-        int progressCount = 0;
-        String progress = localDataSet[position].getProgress();
-        for(int i =0; i<progress.length();i++){
-            if(progress.matches("1")){
-                progressCount+=1;
-            }
-        }
-        int finishCount = progressCount/localDataSet[position].getDays();
-        viewHolder.progressBar.setProgress(finishCount);
-
-      //  finishCount=finishCount*100;
-
-        viewHolder.getDescriptionToPercentage.setText(String.valueOf(finishCount));
 
 
         Date date1 = new Date(System.currentTimeMillis());
         Date date2 = localDataSet[position].getDate();
         Helper.getDateDiff(date1, date2, TimeUnit.DAYS);
 
+
+        viewHolder.getGetDescriptionToPercentage().setText("");
+        // viewHolder.getProgressBar().setProgress();
+    }
+
+
+
+    // ITERATING AFTER PROGRESS TABLE
+    private int estaminateQuantitative(String progressString){
+        String str = "";
+        List<Integer> numbers = new ArrayList<>();
+        for(int i = 0; i < progressString.length(); i++){
+            if(progressString.charAt(i) == ','){
+                numbers.add(Integer.parseInt(str));
+                str = "";
+            }
+            else{
+                str += progressString.charAt(i);
+            }
+        }
+        numbers.add(Integer.parseInt(str));
+
+//        for(int i = 0; i < numbers.length(); i++){
+//            this.labels[this.labels.length] = "Dzień " + (i + 1);
+//        }
+        return numbers.size();
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -135,5 +160,6 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
     public int getItemCount() {
         return localDataSet.length;
     }
+
 }
 

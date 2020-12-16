@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.goals;
+package pl.artsit.flexgoals.ui.addGoals;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,21 +19,21 @@ import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.ui.main.MainViewModel;
 
-public class GoalFinalFragment extends Fragment implements GoalGetCallback {
+public class GoalQuantitativeFragment extends Fragment implements GoalGetCallback {
 
     private MainViewModel mainViewModel;
-    private RecyclerView finalGoalRecyclerView;
+    private RecyclerView quantitativeGoalRecyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         mainViewModel =
                 new ViewModelProvider(this).get(MainViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_goal_final, container, false);
+        View root = inflater.inflate(R.layout.fragment_goal_quantitative, container, false);
 
-        finalGoalRecyclerView = root.findViewById(R.id.final_goals_recycleview);
-        finalGoalRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
-        finalGoalRecyclerView.setHasFixedSize(true);
-        new HttpClient().getFinalGoals(this, MainActivity.currentUser);
+        quantitativeGoalRecyclerView = root.findViewById(R.id.quantitative_goals_recycleview);
+        quantitativeGoalRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        quantitativeGoalRecyclerView.setHasFixedSize(true);
+        new HttpClient().getQuantitativeGoals(this, MainActivity.currentUser);
 
         return root;
     }
@@ -41,6 +41,10 @@ public class GoalFinalFragment extends Fragment implements GoalGetCallback {
     @Override
     public void informAboutFailedGetFinalGoals() {
 
+    }
+
+    @Override
+    public void drawFinalGoals(FinalGoal[] finalGoals) {
     }
 
     @Override
@@ -55,15 +59,10 @@ public class GoalFinalFragment extends Fragment implements GoalGetCallback {
 
     @Override
     public void drawQuantitativeGoals(QuantitativeGoal[] quantitativeGoals) {
+        QuantitativeGoalsAdapter quantitativeGoalsAdapter = new QuantitativeGoalsAdapter(quantitativeGoals);
 
-    }
-
-    @Override
-    public void drawFinalGoals(FinalGoal[] finalGoals) {
-        FinalGoalsAdapter finalGoalsAdapter = new FinalGoalsAdapter(finalGoals);
-
-        finalGoalRecyclerView.setAdapter(finalGoalsAdapter);
-        finalGoalRecyclerView.setVisibility(View.VISIBLE);
+        quantitativeGoalRecyclerView.setAdapter(quantitativeGoalsAdapter);
+        quantitativeGoalRecyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override

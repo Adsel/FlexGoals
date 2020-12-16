@@ -8,15 +8,14 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import com.google.android.material.navigation.NavigationView;
-
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.google.android.material.navigation.NavigationView;
 
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.user.UserCallback;
@@ -24,15 +23,18 @@ import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
-import pl.artsit.flexgoals.ui.goals.PreviewFinalActivity;
-import pl.artsit.flexgoals.ui.goals.PreviewQuantitativeActivity;
 
 public class MainActivity extends AppCompatActivity implements UserCallback {
     private AppBarConfiguration mAppBarConfiguration;
     public static User currentUser;
     public static boolean isUser = false;
-    public static Integer previewGoalId;
-    public static String previewGoalType;
+
+    public enum GOAL_TYPE {
+        FINAL,
+        QUANTITATIVE
+    }
+
+    public static GOAL_TYPE previewGoalType;
     public static QuantitativeGoal previewQuantitativeGoal;
     public static FinalGoal previewFinalGoal;
     private DrawerLayout drawer;
@@ -71,10 +73,6 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
                     .build();
 
             new HttpClient().getUserPoints(this, currentUser);
-
-//            previewGoalId = 1;
-//            previewGoalType = "final";
-//            navController.navigate(R.id.nav_goal_preview);
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
@@ -116,5 +114,4 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
             drawer.openDrawer(GravityCompat.START);
         }
     }
-
 }
