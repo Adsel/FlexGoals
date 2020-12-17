@@ -156,21 +156,20 @@
 
         <Button
             android:id="@+id/edit_button"
-            android:layout_width="101dp"
-            android:layout_height="43dp"
-            android:layout_marginEnd="140dp"
-            android:layout_marginRight="140dp"
+            android:layout_width="54dp"
+            android:layout_height="40dp"
             android:background="@drawable/edit_bcg_card"
             android:fontFamily="@font/open_sans"
-            android:text="Edytuj"
             android:textAllCaps="false"
             android:textSize="14sp"
             android:textStyle="normal"
             app:backgroundTint="@color/colorPink"
+            app:icon="@drawable/ic_baseline_edit_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description_to_change_percent" />
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar"
+            app:layout_constraintVertical_bias="0.935" />
         <Button
             android:id="@+id/accept_button"
             android:layout_width="112dp"
@@ -192,7 +191,6 @@
             app:layout_constraintVertical_bias="0.555" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/view_finished"
             android:layout_width="112dp"
             android:layout_height="42dp"
@@ -200,11 +198,13 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/accept_bcg_card"
             android:fontFamily="@font/open_sans"
-            android:text="Zatwierdz"
+            android:foreground="@drawable/white_cloud"
+            android:foregroundGravity="center"
             android:textAllCaps="false"
-            android:textSize="14sp"
+            android:textSize="30sp"
             android:textStyle="normal"
-            app:backgroundTint="@color/colorWarn"
+            android:visibility="gone"
+            app:backgroundTint="?attr/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.538"

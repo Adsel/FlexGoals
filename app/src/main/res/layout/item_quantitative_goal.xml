@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
 
     android:layout_height="wrap_content"
@@ -10,8 +12,7 @@
     android:layout_marginRight="15dp"
     android:gravity="center_vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/parent_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -135,10 +136,8 @@
 
         <Button
             android:id="@+id/delete_button"
-            android:layout_width="97dp"
+            android:layout_width="112dp"
             android:layout_height="40dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginLeft="28dp"
             android:background="@drawable/delete_bcg_card"
             android:fontFamily="@font/open_sans"
             android:hapticFeedbackEnabled="false"
@@ -148,34 +147,35 @@
             android:textStyle="normal"
             app:backgroundTint="#FFD324D8"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/accept_button"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.103"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description_day_to_change" />
+            app:layout_constraintTop_toBottomOf="@+id/description_day_to_change"
+            app:layout_constraintVertical_bias="0.6" />
 
         <Button
             android:id="@+id/edit_button"
-            android:layout_width="101dp"
-            android:layout_height="43dp"
-            android:layout_marginEnd="140dp"
-            android:layout_marginRight="140dp"
+            android:layout_width="54dp"
+            android:layout_height="40dp"
             android:background="@drawable/edit_bcg_card"
             android:fontFamily="@font/open_sans"
-            android:text="Edytuj"
             android:textAllCaps="false"
             android:textSize="14sp"
             android:textStyle="normal"
             app:backgroundTint="@color/colorPink"
+            app:icon="@drawable/ic_baseline_edit_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description_to_change_percent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progress_bar"
+            app:layout_constraintVertical_bias="0.935" />
 
         <Button
             android:id="@+id/accept_button"
             android:layout_width="112dp"
-            android:layout_height="42dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
             android:background="@drawable/accept_bcg_card"
             android:fontFamily="@font/open_sans"
             android:text="Zatwierdz"
@@ -185,10 +185,11 @@
             app:backgroundTint="@color/purple_500"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.538"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/edit_button"
             app:layout_constraintTop_toBottomOf="@+id/description_to_change_percent"
-            app:layout_constraintVertical_bias="0.555" />
+            app:layout_constraintVertical_bias="0.6" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
