@@ -33,4 +33,10 @@
 
     <color name="addGoals">#a904d1</color>
     <color name="top_name_goals">#ff00ff</color>
+    <color name="color_one">#99FF0033</color>
+    <color name="color_two">#998E001C</color>
+    <color name="color_three">#99350057</color>
+    <color name="color_four">#99009FE3</color>
+    <color name="color_five">#CC00549C</color>
+
 </resources>
