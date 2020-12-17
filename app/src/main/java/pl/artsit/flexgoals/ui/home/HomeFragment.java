@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         //View Pager-------------------------------------
+        context = root.getContext();
         models = new ArrayList<>();
         models.add(new Model(R.drawable.mike,"Inspiracja","Z NAMI ODKRYJESZ SIEBIE! \n\nZnajdź z nami to co cię napedza. "));
         models.add(new Model(R.drawable.image_five,"Sport","Poszerzaj swoje granice"));
@@ -41,7 +42,7 @@ public class HomeFragment extends Fragment {
         //adapter = new Adapter(models,MainActivity.this);
 
 
-        adapter = new ImageAdapter(models,context );
+        adapter = new ImageAdapter(models, context);
         viewPager = root.findViewById(R.id.viewPager);
         viewPager.setAdapter(adapter);
         viewPager.setPadding(130,0,130,0);
