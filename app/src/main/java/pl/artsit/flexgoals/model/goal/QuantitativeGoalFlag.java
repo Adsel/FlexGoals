@@ -2,8 +2,7 @@ package pl.artsit.flexgoals.model.goal;
 
 import java.util.Date;
 
-public class QuantitativeGoal {
-
+public class QuantitativeGoalFlag {
     private Integer id;
     private String name;
     private String description;
@@ -16,12 +15,12 @@ public class QuantitativeGoal {
     private Integer target;
     private Integer step;
     private Date date;
+    private Integer flag;
 
-    public QuantitativeGoal(
-            Integer id, String name, String description, Integer points,
-            Boolean is_shared, Integer id_user, Integer days, String goal,
-            String progress, Integer target, Integer step, Date date
-    ) {
+    public QuantitativeGoalFlag() {
+    }
+
+    public QuantitativeGoalFlag(Integer id, String name, String description, Integer points, Boolean is_shared, Integer id_user, Integer days, String goal, String progress, Integer target, Integer step, Date date, Integer flag) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -34,6 +33,7 @@ public class QuantitativeGoal {
         this.target = target;
         this.step = step;
         this.date = date;
+        this.flag = flag;
     }
 
     public Integer getId() {
@@ -68,20 +68,20 @@ public class QuantitativeGoal {
         this.points = points;
     }
 
-    public Boolean getShared() {
+    public Boolean getIs_shared() {
         return is_shared;
     }
 
-    public void setShared(Boolean shared) {
-        is_shared = shared;
+    public void setIs_shared(Boolean is_shared) {
+        this.is_shared = is_shared;
     }
 
-    public Integer getIdUser() {
+    public Integer getId_user() {
         return id_user;
     }
 
-    public void setIdUser(Integer idUser) {
-        this.id_user = idUser;
+    public void setId_user(Integer id_user) {
+        this.id_user = id_user;
     }
 
     public Integer getDays() {
@@ -132,21 +132,12 @@ public class QuantitativeGoal {
         this.date = date;
     }
 
-    @Override
-    public String toString() {
-        return "quantitative_qoal{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", points=" + points +
-                ", is_shared=" + is_shared +
-                ", id_user=" + id_user +
-                ", days=" + days +
-                ", goal='" + goal + '\'' +
-                ", progress='" + progress + '\'' +
-                ", target=" + target +
-                ", step=" + step +
-                ", date=" + date +
-                '}';
+    public Integer getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Integer flag) {
+        this.flag = flag;
     }
 }
+
