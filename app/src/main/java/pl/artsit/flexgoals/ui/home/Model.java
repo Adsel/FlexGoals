@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.mainslider;
+package pl.artsit.flexgoals.ui.home;
 
 public class Model {
     private int image;

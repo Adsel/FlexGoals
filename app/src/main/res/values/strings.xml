@@ -47,6 +47,7 @@
     <string name="logo">Logo</string>
     <string name="register_failed">Nie udało się zarejestrować</string>
     <string name="register_successful">Rejestracja przebiegła pomyślnie</string>
+    <string name="menu_glowne">Menu</string>
     <string-array name="add_goals_options">
         <item>Cele Ilościowe</item>
         <item>Cele Zaliczeniowe</item>

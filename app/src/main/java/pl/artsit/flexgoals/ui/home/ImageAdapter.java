@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.mainslider;
+package pl.artsit.flexgoals.ui.home;
 
 import android.content.Context;
 import android.view.LayoutInflater;

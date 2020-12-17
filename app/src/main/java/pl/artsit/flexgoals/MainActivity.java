@@ -18,15 +18,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.viewpager.widget.ViewPager;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.user.UserCallback;
-import pl.artsit.flexgoals.mainslider.ImageAdapter;
-import pl.artsit.flexgoals.mainslider.Model;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
 
@@ -36,11 +29,7 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
     public static boolean isUser = false;
     public static MainActivity activity;
     private DrawerLayout drawer;
-    ViewPager viewPager;
-    ImageAdapter adapter;
-    List<Model> models;
-    Integer[] colors = null;
-    ArgbEvaluator argbEvaluator = new ArgbEvaluator();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,50 +77,7 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
             startActivity(intent);
         }
 
-        //View Pager-------------------------------------
-        models = new ArrayList<>();
-        models.add(new Model(R.drawable.mike,"Inspiracja","Z NAMI ODKRYJESZ SIEBIE! \n\nZnajdź z nami to co cię napedza. "));
-        models.add(new Model(R.drawable.image_five,"Sport","Poszerzaj swoje granice"));
-        models.add(new Model(R.drawable.lora,"Organizer","Twój osobisty menadzer, bedzie pomocnikiem w skutecznym planowaniu dnia"));
-        models.add(new Model(R.drawable.image_four,"Motywacja","Zmień swojeń życie na lepsze z aplikacją Flexgo. \n \n POMOŻEMY CI SPEŁNIĆ MARZENIA!!"));
-        models.add(new Model(R.drawable.chester_wade,"Cele"," Codzienne przypomnienie o twoich celach pomoże ci nie zapomniec do kąd zmierzasz "));
 
-        //adapter = new Adapter(models,MainActivity.this);
-        adapter = new ImageAdapter(models, MainActivity.this);
-        viewPager = findViewById(R.id.viewPager);
-        viewPager.setAdapter(adapter);
-        viewPager.setPadding(130,0,130,0);
-
-        Integer[] colors_temp = {
-                getResources().getColor(R.color.color_one),
-                getResources().getColor(R.color.color_two),
-                getResources().getColor(R.color.color_three),
-                getResources().getColor(R.color.color_four),
-                getResources().getColor(R.color.color_five)
-        };
-        colors = colors_temp;
-        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener(){
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if(position < (adapter.getCount() - 1) && position < (colors.length - 1 )){
-                    viewPager.setBackgroundColor((Integer) argbEvaluator.evaluate(
-                            positionOffset,
-                            colors[position],
-                            colors[position + 1]
-                            )
-                    );
-                }else {
-                    viewPager.setBackgroundColor(colors[colors.length - 1]);
-                }
-            }
-            @Override
-            public void onPageSelected(int position) {
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
     }
 
     @Override
