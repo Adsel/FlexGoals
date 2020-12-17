@@ -1,35 +1,28 @@
 package pl.artsit.flexgoals.ui.home;
 
-import android.animation.ArgbEvaluator;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import pl.artsit.flexgoals.R;
 
 public class HomeFragment extends Fragment {
 
-
-    ViewPager viewPager;
-    ImageAdapter adapter;
-    List<Model> models;
-    Integer[] colors = null;
-    ArgbEvaluator argbEvaluator = new ArgbEvaluator();
-    Context context;
+    private HomeViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+        homeViewModel =
+                new ViewModelProvider(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
+
         //View Pager-------------------------------------
         context = root.getContext();
         models = new ArrayList<>();
@@ -75,8 +68,10 @@ public class HomeFragment extends Fragment {
             public void onPageSelected(int position) {
             }
 
+
             @Override
-            public void onPageScrollStateChanged(int state) {
+            public void onChanged(@Nullable String s) {
+                textView.setText(s);
             }
         });
 

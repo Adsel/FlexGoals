@@ -1,6 +1,5 @@
 package pl.artsit.flexgoals;
 
-import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,17 +8,19 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import com.google.android.material.navigation.NavigationView;
-
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.google.android.material.navigation.NavigationView;
+
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.user.UserCallback;
+import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
 
@@ -27,9 +28,16 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
     private AppBarConfiguration mAppBarConfiguration;
     public static User currentUser;
     public static boolean isUser = false;
-    public static MainActivity activity;
-    private DrawerLayout drawer;
 
+    public enum GOAL_TYPE {
+        FINAL,
+        QUANTITATIVE
+    }
+
+    public static GOAL_TYPE previewGoalType;
+    public static QuantitativeGoalFlag previewQuantitativeGoal;
+    public static FinalGoalFlag previewFinalGoal;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
         setContentView(R.layout.activity_main);
 
         if(MainActivity.isUser) {
-            activity = this;
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().hide();
@@ -73,8 +80,6 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
         }
-
-
     }
 
     @Override
