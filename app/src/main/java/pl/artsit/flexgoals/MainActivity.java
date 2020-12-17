@@ -19,6 +19,10 @@ import com.google.android.material.navigation.NavigationView;
 
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.user.UserCallback;
+import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
 
@@ -26,11 +30,16 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
     private AppBarConfiguration mAppBarConfiguration;
     public static User currentUser;
     public static boolean isUser = false;
-    public static MainActivity activity;
-    private DrawerLayout drawer;
 
-    //TODO GOAL
-    public static Integer GOAL_ID = 22;
+    public enum GOAL_TYPE {
+        FINAL,
+        QUANTITATIVE
+    }
+
+    public static GOAL_TYPE previewGoalType;
+    public static QuantitativeGoalFlag previewQuantitativeGoal;
+    public static FinalGoalFlag previewFinalGoal;
+    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
         setContentView(R.layout.activity_main);
 
         if(MainActivity.isUser) {
-            activity = this;
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().hide();
@@ -67,13 +75,6 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
                     .build();
 
             new HttpClient().getUserPoints(this, currentUser);
-            new HttpClient().getFinalGoals(currentUser);
-            new HttpClient().getQuantitativeGoals(currentUser);
-
-
-            navController.navigate(R.id.nav_edit_goal);
-
-
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
