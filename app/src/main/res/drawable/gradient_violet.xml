@@ -4,7 +4,7 @@
     <corners android:radius="100dp"/>
     <!--  Gradient Bg for listrow -->
     <gradient
-        android:startColor="@color/teal_700"
-        android:endColor="@color/teal_200"
+        android:startColor="@color/btn_color_one"
+        android:endColor="@color/main_pink"
         android:angle="0" />
 </shape>
