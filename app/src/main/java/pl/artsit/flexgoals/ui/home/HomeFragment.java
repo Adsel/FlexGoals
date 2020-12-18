@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.goals.GoalPredefinedGetCallback;
@@ -40,7 +39,7 @@ public class HomeFragment extends Fragment implements GoalPredefinedGetCallback 
         predefinedFinalGoalRecyclerView = root.findViewById(R.id.recyclerViewPredefinedFinal);
         predefinedFinalGoalRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         predefinedFinalGoalRecyclerView.setHasFixedSize(true);
-        new HttpClient().get(this, MainActivity.currentUser);
+        new HttpClient().getPredefinedFinalGoals(this);
 
         return root;
     }
@@ -80,6 +79,11 @@ public class HomeFragment extends Fragment implements GoalPredefinedGetCallback 
 
     @Override
     public void informAboutEmptyPredefinedQuantitativeGoals() {
+
+    }
+
+    @Override
+    public void informAboutFailedPreview() {
 
     }
 }

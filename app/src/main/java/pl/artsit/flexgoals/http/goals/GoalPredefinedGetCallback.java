@@ -11,4 +11,7 @@ public interface GoalPredefinedGetCallback {
     void informAboutFailedGetPredefinedQuantitativeGoals();
     void drawPredefinedQuantitativeGoals(PredefinedQuantitativeGoal[] predefinedQuantitativeGoals);
     void informAboutEmptyPredefinedQuantitativeGoals();
+
+    void informAboutFailedPreview();
+
 }

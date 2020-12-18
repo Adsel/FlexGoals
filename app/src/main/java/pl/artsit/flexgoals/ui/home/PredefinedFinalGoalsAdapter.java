@@ -83,13 +83,10 @@ public class PredefinedFinalGoalsAdapter extends RecyclerView.Adapter<Predefined
             predefined_goals_limit = view.findViewById(R.id.predefined_goals_limit);
             accept_button = view.findViewById(R.id.accept_button);
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainActivity.previewPredefinedFinalGoal = predefinedfinalGoal;
-                    Intent intent = new Intent(view.getContext(), PreviewFinalActivity.class);
-                    view.getContext().startActivity(intent);
-                }
+            view.setOnClickListener(v -> {
+                MainActivity.previewPredefinedFinalGoal = predefinedfinalGoal;
+                Intent intent = new Intent(view.getContext(), PreviewFinalActivity.class);
+                view.getContext().startActivity(intent);
             });
             accept_button.setOnClickListener(v -> {
                 MainActivity.previewPredefinedFinalGoal = predefinedfinalGoal;

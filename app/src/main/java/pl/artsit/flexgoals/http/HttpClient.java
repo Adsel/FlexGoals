@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
+import pl.artsit.flexgoals.http.goals.GoalPredefinedGetCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.user.UserCallback;
@@ -317,7 +318,7 @@ public class HttpClient {
         });
     }
 
-    public void getPredefinedFinalGoals() {
+    public void getPredefinedFinalGoals(GoalPredefinedGetCallback goalPredefinedGetCallback) {
         Call<PredefinedFinalGoal[]> call = jsonPlaceholderAPI.getPredefinedFinalGoals();
 
         call.enqueue(new Callback<PredefinedFinalGoal[]>() {
@@ -325,11 +326,16 @@ public class HttpClient {
             public void onResponse(Call<PredefinedFinalGoal[]> call, Response<PredefinedFinalGoal[]> response) {
                 if (!response.isSuccessful()){
                     System.out.println("Unsuccessfull response code" + response.message());
+                    goalPredefinedGetCallback.informAboutFailedPreview();
                     return;
                 }
                 PredefinedFinalGoal[] points = response.body();
+                if(points != null) {
+                    goalPredefinedGetCallback.drawPredefinedFinalGoals(points);
+                } else {
+                    goalPredefinedGetCallback.informAboutFailedPreview();
+                }
 
-                // TODO: set goals
             }
 
             @Override
