@@ -19,9 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.user.UserCallback;
-import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
