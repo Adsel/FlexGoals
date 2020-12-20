@@ -75,6 +75,7 @@
     <string name="modify_goals_desc">Modyfikuj opis</string>
     <string name="modify_goals_days">Modyfikuj ilość dni</string>
     <string name="modify_goals_step">Modyfikuj krok</string>
+    <string name="modify_goals_target">Modyfikuj target</string>
     <string name="modify_goals_goal">Modyfikuj cel</string>
 
     <string name="logo">Logo</string>
@@ -86,6 +87,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_glowne">main_menu</string>
     <string name="statics_button_check">Zobacz</string>
     <string name="statistic_remain">Pozostało</string>
 </resources>

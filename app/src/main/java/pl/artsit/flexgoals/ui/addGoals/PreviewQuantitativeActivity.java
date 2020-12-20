@@ -17,10 +17,11 @@ import java.util.List;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
 
 
 public class PreviewQuantitativeActivity extends AppCompatActivity {
-    private QuantitativeGoal quantitativeGoal;
+    private QuantitativeGoalFlag quantitativeGoal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

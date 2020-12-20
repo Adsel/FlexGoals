@@ -17,11 +17,12 @@ import java.util.List;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
+import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
 
 
 public class PreviewFinalActivity extends AppCompatActivity {
     private PieChart pieChart;
-    private FinalGoal finalGoal;
+    private FinalGoalFlag finalGoal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
