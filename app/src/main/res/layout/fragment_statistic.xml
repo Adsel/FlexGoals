@@ -336,7 +336,7 @@
         android:id="@+id/textViewAddGoalsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/title"
+        android:background="@drawable/title_a"
         android:fontFamily="sans-serif-light"
         android:paddingLeft="20dp"
         android:paddingTop="60dp"
