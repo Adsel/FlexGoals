@@ -13,9 +13,8 @@ import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
-import pl.artsit.flexgoals.model.goal.FinalGoal;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
-import pl.artsit.flexgoals.shared.Helper;
+import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
 
 public class StatisticsFragment extends Fragment implements GoalGetCallback {
     private TextView statisticQuantityCount;
@@ -43,7 +42,7 @@ public class StatisticsFragment extends Fragment implements GoalGetCallback {
     }
 
     @Override
-    public void drawFinalGoals(FinalGoal[] finalGoals) {
+    public void drawFinalGoals(FinalGoalFlag[] finalGoals) {
 
     }
 
@@ -57,9 +56,9 @@ public class StatisticsFragment extends Fragment implements GoalGetCallback {
 
     }
 
-    // TODO: after reformating FinalGoalFlag structure
     @Override
-    public void drawQuantitativeGoals(QuantitativeGoal[] quantitativeGoals) {
+    // TODO: after reformating FinalGoalFlag structure
+    public void drawQuantitativeGoals(QuantitativeGoalFlag[] quantitativeGoals) {
         Integer left = 0;
 
 //        for (QuantitativeGoal quantitativeGoal: quantitativeGoals) {
@@ -70,6 +69,7 @@ public class StatisticsFragment extends Fragment implements GoalGetCallback {
 
         statisticQuantityCount.setText(left.toString());
     }
+
 
     // TODO: after reformating FinalGoalFlag structure
     @Override
