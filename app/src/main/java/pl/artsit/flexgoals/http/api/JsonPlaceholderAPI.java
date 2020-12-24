@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.http;
+package pl.artsit.flexgoals.http.api;
 
 import pl.artsit.flexgoals.model.goal.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.FinalGoalFlag;

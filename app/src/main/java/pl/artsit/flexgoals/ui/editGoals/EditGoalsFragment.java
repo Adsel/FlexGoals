@@ -15,9 +15,11 @@ import androidx.navigation.Navigation;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.http.services.FinalGoalService;
 import pl.artsit.flexgoals.http.services.HttpClient;
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
+import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
@@ -120,7 +122,7 @@ public class EditGoalsFragment extends Fragment implements AddGoalCallback, Goal
                 finalGoal.setId_user(MainActivity.currentUser.getId());
                 finalGoal.setIs_shared(false);
 
-                new HttpClient().saveFinalGoal(this, new FinalGoal(
+                new FinalGoalService().saveFinalGoal(this, new FinalGoal(
                         finalGoal.getId(), finalGoal.getName(), finalGoal.getDescription(), finalGoal.getGoal(),
                         finalGoal.getDays(), finalGoal.getPoints(), finalGoal.getIs_shared(),
                         finalGoal.getProgress(), finalGoal.getId_user(), finalGoal.getDate()
@@ -152,7 +154,7 @@ public class EditGoalsFragment extends Fragment implements AddGoalCallback, Goal
                     quantitativeGoal.setId_user(MainActivity.currentUser.getId());
                     quantitativeGoal.setIs_shared(false);
 
-                    new HttpClient().saveQuantitativeGoal(this, new QuantitativeGoal(
+                    new QuantitativeGoalService().saveQuantitativeGoal(this, new QuantitativeGoal(
                             quantitativeGoal.getId(), quantitativeGoal.getName(), quantitativeGoal.getDescription(), quantitativeGoal.getPoints(),
                             quantitativeGoal.getIs_shared(), quantitativeGoal.getId_user(), quantitativeGoal.getDays(), quantitativeGoal.getGoal(),
                             quantitativeGoal.getProgress(), quantitativeGoal.getTarget(), quantitativeGoal.getStep(), quantitativeGoal.getDate()

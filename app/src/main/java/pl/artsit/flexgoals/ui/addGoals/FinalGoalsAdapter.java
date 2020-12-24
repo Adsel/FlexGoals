@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.http.services.FinalGoalService;
 import pl.artsit.flexgoals.http.services.HttpClient;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
 import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
@@ -61,7 +62,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             });
 
             ((Button) view.findViewById(R.id.accept_button)).setOnClickListener((View v) ->
-                    new HttpClient().scoreFinalGoal(this, finalGoal.getId())
+                    new FinalGoalService().scoreFinalGoal(this, finalGoal.getId())
             );
             currentView = view;
         }

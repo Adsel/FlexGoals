@@ -15,8 +15,10 @@ import androidx.navigation.Navigation;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.http.services.FinalGoalService;
 import pl.artsit.flexgoals.http.services.HttpClient;
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
+import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.goal.FinalGoal;
 import pl.artsit.flexgoals.model.goal.FinalGoalData;
@@ -107,7 +109,7 @@ public class AddGoalsFragment extends Fragment implements AddGoalCallback {
         if (isCorrect) {
             Integer countOfDays = Integer.parseInt(days);
             if (this.currentTaskType == GOAL_TYPE.FINAL) {
-                new HttpClient().addFinalGoal(
+                new FinalGoalService().addFinalGoal(
                         this, new FinalGoalData(
                                 MainActivity.currentUser.getId(), name,
                                 description, goal, countOfDays
@@ -117,7 +119,7 @@ public class AddGoalsFragment extends Fragment implements AddGoalCallback {
             } else if (this.currentTaskType == GOAL_TYPE.QUANTITATIVE) {
                 String step =newGoalDays.getText().toString();
                 if (!step.equals("") && Integer.parseInt(step) > 0){
-                    new HttpClient().addQuantitativeGoal(
+                    new QuantitativeGoalService().addQuantitativeGoal(
                             this, new QuantitativeGoalData(
                                     name, description, MainActivity.currentUser.getId(),
                                     countOfDays, goal,  Integer.parseInt(step)
