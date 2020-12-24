@@ -16,14 +16,13 @@ import androidx.navigation.Navigation;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.services.FinalGoalService;
-import pl.artsit.flexgoals.http.services.HttpClient;
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
 import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.ModalWidgets;
-import pl.artsit.flexgoals.model.goal.FinalGoal;
-import pl.artsit.flexgoals.model.goal.FinalGoalData;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoal;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalData;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalData;
 
 public class AddGoalsFragment extends Fragment implements AddGoalCallback {
 

@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.model.goal;
+package pl.artsit.flexgoals.model.goal.finals;
 
 public class FinalGoalData {
     private Integer id_user;

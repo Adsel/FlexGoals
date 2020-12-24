@@ -17,14 +17,13 @@ import java.util.concurrent.TimeUnit;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.services.FinalGoalService;
-import pl.artsit.flexgoals.http.services.HttpClient;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
-import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
 import pl.artsit.flexgoals.shared.Helper;
 
+import static pl.artsit.flexgoals.shared.Helper.GOAL_FINISHED;
+
 public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.ViewHolder> {
-    private static final Integer GOAL_FINISHED = -1;
-    private static final Integer GOAL_ACHIEVED = -2;
     private FinalGoalFlag[] localDataSet;
 
     /**
@@ -128,6 +127,8 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             if (viewHolder.finalGoal.getFlag() == GOAL_FINISHED) {
                 ((TextView) viewHolder.currentView.findViewById(R.id.view_finished)).setVisibility(View.VISIBLE);
             }
+        } else {
+            ((Button) viewHolder.currentView.findViewById(R.id.accept_button)).setVisibility(View.VISIBLE);
         }
         viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
         viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());

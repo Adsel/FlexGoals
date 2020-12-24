@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.model.goal.FinalGoal;
-import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
 
 
 public class PreviewFinalActivity extends AppCompatActivity {

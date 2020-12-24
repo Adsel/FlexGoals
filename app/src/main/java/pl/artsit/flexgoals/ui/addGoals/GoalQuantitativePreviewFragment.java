@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
 
 public class GoalQuantitativePreviewFragment extends Fragment {
     private QuantitativeGoal quantitativeGoal;
