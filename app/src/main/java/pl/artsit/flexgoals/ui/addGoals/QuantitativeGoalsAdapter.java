@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.shared.Helper;
 

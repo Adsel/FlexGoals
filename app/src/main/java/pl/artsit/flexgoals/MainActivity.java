@@ -17,7 +17,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 
-import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.http.services.HttpClient;
+import pl.artsit.flexgoals.http.services.UserService;
 import pl.artsit.flexgoals.http.user.UserCallback;
 import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
@@ -48,31 +49,19 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().hide();
-//            FloatingActionButton fab = findViewById(R.id.fab);
-//            fab.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                            .setAction("Action", null).show();
-//                }
-//            });
 
-            NavigationView navigationViewOld = findViewById(R.id.nav_view);
-            NavController navControllerOld = Navigation.findNavController(this, R.id.nav_host_fragment);
-//            NavigationUI.setupActionBarWithNavController(this, navControllerOld, mAppBarConfiguration);
-            NavigationUI.setupWithNavController(navigationViewOld, navControllerOld);
-
-
-            drawer = findViewById(R.id.drawer_layout);
             NavigationView navigationView = findViewById(R.id.nav_view);
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+            NavigationUI.setupWithNavController(navigationView, navController);
+
+            drawer = findViewById(R.id.drawer_layout);
 
             mAppBarConfiguration = new AppBarConfiguration.Builder(
                     R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                     .setDrawerLayout(drawer)
                     .build();
 
-            new HttpClient().getUserPoints(this, currentUser);
+            new UserService().getUserPoints(this, currentUser);
         } else {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);

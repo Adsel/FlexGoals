@@ -20,7 +20,8 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.http.services.HttpClient;
+import pl.artsit.flexgoals.http.services.UserService;
 import pl.artsit.flexgoals.http.user.UserLoginCallback;
 import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.user.AuthData;
@@ -96,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements UserLoginCallbac
                     modalWidgets.showToast(getString(R.string.password_is_empty));
                 }
                 if (isCorrectLogin && isCorrectPassword) {
-                    new HttpClient().getUser(
+                    new UserService().getUser(
                             this,
                             new AuthData(editTextLogin.getText().toString(), editTextPassword.getText().toString())
                     );
@@ -181,13 +182,13 @@ public class LoginActivity extends AppCompatActivity implements UserLoginCallbac
         editor.apply();
     }
 
-    public boolean loadUserWhenCredentialsAreSaved() {
+    private boolean loadUserWhenCredentialsAreSaved() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         String login = sharedPreferences.getString("USER_CREDENTIALS_LOGIN", "");
         String password = sharedPreferences.getString("USER_CREDENTIALS_PASSWORD", "");
 
         if (!login.equals("") && !password.equals("")) {
-            new HttpClient().getUser(this, new AuthData(login, password));
+            new UserService().getUser(this, new AuthData(login, password));
             return true;
         }
 

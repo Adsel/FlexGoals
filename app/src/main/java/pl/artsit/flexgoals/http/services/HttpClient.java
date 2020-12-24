@@ -1,8 +1,9 @@
-package pl.artsit.flexgoals.http;
+package pl.artsit.flexgoals.http.services;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import pl.artsit.flexgoals.http.JsonPlaceholderAPI;
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
@@ -28,10 +29,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class HttpClient {
-    private Retrofit retrofit;
-    private String path = "http://147.135.208.69:8080/"; //8080
-    private JsonPlaceholderAPI jsonPlaceholderAPI;
-    private Gson gson;
+    protected Retrofit retrofit;
+    protected String path = "http://147.135.208.69:8080/"; //8080
+    protected JsonPlaceholderAPI jsonPlaceholderAPI;
+    protected Gson gson;
 
     public HttpClient(){
         gson = new GsonBuilder()
@@ -42,81 +43,6 @@ public class HttpClient {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         jsonPlaceholderAPI = retrofit.create(JsonPlaceholderAPI.class);
-    }
-
-    public void getUser(UserLoginCallback userLoginCallback, AuthData authData){
-        Call<User> call = jsonPlaceholderAPI.getUser(authData);
-
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (!response.isSuccessful()){
-                    System.out.println("Unsuccessfull response code" + response.message());
-                    return;
-                }
-                User user = response.body();
-                if(user != null) {
-                    userLoginCallback.saveUserCredentials(authData.getLogin(), authData.getPassword());
-                    userLoginCallback.redirectToMain(user);
-                } else {
-                    userLoginCallback.informAboutFailedLogin();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                userLoginCallback.informAboutFailedLogin();
-            }
-        });
-    }
-
-    public void registerUser(UserRegistryCallback userRegistryCallback, User user){
-        Call<User> call = jsonPlaceholderAPI.registerUser(user);
-
-        System.out.println("STRUCTURE OF USsaveQuaER" + user.toString());
-
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (!response.isSuccessful()){
-                    System.out.println("Unsuccessfull response code");
-                    userRegistryCallback.informAboutFailedRegistered();
-                    return;
-                }
-
-                // User user = response.body();
-                userRegistryCallback.informAboutSuccessfulRegistered();
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                System.out.println("Failed request");
-                userRegistryCallback.informAboutFailedRegistered();
-            }
-        });
-    }
-
-    public void getUserPoints(UserCallback userCallback, User user){
-        Call<Integer> call = jsonPlaceholderAPI.getUserPoints(user.getId());
-
-        call.enqueue(new Callback<Integer>() {
-            @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
-                if (!response.isSuccessful()){
-                    System.out.println("Unsuccessfull response code" + response.message());
-                    return;
-                }
-                Integer points = response.body();
-                if(points != null) {
-                    userCallback.setPoints(points);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
-
-            }
-        });
     }
 
     public void saveQuantitativeGoal(GoalUpdateCallback goalUpdateCallback, QuantitativeGoal quantitativeGoal) {
