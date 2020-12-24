@@ -87,8 +87,10 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
         } else {
             editTextLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid,0, R.drawable.ic_check_circle_solid, 0);
             textViewLogin.setVisibility(TextView.INVISIBLE);
+
             return true;
         }
+
         return false;
     }
 
@@ -96,9 +98,7 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-
-            this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
+        this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
 
         setContentView(R.layout.activity_register);
         textViewLogin= findViewById(R.id.textViewLogin);
@@ -148,7 +148,6 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
             }
         });
 
-
         editTextPassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -194,6 +193,7 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
                     return true;
                 }
             }
+
             return false;
         });
 
@@ -206,11 +206,9 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 login = editTextLogin.getText().toString();
-
-
-
             }
         });
+
         editTextMail.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {}
@@ -221,9 +219,6 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
                                       int before, int count) {
                 mail = editTextMail.getText().toString();
                 checkMail();
-
-
-
             }
         });
 
@@ -241,7 +236,6 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
             if (checkPasswords() && checkLogin() && checkMail()) {
                 User user = new User(0,password,login,0,mail);
                 new UserService().registerUser(this, user);
-
             }
         });
 
