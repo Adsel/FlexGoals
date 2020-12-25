@@ -48,23 +48,9 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
-
-            view.setOnClickListener((View v) -> {
-                    MainActivity.previewFinalGoal = finalGoal;
-                    Intent intent = new Intent(view.getContext(), PreviewFinalActivity.class);
-                    view.getContext().startActivity(intent);
-            });
-
-            ((Button) view.findViewById(R.id.edit_button)).setOnClickListener((View v) -> {
-                    MainActivity.previewFinalGoal = finalGoal;
-                    MainActivity.previewGoalType = MainActivity.GOAL_TYPE.FINAL;
-                    Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
-            });
-
-            ((Button) view.findViewById(R.id.accept_button)).setOnClickListener((View v) ->
-                    new FinalGoalService().scoreFinalGoal(this, finalGoal.getId())
-            );
             currentView = view;
+
+            addActions();
         }
 
         public TextView getNameOfGoal() {
@@ -89,13 +75,31 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
 
         @Override
         public void informAboutGoalUpdated() {
-            ((Button) currentView.findViewById(R.id.accept_button)).setVisibility(View.GONE);
+            currentView.findViewById(R.id.accept_button).setVisibility(View.GONE);
         }
 
         @Override
         public void informAboutFailedUpdated() {
             // TODO:
             // TOAST
+        }
+
+        private void addActions() {
+            currentView.setOnClickListener((View v) -> {
+                MainActivity.previewFinalGoal = finalGoal;
+                Intent intent = new Intent(currentView.getContext(), PreviewFinalActivity.class);
+                currentView.getContext().startActivity(intent);
+            });
+
+            currentView.findViewById(R.id.edit_button).setOnClickListener((View v) -> {
+                MainActivity.previewFinalGoal = finalGoal;
+                MainActivity.previewGoalType = MainActivity.GOAL_TYPE.FINAL;
+                Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
+            });
+
+            currentView.findViewById(R.id.accept_button).setOnClickListener((View v) ->
+                    new FinalGoalService().scoreFinalGoal(this, finalGoal.getId())
+            );
         }
     }
 
@@ -123,10 +127,10 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.finalGoal = localDataSet[position];
         if (viewHolder.finalGoal.getFlag() < 0) {
-            ((Button) viewHolder.currentView.findViewById(R.id.accept_button)).setVisibility(View.GONE);
+            viewHolder.currentView.findViewById(R.id.accept_button).setVisibility(View.GONE);
 
             if (viewHolder.finalGoal.getFlag() == GOAL_FINISHED) {
-                ((TextView) viewHolder.currentView.findViewById(R.id.view_finished)).setVisibility(View.VISIBLE);
+                viewHolder.currentView.findViewById(R.id.view_finished).setVisibility(View.VISIBLE);
             }
         }
         viewHolder.getNameOfGoal().setText(localDataSet[position].getName());

@@ -46,6 +46,26 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
     public static final Pattern emailRegex =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
+    @SuppressLint({"ClickableViewAccessibility", "ResourceType"})
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
+
+        setContentView(R.layout.activity_register);
+        textViewLogin= findViewById(R.id.textViewLogin);
+        textViewMail= findViewById(R.id.textViewMail);
+        textViewPassword= findViewById(R.id.textViewPassword);
+        editTextLogin= findViewById(R.id.editTextLogin);
+        editTextMail = findViewById(R.id.editTextMail);
+        editTextPassword= findViewById(R.id.editTextPassword);
+        editTextPasswordRepeat= findViewById(R.id.editTextPasswordRepeat);
+        buttonRegister= findViewById(R.id.buttonRegister);
+        modalWidgets = new ModalWidgets(getApplicationContext());
+
+        addActions();
+    }
+
     private boolean checkPasswords(){
         if (!password.equals(passwordRepeat) && !password.equals("") && !passwordRepeat.equals("")){
             textViewPassword.setVisibility(TextView.VISIBLE);
@@ -94,24 +114,20 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
         return false;
     }
 
-    @SuppressLint({"ClickableViewAccessibility", "ResourceType"})
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
+    public void informAboutFailedRegistered() {
+        modalWidgets.showToast(getString(R.string.register_failed));
+    }
 
-        setContentView(R.layout.activity_register);
-        textViewLogin= findViewById(R.id.textViewLogin);
-        textViewMail= findViewById(R.id.textViewMail);
-        textViewPassword= findViewById(R.id.textViewPassword);
-        editTextLogin= findViewById(R.id.editTextLogin);
-        editTextMail = findViewById(R.id.editTextMail);
-        editTextPassword= findViewById(R.id.editTextPassword);
-        editTextPasswordRepeat= findViewById(R.id.editTextPasswordRepeat);
-        buttonRegister= findViewById(R.id.buttonRegister);
+    @Override
+    public void informAboutSuccessfulRegistered() {
+        modalWidgets.showToast(getString(R.string.register_successful));
 
-        modalWidgets =  new ModalWidgets(getApplicationContext());
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+    }
 
+    private void addActions() {
         editTextLogin.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -239,18 +255,5 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
             }
         });
 
-    }
-
-    @Override
-    public void informAboutFailedRegistered() {
-        modalWidgets.showToast(getString(R.string.register_failed));
-    }
-
-    @Override
-    public void informAboutSuccessfulRegistered() {
-        modalWidgets.showToast(getString(R.string.register_successful));
-
-        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(intent);
     }
 }
