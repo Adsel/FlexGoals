@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.http.goals.DeleteGoalsCallback;
 import pl.artsit.flexgoals.http.services.FinalGoalService;
 import pl.artsit.flexgoals.http.services.HttpClient;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
@@ -31,7 +32,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder implements GoalAchieveCallback{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements GoalAchieveCallback, DeleteGoalsCallback {
         private  TextView nameOfGoal;
         private TextView descriptionOfGoal;
         private ProgressBar progressBar;
@@ -39,6 +40,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         private TextView getDescriptionToPercentage;
         private FinalGoalFlag finalGoal;
         private View currentView;
+        private Button deleteButton;
 
         public ViewHolder(final View view) {
             super(view);
@@ -48,6 +50,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
+            deleteButton = view.findViewById(R.id.delete_button);
 
             view.setOnClickListener((View v) -> {
                     MainActivity.previewFinalGoal = finalGoal;
@@ -65,6 +68,13 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
                     new FinalGoalService().scoreFinalGoal(this, finalGoal.getId())
             );
             currentView = view;
+
+
+
+            ((Button) view.findViewById(R.id.delete_button)).setOnClickListener((View v)->
+                new FinalGoalService().deleteFinalGoal(, finalGoal.getId())
+            );
+            //TODO: Sprawdzic czy dziala to poprawnie !!!! ^
         }
 
         public TextView getNameOfGoal() {
@@ -96,6 +106,16 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         public void informAboutFailedUpdated() {
             // TODO:
             // TOAST
+        }
+
+        @Override
+        public void deleteFinalCallback(Void finalGoalData) {
+
+        }
+
+        @Override
+        public void informAboutFailedDeleteFinalGoal() {
+
         }
     }
 

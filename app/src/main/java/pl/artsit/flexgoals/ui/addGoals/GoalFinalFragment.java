@@ -86,4 +86,9 @@ public class GoalFinalFragment extends Fragment implements GoalGetCallback {
     public void drawFinalProgress() {
 
     }
+
+    /*@Override
+    public void informAboutFailedDeleteFinalGoal(){
+
+    }*/
 }
