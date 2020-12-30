@@ -1,6 +1,7 @@
 package pl.artsit.flexgoals.ui.addGoals;
 
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +27,7 @@ import pl.artsit.flexgoals.shared.Helper;
 public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.ViewHolder> {
     private static final Integer GOAL_FINISHED = -1;
     private static final Integer GOAL_ACHIEVED = -2;
+    private static final char PROGRESS_DONE = '1';
     private FinalGoalFlag[] localDataSet;
 
     /**
@@ -123,6 +126,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         return new ViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.finalGoal = localDataSet[position];
@@ -135,33 +139,44 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         }
         viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
         viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
-        viewHolder.descriptionDayToChange.setText(localDataSet[position].getDays().toString());
 
-        int progressCount = 0;
-        String progress = localDataSet[position].getProgress();
-        for(int i = 0; i < progress.length();i++){
-            if(progress.matches("1")){
-                progressCount+=1;
-            }
+        int progressCount = getProgressCount(localDataSet[position].getProgress());
+        int finishCount = getProgressPercentage(progressCount, localDataSet[position].getDays());
+        if (finishCount > 0) {
+            viewHolder.progressBar.setProgress(finishCount);
+        } else {
+            viewHolder.progressBar.setProgress(1);
         }
-        int finishCount = progressCount/localDataSet[position].getDays();
-        viewHolder.progressBar.setProgress(finishCount);
+        viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
 
-      //  finishCount=finishCount*100;
+        long leftDays = Helper.getLeftDays(localDataSet[position].getDate(), localDataSet[position].getDays());
 
-        viewHolder.getDescriptionToPercentage.setText(String.valueOf(finishCount));
-
-
-        Date date1 = new Date(System.currentTimeMillis());
-        Date date2 = localDataSet[position].getDate();
-        Helper.getDateDiff(date1, date2, TimeUnit.DAYS);
-
+        if (leftDays == 1) {
+            viewHolder.descriptionDayToChange.setText(leftDays + " dzień");
+        } else {
+            viewHolder.descriptionDayToChange.setText(leftDays + " dni");
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return localDataSet.length;
+    }
+
+    private int getProgressCount(String progress) {
+        int progressCount = 0;
+        for (int i = 0; i < progress.length(); i++){
+            if (progress.charAt(i) == PROGRESS_DONE){
+                progressCount += 1;
+            }
+        }
+
+        return progressCount;
+    }
+
+    private int getProgressPercentage(int progressCount, int daysCount) {
+        return progressCount * 100 / daysCount;
     }
 }
 

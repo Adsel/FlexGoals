@@ -1,6 +1,7 @@
 package pl.artsit.flexgoals.ui.addGoals;
 
 import android.content.Intent;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -117,46 +119,48 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     }
 
     // Replace the contents of a view (invoked by the layout manager)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.quantitativeGoal = localDataSet[position];
-
         viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
         viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
-        viewHolder.descriptionDayToChange.setText(localDataSet[position].getDays().toString());
 
+        int progressCount = getProgressCount(localDataSet[position].getProgress(), localDataSet[position].getStep());
+        int finishCount = getProgressPercentage(progressCount, localDataSet[position].getDays(), localDataSet[position].getStep());
+        if (finishCount > 0) {
+            viewHolder.progressBar.setProgress(finishCount);
+        } else {
+            viewHolder.progressBar.setProgress(1);
+        }
+        viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
 
+        long leftDays = Helper.getLeftDays(localDataSet[position].getDate(), localDataSet[position].getDays());
 
-        Date date1 = new Date(System.currentTimeMillis());
-        Date date2 = localDataSet[position].getDate();
-        Helper.getDateDiff(date1, date2, TimeUnit.DAYS);
-
-
-        viewHolder.getGetDescriptionToPercentage().setText("");
-        // viewHolder.getProgressBar().setProgress();
+        if (leftDays == 1) {
+            viewHolder.descriptionDayToChange.setText(leftDays + " dzień");
+        } else {
+            viewHolder.descriptionDayToChange.setText(leftDays + " dni");
+        }
     }
 
+    private int getProgressCount(String progress, int step) {
+        int progressCount = 0;
 
-
-    // ITERATING AFTER PROGRESS TABLE
-    private int estaminateQuantitative(String progressString){
-        String str = "";
-        List<Integer> numbers = new ArrayList<>();
-        for(int i = 0; i < progressString.length(); i++){
-            if(progressString.charAt(i) == ','){
-                numbers.add(Integer.parseInt(str));
-                str = "";
+        String[] progressStr = progress.split(",");
+        for (String prog: progressStr) {
+            Integer temp = Integer.parseInt(prog);
+            if (temp > step) {
+                temp = step;
             }
-            else{
-                str += progressString.charAt(i);
-            }
+            progressCount += temp;
         }
-        numbers.add(Integer.parseInt(str));
 
-//        for(int i = 0; i < numbers.length(); i++){
-//            this.labels[this.labels.length] = "Dzień " + (i + 1);
-//        }
-        return numbers.size();
+        return progressCount;
+    }
+
+    private int getProgressPercentage(int progressCount, int daysCount, int step) {
+        return progressCount * 100 / (daysCount * step);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
