@@ -26,8 +26,6 @@ import pl.artsit.flexgoals.shared.Helper;
 import static pl.artsit.flexgoals.shared.Helper.GOAL_FINISHED;
 
 public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.ViewHolder> {
-    private static final Integer GOAL_FINISHED = -1;
-    private static final Integer GOAL_ACHIEVED = -2;
     private static final char PROGRESS_DONE = '1';
     private FinalGoalFlag[] localDataSet;
 
@@ -134,7 +132,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         if (viewHolder.finalGoal.getFlag() < 0) {
             viewHolder.currentView.findViewById(R.id.accept_button).setVisibility(View.GONE);
 
-            if (viewHolder.finalGoal.getFlag() == GOAL_FINISHED) {
+            if (viewHolder.finalGoal.getFlag() == Helper.GOAL_FINISHED) {
                 viewHolder.currentView.findViewById(R.id.view_finished).setVisibility(View.VISIBLE);
             }
         } else {

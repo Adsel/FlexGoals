@@ -19,10 +19,6 @@ import androidx.annotation.RequiresApi;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
@@ -31,8 +27,6 @@ import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalProgress;
 import pl.artsit.flexgoals.shared.Helper;
-
-import static pl.artsit.flexgoals.shared.Helper.GOAL_FINISHED;
 
 public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeGoalsAdapter.ViewHolder> {
 
@@ -60,37 +54,17 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
 
         public ViewHolder(View view) {
             super(view);
-            // Define click listener for the ViewHolder's View
 
             nameOfGoal = view.findViewById(R.id.name_of_goal);
             descriptionOfGoal = view.findViewById(R.id.description_of_goal);
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
-            currentView = view;
-
-
-            /// JUMP  1
             acceptButton = view.findViewById(R.id.accept_quantitative_button);
             finishedText = view.findViewById(R.id.view_finished);
-
-            view.setOnClickListener(v -> {
-                MainActivity.previewQuantitativeGoal = quantitativeGoal;
-                Intent intent = new Intent(view.getContext(), PreviewQuantitativeActivity.class);
-                view.getContext().startActivity(intent);
-            });
+            currentView = view;
 
             addActions();
-
-
-            // JUMP 2
-            ((Button) view.findViewById(R.id.edit_button)).setOnClickListener((View.OnClickListener) v -> {
-                MainActivity.previewQuantitativeGoal = quantitativeGoal;
-                MainActivity.previewGoalType = MainActivity.GOAL_TYPE.QUANTITATIVE;
-                Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
-            });
-
-            acceptButton.setOnClickListener((View.OnClickListener) v -> makePromptWithGoalAchievement(v, quantitativeGoal));
         }
 
 
@@ -128,11 +102,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                 Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
             });
 
-            currentView.findViewById(R.id.accept_button).setOnClickListener(v -> {
-                //  new HttpClient().
-                // TODO:
-                // ACHIEVE
-            });
+            acceptButton.setOnClickListener((View.OnClickListener) v -> makePromptWithGoalAchievement(v, quantitativeGoal));
         }
 
         private void makePromptWithGoalAchievement(View view, QuantitativeGoalFlag quantitativeGoal) {
@@ -218,21 +188,17 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         } else {
             viewHolder.progressBar.setProgress(1);
         }
-        viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
-            viewHolder.acceptButton.setVisibility(View.GONE);
 
-            if (viewHolder.quantitativeGoal.getFlag() == GOAL_FINISHED) {
-                viewHolder.finishedText.setVisibility(View.VISIBLE);
-            }
+        viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
+
+
+        viewHolder.acceptButton.setVisibility(View.GONE);
+
+        if (viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_FINISHED) {
+            viewHolder.finishedText.setVisibility(View.VISIBLE);
         } else {
             viewHolder.acceptButton.setVisibility(View.VISIBLE);
         }
-
-        Date date1 = new Date(System.currentTimeMillis());
-        Date date2 = localDataSet[position].getDate();
-        Helper.getDateDiff(date1, date2, TimeUnit.DAYS);
-
-        // JUMP 3 END
 
         long leftDays = Helper.getLeftDays(localDataSet[position].getDate(), localDataSet[position].getDays());
 
