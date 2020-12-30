@@ -37,6 +37,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         private TextView descriptionDayToChange;
         private TextView getDescriptionToPercentage;
         private QuantitativeGoalFlag quantitativeGoal;
+        private View currentView;
 
         public ViewHolder(View view) {
             super(view);
@@ -47,33 +48,9 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
+            currentView = view;
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainActivity.previewQuantitativeGoal = quantitativeGoal;
-                    Intent intent = new Intent(view.getContext(), PreviewQuantitativeActivity.class);
-                    view.getContext().startActivity(intent);
-                }
-            });
-
-            ((Button) view.findViewById(R.id.edit_button)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainActivity.previewQuantitativeGoal = quantitativeGoal;
-                    MainActivity.previewGoalType = MainActivity.GOAL_TYPE.QUANTITATIVE;
-                    Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
-                }
-            });
-
-            ((Button) view.findViewById(R.id.accept_button)).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                  //  new HttpClient().
-                    // TODO:
-                    // ACHIEVE
-                }
-            });
+            addActions();
         }
 
 
@@ -96,6 +73,26 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
 
         public TextView getGetDescriptionToPercentage() {
             return getDescriptionToPercentage;
+        }
+
+        private void addActions() {
+            currentView.setOnClickListener(v -> {
+                MainActivity.previewQuantitativeGoal = quantitativeGoal;
+                Intent intent = new Intent(currentView.getContext(), PreviewQuantitativeActivity.class);
+                currentView.getContext().startActivity(intent);
+            });
+
+            currentView.findViewById(R.id.edit_button).setOnClickListener(v -> {
+                MainActivity.previewQuantitativeGoal = quantitativeGoal;
+                MainActivity.previewGoalType = MainActivity.GOAL_TYPE.QUANTITATIVE;
+                Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
+            });
+
+            currentView.findViewById(R.id.accept_button).setOnClickListener(v -> {
+                //  new HttpClient().
+                // TODO:
+                // ACHIEVE
+            });
         }
     }
 

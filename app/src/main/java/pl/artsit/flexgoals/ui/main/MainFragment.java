@@ -21,6 +21,4 @@ public class MainFragment extends Fragment {
 
         return root;
     }
-
-
 }
