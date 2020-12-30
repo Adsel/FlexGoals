@@ -3,6 +3,7 @@ package pl.artsit.flexgoals.ui.addGoals;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.graphics.Color;
 import android.text.InputType;
 import android.view.ContextThemeWrapper;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,6 +54,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         private TextView descriptionDayToChange;
         private TextView getDescriptionToPercentage;
         private QuantitativeGoalFlag quantitativeGoal;
+        private View currentView;
         private Button acceptButton;
         private TextView finishedText;
 
@@ -64,6 +67,10 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
+            currentView = view;
+
+
+            /// JUMP  1
             acceptButton = view.findViewById(R.id.accept_quantitative_button);
             finishedText = view.findViewById(R.id.view_finished);
 
@@ -73,6 +80,10 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                 view.getContext().startActivity(intent);
             });
 
+            addActions();
+
+
+            // JUMP 2
             ((Button) view.findViewById(R.id.edit_button)).setOnClickListener((View.OnClickListener) v -> {
                 MainActivity.previewQuantitativeGoal = quantitativeGoal;
                 MainActivity.previewGoalType = MainActivity.GOAL_TYPE.QUANTITATIVE;
@@ -102,6 +113,26 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
 
         public TextView getGetDescriptionToPercentage() {
             return getDescriptionToPercentage;
+        }
+
+        private void addActions() {
+            currentView.setOnClickListener(v -> {
+                MainActivity.previewQuantitativeGoal = quantitativeGoal;
+                Intent intent = new Intent(currentView.getContext(), PreviewQuantitativeActivity.class);
+                currentView.getContext().startActivity(intent);
+            });
+
+            currentView.findViewById(R.id.edit_button).setOnClickListener(v -> {
+                MainActivity.previewQuantitativeGoal = quantitativeGoal;
+                MainActivity.previewGoalType = MainActivity.GOAL_TYPE.QUANTITATIVE;
+                Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
+            });
+
+            currentView.findViewById(R.id.accept_button).setOnClickListener(v -> {
+                //  new HttpClient().
+                // TODO:
+                // ACHIEVE
+            });
         }
 
         private void makePromptWithGoalAchievement(View view, QuantitativeGoalFlag quantitativeGoal) {
@@ -173,17 +204,21 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     }
 
     // Replace the contents of a view (invoked by the layout manager)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.quantitativeGoal = localDataSet[position];
-
         viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
         viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
-        viewHolder.descriptionDayToChange.setText(localDataSet[position].getDays().toString());
 
-        if (viewHolder.quantitativeGoal.getFlag() < 0) {
-            System.out.println(viewHolder.quantitativeGoal.getFlag() + "   " + viewHolder.quantitativeGoal.getName());
-
+        int progressCount = getProgressCount(localDataSet[position].getProgress(), localDataSet[position].getStep());
+        int finishCount = getProgressPercentage(progressCount, localDataSet[position].getDays(), localDataSet[position].getStep());
+        if (finishCount > 0) {
+            viewHolder.progressBar.setProgress(finishCount);
+        } else {
+            viewHolder.progressBar.setProgress(1);
+        }
+        viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
             viewHolder.acceptButton.setVisibility(View.GONE);
 
             if (viewHolder.quantitativeGoal.getFlag() == GOAL_FINISHED) {
@@ -197,31 +232,34 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         Date date2 = localDataSet[position].getDate();
         Helper.getDateDiff(date1, date2, TimeUnit.DAYS);
 
-        viewHolder.getGetDescriptionToPercentage().setText("");
-        // viewHolder.getProgressBar().setProgress();
+        // JUMP 3 END
+
+        long leftDays = Helper.getLeftDays(localDataSet[position].getDate(), localDataSet[position].getDays());
+
+        if (leftDays == 1) {
+            viewHolder.descriptionDayToChange.setText(leftDays + " dzień");
+        } else {
+            viewHolder.descriptionDayToChange.setText(leftDays + " dni");
+        }
     }
 
+    private int getProgressCount(String progress, int step) {
+        int progressCount = 0;
 
-
-    // ITERATING AFTER PROGRESS TABLE
-    private int estaminateQuantitative(String progressString){
-        String str = "";
-        List<Integer> numbers = new ArrayList<>();
-        for(int i = 0; i < progressString.length(); i++){
-            if(progressString.charAt(i) == ','){
-                numbers.add(Integer.parseInt(str));
-                str = "";
+        String[] progressStr = progress.split(",");
+        for (String prog: progressStr) {
+            Integer temp = Integer.parseInt(prog);
+            if (temp > step) {
+                temp = step;
             }
-            else{
-                str += progressString.charAt(i);
-            }
+            progressCount += temp;
         }
-        numbers.add(Integer.parseInt(str));
 
-//        for(int i = 0; i < numbers.length(); i++){
-//            this.labels[this.labels.length] = "Dzień " + (i + 1);
-//        }
-        return numbers.size();
+        return progressCount;
+    }
+
+    private int getProgressPercentage(int progressCount, int daysCount, int step) {
+        return progressCount * 100 / (daysCount * step);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

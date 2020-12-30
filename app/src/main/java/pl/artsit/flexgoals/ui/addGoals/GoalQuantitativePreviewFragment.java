@@ -12,7 +12,6 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 
-import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
 
@@ -26,12 +25,9 @@ public class GoalQuantitativePreviewFragment extends Fragment {
     private GOAL_TYPE currentTaskType;
 
     public View onCreateView(@NonNull LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
-        //addGoalsViewModel = new ViewModelProvider(this).get(AddGoalsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_goal_preview, container, false);
         TextView header = root.findViewById(R.id.progressTitleBar);
         setHeaderBackgroundColor(header, R.color.colorHeaderAction, R.drawable.title, getContext());
-
-        MainActivity mainActivity = (MainActivity) getActivity();
 
         return root;
     }
