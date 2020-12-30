@@ -8,6 +8,7 @@ import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalUpdateData;
 import pl.artsit.flexgoals.model.user.User;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,7 +19,7 @@ public class QuantitativeGoalService extends HttpClient {
         super();
     }
 
-    public void saveQuantitativeGoal(GoalUpdateCallback goalUpdateCallback, QuantitativeGoal quantitativeGoal) {
+    public void saveQuantitativeGoal(GoalUpdateCallback goalUpdateCallback, QuantitativeGoalUpdateData quantitativeGoal) {
         Call<Integer> call = jsonPlaceholderAPI.updateQuantitativeGoal(quantitativeGoal);
 
         call.enqueue(new Callback<Integer>() {
