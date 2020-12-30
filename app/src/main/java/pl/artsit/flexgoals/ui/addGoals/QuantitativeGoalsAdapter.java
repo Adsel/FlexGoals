@@ -130,9 +130,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
 
 
 
-        Date date1 = new Date(System.currentTimeMillis());
-        Date date2 = localDataSet[position].getDate();
-        Helper.getDateDiff(date1, date2, TimeUnit.DAYS);
 
 
         viewHolder.getGetDescriptionToPercentage().setText("");
