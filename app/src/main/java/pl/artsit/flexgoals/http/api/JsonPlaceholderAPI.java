@@ -1,13 +1,14 @@
 package pl.artsit.flexgoals.http.api;
 
-import pl.artsit.flexgoals.model.goal.FinalGoalData;
-import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
-import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
-import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
-import pl.artsit.flexgoals.model.goal.FinalGoal;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalData;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.finals.PredefinedFinalGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.PredefinedQuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalData;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalProgress;
 import pl.artsit.flexgoals.model.user.AuthData;
 import pl.artsit.flexgoals.model.user.User;
 import retrofit2.Call;
@@ -37,6 +38,9 @@ public interface JsonPlaceholderAPI {
 
     @PUT("/api/goals/update-prog-fgoal")
     Call<Integer> scoreFinalGoal(@Body Integer integer);
+
+    @PUT("/api/goals/update-qgoal")
+    Call<Integer> scoreQuantitativeGoal(@Body QuantitativeGoalProgress quantitativeGoalProgress);
 
     @GET("/api/goals/final/{userId}")
     Call<FinalGoalFlag[]> getUserFinalGoals(@Path("userId") Integer userId);

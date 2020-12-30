@@ -16,15 +16,14 @@ import androidx.navigation.Navigation;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.services.FinalGoalService;
-import pl.artsit.flexgoals.http.services.HttpClient;
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
 import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.ModalWidgets;
-import pl.artsit.flexgoals.model.goal.FinalGoal;
-import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoal;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 
 public class EditGoalsFragment extends Fragment implements AddGoalCallback, GoalUpdateCallback {
 

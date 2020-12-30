@@ -1,8 +1,8 @@
-package pl.artsit.flexgoals.model.goal;
+package pl.artsit.flexgoals.model.goal.finals;
 
 import java.util.Date;
 
-public class FinalGoalFlag {
+public class FinalGoal {
     private Integer id;
     private String name;
     private String description;
@@ -13,12 +13,8 @@ public class FinalGoalFlag {
     private String progress;
     private Integer id_user;
     private Date date;
-    private Integer flag;
 
-    public FinalGoalFlag() {
-    }
-
-    public FinalGoalFlag(Integer id, String name, String description, String goal, Integer days, Integer points, Boolean is_shared, String progress, Integer id_user, Date date, Integer flag) {
+    public FinalGoal(Integer id, String name, String description, String goal, Integer days, Integer points, Boolean is_shared, String progress, Integer id_user, Date date) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -29,7 +25,6 @@ public class FinalGoalFlag {
         this.progress = progress;
         this.id_user = id_user;
         this.date = date;
-        this.flag = flag;
     }
 
     public Integer getId() {
@@ -80,12 +75,12 @@ public class FinalGoalFlag {
         this.points = points;
     }
 
-    public Boolean getIs_shared() {
+    public Boolean getShared() {
         return is_shared;
     }
 
-    public void setIs_shared(Boolean is_shared) {
-        this.is_shared = is_shared;
+    public void setShared(Boolean shared) {
+        is_shared = shared;
     }
 
     public String getProgress() {
@@ -96,12 +91,12 @@ public class FinalGoalFlag {
         this.progress = progress;
     }
 
-    public Integer getId_user() {
+    public Integer getIdUser() {
         return id_user;
     }
 
-    public void setId_user(Integer id_user) {
-        this.id_user = id_user;
+    public void setIdUser(Integer idUser) {
+        this.id_user = idUser;
     }
 
     public Date getDate() {
@@ -112,11 +107,19 @@ public class FinalGoalFlag {
         this.date = date;
     }
 
-    public Integer getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Integer flag) {
-        this.flag = flag;
+    @Override
+    public String toString() {
+        return "finalGoal{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", goal='" + goal + '\'' +
+                ", days=" + days +
+                ", points=" + points +
+                ", is_shared=" + is_shared +
+                ", progress='" + progress + '\'' +
+                ", id_user=" + id_user +
+                ", date=" + date +
+                '}';
     }
 }

@@ -15,8 +15,8 @@ import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
-import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.ui.main.MainViewModel;
 
 public class GoalQuantitativeFragment extends Fragment implements GoalGetCallback {

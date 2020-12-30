@@ -1,8 +1,9 @@
-package pl.artsit.flexgoals.model.goal;
+package pl.artsit.flexgoals.model.goal.quantitative;
 
 import java.util.Date;
 
-public class QuantitativeGoalFlag {
+public class QuantitativeGoal {
+
     private Integer id;
     private String name;
     private String description;
@@ -15,12 +16,12 @@ public class QuantitativeGoalFlag {
     private Integer target;
     private Integer step;
     private Date date;
-    private Integer flag;
 
-    public QuantitativeGoalFlag() {
-    }
-
-    public QuantitativeGoalFlag(Integer id, String name, String description, Integer points, Boolean is_shared, Integer id_user, Integer days, String goal, String progress, Integer target, Integer step, Date date, Integer flag) {
+    public QuantitativeGoal(
+            Integer id, String name, String description, Integer points,
+            Boolean is_shared, Integer id_user, Integer days, String goal,
+            String progress, Integer target, Integer step, Date date
+    ) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -33,7 +34,6 @@ public class QuantitativeGoalFlag {
         this.target = target;
         this.step = step;
         this.date = date;
-        this.flag = flag;
     }
 
     public Integer getId() {
@@ -68,20 +68,20 @@ public class QuantitativeGoalFlag {
         this.points = points;
     }
 
-    public Boolean getIs_shared() {
+    public Boolean getShared() {
         return is_shared;
     }
 
-    public void setIs_shared(Boolean is_shared) {
-        this.is_shared = is_shared;
+    public void setShared(Boolean shared) {
+        is_shared = shared;
     }
 
-    public Integer getId_user() {
+    public Integer getIdUser() {
         return id_user;
     }
 
-    public void setId_user(Integer id_user) {
-        this.id_user = id_user;
+    public void setIdUser(Integer idUser) {
+        this.id_user = idUser;
     }
 
     public Integer getDays() {
@@ -132,12 +132,21 @@ public class QuantitativeGoalFlag {
         this.date = date;
     }
 
-    public Integer getFlag() {
-        return flag;
-    }
-
-    public void setFlag(Integer flag) {
-        this.flag = flag;
+    @Override
+    public String toString() {
+        return "quantitative_qoal{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", points=" + points +
+                ", is_shared=" + is_shared +
+                ", id_user=" + id_user +
+                ", days=" + days +
+                ", goal='" + goal + '\'' +
+                ", progress='" + progress + '\'' +
+                ", target=" + target +
+                ", step=" + step +
+                ", date=" + date +
+                '}';
     }
 }
-

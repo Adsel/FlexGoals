@@ -1,13 +1,15 @@
 package pl.artsit.flexgoals.http.services;
 
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
+import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
 import pl.artsit.flexgoals.http.user.UserCallback;
-import pl.artsit.flexgoals.model.goal.PredefinedQuantitativeGoal;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoalData;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
+import pl.artsit.flexgoals.model.goal.quantitative.PredefinedQuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalData;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalProgress;
 import pl.artsit.flexgoals.model.user.User;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -156,6 +158,29 @@ public class QuantitativeGoalService extends HttpClient {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
 
+            }
+        });
+    }
+
+    public void scoreQuantitativeGoal(GoalAchieveCallback achieveCallback, QuantitativeGoalProgress quantitativeGoalProgress) {
+        Call<Integer> call = jsonPlaceholderAPI.scoreQuantitativeGoal(quantitativeGoalProgress);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (!response.isSuccessful()){
+                    System.out.println("Unsuccessfull response code" + response.message());
+                    achieveCallback.informAboutFailedUpdated();
+
+                    return;
+                }
+
+                achieveCallback.informAboutGoalUpdated();
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                achieveCallback.informAboutFailedUpdated();
             }
         });
     }
