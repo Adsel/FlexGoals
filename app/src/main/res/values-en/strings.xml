@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name" translatable="false">FlexGoals</string>
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
-    <string name="nav_header_desc" translatable="false">Navigation header</string>
-    <string name="action_settings">Settings</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_settings">Ustawienia</string>
     <string name="menu_dodajCel">Add Goal</string>
     <string name="menu_celeIlosciowe">"Quantitative goals "</string>
     <string name="menu_celeZaliczeniowe">"Final goals "</string>
@@ -26,12 +22,11 @@
     <string name="password_not_same">"The passwords do not match "</string>
     <string name="incorrect_data">"Data incorrect! "</string>
     <string name="password_is_empty">"Password is empty "</string>
-    <string name="add_goals_title">Add Target</string>
+    <string name="add_goals_title">"Add Target "</string>
     <string name="add_goals_name">"Enter a name "</string>
     <string name="add_goalsI_info">"Add Target "</string>
     <string name="add_goals_submit">Submit</string>
     <string name="menu_button">menu</string>
-    <string name="todo" translatable="false">TODO</string>
     <string name="add_goals_type">"Choose Type "</string>
     <string name="add_goals_add_title">"Add a title "</string>
     <string name="add_goals_add_desc">Add description</string>
@@ -61,7 +56,6 @@
     <string name="modify_goals_step">"Modify the step "</string>
     <string name="modify_goals_target">"Modify target "</string>
     <string name="modify_goals_goal">"Modify the target "</string>
-    <string name="logo" translatable="false">Logo</string>
     <string name="register_failed">"Failed to register "</string>
     <string name="register_successful">"Registration was successful "</string>
     <string name="menu_edit_goal">"Edit target "</string>
@@ -75,8 +69,7 @@
     <string name="quantitative_progress_dialog_cancel">"Cancel "</string>
     <string name="quantitative_progress_modal_saved">"Successfully Passed! "</string>
     <string name="quantitative_progress_modal_failed">"Failed to save! "</string>
-    <string name="quantitative_progress_modal_invalid">Progress must be greater than zero!</string>
-
+    <string name="quantitative_progress_modal_invalid">"Progress must be greater than zero! "</string>
     <string-array name="add_goals_options">
         <item>Quantitative goals</item>
         <item>Final goals</item>
