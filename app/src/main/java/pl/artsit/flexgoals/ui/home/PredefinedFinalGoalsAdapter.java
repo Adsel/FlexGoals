@@ -11,13 +11,9 @@ import android.widget.TextView;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.model.goal.PredefinedFinalGoal;
-import pl.artsit.flexgoals.shared.Helper;
 import pl.artsit.flexgoals.ui.addGoals.PreviewFinalActivity;
 
 public class PredefinedFinalGoalsAdapter extends RecyclerView.Adapter<PredefinedFinalGoalsAdapter.ViewHolder>{
@@ -45,13 +41,6 @@ public class PredefinedFinalGoalsAdapter extends RecyclerView.Adapter<Predefined
         viewHolder.textViewPredefinedFinalGoalDesc2.setText(localDataSet[position].getDescription());
         viewHolder.description_day_to_change2.setText(localDataSet[position].getDays().toString());
         viewHolder.predefined_goals_limit.setVisibility(View.INVISIBLE);
-
-        viewHolder.getDescriptionToPercentage.setText(String.valueOf(finishCount));
-
-
-        Date date1 = new Date(System.currentTimeMillis());
-        Date date2 = localDataSet[position].getDate();
-        Helper.getDateDiff(date1, date2, TimeUnit.DAYS);
     }
 
     @Override
