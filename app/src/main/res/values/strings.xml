@@ -97,4 +97,5 @@
     <string name="quantitative_progress_modal_saved">Pomyślnie zaliczono!</string>
     <string name="quantitative_progress_modal_failed">Nie udało się zapisać!</string>
     <string name="quantitative_progress_modal_invalid">Postęp musi być większy od zera!</string>
+    <string name="log_out">wyloguj</string>
 </resources>
