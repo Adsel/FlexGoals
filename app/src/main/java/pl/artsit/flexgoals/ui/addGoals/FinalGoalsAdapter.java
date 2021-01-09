@@ -43,6 +43,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         private TextView getDescriptionToPercentage;
         private FinalGoalFlag finalGoal;
         private View currentView;
+        private Button acceptButton;
 
         public ViewHolder(final View view) {
             super(view);
@@ -52,6 +53,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
+            acceptButton = view.findViewById(R.id.accept_button);
 
             view.setOnClickListener((View v) -> {
                     MainActivity.previewFinalGoal = finalGoal;
@@ -65,10 +67,19 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
                     Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
             });
 
-            ((Button) view.findViewById(R.id.accept_button)).setOnClickListener((View v) ->
+            /*((Button) view.findViewById(R.id.accept_button)).setOnClickListener((View v) ->
                     new HttpClient().scoreFinalGoal(this, finalGoal.getId())
-            );
+
+            );*/
             currentView = view;
+            ((Button) view.findViewById(R.id.accept_button)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    acceptButton.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.white_cloud);
+                    acceptButton.setText("");
+                    // acceptButton.setVisibility(View.INVISIBLE);
+                }
+            });
         }
 
         public TextView getNameOfGoal() {

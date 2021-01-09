@@ -38,6 +38,8 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         private TextView descriptionDayToChange;
         private TextView getDescriptionToPercentage;
         private QuantitativeGoalFlag quantitativeGoal;
+        private Button acceptButton;
+
 
 
         public ViewHolder(View view) {
@@ -49,6 +51,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
+            acceptButton = view.findViewById(R.id.accept_button);
 
 
             view.setOnClickListener(new View.OnClickListener() {
@@ -72,9 +75,9 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             ((Button) view.findViewById(R.id.accept_button)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                  //  new HttpClient().
-                    // TODO:
-                    // ACHIEVE
+                  acceptButton.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.white_cloud);
+                  acceptButton.setText("");
+                 // acceptButton.setVisibility(View.INVISIBLE);
                 }
             });
         }
