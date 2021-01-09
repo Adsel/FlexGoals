@@ -15,14 +15,50 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import okhttp3.ResponseBody;
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.http.goals.DeleteGoalsCallback;
+import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
+import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.shared.Helper;
+import retrofit2.Call;
 
-public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeGoalsAdapter.ViewHolder> {
+public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeGoalsAdapter.ViewHolder> implements DeleteGoalsCallback, GoalAchieveCallback {
 
     private QuantitativeGoalFlag[] localDataSet;
+
+    @Override
+    public void deleteFinalCallback(Void finalGoalData) {
+
+    }
+
+    @Override
+    public void deleteQuantitativeCallback(Void quanitativeGoalData) {
+
+    }
+
+    @Override
+    public void informAboutFailedDeleteFinalGoal() {
+
+    }
+
+    @Override
+    public void informAboutFailedDeleteQuantitativeGoal() {
+
+    }
+
+    @Override
+    public void informAboutGoalUpdated() {
+
+    }
+
+    @Override
+    public void informAboutFailedUpdated() {
+
+    }
 
     /**
      * Provide a reference to the type of views that you are using
@@ -36,6 +72,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         private ProgressBar progressBar;
         private TextView descriptionDayToChange;
         private TextView getDescriptionToPercentage;
+        private Button deleteButton;
         private QuantitativeGoalFlag quantitativeGoal;
 
         public ViewHolder(View view) {
@@ -47,6 +84,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
+            deleteButton = view.findViewById(R.id.delete_button);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -72,6 +110,12 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                   //  new HttpClient().
                     // TODO:
                     // ACHIEVE
+                }
+            });
+            ((Button) view.findViewById(R.id.delete_button)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new QuantitativeGoalService().deleteQuantitativeGoal(this,quantitativeGoal.getId());
                 }
             });
         }

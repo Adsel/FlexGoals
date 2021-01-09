@@ -20,6 +20,7 @@ import pl.artsit.flexgoals.http.goals.DeleteGoalsCallback;
 import pl.artsit.flexgoals.http.services.FinalGoalService;
 import pl.artsit.flexgoals.http.services.HttpClient;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
+import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
 import pl.artsit.flexgoals.shared.Helper;
 
@@ -28,11 +29,13 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
     private static final Integer GOAL_ACHIEVED = -2;
     private FinalGoalFlag[] localDataSet;
 
+
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
     public static class ViewHolder extends RecyclerView.ViewHolder implements GoalAchieveCallback, DeleteGoalsCallback {
+        private final ModalWidgets modal;
         private  TextView nameOfGoal;
         private TextView descriptionOfGoal;
         private ProgressBar progressBar;
@@ -51,6 +54,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
             deleteButton = view.findViewById(R.id.delete_button);
+            modal = new ModalWidgets(view.getContext());
 
             view.setOnClickListener((View v) -> {
                     MainActivity.previewFinalGoal = finalGoal;
@@ -72,7 +76,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
 
 
             ((Button) view.findViewById(R.id.delete_button)).setOnClickListener((View v)->
-                new FinalGoalService().deleteFinalGoal(, finalGoal.getId())
+                new FinalGoalService().deleteFinalGoal(this, finalGoal.getId())
             );
             //TODO: Sprawdzic czy dziala to poprawnie !!!! ^
         }
@@ -114,8 +118,24 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         }
 
         @Override
-        public void informAboutFailedDeleteFinalGoal() {
+        public void deleteQuantitativeCallback(Void quanitativeGoalData) {
 
+        }
+
+        //TODO: sprawdzic dzialanie!, nie wyswietla komunikatu.
+        @Override
+        public void informAboutFailedDeleteFinalGoal() {
+                notify("Nie udało się usunąć celu");
+
+        }
+
+        @Override
+        public void informAboutFailedDeleteQuantitativeGoal() {
+
+        }
+
+        public void notify(String msg) {
+            this.modal.showToast(msg);
         }
     }
 

@@ -1,6 +1,9 @@
 package pl.artsit.flexgoals.http.services;
 
+import android.view.View;
+
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
+import pl.artsit.flexgoals.http.goals.DeleteGoalsCallback;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
 import pl.artsit.flexgoals.http.user.UserCallback;
@@ -139,23 +142,23 @@ public class QuantitativeGoalService extends HttpClient {
         });
     }
 
-    public void deleteQuantitativeGoal(UserCallback userCallback, QuantitativeGoal quantitativeGoal){
-        Call<Void> call = jsonPlaceholderAPI.deleteQuantitativeGoal(quantitativeGoal.getId());
+    public void deleteQuantitativeGoal(DeleteGoalsCallback quantitativeCallback, Integer quantitativeGoal){
 
+        //Call<ResponseBody> call = jsonPlaceholderAPI.deleteQuantitativeGoal(quantitativeGoal);
+        Call<Void> call = jsonPlaceholderAPI.deleteQuantitativeGoal(quantitativeGoal);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (!response.isSuccessful()){
                     System.out.println("Unsuccessfull response code" + response.message());
-                    return;
                 }
 
-                userCallback.goToMain();
+                quantitativeCallback.deleteQuantitativeCallback(response.body());
             }
-
+//TODO:Sprawdzić !!!!
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                quantitativeCallback.informAboutFailedDeleteQuantitativeGoal();
             }
         });
     }

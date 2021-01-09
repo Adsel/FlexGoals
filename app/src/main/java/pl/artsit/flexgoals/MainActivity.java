@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
         ((TextView) findViewById(R.id.userName)).setText(currentUser.getLogin());
         ((TextView) findViewById(R.id.userEmail)).setText(currentUser.getEmail());
         ((TextView) findViewById(R.id.userPoints)).setText(currentUser.getPoints().toString());
