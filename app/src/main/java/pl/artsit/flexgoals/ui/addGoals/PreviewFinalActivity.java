@@ -53,6 +53,9 @@ public class PreviewFinalActivity extends AppCompatActivity {
                 getResources().getColor(R.color.kalendarz),
                 getResources().getColor(R.color.celeZaliczeniowe),
                 getResources().getColor(R.color.wyloguj),
+                getResources().getColor(R.color.celeIlosciowe),
+                getResources().getColor(R.color.color_one),
+                getResources().getColor(R.color.color_three),
         };
 
         PieDataSet dataSet = new PieDataSet(pieEntires,"");
@@ -74,6 +77,7 @@ public class PreviewFinalActivity extends AppCompatActivity {
         pieChart.setDrawSliceText(false);
         pieChart.setDrawSlicesUnderHole(false);
         pieChart.setDrawRoundedSlices(false);
+        pieChart.setHoleColor(getResources().getColor(R.color.colorPrimary));
         //legend attributes
         Legend legend = pieChart.getLegend();
         legend.setForm(Legend.LegendForm.CIRCLE);

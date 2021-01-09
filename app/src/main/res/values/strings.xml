@@ -81,4 +81,5 @@
         <item>Quantitative goals</item>
         <item>Final goals</item>
     </string-array>
+    <string name="day">Day</string>
 </resources>
