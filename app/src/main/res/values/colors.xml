@@ -39,4 +39,14 @@
     <color name="color_three">#99350057</color>
     <color name="color_four">#99009FE3</color>
     <color name="color_five">#CC00549C</color>
+
+
+
+    <color name="main_color">#FF00FF</color>
+    <color name="main2_color">#ACA7CB</color>
+    <color name="main3_color">#474554</color>
+    <color name="main4_color">#616161</color>
+    <color name="main5_color">#7C00CF</color>
+
+
 </resources>
