@@ -32,7 +32,7 @@ public class PreviewQuantitativeActivity extends AppCompatActivity {
         quantitativeGoal = MainActivity.previewQuantitativeGoal;
 
         // DATA
-        BarDataSet dataset = new BarDataSet(getEntries(), "ilość");
+        BarDataSet dataset = new BarDataSet(getEntries(), getResources().getString(R.string.quantitative_activity));
 
         // CHART
         BarChart chart = (BarChart)findViewById(R.id.testowo);
@@ -55,16 +55,9 @@ public class PreviewQuantitativeActivity extends AppCompatActivity {
         chart.getDescription().setEnabled(false);
         // COLORS AND ANIMATION (OF DRAWING CHART)
 
-        final int[] PIE_COLORS = {
-                getResources().getColor(R.color.kalendarz),
-                getResources().getColor(R.color.celeZaliczeniowe),
-                getResources().getColor(R.color.wyloguj),
-                getResources().getColor(R.color.celeIlosciowe),
-                getResources().getColor(R.color.color_one),
-                getResources().getColor(R.color.color_three),
-        };
+
         dataset.setValueTextColor(getResources().getColor(R.color.colorPrimary));
-        dataset.setColors(PIE_COLORS);
+        dataset.setColors(getResources().getIntArray(R.array.color_group));
         chart.animateY(2500);
     }
 

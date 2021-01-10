@@ -75,4 +75,5 @@
         <item>Final goals</item>
     </string-array>
     <string name="day">Day</string>
+    <string name="quantitative_activity">quantity</string>
 </resources>

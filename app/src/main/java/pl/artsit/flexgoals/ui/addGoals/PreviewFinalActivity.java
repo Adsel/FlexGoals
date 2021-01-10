@@ -1,5 +1,6 @@
 package pl.artsit.flexgoals.ui.addGoals;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -24,6 +25,7 @@ public class PreviewFinalActivity extends AppCompatActivity {
     private PieChart pieChart;
     private FinalGoalFlag finalGoal;
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,17 +51,8 @@ public class PreviewFinalActivity extends AppCompatActivity {
 
         // /TODO
 
-        final int[] PIE_COLORS = {
-                getResources().getColor(R.color.kalendarz),
-                getResources().getColor(R.color.celeZaliczeniowe),
-                getResources().getColor(R.color.wyloguj),
-                getResources().getColor(R.color.celeIlosciowe),
-                getResources().getColor(R.color.color_one),
-                getResources().getColor(R.color.color_three),
-        };
-
         PieDataSet dataSet = new PieDataSet(pieEntires,"");
-        dataSet.setColors(PIE_COLORS);
+        dataSet.setColors(getResources().getIntArray(R.array.color_group));
         PieData data = new PieData(dataSet);
 
 
@@ -69,7 +62,7 @@ public class PreviewFinalActivity extends AppCompatActivity {
         pieChart.setHoleColor(ModalWidgets.getColorWithAlpha(Color.GREEN, 0.0f));
         pieChart.setDrawEntryLabels(false);
         pieChart.setContentDescription("");
-        pieChart.setHoleRadius(75);
+        pieChart.setHoleRadius(getResources().getInteger(R.integer.hole_radius));
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setDrawEntryLabels(false);
@@ -81,9 +74,8 @@ public class PreviewFinalActivity extends AppCompatActivity {
         //legend attributes
         Legend legend = pieChart.getLegend();
         legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setTextSize(28);
-        legend.setFormSize(28);
-        legend.setFormToTextSpace(10);
+        legend.setTextSize(getResources().getInteger(R.integer.primary_text_size));
+        legend.setFormSize(getResources().getInteger(R.integer.primary_text_size));
         legend.setTextColor( getResources().getColor(R.color.colorPrimary));
     }
 
