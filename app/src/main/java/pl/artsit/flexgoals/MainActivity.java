@@ -1,12 +1,17 @@
 package pl.artsit.flexgoals;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -17,6 +22,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.Locale;
 
 import pl.artsit.flexgoals.http.services.UserService;
 import pl.artsit.flexgoals.http.user.UserCallback;
@@ -40,10 +47,14 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
     public static FinalGoalFlag previewFinalGoal;
     private DrawerLayout drawer;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //TODO
+        setLocale(this,"EN");
 
         if(MainActivity.isUser) {
             Toolbar toolbar = findViewById(R.id.toolbar);
@@ -115,6 +126,15 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
 
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
+    }
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+    public static void setLocale(Activity activity, String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+        Resources resources = activity.getResources();
+        Configuration config = resources.getConfiguration();
+        config.setLocale(locale);
+        resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
 }
 

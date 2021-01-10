@@ -1,0 +1,94 @@
+<resources>
+    <string name="action_settings">Ustawienia</string>
+
+    <string name="menu_dodajCel">Dodaj cel</string>
+    <string name="menu_celeIlosciowe">Cele ilościowe</string>
+    <string name="menu_celeZaliczeniowe">Cele zaliczeniowe</string>
+    <string name="menu_statystyka">Statystyka</string>
+    <string name="menu_kalendarz">Kalendarz</string>>
+
+    <string name="register">Zarejestruj</string>
+    <string name="register_title">Załóż konto</string>
+    <string name="register_info">Wprowadź dane abu utworzyć twoje nowe konto</string>
+
+    <string name="login">Nazwa użytkownika</string>
+    <string name="login_is_empty">Login jest pusty</string>
+    <string name="login_title">Zaloguj się</string>
+    <string name="login_login">Zaloguj</string>
+    <string name="login_info">Wprowadź dane logowania aby przejść na twoje konto</string>
+
+    <string name="mail">Mail</string>
+    <string name="mail_incorrect">Mail jest nieprawidłowy</string>
+    <string name="mail_is_empty">Mail jest pusty</string>
+
+    <string name="password">Haslo</string>
+    <string name="password_repeat">Powtórz hasło</string>
+    <string name="password_not_same">Hasła nie są identyczne</string>
+
+    <string name="incorrect_data">Dane nieprawidłowe!</string>
+    <string name="password_is_empty">Hasło jest puste</string>
+
+    <string name="add_goals_title">Dodaj Cel</string>
+    <string name="add_goals_name">Wprowadź nazwę</string>
+    <string name="add_goalsI_info">Dodaj Cel</string>
+
+    <string name="add_goals_submit">Zatwierdź</string>
+    <string name="menu_button">menu</string>
+    <string name="add_goals_type">Wybierz Rodzaj</string>
+    <string name="add_goals_add_title">Dodaj tytuł</string>
+    <string name="add_goals_add_desc">Dodaj opis</string>
+    <string name="add_goals_add_days">Dodaj ilość dni</string>
+    <string name="add_goals_add_step">Podaj krok</string>
+    <string name="add_goals_add_goal">Dodaj cel</string>
+
+    <string name="goal_preview_header">Wykonany postęp</string>
+    <string name="goal_preview_final_chart_title">Postęp</string>
+    <string name="goal_preview_final_chart_progress">Wykonano</string>
+    <string name="goal_preview_final_chart_failed">Nie wykonano</string>
+    <string name="goal_preview_final_chart_todo">Do wykonania</string>
+
+    <!-- STATISTIC FRAGMENT -->
+    <string name="statistic_header">" Statystyka użytkownika"</string>
+    <string name="statistic_title">Statystyka</string>
+    <string name="statistic_username_title">Użytkownik</string>
+    <string name="statistic_email_title">Mail</string>
+    <string name="statistic_points_title">Liczba punktów</string>
+    <string name="statistic_quantity">Cele ilościowe</string>
+    <string name="statistic_final">Cele zaliczeniowe</string>
+    <string name="goal_view_remain">Pozostało</string>
+    <string name="goal_view_delete">usuń</string>
+    <string name="goal_view_accept">zatwierdź</string>
+    <string name="goal_view_status">obecnie</string>
+
+    <string-array name="add_goals_options">
+        <item>Cele Ilościowe</item>
+        <item>Cele Zaliczeniowe</item>
+    </string-array>
+
+    <string name="modify_goals_type">Wybierz Rodzaj</string>
+    <string name="modify_goals_title">Modyfikuj tytuł</string>
+    <string name="modify_goals_desc">Modyfikuj opis</string>
+    <string name="modify_goals_days">Modyfikuj ilość dni</string>
+    <string name="modify_goals_step">Modyfikuj krok</string>
+    <string name="modify_goals_target">Modyfikuj target</string>
+    <string name="modify_goals_goal">Modyfikuj cel</string>
+
+    <string name="register_failed">Nie udało się zarejestrować</string>
+    <string name="register_successful">Rejestracja przebiegła pomyślnie</string>
+
+    <string name="menu_edit_goal">Edytuj Cel</string>
+    <string name="added_goal">dodano cel</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_glowne">main_menu</string>
+    <string name="statics_button_check">Zobacz</string>
+    <string name="statistic_remain">Pozostało</string>
+
+    <string name="quantitative_progress_dialog_title">Wprowadź progress</string>
+    <string name="quantitative_progress_dialog_accept">Zatwierdź</string>
+    <string name="quantitative_progress_dialog_cancel">Anuluj</string>
+    <string name="quantitative_progress_modal_saved">Pomyślnie zaliczono!</string>
+    <string name="quantitative_progress_modal_failed">Nie udało się zapisać!</string>
+    <string name="quantitative_progress_modal_invalid">Postęp musi być większy od zera!</string>
+</resources>
