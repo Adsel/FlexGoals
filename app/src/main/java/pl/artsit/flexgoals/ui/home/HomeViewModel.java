@@ -1,3 +1,4 @@
+
 package pl.artsit.flexgoals.ui.home;
 
 import androidx.lifecycle.LiveData;
@@ -15,4 +16,5 @@ public class HomeViewModel extends ViewModel {
     public LiveData<String> getText() {
         return mText;
     }
+
 }

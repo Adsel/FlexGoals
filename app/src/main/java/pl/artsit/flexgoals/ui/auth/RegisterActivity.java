@@ -22,7 +22,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.http.services.HttpClient;
+import pl.artsit.flexgoals.http.services.UserService;
 import pl.artsit.flexgoals.http.user.UserRegistryCallback;
 import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.user.User;
@@ -44,6 +45,26 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
     String passwordRepeat = "";
     public static final Pattern emailRegex =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+
+    @SuppressLint({"ClickableViewAccessibility", "ResourceType"})
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
+
+        setContentView(R.layout.activity_register);
+        textViewLogin= findViewById(R.id.textViewLogin);
+        textViewMail= findViewById(R.id.textViewMail);
+        textViewPassword= findViewById(R.id.textViewPassword);
+        editTextLogin= findViewById(R.id.editTextLogin);
+        editTextMail = findViewById(R.id.editTextMail);
+        editTextPassword= findViewById(R.id.editTextPassword);
+        editTextPasswordRepeat= findViewById(R.id.editTextPasswordRepeat);
+        buttonRegister= findViewById(R.id.buttonRegister);
+        modalWidgets = new ModalWidgets(getApplicationContext());
+
+        addActions();
+    }
 
     private boolean checkPasswords(){
         if (!password.equals(passwordRepeat) && !password.equals("") && !passwordRepeat.equals("")){
@@ -86,31 +107,15 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
         } else {
             editTextLogin.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_user_solid,0, R.drawable.ic_check_circle_solid, 0);
             textViewLogin.setVisibility(TextView.INVISIBLE);
+
             return true;
         }
+
         return false;
     }
 
-    @SuppressLint({"ClickableViewAccessibility", "ResourceType"})
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
 
-            this.getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_HIDE_NAVIGATION );
-
-        setContentView(R.layout.activity_register);
-        textViewLogin= findViewById(R.id.textViewLogin);
-        textViewMail= findViewById(R.id.textViewMail);
-        textViewPassword= findViewById(R.id.textViewPassword);
-        editTextLogin= findViewById(R.id.editTextLogin);
-        editTextMail = findViewById(R.id.editTextMail);
-        editTextPassword= findViewById(R.id.editTextPassword);
-        editTextPasswordRepeat= findViewById(R.id.editTextPasswordRepeat);
-        buttonRegister= findViewById(R.id.buttonRegister);
-
-        modalWidgets =  new ModalWidgets(getApplicationContext());
-
+    private void addActions() {
         editTextLogin.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -146,7 +151,6 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
 
             }
         });
-
 
         editTextPassword.addTextChangedListener(new TextWatcher() {
             @Override
@@ -193,6 +197,7 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
                     return true;
                 }
             }
+
             return false;
         });
 
@@ -205,11 +210,9 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
                 login = editTextLogin.getText().toString();
-
-
-
             }
         });
+
         editTextMail.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {}
@@ -220,9 +223,6 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
                                       int before, int count) {
                 mail = editTextMail.getText().toString();
                 checkMail();
-
-
-
             }
         });
 
@@ -239,8 +239,7 @@ public class RegisterActivity extends AppCompatActivity implements UserRegistryC
             }
             if (checkPasswords() && checkLogin() && checkMail()) {
                 User user = new User(0,password,login,0,mail);
-                new HttpClient().registerUser(this, user);
-
+                new UserService().registerUser(this, user);
             }
         });
 

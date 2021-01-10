@@ -1,7 +1,7 @@
 package pl.artsit.flexgoals.http.goals;
 
-import pl.artsit.flexgoals.model.goal.FinalGoal;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
 
 public interface AddGoalCallback {
     void onAddedFinalGoalCallback(FinalGoal finalGoalData);
