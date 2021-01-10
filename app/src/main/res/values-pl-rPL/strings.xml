@@ -91,4 +91,6 @@
     <string name="quantitative_progress_modal_saved">Pomyślnie zaliczono!</string>
     <string name="quantitative_progress_modal_failed">Nie udało się zapisać!</string>
     <string name="quantitative_progress_modal_invalid">Postęp musi być większy od zera!</string>
+    <string name="day">Dzień</string>
+    <string name="quantitative_activity">ilość</string>
 </resources>
