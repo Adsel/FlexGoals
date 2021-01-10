@@ -1,6 +1,7 @@
 package pl.artsit.flexgoals.ui.addGoals;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -12,10 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +38,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     private ModalWidgets modal;
     private Context context;
     private View currentView;
+    Dialog myDialog;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -51,10 +56,14 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         private View currentView;
         private Button acceptButton;
         private TextView finishedText;
+        private ConstraintLayout layout;
+        private RelativeLayout endTask;
 
         public ViewHolder(View view) {
             super(view);
-
+            //---------------
+            endTask = (RelativeLayout) itemView.findViewById(R.id.end_task);
+            //---------------
             nameOfGoal = view.findViewById(R.id.name_of_goal);
             descriptionOfGoal = view.findViewById(R.id.description_of_goal);
             progressBar = view.findViewById(R.id.progress_bar);
@@ -63,6 +72,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             acceptButton = view.findViewById(R.id.accept_quantitative_button);
             finishedText = view.findViewById(R.id.view_finished);
             currentView = view;
+            layout = view.findViewById(R.id.parent_layout);
 
             addActions();
         }
@@ -207,6 +217,11 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         } else {
             viewHolder.descriptionDayToChange.setText(leftDays + " dni");
         }
+        /*if(leftDays == 0 && viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_FINISHED){
+
+        }*/
+
+
     }
 
     private int getProgressCount(String progress, int step) {

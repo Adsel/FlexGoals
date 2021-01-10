@@ -21,8 +21,7 @@ public abstract class HttpClient {
     protected final String PATH = "http://147.135.208.69:8080/";
     protected JsonPlaceholderAPI jsonPlaceholderAPI;
     protected Gson gson;
-    FinalGoalFlag[]  finalGoalFlags;
-    QuantitativeGoalFlag[] quantitativeGoalFlag;
+
 
     public HttpClient(){
         gson = new GsonBuilder()
@@ -36,13 +35,13 @@ public abstract class HttpClient {
 
 
     }
-    public ArrayList<FinalGoalFlag> sortedFinalGoals(){
+    public ArrayList<FinalGoalFlag> sortedFinalGoals(FinalGoalFlag[]  finalGoalFlags){
         ArrayList<FinalGoalFlag> readyDayGoals = null;
         ArrayList<FinalGoalFlag> unreadyDayGoals = null;
         ArrayList <FinalGoalFlag> allListSorted = null;
 
-        for(int i =0 ; i< quantitativeGoalFlag.length;i++){
-            if(quantitativeGoalFlag[i].getFlag()== -1){
+        for(int i =0 ; i< finalGoalFlags.length;i++){
+            if(finalGoalFlags[i].getFlag()== -1){
                 unreadyDayGoals.add(finalGoalFlags[i]);
             }else readyDayGoals.add(finalGoalFlags[i]);
         }
@@ -52,7 +51,7 @@ public abstract class HttpClient {
     }
 
 
-    public ArrayList<QuantitativeGoalFlag> sortedQuatitativeGoals(){
+    public ArrayList<QuantitativeGoalFlag> sortedQuatitativeGoals(QuantitativeGoalFlag[] quantitativeGoalFlag){
         ArrayList<QuantitativeGoalFlag> readyDayGoals = null;
         ArrayList<QuantitativeGoalFlag> unreadyDayGoals = null;
         ArrayList <QuantitativeGoalFlag> allListSorted = null;
@@ -61,6 +60,21 @@ public abstract class HttpClient {
             if(quantitativeGoalFlag[i].getFlag()== -1){
                 unreadyDayGoals.add(quantitativeGoalFlag[i]);
             }else readyDayGoals.add(quantitativeGoalFlag[i]);
+        }
+        allListSorted.addAll(unreadyDayGoals);
+        allListSorted.addAll(readyDayGoals);
+        return  allListSorted;
+    }
+    //Sprawdzone
+    public ArrayList<QuantitativeGoalFlag> sortedQuantitativeGoals( QuantitativeGoalFlag[] QuantitativeGoalFlags){
+        ArrayList<QuantitativeGoalFlag> readyDayGoals = new ArrayList<QuantitativeGoalFlag>();
+        ArrayList<QuantitativeGoalFlag> unreadyDayGoals = new ArrayList<QuantitativeGoalFlag>();
+        ArrayList <QuantitativeGoalFlag> allListSorted = new ArrayList<QuantitativeGoalFlag>();
+
+        for(QuantitativeGoalFlag quantitativeGoalFlag: QuantitativeGoalFlags){
+            if(quantitativeGoalFlag.getFlag()== -1){
+                unreadyDayGoals.add(quantitativeGoalFlag);
+            }else readyDayGoals.add(quantitativeGoalFlag);
         }
         allListSorted.addAll(unreadyDayGoals);
         allListSorted.addAll(readyDayGoals);
