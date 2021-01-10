@@ -48,5 +48,6 @@
     <color name="main4_color">#616161</color>
     <color name="main5_color">#7C00CF</color>
 
+    <color name="quantitative_item_primary">#7C00CF</color>
 
 </resources>
