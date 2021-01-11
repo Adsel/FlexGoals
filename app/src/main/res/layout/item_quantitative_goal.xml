@@ -191,7 +191,6 @@
             app:layout_constraintVertical_bias="0.555" />
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/view_finished"
             android:layout_width="112dp"
             android:layout_height="42dp"
@@ -199,11 +198,13 @@
             android:layout_marginRight="16dp"
             android:background="@drawable/accept_bcg_card"
             android:fontFamily="@font/open_sans"
-            android:text="Zakończono"
+            android:foreground="@drawable/white_cloud"
+            android:foregroundGravity="center"
             android:textAllCaps="false"
-            android:textSize="14sp"
+            android:textSize="30sp"
             android:textStyle="normal"
-            app:backgroundTint="@color/colorWarn"
+            android:visibility="gone"
+            app:backgroundTint="?attr/colorPrimaryDark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.538"
