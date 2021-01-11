@@ -1,6 +1,7 @@
 package pl.artsit.flexgoals.http.services;
 
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
+import pl.artsit.flexgoals.http.goals.DeleteGoalCallback;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
@@ -141,7 +142,7 @@ public class QuantitativeGoalService extends HttpClient {
         });
     }
 
-    public void deleteQuantitativeGoal(UserCallback userCallback, QuantitativeGoal quantitativeGoal){
+    public void deleteQuantitativeGoal(DeleteGoalCallback deleteGoalCallback, QuantitativeGoalFlag quantitativeGoal){
         Call<Void> call = jsonPlaceholderAPI.deleteQuantitativeGoal(quantitativeGoal.getId());
 
         call.enqueue(new Callback<Void>() {
@@ -152,12 +153,12 @@ public class QuantitativeGoalService extends HttpClient {
                     return;
                 }
 
-                userCallback.goToMain();
+                deleteGoalCallback.deleteQuantitativeCallback(quantitativeGoal);
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                deleteGoalCallback.informAboutFailedDeleteQuantitativeGoal();
             }
         });
     }
