@@ -44,7 +44,7 @@
     <string name="statistic_email_title">Mail</string>
     <string name="statistic_points_title">"Number of points "</string>
     <string name="statistic_quantity">"Quantitative goals "</string>
-    <string name="statistic_final">Finial goals</string>
+    <string name="statistic_final">Final goals</string>
     <string name="goal_view_remain">Left</string>
     <string name="goal_view_delete">Delete</string>
     <string name="goal_view_accept">Submit</string>
