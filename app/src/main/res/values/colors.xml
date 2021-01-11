@@ -40,4 +40,13 @@
     <color name="color_three">#99350057</color>
     <color name="color_four">#99009FE3</color>
     <color name="color_five">#CC00549C</color>
+
+    <array name="color_group">
+        <item>@color/dodajCel</item>
+        <item>@color/celeIlosciowe</item>
+        <item>@color/celeZaliczeniowe</item>
+        <item>@color/statystyka</item>
+        <item>@color/kalendarz</item>
+        <item>@color/wyloguj</item>
+    </array>
 </resources>
