@@ -2,6 +2,7 @@
 <resources>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
+    <color name="purple_400">#705998</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="colorPink">#E244B8</color>
     <color name="teal_200">#FF03DAC5</color>
@@ -39,6 +40,15 @@
     <color name="color_three">#99350057</color>
     <color name="color_four">#99009FE3</color>
     <color name="color_five">#CC00549C</color>
+
+    <array name="color_group">
+        <item>@color/dodajCel</item>
+        <item>@color/celeIlosciowe</item>
+        <item>@color/celeZaliczeniowe</item>
+        <item>@color/statystyka</item>
+        <item>@color/kalendarz</item>
+        <item>@color/wyloguj</item>
+    </array>
 
 
 

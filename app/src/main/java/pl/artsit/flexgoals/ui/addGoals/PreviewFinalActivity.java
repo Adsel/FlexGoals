@@ -1,21 +1,23 @@
 package pl.artsit.flexgoals.ui.addGoals;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
 
 
@@ -23,6 +25,7 @@ public class PreviewFinalActivity extends AppCompatActivity {
     private PieChart pieChart;
     private FinalGoalFlag finalGoal;
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,28 +52,32 @@ public class PreviewFinalActivity extends AppCompatActivity {
         // /TODO
 
         PieDataSet dataSet = new PieDataSet(pieEntires,"");
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        dataSet.setColors(getResources().getIntArray(R.array.color_group));
+        dataSet.setValueTextSize(25f);
         PieData data = new PieData(dataSet);
+
 
         //Get the chart
         pieChart.setData(data);
         pieChart.invalidate();
-        pieChart.setCenterText(getString(R.string.goal_preview_final_chart_title));
-        pieChart.setCenterTextSize(45);
+        pieChart.setHoleColor(ModalWidgets.getColorWithAlpha(Color.GREEN, 0.0f));
         pieChart.setDrawEntryLabels(false);
         pieChart.setContentDescription("");
-        //pieChart.setDrawMarkers(true);
-        //pieChart.setMaxHighlightDistance(34);
-        pieChart.setEntryLabelTextSize(75);
-        pieChart.setHoleRadius(75);
-        pieChart.setDescription(new Description());
-
+        pieChart.setHoleRadius(getResources().getInteger(R.integer.hole_radius));
+        pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setDrawEntryLabels(false);
+        pieChart.setDrawMarkers(false);
+        pieChart.setDrawSliceText(false);
+        pieChart.setDrawSlicesUnderHole(false);
+        pieChart.setDrawRoundedSlices(false);
+        pieChart.setHoleColor(getResources().getColor(R.color.colorPrimary));
         //legend attributes
         Legend legend = pieChart.getLegend();
         legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setTextSize(30);
-        legend.setFormSize(15);
-        legend.setFormToTextSpace(2);
+        legend.setTextSize(getResources().getInteger(R.integer.primary_text_size));
+        legend.setFormSize(getResources().getInteger(R.integer.primary_text_size));
+        legend.setTextColor( getResources().getColor(R.color.colorPrimary));
     }
 
     List<Integer> getProgressData() {

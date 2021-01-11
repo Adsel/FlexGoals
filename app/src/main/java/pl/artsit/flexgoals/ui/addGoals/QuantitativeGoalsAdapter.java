@@ -19,20 +19,26 @@ import androidx.annotation.RequiresApi;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.http.goals.DeleteGoalCallback;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
 import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.ModalWidgets;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalProgress;
 import pl.artsit.flexgoals.shared.Helper;
 
 public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeGoalsAdapter.ViewHolder> {
 
-    private QuantitativeGoalFlag[] localDataSet;
+    private List<QuantitativeGoalFlag> localDataSet;
     private ModalWidgets modal;
     private Context context;
+    private Button deleteButton;
     private View currentView;
 
     /**
@@ -41,7 +47,8 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
      */
 
 
-    class ViewHolder extends RecyclerView.ViewHolder implements GoalAchieveCallback  {
+    class ViewHolder extends RecyclerView.ViewHolder implements GoalAchieveCallback,
+            DeleteGoalCallback {
         private final TextView nameOfGoal;
         private TextView descriptionOfGoal;
         private ProgressBar progressBar;
@@ -51,6 +58,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         private View currentView;
         private Button acceptButton;
         private TextView finishedText;
+        private QuantitativeGoalsAdapter parent;
 
         public ViewHolder(View view) {
             super(view);
@@ -62,6 +70,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
             acceptButton = view.findViewById(R.id.accept_quantitative_button);
             finishedText = view.findViewById(R.id.view_finished);
+            deleteButton = view.findViewById(R.id.delete_button);
             currentView = view;
 
             addActions();
@@ -103,6 +112,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             });
 
             acceptButton.setOnClickListener((View.OnClickListener) v -> makePromptWithGoalAchievement(v, quantitativeGoal));
+            deleteButton.setOnClickListener((View.OnClickListener) v ->  new QuantitativeGoalService().deleteQuantitativeGoal(this, quantitativeGoal));
         }
 
         private void makePromptWithGoalAchievement(View view, QuantitativeGoalFlag quantitativeGoal) {
@@ -148,6 +158,28 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             }
         }
 
+        @Override
+        public void deleteFinalCallback(FinalGoalFlag finalGoalId) {
+
+        }
+
+        @Override
+        public void deleteQuantitativeCallback(QuantitativeGoalFlag deletedQuantitativeGoal) {
+            parent.localDataSet.remove(deletedQuantitativeGoal);
+            parent.notifyItemRemoved(getAdapterPosition());
+            parent.notifyDataSetChanged();
+            modal.showToast(currentView.getContext().getString(R.string.deleted_quantitative_goal));
+        }
+
+        @Override
+        public void informAboutFailedDeleteFinalGoal() {
+
+        }
+
+        @Override
+        public void informAboutFailedDeleteQuantitativeGoal() {
+            modal.showToast(currentView.getContext().getString(R.string.failed_delete_goal));
+        }
     }
 
     /**
@@ -157,7 +189,11 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
      * by RecyclerView.
      */
     public QuantitativeGoalsAdapter(QuantitativeGoalFlag[] dataSet) {
-        localDataSet = dataSet;
+        List<QuantitativeGoalFlag> data = new ArrayList<>();
+        for (int i = 0; i < dataSet.length; i++) {
+            data.add(dataSet[i]);
+        }
+        localDataSet = data;
     }
 
     // Create new views (invoked by the layout manager)
@@ -177,12 +213,12 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.quantitativeGoal = localDataSet[position];
-        viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
-        viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
+        viewHolder.quantitativeGoal = localDataSet.get(position);
+        viewHolder.getNameOfGoal().setText(localDataSet.get(position).getName());
+        viewHolder.descriptionOfGoal.setText(localDataSet.get(position).getDescription());
 
-        int progressCount = getProgressCount(localDataSet[position].getProgress(), localDataSet[position].getStep());
-        int finishCount = getProgressPercentage(progressCount, localDataSet[position].getDays(), localDataSet[position].getStep());
+        int progressCount = getProgressCount(localDataSet.get(position).getProgress(), localDataSet.get(position).getStep());
+        int finishCount = getProgressPercentage(progressCount, localDataSet.get(position).getDays(), localDataSet.get(position).getStep());
         if (finishCount > 0) {
             viewHolder.progressBar.setProgress(finishCount);
         } else {
@@ -191,22 +227,27 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
 
         viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
 
+        if (viewHolder.quantitativeGoal.getFlag() < 0) {
+            viewHolder.acceptButton.setVisibility(View.GONE);
 
-        viewHolder.acceptButton.setVisibility(View.GONE);
-
-        if (viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_FINISHED) {
-            viewHolder.finishedText.setVisibility(View.VISIBLE);
+            if (viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_FINISHED) {
+                viewHolder.finishedText.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.finishedText.setVisibility(View.GONE);
+            }
         } else {
-            viewHolder.acceptButton.setVisibility(View.VISIBLE);
+            (viewHolder.currentView.findViewById(R.id.accept_button)).setVisibility(View.VISIBLE);
         }
 
-        long leftDays = Helper.getLeftDays(localDataSet[position].getDate(), localDataSet[position].getDays());
+        long leftDays = Helper.getLeftDays(localDataSet.get(position).getDate(), localDataSet.get(position).getDays());
 
         if (leftDays == 1) {
             viewHolder.descriptionDayToChange.setText(leftDays + " dzień");
         } else {
             viewHolder.descriptionDayToChange.setText(leftDays + " dni");
         }
+
+        viewHolder.parent = this;
     }
 
     private int getProgressCount(String progress, int step) {
@@ -231,6 +272,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return localDataSet.length;
+        return localDataSet.size();
     }
 }
