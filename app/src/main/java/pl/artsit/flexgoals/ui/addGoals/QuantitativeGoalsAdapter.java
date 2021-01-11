@@ -231,8 +231,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
 
 
         viewHolder.acceptButton.setVisibility(View.GONE);
-
-        if (viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_FINISHED) {
+        if (viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_FINISHED || viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_ACHIEVED) {
             viewHolder.finishedText.setVisibility(View.VISIBLE);
         } else {
             viewHolder.acceptButton.setVisibility(View.VISIBLE);
