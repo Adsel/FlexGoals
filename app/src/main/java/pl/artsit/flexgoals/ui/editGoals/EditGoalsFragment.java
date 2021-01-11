@@ -7,26 +7,25 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import java.util.Date;
-
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.http.services.FinalGoalService;
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
+import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.ModalWidgets;
-import pl.artsit.flexgoals.model.goal.FinalGoal;
-import pl.artsit.flexgoals.model.goal.FinalGoalData;
-import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
+import pl.artsit.flexgoals.model.goal.FinalGoalUpdateData;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalUpdateData;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoal;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 
 public class EditGoalsFragment extends Fragment implements AddGoalCallback, GoalUpdateCallback {
 
@@ -124,10 +123,10 @@ public class EditGoalsFragment extends Fragment implements AddGoalCallback, Goal
                 finalGoal.setId_user(MainActivity.currentUser.getId());
                 finalGoal.setIs_shared(false);
 
-                new HttpClient().saveFinalGoal(this, new FinalGoal(
+                new FinalGoalService().saveFinalGoal(this, new FinalGoalUpdateData(
                         finalGoal.getId(), finalGoal.getName(), finalGoal.getDescription(), finalGoal.getGoal(),
                         finalGoal.getDays(), finalGoal.getPoints(), finalGoal.getIs_shared(),
-                        finalGoal.getProgress(), finalGoal.getId_user(), finalGoal.getDate()
+                        finalGoal.getProgress(), finalGoal.getId_user()
                 ));
             } else if (this.currentTaskType == MainActivity.GOAL_TYPE.QUANTITATIVE) {
                 Integer step = Integer.parseInt(newGoalDays.getText().toString());
@@ -156,10 +155,10 @@ public class EditGoalsFragment extends Fragment implements AddGoalCallback, Goal
                     quantitativeGoal.setId_user(MainActivity.currentUser.getId());
                     quantitativeGoal.setIs_shared(false);
 
-                    new HttpClient().saveQuantitativeGoal(this, new QuantitativeGoal(
+                    new QuantitativeGoalService().saveQuantitativeGoal(this, new QuantitativeGoalUpdateData(
                             quantitativeGoal.getId(), quantitativeGoal.getName(), quantitativeGoal.getDescription(), quantitativeGoal.getPoints(),
                             quantitativeGoal.getIs_shared(), quantitativeGoal.getId_user(), quantitativeGoal.getDays(), quantitativeGoal.getGoal(),
-                            quantitativeGoal.getProgress(), quantitativeGoal.getTarget(), quantitativeGoal.getStep(), quantitativeGoal.getDate()
+                            quantitativeGoal.getProgress(), quantitativeGoal.getTarget(), quantitativeGoal.getStep()
                     ));
                 } else {
                     notify(getString(R.string.incorrect_data));

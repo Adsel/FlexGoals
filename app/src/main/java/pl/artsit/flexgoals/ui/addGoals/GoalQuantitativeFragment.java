@@ -13,12 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.http.HttpClient;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
-import pl.artsit.flexgoals.model.goal.FinalGoal;
-import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoal;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
+import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.ui.main.MainViewModel;
 
 public class GoalQuantitativeFragment extends Fragment implements GoalGetCallback {
@@ -35,7 +33,7 @@ public class GoalQuantitativeFragment extends Fragment implements GoalGetCallbac
         quantitativeGoalRecyclerView = root.findViewById(R.id.quantitative_goals_recycleview);
         quantitativeGoalRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         quantitativeGoalRecyclerView.setHasFixedSize(true);
-        new HttpClient().getQuantitativeGoals(this, MainActivity.currentUser);
+        new QuantitativeGoalService().getQuantitativeGoals(this, MainActivity.currentUser);
 
         return root;
     }

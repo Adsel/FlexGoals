@@ -20,7 +20,8 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.http.HttpClient;
+import pl.artsit.flexgoals.http.services.HttpClient;
+import pl.artsit.flexgoals.http.services.UserService;
 import pl.artsit.flexgoals.http.user.UserLoginCallback;
 import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.user.AuthData;
@@ -51,86 +52,10 @@ public class LoginActivity extends AppCompatActivity implements UserLoginCallbac
             editTextPassword = findViewById(R.id.editTextPassword);
             textViewLogin = findViewById(R.id.textViewLogin);
             textViewPassword = findViewById(R.id.textViewPassword);
-
-            editTextPassword.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    checkPassword();
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
-            editTextLogin.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    checkLogin();
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
-
-            buttonLogin = findViewById(R.id.buttonLogin);
-            buttonLogin.setOnClickListener(view -> {
-                boolean isCorrectLogin = checkLogin();
-                boolean isCorrectPassword = checkPassword();
-                if (!isCorrectLogin) {
-                    modalWidgets.showToast(getString(R.string.login_is_empty));
-                }
-                if (!isCorrectPassword) {
-                    modalWidgets.showToast(getString(R.string.password_is_empty));
-                }
-                if (isCorrectLogin && isCorrectPassword) {
-                    new HttpClient().getUser(
-                            this,
-                            new AuthData(editTextLogin.getText().toString(), editTextPassword.getText().toString())
-                    );
-                }
-            });
-
             buttonRegister = findViewById(R.id.buttonRegister);
-            buttonRegister.setOnClickListener(view -> {
-                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(intent);
-            });
+            buttonLogin = findViewById(R.id.buttonLogin);
 
-            editTextPassword.setOnTouchListener((v, event) -> {
-                final int DRAWABLE_RIGHT = 2;
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-
-                        Drawable unwrappedDrawable = AppCompatResources.getDrawable(getBaseContext(), R.drawable.ic_eye_solid);
-                        Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
-
-                        if (editTextPassword.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())) {
-                            DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorAccent));
-                            editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        } else {
-                            DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorPrimary));
-                            editTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        }
-                        editTextPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_solid, 0, R.drawable.ic_eye_solid, 0);
-
-                        return true;
-                    }
-                }
-                return false;
-            });
+            addActions();
         }
     }
 
@@ -181,17 +106,94 @@ public class LoginActivity extends AppCompatActivity implements UserLoginCallbac
         editor.apply();
     }
 
-    public boolean loadUserWhenCredentialsAreSaved() {
+    private boolean loadUserWhenCredentialsAreSaved() {
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         String login = sharedPreferences.getString("USER_CREDENTIALS_LOGIN", "");
         String password = sharedPreferences.getString("USER_CREDENTIALS_PASSWORD", "");
 
         if (!login.equals("") && !password.equals("")) {
-            new HttpClient().getUser(this, new AuthData(login, password));
+            new UserService().getUser(this, new AuthData(login, password));
             return true;
         }
 
         return false;
+    }
+
+    private void addActions() {
+        editTextPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkPassword();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        editTextLogin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkLogin();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+        buttonLogin.setOnClickListener(view -> {
+            boolean isCorrectLogin = checkLogin();
+            boolean isCorrectPassword = checkPassword();
+            if (!isCorrectLogin) {
+                modalWidgets.showToast(getString(R.string.login_is_empty));
+            }
+            if (!isCorrectPassword) {
+                modalWidgets.showToast(getString(R.string.password_is_empty));
+            }
+            if (isCorrectLogin && isCorrectPassword) {
+                new UserService().getUser(
+                        this,
+                        new AuthData(editTextLogin.getText().toString(), editTextPassword.getText().toString())
+                );
+            }
+        });
+        buttonRegister.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+            startActivity(intent);
+        });
+        editTextPassword.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_RIGHT = 2;
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+
+                    Drawable unwrappedDrawable = AppCompatResources.getDrawable(getBaseContext(), R.drawable.ic_eye_solid);
+                    Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);
+
+                    if (editTextPassword.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())) {
+                        DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorAccent));
+                        editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    } else {
+                        DrawableCompat.setTint(wrappedDrawable, getResources().getColor(R.color.colorPrimary));
+                        editTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    }
+                    editTextPassword.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_lock_solid, 0, R.drawable.ic_eye_solid, 0);
+
+                    return true;
+                }
+            }
+            return false;
+        });
     }
 
 }
