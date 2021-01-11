@@ -1,18 +1,26 @@
 package pl.artsit.flexgoals.ui.addGoals;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -25,7 +33,7 @@ import pl.artsit.flexgoals.shared.Helper;
 
 import static pl.artsit.flexgoals.shared.Helper.GOAL_FINISHED;
 
-public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.ViewHolder> {
+public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.ViewHolder>  {
     private static final char PROGRESS_DONE = '1';
     private FinalGoalFlag[] localDataSet;
 
@@ -41,7 +49,13 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         private TextView getDescriptionToPercentage;
         private FinalGoalFlag finalGoal;
         private View currentView;
+        private ConstraintLayout constraintLayout;
+        private Button acceptButton;
+        private LinearLayout item;
 
+
+
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public ViewHolder(final View view) {
             super(view);
 
@@ -50,7 +64,10 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
+            constraintLayout = view.findViewById(R.id.parent_layout);
             currentView = view;
+            acceptButton = view.findViewById(R.id.accept_quantitative_button);
+            item = (LinearLayout) view.findViewById(R.id.item_linear);
 
             addActions();
         }
@@ -86,9 +103,12 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             // TOAST
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         private void addActions() {
             currentView.setOnClickListener((View v) -> {
                 MainActivity.previewFinalGoal = finalGoal;
+
+
                 Intent intent = new Intent(currentView.getContext(), PreviewFinalActivity.class);
                 currentView.getContext().startActivity(intent);
             });
@@ -102,6 +122,9 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             currentView.findViewById(R.id.accept_button).setOnClickListener((View v) ->
                     new FinalGoalService().scoreFinalGoal(this, finalGoal.getId())
             );
+
+
+
         }
     }
 
@@ -116,11 +139,13 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
     }
 
     // Create new views (invoked by the layout manager)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_final_goal, viewGroup, false);
+
 
         return new ViewHolder(view);
     }
@@ -133,6 +158,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             viewHolder.currentView.findViewById(R.id.accept_button).setVisibility(View.GONE);
 
             if (viewHolder.finalGoal.getFlag() == Helper.GOAL_FINISHED) {
+
                 viewHolder.currentView.findViewById(R.id.view_finished).setVisibility(View.VISIBLE);
             }
         } else {
@@ -141,6 +167,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
         viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
 
+
         int progressCount = getProgressCount(localDataSet[position].getProgress());
         int finishCount = getProgressPercentage(progressCount, localDataSet[position].getDays());
         if (finishCount > 0) {
@@ -148,7 +175,9 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         } else {
             viewHolder.progressBar.setProgress(1);
         }
-        viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
+        //viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
+
+        viewHolder.getDescriptionToPercentage.setText("100%");
 
         long leftDays = Helper.getLeftDays(localDataSet[position].getDate(), localDataSet[position].getDays());
 
@@ -157,6 +186,31 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         } else {
             viewHolder.descriptionDayToChange.setText(leftDays + " dni");
         }
+        /* DateTimeFormatter dtf;
+         LocalDateTime now;
+        dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        now = LocalDateTime.now();
+        System.out.println();*/
+        /*if(viewHolder.getDescriptionToPercentage.getText() == "100%"){
+            viewHolder.acceptButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Dialog myDialog;
+                    Context context = null;
+                    myDialog = new Dialog(context);
+                    myDialog.setContentView(R.layout.end_task);
+                    
+                    viewHolder.item.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            myDialog.show();
+                        }
+                    });
+                }
+            });
+        }*/
+
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
