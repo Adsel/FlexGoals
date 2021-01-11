@@ -229,12 +229,16 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
 
         viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
 
+        if (viewHolder.quantitativeGoal.getFlag() < 0) {
+            viewHolder.acceptButton.setVisibility(View.GONE);
 
-        viewHolder.acceptButton.setVisibility(View.GONE);
-        if (viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_FINISHED || viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_ACHIEVED) {
-            viewHolder.finishedText.setVisibility(View.VISIBLE);
+            if (viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_FINISHED) {
+                viewHolder.finishedText.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.finishedText.setVisibility(View.GONE);
+            }
         } else {
-            viewHolder.acceptButton.setVisibility(View.VISIBLE);
+            (viewHolder.currentView.findViewById(R.id.accept_button)).setVisibility(View.VISIBLE);
         }
 
         long leftDays = Helper.getLeftDays(localDataSet.get(position).getDate(), localDataSet.get(position).getDays());
