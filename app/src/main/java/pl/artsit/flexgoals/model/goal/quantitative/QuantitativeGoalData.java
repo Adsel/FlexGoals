@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.model.goal;
+package pl.artsit.flexgoals.model.goal.quantitative;
 
 public class QuantitativeGoalData {
     private String name;

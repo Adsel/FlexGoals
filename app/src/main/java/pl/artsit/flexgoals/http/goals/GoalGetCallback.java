@@ -1,7 +1,7 @@
 package pl.artsit.flexgoals.http.goals;
 
-import pl.artsit.flexgoals.model.goal.FinalGoalFlag;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoalFlag;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 
 public interface GoalGetCallback {
     void informAboutFailedGetFinalGoals();
