@@ -89,6 +89,4 @@
     <string name="deleted_quantitative_goal">Deleted quantitative goal!</string>
     <string name="deleted_final_goal">Deleted final goal!</string>
     <string name="failed_delete_goal">Failed to delete goal!</string>
-    <string name="day">Day</string>
-    <string name="quantitative_activity">quantity</string>
 </resources>

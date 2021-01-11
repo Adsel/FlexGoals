@@ -98,6 +98,4 @@
     <string name="deleted_quantitative_goal">Usunięto cel ilościowy!</string>
     <string name="deleted_final_goal">Usunięto cel zaliczeniowy!</string>
     <string name="failed_delete_goal">Nie udało się usunąć celu!</string>
-    <string name="day">Dzień</string>
-    <string name="quantitative_activity">ilość</string>
 </resources>
