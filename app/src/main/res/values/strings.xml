@@ -76,6 +76,7 @@
     <string name="quantitative_progress_modal_saved">"Successfully Passed! "</string>
     <string name="quantitative_progress_modal_failed">"Failed to save! "</string>
     <string name="quantitative_progress_modal_invalid">Progress must be greater than zero!</string>
+
     <string name="log_out">log out</string>
 
     <string-array name="add_goals_options">
@@ -84,4 +85,8 @@
     </string-array>
     <string name="day">Day</string>
     <string name="quantitative_activity">quantity</string>
+
+    <string name="deleted_quantitative_goal">Deleted quantitative goal!</string>
+    <string name="deleted_final_goal">Deleted final goal!</string>
+    <string name="failed_delete_goal">Failed to delete goal!</string>
 </resources>
