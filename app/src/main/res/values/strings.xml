@@ -76,6 +76,7 @@
     <string name="quantitative_progress_modal_saved">"Successfully Passed! "</string>
     <string name="quantitative_progress_modal_failed">"Failed to save! "</string>
     <string name="quantitative_progress_modal_invalid">Progress must be greater than zero!</string>
+    <string name="log_out">log out</string>
 
     <string-array name="add_goals_options">
         <item>Quantitative goals</item>
