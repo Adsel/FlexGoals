@@ -20,7 +20,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import pl.artsit.flexgoals.MainActivity;
@@ -30,7 +29,6 @@ import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
 import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
-import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalProgress;
 import pl.artsit.flexgoals.shared.Helper;
