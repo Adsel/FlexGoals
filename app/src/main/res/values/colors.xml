@@ -49,4 +49,15 @@
         <item>@color/kalendarz</item>
         <item>@color/wyloguj</item>
     </array>
+
+
+
+    <color name="main_color">#FF00FF</color>
+    <color name="main2_color">#ACA7CB</color>
+    <color name="main3_color">#474554</color>
+    <color name="main4_color">#616161</color>
+    <color name="main5_color">#7C00CF</color>
+
+    <color name="quantitative_item_primary">#7C00CF</color>
+
 </resources>
