@@ -53,6 +53,7 @@ public class PreviewFinalActivity extends AppCompatActivity {
 
         PieDataSet dataSet = new PieDataSet(pieEntires,"");
         dataSet.setColors(getResources().getIntArray(R.array.color_group));
+        dataSet.setValueTextSize(25f);
         PieData data = new PieData(dataSet);
 
 
