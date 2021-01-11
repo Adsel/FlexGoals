@@ -39,7 +39,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     private ModalWidgets modal;
     private Context context;
     private Button deleteButton;
-    private View currentView;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -68,7 +67,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
-            acceptButton = view.findViewById(R.id.accept_quantitative_button);
+            acceptButton = view.findViewById(R.id.accept_quantitative_button_s);
             finishedText = view.findViewById(R.id.view_finished);
             deleteButton = view.findViewById(R.id.delete_button);
             currentView = view;
@@ -204,7 +203,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                 .inflate(R.layout.item_quantitative_goal, viewGroup, false);
         modal = new ModalWidgets(view.getContext());
         context = view.getContext();
-        currentView = view;
 
         return new ViewHolder(view);
     }
@@ -236,7 +234,8 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                 viewHolder.finishedText.setVisibility(View.GONE);
             }
         } else {
-            (viewHolder.currentView.findViewById(R.id.accept_button)).setVisibility(View.VISIBLE);
+            viewHolder.acceptButton.setVisibility(View.VISIBLE);
+            viewHolder.finishedText.setVisibility(View.GONE);
         }
 
         long leftDays = Helper.getLeftDays(localDataSet.get(position).getDate(), localDataSet.get(position).getDays());
