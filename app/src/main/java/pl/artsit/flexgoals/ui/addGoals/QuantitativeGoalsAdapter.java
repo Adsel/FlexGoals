@@ -100,22 +100,20 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         }
 
         private void addActions() {
-            Dialog myDialog;
-            myDialog = new Dialog(currentView.getContext());
-            myDialog.setContentView(R.layout.end_task);
-            Button myResults = (Button) myDialog.findViewById(R.id.button4);
-            Button close = (Button) myDialog.findViewById(R.id.button5);
-
             currentView.setOnClickListener(v -> {
-
-                if(getGetDescriptionToPercentage().getText().toString()== "100%"){
+                if (quantitativeGoal.getFlag() == Helper.GOAL_FINISHED){
+                    Dialog myDialog = new Dialog(currentView.getContext());
+                    myDialog.setContentView(R.layout.end_task);
+                    Button myResults = myDialog.findViewById(R.id.ended_dialog_results);
+                    Button close = myDialog.findViewById(R.id.ended_dialog_close);
                     myDialog.show();
-                    System.out.println("Cel zostal zakonczony !!! ");
-                }else {
-                    MainActivity.previewQuantitativeGoal = quantitativeGoal;
-                    Intent intent = new Intent(currentView.getContext(), PreviewFinalActivity.class);
-                    currentView.getContext().startActivity(intent);
-                    System.out.println("Nie zakonczono celu !!! " );
+                    myResults.setOnClickListener(view -> {
+                        goToPreview();
+                    });
+
+                    close.setOnClickListener(view -> myDialog.hide());
+                } else {
+                    goToPreview();
                 }
             });
 
@@ -125,7 +123,13 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                 Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
             });
 
-            acceptButton.setOnClickListener((View.OnClickListener) v -> makePromptWithGoalAchievement(v, quantitativeGoal));
+            acceptButton.setOnClickListener(v -> makePromptWithGoalAchievement(v, quantitativeGoal));
+        }
+
+        private void goToPreview() {
+            MainActivity.previewQuantitativeGoal = quantitativeGoal;
+            Intent intent = new Intent(currentView.getContext(), PreviewQuantitativeActivity.class);
+            currentView.getContext().startActivity(intent);
         }
 
         private void makePromptWithGoalAchievement(View view, QuantitativeGoalFlag quantitativeGoal) {

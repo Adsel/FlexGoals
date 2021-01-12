@@ -49,21 +49,19 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/ended_dialog_results"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Przejdź do wyników"
             android:textColor="#FF8861F3"
-            android:textIsSelectable="true"
             app:backgroundTint="#FFFFFF" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/ended_dialog_close"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Zamknij"
             android:textColor="#8861F3"
-            android:textIsSelectable="true"
             app:backgroundTint="#FFFFFF" />
     </LinearLayout>
 

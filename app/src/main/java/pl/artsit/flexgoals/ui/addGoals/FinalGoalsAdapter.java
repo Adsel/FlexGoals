@@ -1,7 +1,6 @@
 package pl.artsit.flexgoals.ui.addGoals;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -11,20 +10,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
@@ -54,8 +44,6 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         private ConstraintLayout constraintLayout;
         private Button acceptButton;
         private LinearLayout item;
-
-
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         public ViewHolder(final View view) {
@@ -107,39 +95,21 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         private void addActions() {
-            Dialog myDialog;
-            myDialog = new Dialog(currentView.getContext());
-            myDialog.setContentView(R.layout.end_task);
-            Button myResults = (Button) myDialog.findViewById(R.id.button4);
-            Button close = (Button) myDialog.findViewById(R.id.button5);
-
-            myResults.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MainActivity.previewFinalGoal = finalGoal;
-                    Intent intent = new Intent(currentView.getContext(), PreviewFinalActivity.class);
-                    currentView.getContext().startActivity(intent);
-                }
-            });
-            close.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    myDialog.hide();
-                }
-            });
             currentView.setOnClickListener((View v) -> {
-
-                if(getGetDescriptionToPercentage().getText().toString()== "100%"){
+                if (finalGoal.getFlag() == GOAL_FINISHED){
+                    Dialog myDialog = new Dialog(currentView.getContext());
+                    myDialog.setContentView(R.layout.end_task);
+                    Button myResults = myDialog.findViewById(R.id.ended_dialog_results);
+                    Button close = myDialog.findViewById(R.id.ended_dialog_close);
                     myDialog.show();
-                    System.out.println("Cel zostal zakonczony !!! ");
-                }else {
-                    MainActivity.previewFinalGoal = finalGoal;
-                    Intent intent = new Intent(currentView.getContext(), PreviewFinalActivity.class);
-                    currentView.getContext().startActivity(intent);
-                    System.out.println("Nie zakonczono celu !!! " );
+                    myResults.setOnClickListener(view -> {
+                        goToPreview();
+                    });
+
+                    close.setOnClickListener(view -> myDialog.hide());
+                } else {
+                    goToPreview();
                 }
-
-
             });
 
             currentView.findViewById(R.id.edit_button).setOnClickListener((View v) -> {
@@ -152,6 +122,12 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
                     new FinalGoalService().scoreFinalGoal(this, finalGoal.getId())
             );
 
+        }
+
+        private void goToPreview() {
+            MainActivity.previewFinalGoal = finalGoal;
+            Intent intent = new Intent(currentView.getContext(), PreviewFinalActivity.class);
+            currentView.getContext().startActivity(intent);
         }
     }
 
@@ -204,8 +180,6 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         }
         viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
 
-        //viewHolder.getDescriptionToPercentage.setText("100%");
-
         long leftDays = Helper.getLeftDays(localDataSet[position].getDate(), localDataSet[position].getDays());
 
         if (leftDays == 1) {
@@ -213,31 +187,6 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         } else {
             viewHolder.descriptionDayToChange.setText(leftDays + " dni");
         }
-        /* DateTimeFormatter dtf;
-         LocalDateTime now;
-        dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        now = LocalDateTime.now();
-        System.out.println();*/
-        if(viewHolder.getDescriptionToPercentage.getText() == "100%"){
-            viewHolder.acceptButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Dialog myDialog;
-                    Context context = null;
-                    myDialog = new Dialog(context);
-                    myDialog.setContentView(R.layout.end_task);
-
-                    viewHolder.item.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            myDialog.show();
-                        }
-                    });
-                }
-            });
-        }
-
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)
