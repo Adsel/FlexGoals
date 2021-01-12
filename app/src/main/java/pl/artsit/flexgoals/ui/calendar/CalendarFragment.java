@@ -25,6 +25,7 @@ import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.services.FinalGoalService;
+import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
@@ -57,6 +58,7 @@ public class CalendarFragment<T> extends Fragment implements GoalGetCallback {
         textViewCalendarTitle = root.findViewById(R.id.textViewCalendarTitle);
 
         new FinalGoalService().getFinalGoals(this, MainActivity.currentUser);
+        new QuantitativeGoalService().getQuantitativeGoals(this, MainActivity.currentUser);
 
         setCalendarDate(new Date(),new Date());
 
@@ -199,7 +201,7 @@ public class CalendarFragment<T> extends Fragment implements GoalGetCallback {
     @Override
     public void drawFinalGoals(FinalGoalFlag[] finalGoals) {
         for (int i =0; i < finalGoals.length; i++) {
-            System.out.println(finalGoals[i].getDate() + " XD " + finalGoals[i].getDays());
+            System.out.println(finalGoals[i].getDate() + " Final " + finalGoals[i].getDays());
             this.finalGoals.add(finalGoals[i]);
         }
     }
@@ -217,7 +219,7 @@ public class CalendarFragment<T> extends Fragment implements GoalGetCallback {
     @Override
     public void drawQuantitativeGoals(QuantitativeGoalFlag[] quantitativeGoals) {
         for (int i =0; i < quantitativeGoals.length; i++) {
-            System.out.println(quantitativeGoals[i].getDate() + " XD " + quantitativeGoals[i].getDays());
+            System.out.println(quantitativeGoals[i].getDate() + " Quanti " + quantitativeGoals[i].getDays());
             this.quantitativeGoals.add(quantitativeGoals[i]);
         }
     }
