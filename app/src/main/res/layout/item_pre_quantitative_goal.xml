@@ -15,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/parent_layout"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="348dp"
         android:background="@drawable/bcg_to_card_view"
         android:minHeight="300dp">
 
@@ -23,23 +23,23 @@
             android:id="@+id/name_of_goal_q"
             android:layout_width="337dp"
             android:layout_height="32dp"
-            android:layout_marginTop="24dp"
-            android:background="@color/white"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/button_color_less_violet"
             android:fontFamily="@font/open_sans"
             android:gravity="center"
             android:text="[PRE Q] Zostań programistą"
-            android:textColor="@color/black"
+            android:textColor="@color/colorWhite"
             android:textSize="18sp"
-            android:textStyle="normal"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintHorizontal_bias="0.488"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/description_of_goal_q"
             android:layout_width="337dp"
-            android:layout_height="32dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/open_sans"
             android:gravity="center"
@@ -48,42 +48,103 @@
             android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintHorizontal_bias="0.533"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_of_goal" />
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
         <Button
             android:id="@+id/use_pre_quantitative_button"
             android:layout_width="112dp"
             android:layout_height="42dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/delete_bcg_card"
             android:fontFamily="@font/open_sans"
+            android:gravity="center"
             android:text="Uzyj"
             android:textAllCaps="false"
+            android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="normal"
             app:backgroundTint="@color/celeZaliczeniowe"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/goal_to_change" />
 
         <TextView
-            android:id="@+id/view_finished"
-            android:layout_width="112dp"
-            android:layout_height="42dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/accept_bcg_card"
-            android:fontFamily="@font/open_sans"
-            android:text="Zakończono"
-            android:textAllCaps="false"
+            android:id="@+id/step_goal"
+            android:layout_width="108dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:text="@string/step_goal"
+            android:textColor="@color/white"
             android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textView11"
+            app:layout_constraintHorizontal_bias="0.065"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_of_goal_q" />
+
+        <TextView
+            android:id="@+id/step_value_to_change"
+            android:layout_width="128dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/goal_to_change"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/step_goal" />
+
+        <TextView
+            android:id="@+id/goal_to_change"
+            android:layout_width="184dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="Jakiś tam cel i nie wiem jaki dac to daje taki"
+            android:textColor="@color/white"
             android:textStyle="normal"
-            android:visibility="gone"
-            app:backgroundTint="@color/colorWarn"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="337dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="@string/pre_description_of_goal"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.488"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_of_goal_q" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="187dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="center"
+            android:text="@string/pre_your_goal"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/description_of_goal_q" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

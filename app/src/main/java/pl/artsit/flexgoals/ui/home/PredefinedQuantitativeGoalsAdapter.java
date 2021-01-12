@@ -58,15 +58,12 @@ public class PredefinedQuantitativeGoalsAdapter extends RecyclerView.Adapter<Pre
         }
         localDataSet = data;
     }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_pre_quantitative_goal, viewGroup, false);
-
         return new ViewHolder(view);
     }
-
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {

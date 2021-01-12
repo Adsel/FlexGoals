@@ -98,4 +98,8 @@
     <string name="deleted_quantitative_goal">Usunięto cel ilościowy!</string>
     <string name="deleted_final_goal">Usunięto cel zaliczeniowy!</string>
     <string name="failed_delete_goal">Nie udało się usunąć celu!</string>
+    <string name="pre_your_goal">Twój cel</string>
+    <string name="pre_description_of_goal">Opis</string>
+
+    <string name="step_goal">Krok</string>
 </resources>

@@ -2,10 +2,13 @@ package pl.artsit.flexgoals.ui.home;
 
 import android.animation.ArgbEvaluator;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -34,6 +37,7 @@ public class HomeFragment extends Fragment implements PredefinedGoalCallback {
     private RecyclerView preQuantGoalRecyclerView;
     private RecyclerView preFinalGoalRecyclerView;
     private ModalWidgets modal;
+    private ScrollView scrollView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public class HomeFragment extends Fragment implements PredefinedGoalCallback {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         context = root.getContext();
+        scrollView = root.findViewById(R.id.scrolll_view);
         viewPager = root.findViewById(R.id.viewPager);
         models = getModels();
         modal = new ModalWidgets(root.getContext());
@@ -86,20 +91,28 @@ public class HomeFragment extends Fragment implements PredefinedGoalCallback {
         adapter = new ImageAdapter(models, context);
         viewPager.setAdapter(adapter);
         viewPager.setPadding(130,0,130,0);
+        viewPager.setBackground(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener(){
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 if (position < (adapter.getCount() - 1) && position < (colors.length - 1 )){
-                    viewPager.setBackgroundColor((Integer) argbEvaluator.evaluate(
+                    scrollView.setBackgroundColor((Integer) argbEvaluator.evaluate(
                                 positionOffset,
                                 colors[position],
                                 colors[position + 1]
                         )
                     );
+                  /*  viewPager.setBackgroundColor((Integer) argbEvaluator.evaluate(
+                            positionOffset,
+                            colors[position],
+                            colors[position + 1]
+                            )
+                    );*/
 
                 } else {
-                    viewPager.setBackgroundColor(colors[colors.length - 1]);
+                   // viewPager.setBackgroundColor(colors[colors.length - 1]);
+                    scrollView.setBackgroundColor(colors[colors.length - 1]);
                 }
             }
             @Override
