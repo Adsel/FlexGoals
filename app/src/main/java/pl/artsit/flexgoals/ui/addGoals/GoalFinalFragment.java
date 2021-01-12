@@ -33,7 +33,9 @@ public class GoalFinalFragment extends Fragment implements GoalGetCallback {
         finalGoalRecyclerView = root.findViewById(R.id.final_goals_recycleview);
         finalGoalRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
         finalGoalRecyclerView.setHasFixedSize(true);
+
         new FinalGoalService().getFinalGoals(this, MainActivity.currentUser);
+
 
         return root;
     }
@@ -62,8 +64,11 @@ public class GoalFinalFragment extends Fragment implements GoalGetCallback {
     public void drawFinalGoals(FinalGoalFlag[] finalGoals) {
         FinalGoalsAdapter finalGoalsAdapter = new FinalGoalsAdapter(finalGoals);
 
+
         finalGoalRecyclerView.setAdapter(finalGoalsAdapter);
         finalGoalRecyclerView.setVisibility(View.VISIBLE);
+
+
     }
 
     @Override

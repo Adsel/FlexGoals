@@ -1,8 +1,10 @@
 package pl.artsit.flexgoals.ui.addGoals;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.graphics.Color;
 import android.text.InputType;
@@ -12,34 +14,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.http.goals.DeleteGoalCallback;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
 import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.ModalWidgets;
-import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalProgress;
 import pl.artsit.flexgoals.shared.Helper;
 
 public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeGoalsAdapter.ViewHolder> {
 
-    private List<QuantitativeGoalFlag> localDataSet;
+    private QuantitativeGoalFlag[] localDataSet;
     private ModalWidgets modal;
     private Context context;
-    private Button deleteButton;
     private View currentView;
+
 
     /**
      * Provide a reference to the type of views that you are using
@@ -47,8 +47,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
      */
 
 
-    class ViewHolder extends RecyclerView.ViewHolder implements GoalAchieveCallback,
-            DeleteGoalCallback {
+    class ViewHolder extends RecyclerView.ViewHolder implements GoalAchieveCallback  {
         private final TextView nameOfGoal;
         private TextView descriptionOfGoal;
         private ProgressBar progressBar;
@@ -58,11 +57,14 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         private View currentView;
         private Button acceptButton;
         private TextView finishedText;
-        private QuantitativeGoalsAdapter parent;
+        private ConstraintLayout layout;
+        private RelativeLayout endTask;
 
         public ViewHolder(View view) {
             super(view);
-
+            //---------------
+            endTask = (RelativeLayout) itemView.findViewById(R.id.end_task);
+            //---------------
             nameOfGoal = view.findViewById(R.id.name_of_goal);
             descriptionOfGoal = view.findViewById(R.id.description_of_goal);
             progressBar = view.findViewById(R.id.progress_bar);
@@ -70,8 +72,8 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
             acceptButton = view.findViewById(R.id.accept_quantitative_button);
             finishedText = view.findViewById(R.id.view_finished);
-            deleteButton = view.findViewById(R.id.delete_button);
             currentView = view;
+            layout = view.findViewById(R.id.parent_layout);
 
             addActions();
         }
@@ -100,9 +102,21 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
 
         private void addActions() {
             currentView.setOnClickListener(v -> {
-                MainActivity.previewQuantitativeGoal = quantitativeGoal;
-                Intent intent = new Intent(currentView.getContext(), PreviewQuantitativeActivity.class);
-                currentView.getContext().startActivity(intent);
+                if (quantitativeGoal.getFlag() == Helper.GOAL_FINISHED){
+                    Dialog myDialog = new Dialog(currentView.getContext());
+                    myDialog.setContentView(R.layout.end_task);
+                    Button myResults = myDialog.findViewById(R.id.ended_dialog_results);
+                    Button close = myDialog.findViewById(R.id.ended_dialog_close);
+                    myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    myDialog.show();
+                    myResults.setOnClickListener(view -> {
+                        goToPreview();
+                    });
+
+                    close.setOnClickListener(view -> myDialog.hide());
+                } else {
+                    goToPreview();
+                }
             });
 
             currentView.findViewById(R.id.edit_button).setOnClickListener(v -> {
@@ -111,8 +125,13 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                 Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
             });
 
-            acceptButton.setOnClickListener((View.OnClickListener) v -> makePromptWithGoalAchievement(v, quantitativeGoal));
-            deleteButton.setOnClickListener((View.OnClickListener) v ->  new QuantitativeGoalService().deleteQuantitativeGoal(this, quantitativeGoal));
+            acceptButton.setOnClickListener(v -> makePromptWithGoalAchievement(v, quantitativeGoal));
+        }
+
+        private void goToPreview() {
+            MainActivity.previewQuantitativeGoal = quantitativeGoal;
+            Intent intent = new Intent(currentView.getContext(), PreviewQuantitativeActivity.class);
+            currentView.getContext().startActivity(intent);
         }
 
         private void makePromptWithGoalAchievement(View view, QuantitativeGoalFlag quantitativeGoal) {
@@ -153,33 +172,11 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                                     progress
                             ));
                 } else {
-                    modal.showToast(context.getString(R.string.quantitative_progress_modal_invalid));
+                    //modal.showToast(context.getString(R.string.quantitative_progress_modal_invalid));
                 }
             }
         }
 
-        @Override
-        public void deleteFinalCallback(FinalGoalFlag finalGoalId) {
-
-        }
-
-        @Override
-        public void deleteQuantitativeCallback(QuantitativeGoalFlag deletedQuantitativeGoal) {
-            parent.localDataSet.remove(deletedQuantitativeGoal);
-            parent.notifyItemRemoved(getAdapterPosition());
-            parent.notifyDataSetChanged();
-            modal.showToast(currentView.getContext().getString(R.string.deleted_quantitative_goal));
-        }
-
-        @Override
-        public void informAboutFailedDeleteFinalGoal() {
-
-        }
-
-        @Override
-        public void informAboutFailedDeleteQuantitativeGoal() {
-            modal.showToast(currentView.getContext().getString(R.string.failed_delete_goal));
-        }
     }
 
     /**
@@ -189,11 +186,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
      * by RecyclerView.
      */
     public QuantitativeGoalsAdapter(QuantitativeGoalFlag[] dataSet) {
-        List<QuantitativeGoalFlag> data = new ArrayList<>();
-        for (int i = 0; i < dataSet.length; i++) {
-            data.add(dataSet[i]);
-        }
-        localDataSet = data;
+        localDataSet = dataSet;
     }
 
     // Create new views (invoked by the layout manager)
@@ -213,12 +206,12 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.quantitativeGoal = localDataSet.get(position);
-        viewHolder.getNameOfGoal().setText(localDataSet.get(position).getName());
-        viewHolder.descriptionOfGoal.setText(localDataSet.get(position).getDescription());
+        viewHolder.quantitativeGoal = localDataSet[position];
+        viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
+        viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
 
-        int progressCount = getProgressCount(localDataSet.get(position).getProgress(), localDataSet.get(position).getStep());
-        int finishCount = getProgressPercentage(progressCount, localDataSet.get(position).getDays(), localDataSet.get(position).getStep());
+        int progressCount = getProgressCount(localDataSet[position].getProgress(), localDataSet[position].getStep());
+        int finishCount = getProgressPercentage(progressCount, localDataSet[position].getDays(), localDataSet[position].getStep());
         if (finishCount > 0) {
             viewHolder.progressBar.setProgress(finishCount);
         } else {
@@ -227,27 +220,27 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
 
         viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
 
-        if (viewHolder.quantitativeGoal.getFlag() < 0) {
-            viewHolder.acceptButton.setVisibility(View.GONE);
 
-            if (viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_FINISHED) {
-                viewHolder.finishedText.setVisibility(View.VISIBLE);
-            } else {
-                viewHolder.finishedText.setVisibility(View.GONE);
-            }
+        viewHolder.acceptButton.setVisibility(View.GONE);
+
+        if (viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_FINISHED) {
+            viewHolder.finishedText.setVisibility(View.VISIBLE);
         } else {
-            (viewHolder.currentView.findViewById(R.id.accept_button)).setVisibility(View.VISIBLE);
+            viewHolder.acceptButton.setVisibility(View.VISIBLE);
         }
 
-        long leftDays = Helper.getLeftDays(localDataSet.get(position).getDate(), localDataSet.get(position).getDays());
+        long leftDays = Helper.getLeftDays(localDataSet[position].getDate(), localDataSet[position].getDays());
 
         if (leftDays == 1) {
             viewHolder.descriptionDayToChange.setText(leftDays + " dzień");
         } else {
             viewHolder.descriptionDayToChange.setText(leftDays + " dni");
         }
+        /*if(leftDays == 0 && viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_FINISHED){
 
-        viewHolder.parent = this;
+        }*/
+
+
     }
 
     private int getProgressCount(String progress, int step) {
@@ -272,6 +265,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return localDataSet.size();
+        return localDataSet.length;
     }
 }
