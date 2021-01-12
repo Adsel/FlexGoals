@@ -2,6 +2,7 @@ package pl.artsit.flexgoals.ui.addGoals;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -101,6 +102,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
                     myDialog.setContentView(R.layout.end_task);
                     Button myResults = myDialog.findViewById(R.id.ended_dialog_results);
                     Button close = myDialog.findViewById(R.id.ended_dialog_close);
+                    myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                     myDialog.show();
                     myResults.setOnClickListener(view -> {
                         goToPreview();
