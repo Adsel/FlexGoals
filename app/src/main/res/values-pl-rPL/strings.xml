@@ -98,4 +98,10 @@
     <string name="deleted_quantitative_goal">Usunięto cel ilościowy!</string>
     <string name="deleted_final_goal">Usunięto cel zaliczeniowy!</string>
     <string name="failed_delete_goal">Nie udało się usunąć celu!</string>
+    <string name="calendar_prev">poprzedni</string>
+    <string name="calendar_next">następny</string>
+    <string name="calendar_clickChange">nacisnij aby zmienić typ</string>
+    <string name="calendar_quantitative_empty">Nie masz zadnych celow ilosciowych</string>
+    <string name="calendar_final_empty">Nie masz zadnych celow zaliczeniowych</string>
+    <string name="calendar_use_type">Wybierz typ twojego zadania</string>
 </resources>
