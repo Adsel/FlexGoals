@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.graphics.Color;
 import android.text.InputType;
@@ -38,7 +39,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     private ModalWidgets modal;
     private Context context;
     private View currentView;
-    Dialog myDialog;
+
 
     /**
      * Provide a reference to the type of views that you are using
@@ -106,6 +107,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                     myDialog.setContentView(R.layout.end_task);
                     Button myResults = myDialog.findViewById(R.id.ended_dialog_results);
                     Button close = myDialog.findViewById(R.id.ended_dialog_close);
+                    myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                     myDialog.show();
                     myResults.setOnClickListener(view -> {
                         goToPreview();
