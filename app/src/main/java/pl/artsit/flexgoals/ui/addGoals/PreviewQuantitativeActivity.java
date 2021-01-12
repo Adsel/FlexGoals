@@ -1,6 +1,9 @@
 package pl.artsit.flexgoals.ui.addGoals;
 
+import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -9,7 +12,6 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,7 @@ import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 public class PreviewQuantitativeActivity extends AppCompatActivity {
     private QuantitativeGoalFlag quantitativeGoal;
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +32,7 @@ public class PreviewQuantitativeActivity extends AppCompatActivity {
         quantitativeGoal = MainActivity.previewQuantitativeGoal;
 
         // DATA
-        BarDataSet dataset = new BarDataSet(getEntries(), "ilość");
+        BarDataSet dataset = new BarDataSet(getEntries(), getResources().getString(R.string.quantitative_activity));
 
         // CHART
         BarChart chart = (BarChart)findViewById(R.id.testowo);
@@ -38,20 +41,31 @@ public class PreviewQuantitativeActivity extends AppCompatActivity {
 
         // CHART DESCRIPTION AND ADDING LABELS
         Description description = new Description();
-        description.setText("Cel ilościowy");
+        description.setText(getResources().getText(R.string.statistic_quantity).toString());
         chart.setDescription(description);
         chart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(getLabels()));
-
+        chart.setOutlineAmbientShadowColor(getResources().getColor(R.color.colorPrimary));
+        chart.setBorderColor(getResources().getColor(R.color.colorPrimary));
+        chart.setNoDataTextColor(getResources().getColor(R.color.colorPrimary));
+        chart.getXAxis().setTextColor(getResources().getColor(R.color.colorPrimary));
+        chart.getBarData().setValueTextColor(getResources().getColor(R.color.colorPrimary));
+        chart.getAxisLeft().setZeroLineColor(getResources().getColor(R.color.colorPrimary));
+        chart.getLegend().setTextColor(getResources().getColor(R.color.colorPrimary));
+        chart.setGridBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        chart.getDescription().setEnabled(false);
         // COLORS AND ANIMATION (OF DRAWING CHART)
-        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
-        chart.animateY(5000);
+
+
+        dataset.setValueTextColor(getResources().getColor(R.color.colorPrimary));
+        dataset.setColors(getResources().getIntArray(R.array.color_group));
+        chart.animateY(2500);
     }
 
     private List<String> getLabels() {
         List<String> labels = new ArrayList<>();
 
         for (int i = 0; i < quantitativeGoal.getDays(); i++) {
-            labels.add("Dzień" + (i + 1));
+            labels.add(getResources().getText(R.string.day).toString() + " " + (i + 1));
         }
 
         return labels;

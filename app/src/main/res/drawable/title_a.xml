@@ -3,5 +3,5 @@
     android:shape="rectangle">
     <corners android:bottomLeftRadius="40dp"
         android:bottomRightRadius="40dp" />
-    <solid android:color="@color/addGoals"  />
+    <gradient android:startColor="@color/purple_500" android:endColor="@color/celeIlosciowe" />
 </shape>

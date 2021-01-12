@@ -1,5 +1,7 @@
 package pl.artsit.flexgoals.http.api;
 
+import pl.artsit.flexgoals.model.goal.FinalGoalUpdateData;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalUpdateData;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
 import pl.artsit.flexgoals.model.goal.finals.PredefinedFinalGoal;
@@ -31,10 +33,10 @@ public interface JsonPlaceholderAPI {
     Call<Integer> getUserPoints(@Path("userId") Integer userId);
 
     @PUT("/api/goals/update-qgoaldata")
-    Call<Integer> updateQuantitativeGoal(@Body QuantitativeGoal quantitativeGoal);
+    Call<Integer> updateQuantitativeGoal(@Body QuantitativeGoalUpdateData quantitativeGoal);
 
     @PUT("/api/goals/update-fgoal")
-    Call<Integer> updateFinalGoal(@Body FinalGoal finalGoal);
+    Call<Integer> updateFinalGoal(@Body FinalGoalUpdateData finalGoal);
 
     @PUT("/api/goals/update-prog-fgoal")
     Call<Integer> scoreFinalGoal(@Body Integer integer);
