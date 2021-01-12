@@ -1,52 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">FlexGoals</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="app_name" translatable="false">FlexGoals</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings">Settings</string>
-
-    <string name="menu_dodajCel">Dodaj cel</string>
-    <string name="menu_celeIlosciowe">Cele ilościowe</string>
-    <string name="menu_celeZaliczeniowe">Cele zaliczeniowe</string>
-    <string name="menu_statystyka">Statystyka</string>
-    <string name="menu_kalendarz">Kalendarz</string>>
-
-    <string name="register">Zarejestruj</string>
-    <string name="register_title">Załóż konto</string>
-    <string name="register_info">Wprowadź dane abu utworzyć twoje nowe konto</string>
-
-    <string name="login">Nazwa użytkownika</string>
-    <string name="login_is_empty">Login jest pusty</string>
-    <string name="login_title">Zaloguj się</string>
-    <string name="login_login">Zaloguj</string>
-    <string name="login_info">Wprowadź dane logowania aby przejść na twoje konto</string>
-
+    <string name="menu_dodajCel">Add Goal</string>
+    <string name="menu_celeIlosciowe">"Quantitative goals "</string>
+    <string name="menu_celeZaliczeniowe">"Final goals "</string>
+    <string name="menu_statystyka">Statics</string>
+    <string name="menu_kalendarz">Calendar</string>
+    <string name="register">Register</string>
+    <string name="register_title">Create Account</string>
+    <string name="register_info">" Enter your details to create your new account"</string>
+    <string name="login">"Username "</string>
+    <string name="login_is_empty">Login is empty</string>
+    <string name="login_title">Login</string>
+    <string name="login_login">Login</string>
+    <string name="login_info">"Enter your login details to go to your account "</string>
     <string name="mail">Mail</string>
-    <string name="mail_incorrect">Mail jest nieprawidłowy</string>
-    <string name="mail_is_empty">Mail jest pusty</string>
-
-    <string name="password">Haslo</string>
-    <string name="password_repeat">Powtórz hasło</string>
-    <string name="password_not_same">Hasła nie są identyczne</string>
-
-    <string name="incorrect_data">Dane nieprawidłowe!</string>
-    <string name="password_is_empty">Hasło jest puste</string>
-
-    <string name="add_goals_title">Dodaj Cel</string>
-    <string name="add_goals_name">Wprowadź nazwę</string>
-    <string name="add_goalsI_info">Dodaj Cel</string>
-    <string name="add_goals_type">Wybierz Rodzaj</string>
-    <string name="add_goals_submit">Zatwierdź</string>
+    <string name="mail_incorrect">"Mail is invalid "</string>
+    <string name="mail_is_empty">"Mail is empty "</string>
+    <string name="password">Password</string>
+    <string name="password_repeat">Repeat password</string>
+    <string name="password_not_same">"The passwords do not match "</string>
+    <string name="incorrect_data">"Data incorrect! "</string>
+    <string name="password_is_empty">"Password is empty "</string>
+    <string name="add_goals_title">Add Target</string>
+    <string name="add_goals_name">"Enter a name "</string>
+    <string name="add_goalsI_info">"Add Target "</string>
+    <string name="add_goals_submit">Submit</string>
     <string name="menu_button">menu</string>
-    <string name="todo">TODO</string>
-    <string name="add_goals_add_title">Dodaj tytuł</string>
-    <string name="add_goals_add_desc">Dodaj opis</string>
-    <string name="add_goals_add_days">Dodaj ilość dni</string>
-    <string name="add_goals_add_step">Podaj krok</string>
-    <string name="add_goals_add_goal">Dodaj cel</string>
-    <string name="logo">Logo</string>
+    <string name="todo" translatable="false">TODO</string>
+    <string name="add_goals_type">"Choose Type "</string>
+    <string name="add_goals_add_title">"Add a title "</string>
+    <string name="add_goals_add_desc">Add description</string>
+    <string name="add_goals_add_days">"Add the number of days "</string>
+    <string name="add_goals_add_step">Add a step</string>
+    <string name="add_goals_add_goal">"Add a goal "</string>
+    <string name="goal_preview_header">"Progress made "</string>
+    <string name="goal_preview_final_chart_title">Progress</string>
+    <string name="goal_preview_final_chart_progress">Done</string>
+    <string name="goal_preview_final_chart_failed">"Not done "</string>
+    <string name="goal_preview_final_chart_todo">To do</string>
+    <string name="statistic_header">"User statistics "</string>
+    <string name="statistic_title">Statistics</string>
+    <string name="statistic_username_title">User</string>
+    <string name="statistic_email_title">Mail</string>
+    <string name="statistic_points_title">"Number of points "</string>
+    <string name="statistic_quantity">"Quantitative goals "</string>
+    <string name="statistic_final">Final goals</string>
+    <string name="goal_view_remain">Left</string>
+    <string name="goal_view_delete">Delete</string>
+    <string name="goal_view_accept">Submit</string>
+    <string name="goal_view_status">Current</string>
+    <string name="modify_goals_type">"Choose Type "</string>
+    <string name="modify_goals_title">"Modify the title "</string>
+    <string name="modify_goals_desc">"Modify the description "</string>
+    <string name="modify_goals_days">"Modify the number of days "</string>
+    <string name="modify_goals_step">"Modify the step "</string>
+    <string name="modify_goals_target">"Modify target "</string>
+    <string name="modify_goals_goal">"Modify the target "</string>
+    <string name="logo" translatable="false">Logo</string>
+    <string name="register_failed">"Failed to register "</string>
+    <string name="register_successful">"Registration was successful "</string>
+    <string name="menu_edit_goal">"Edit target "</string>
+    <string name="added_goal">Target added</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_glowne">main_menu</string>
+    <string name="statics_button_check">View</string>
+    <string name="statistic_remain">Left</string>
+    <string name="quantitative_progress_dialog_title">"Enter progress "</string>
+    <string name="quantitative_progress_dialog_accept">"Submit "</string>
+    <string name="quantitative_progress_dialog_cancel">"Cancel "</string>
+    <string name="quantitative_progress_modal_saved">"Successfully Passed! "</string>
+    <string name="quantitative_progress_modal_failed">"Failed to save! "</string>
+    <string name="quantitative_progress_modal_invalid">Progress must be greater than zero!</string>
+
+    <string name="log_out">log out</string>
+
     <string-array name="add_goals_options">
-        <item>Cele Ilościowe</item>
-        <item>Cele Zaliczeniowe</item>
+        <item>Quantitative goals</item>
+        <item>Final goals</item>
     </string-array>
+    <string name="day">Day</string>
+    <string name="quantitative_activity">quantity</string>
+
+    <string name="deleted_quantitative_goal">Deleted quantitative goal!</string>
+    <string name="deleted_final_goal">Deleted final goal!</string>
+    <string name="failed_delete_goal">Failed to delete goal!</string>
 </resources>

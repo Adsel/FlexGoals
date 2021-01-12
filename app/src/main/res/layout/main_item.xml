@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10sp">
+
+
+    <FrameLayout
+        android:id="@+id/fame_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="703dp"
+        android:background="@drawable/round_list"
+        android:padding="10sp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="657dp"
+            android:layout_margin="10dp"
+            app:cardCornerRadius="20dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="682dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="364dp"
+                        android:layout_height="528dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/man_is_possible"></ImageView>
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="227dp"
+                        android:layout_gravity="center"
+                        android:foregroundGravity="center">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:gravity="center"
+                                android:text="1 photo"
+                                android:textColor="#262626"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/desc"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="20dp"
+                                android:drawablePadding="10dp"
+                                android:ellipsize="end"
+                                android:gravity="center"
+                                android:maxLines="3"
+                                android:text="Description... ... ... ..." />
+
+                        </LinearLayout>
+                    </ScrollView>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+
+</LinearLayout>
