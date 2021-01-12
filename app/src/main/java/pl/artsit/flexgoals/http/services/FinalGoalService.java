@@ -5,6 +5,7 @@ import pl.artsit.flexgoals.http.goals.DeleteGoalCallback;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
+import pl.artsit.flexgoals.http.goals.PredefinedGoalCallback;
 import pl.artsit.flexgoals.model.goal.FinalGoalUpdateData;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoal;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalData;
@@ -117,24 +118,23 @@ public class FinalGoalService extends HttpClient{
         });
     }
 
-    public void getPredefinedFinalGoals() {
+    public void getPredefinedFinalGoals(PredefinedGoalCallback predefinedGoalCallback) {
         Call<PredefinedFinalGoal[]> call = jsonPlaceholderAPI.getPredefinedFinalGoals();
 
         call.enqueue(new Callback<PredefinedFinalGoal[]>() {
             @Override
             public void onResponse(Call<PredefinedFinalGoal[]> call, Response<PredefinedFinalGoal[]> response) {
                 if (!response.isSuccessful()){
-                    System.out.println("Unsuccessfull response code" + response.message());
+                    predefinedGoalCallback.informAboutFailed();
                     return;
                 }
-                PredefinedFinalGoal[] points = response.body();
-
-                // TODO: set goals
+                PredefinedFinalGoal[] goals = response.body();
+                predefinedGoalCallback.drawPreFinal(goals);
             }
 
             @Override
             public void onFailure(Call<PredefinedFinalGoal[]> call, Throwable t) {
-
+                predefinedGoalCallback.informAboutFailed();
             }
         });
     }

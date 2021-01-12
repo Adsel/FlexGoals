@@ -9,12 +9,21 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import java.util.ArrayList;
 import java.util.List;
-import pl.artsit.flexgoals.R;
 
-public class HomeFragment extends Fragment {
+import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.http.goals.PredefinedGoalCallback;
+import pl.artsit.flexgoals.http.services.FinalGoalService;
+import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
+import pl.artsit.flexgoals.model.ModalWidgets;
+import pl.artsit.flexgoals.model.goal.finals.PredefinedFinalGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.PredefinedQuantitativeGoal;
+
+public class HomeFragment extends Fragment implements PredefinedGoalCallback {
     private Integer[] colors;
     private HomeViewModel homeViewModel;
     private ViewPager viewPager;
@@ -22,6 +31,9 @@ public class HomeFragment extends Fragment {
     private List<Model> models;
     private ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     private Context context;
+    private RecyclerView preQuantGoalRecyclerView;
+    private RecyclerView preFinalGoalRecyclerView;
+    private ModalWidgets modal;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +44,15 @@ public class HomeFragment extends Fragment {
         context = root.getContext();
         viewPager = root.findViewById(R.id.viewPager);
         models = getModels();
+        modal = new ModalWidgets(root.getContext());
+
+        preQuantGoalRecyclerView = root.findViewById(R.id.pre_quantitative_goals_recycleview);
+        preQuantGoalRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        new QuantitativeGoalService().getQuantitativeGoals(this);
+
+        preFinalGoalRecyclerView = root.findViewById(R.id.pre_final_goals_recycleview);
+        preFinalGoalRecyclerView.setLayoutManager(new LinearLayoutManager(root.getContext()));
+        new FinalGoalService().getPredefinedFinalGoals(this);
 
         addSlider();
 
@@ -90,5 +111,28 @@ public class HomeFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void informAboutFailed() {
+        modal.showToast("Failed to load predefined goals");
+    }
+
+    @Override
+    public void drawPreFinal(PredefinedFinalGoal[] predefinedFinalGoals) {
+        PredefinedFinalGoalsAdapter predefinedFinalGoalAdapter = new PredefinedFinalGoalsAdapter(predefinedFinalGoals);
+
+        preFinalGoalRecyclerView.setAdapter(predefinedFinalGoalAdapter);
+        preFinalGoalRecyclerView.setVisibility(View.VISIBLE);
+        preFinalGoalRecyclerView.setHasFixedSize(true);
+    }
+
+    @Override
+    public void drawPreQuantitative(PredefinedQuantitativeGoal[] predefinedQuantitativeGoals) {
+        PredefinedQuantitativeGoalsAdapter predefinedQuantitativeGoalsAdapter = new PredefinedQuantitativeGoalsAdapter(predefinedQuantitativeGoals);
+
+        preQuantGoalRecyclerView.setAdapter(predefinedQuantitativeGoalsAdapter);
+        preQuantGoalRecyclerView.setVisibility(View.VISIBLE);
+        preQuantGoalRecyclerView.setHasFixedSize(true);
     }
 }

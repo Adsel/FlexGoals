@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+    android:layout_marginStart="15dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="50dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginRight="15dp"
+    android:gravity="center_vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parent_layout"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:background="@drawable/bcg_to_card_view"
+        android:minHeight="300dp">
+
+        <TextView
+            android:id="@+id/name_of_goal_q"
+            android:layout_width="337dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/white"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="[PRE Q] Zostań programistą"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/description_of_goal_q"
+            android:layout_width="337dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:text="Napisz program w ciagu tygodnia"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_of_goal" />
+
+        <Button
+            android:id="@+id/use_pre_quantitative_button"
+            android:layout_width="112dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/delete_bcg_card"
+            android:fontFamily="@font/open_sans"
+            android:text="Uzyj"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            app:backgroundTint="@color/celeZaliczeniowe"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/view_finished"
+            android:layout_width="112dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/accept_bcg_card"
+            android:fontFamily="@font/open_sans"
+            android:text="Zakończono"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:visibility="gone"
+            app:backgroundTint="@color/colorWarn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

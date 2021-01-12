@@ -5,6 +5,7 @@ import pl.artsit.flexgoals.http.goals.DeleteGoalCallback;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
+import pl.artsit.flexgoals.http.goals.PredefinedGoalCallback;
 import pl.artsit.flexgoals.http.user.UserCallback;
 import pl.artsit.flexgoals.model.goal.QuantitativeGoalUpdateData;
 import pl.artsit.flexgoals.model.goal.quantitative.PredefinedQuantitativeGoal;
@@ -121,24 +122,23 @@ public class QuantitativeGoalService extends HttpClient {
         });
     }
 
-    public void getQuantitativeGoals() {
+    public void getQuantitativeGoals(PredefinedGoalCallback predefinedGoalCallback) {
         Call<PredefinedQuantitativeGoal[]> call = jsonPlaceholderAPI.getQuantitativeGoals();
 
         call.enqueue(new Callback<PredefinedQuantitativeGoal[]>() {
             @Override
             public void onResponse(Call<PredefinedQuantitativeGoal[]> call, Response<PredefinedQuantitativeGoal[]> response) {
                 if (!response.isSuccessful()){
-                    System.out.println("Unsuccessfull response code" + response.message());
+                    predefinedGoalCallback.informAboutFailed();
                     return;
                 }
                 PredefinedQuantitativeGoal[] goals = response.body();
-
-                // TODO: set goals
+                predefinedGoalCallback.drawPreQuantitative(goals);
             }
 
             @Override
             public void onFailure(Call<PredefinedQuantitativeGoal[]> call, Throwable t) {
-
+                predefinedGoalCallback.informAboutFailed();
             }
         });
     }
