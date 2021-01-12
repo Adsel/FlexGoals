@@ -66,8 +66,8 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
             constraintLayout = view.findViewById(R.id.parent_layout);
             currentView = view;
-            acceptButton = view.findViewById(R.id.accept_quantitative_button);
-            item = (LinearLayout) view.findViewById(R.id.item_linear);
+            acceptButton = view.findViewById(R.id.accept_button);
+            item = view.findViewById(R.id.item_linear);
 
             addActions();
         }
@@ -191,7 +191,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         now = LocalDateTime.now();
         System.out.println();*/
-        /*if(viewHolder.getDescriptionToPercentage.getText() == "100%"){
+        if(viewHolder.getDescriptionToPercentage.getText() == "100%"){
             viewHolder.acceptButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -199,7 +199,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
                     Context context = null;
                     myDialog = new Dialog(context);
                     myDialog.setContentView(R.layout.end_task);
-                    
+
                     viewHolder.item.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -208,7 +208,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
                     });
                 }
             });
-        }*/
+        }
 
 
     }
