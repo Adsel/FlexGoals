@@ -6,7 +6,7 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="#00FFFFFF">
+    android:background="#00000000">
 
     <LinearLayout
         android:id="@+id/item_linear"
@@ -18,7 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
+            android:background="@drawable/end_goal_title_bcg"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:text="Brawo !!!"
+                android:text="@string/bravo_title"
                 android:textColor="#FFFFFF"
                 android:textSize="18dp"
                 android:textStyle="bold" />
@@ -41,7 +41,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
-                android:text="Zakończyłeś Cel"
+                android:text="@string/end_goal"
                 android:textColor="#FFFFFF"
                 android:textSize="16dp"
                 android:textStyle="italic" />
@@ -52,17 +52,27 @@
             android:id="@+id/ended_dialog_results"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Przejdź do wyników"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/go_to_results"
             android:textColor="#FF8861F3"
-            app:backgroundTint="#FFFFFF" />
+            app:backgroundTint="#FFFFFF"
+            app:cornerRadius="20dp" />
 
         <Button
             android:id="@+id/ended_dialog_close"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Zamknij"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/close"
             android:textColor="#8861F3"
-            app:backgroundTint="#FFFFFF" />
+            app:backgroundTint="#FFFFFF"
+            app:cornerRadius="20dp" />
     </LinearLayout>
 
 

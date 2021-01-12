@@ -178,7 +178,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         } else {
             viewHolder.progressBar.setProgress(1);
         }
-        viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
+        //viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
 
         long leftDays = Helper.getLeftDays(localDataSet[position].getDate(), localDataSet[position].getDays());
 

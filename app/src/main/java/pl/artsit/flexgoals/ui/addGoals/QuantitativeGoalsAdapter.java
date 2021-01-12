@@ -170,7 +170,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                                     progress
                             ));
                 } else {
-                    modal.showToast(context.getString(R.string.quantitative_progress_modal_invalid));
+                    //modal.showToast(context.getString(R.string.quantitative_progress_modal_invalid));
                 }
             }
         }
