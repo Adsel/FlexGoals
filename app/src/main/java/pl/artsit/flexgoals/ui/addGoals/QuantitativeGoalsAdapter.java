@@ -100,10 +100,23 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         }
 
         private void addActions() {
+            Dialog myDialog;
+            myDialog = new Dialog(currentView.getContext());
+            myDialog.setContentView(R.layout.end_task);
+            Button myResults = (Button) myDialog.findViewById(R.id.button4);
+            Button close = (Button) myDialog.findViewById(R.id.button5);
+
             currentView.setOnClickListener(v -> {
-                MainActivity.previewQuantitativeGoal = quantitativeGoal;
-                Intent intent = new Intent(currentView.getContext(), PreviewQuantitativeActivity.class);
-                currentView.getContext().startActivity(intent);
+
+                if(getGetDescriptionToPercentage().getText().toString()== "100%"){
+                    myDialog.show();
+                    System.out.println("Cel zostal zakonczony !!! ");
+                }else {
+                    MainActivity.previewQuantitativeGoal = quantitativeGoal;
+                    Intent intent = new Intent(currentView.getContext(), PreviewFinalActivity.class);
+                    currentView.getContext().startActivity(intent);
+                    System.out.println("Nie zakonczono celu !!! " );
+                }
             });
 
             currentView.findViewById(R.id.edit_button).setOnClickListener(v -> {
