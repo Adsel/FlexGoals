@@ -1,10 +1,12 @@
 package pl.artsit.flexgoals.http.services;
 
 import pl.artsit.flexgoals.http.goals.AddGoalCallback;
+import pl.artsit.flexgoals.http.goals.DeleteGoalCallback;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
 import pl.artsit.flexgoals.http.user.UserCallback;
+import pl.artsit.flexgoals.model.goal.QuantitativeGoalUpdateData;
 import pl.artsit.flexgoals.model.goal.quantitative.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalData;
@@ -20,7 +22,7 @@ public class QuantitativeGoalService extends HttpClient {
         super();
     }
 
-    public void saveQuantitativeGoal(GoalUpdateCallback goalUpdateCallback, QuantitativeGoal quantitativeGoal) {
+    public void saveQuantitativeGoal(GoalUpdateCallback goalUpdateCallback, QuantitativeGoalUpdateData quantitativeGoal) {
         Call<Integer> call = jsonPlaceholderAPI.updateQuantitativeGoal(quantitativeGoal);
 
         call.enqueue(new Callback<Integer>() {
@@ -141,7 +143,7 @@ public class QuantitativeGoalService extends HttpClient {
         });
     }
 
-    public void deleteQuantitativeGoal(UserCallback userCallback, QuantitativeGoal quantitativeGoal){
+    public void deleteQuantitativeGoal(DeleteGoalCallback deleteGoalCallback, QuantitativeGoalFlag quantitativeGoal){
         Call<Void> call = jsonPlaceholderAPI.deleteQuantitativeGoal(quantitativeGoal.getId());
 
         call.enqueue(new Callback<Void>() {
@@ -152,12 +154,12 @@ public class QuantitativeGoalService extends HttpClient {
                     return;
                 }
 
-                userCallback.goToMain();
+                deleteGoalCallback.deleteQuantitativeCallback(quantitativeGoal);
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                deleteGoalCallback.informAboutFailedDeleteQuantitativeGoal();
             }
         });
     }
