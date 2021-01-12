@@ -22,6 +22,7 @@ public class PredefinedFinalGoalsAdapter extends RecyclerView.Adapter<Predefined
     private TextView name;
     private TextView desc;
     private Button useBtn;
+    private TextView finalGoalCon;
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -31,6 +32,7 @@ public class PredefinedFinalGoalsAdapter extends RecyclerView.Adapter<Predefined
             name = view.findViewById(R.id.name_of_goal_f);
             desc = view.findViewById(R.id.description_of_goal_f);
             useBtn = view.findViewById(R.id.use_pre_f_button);
+            finalGoalCon = view.findViewById(R.id.final_goal_con);
         }
 
         public TextView getNameOfGoal() {
@@ -40,6 +42,7 @@ public class PredefinedFinalGoalsAdapter extends RecyclerView.Adapter<Predefined
         public TextView getDescOfGoal() {
             return desc;
         }
+        public TextView getFinalGoalCon(){return finalGoalCon;}
     }
 
     public PredefinedFinalGoalsAdapter(PredefinedFinalGoal[] dataSet) {
@@ -63,6 +66,8 @@ public class PredefinedFinalGoalsAdapter extends RecyclerView.Adapter<Predefined
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.getNameOfGoal().setText(localDataSet.get(position).getName());
         viewHolder.getDescOfGoal().setText(localDataSet.get(position).getDescription());
+        viewHolder.getFinalGoalCon().setText(localDataSet.get(position).getGoal());
+
     }
 
     @Override

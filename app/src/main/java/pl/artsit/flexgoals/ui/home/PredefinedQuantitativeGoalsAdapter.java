@@ -31,6 +31,8 @@ public class PredefinedQuantitativeGoalsAdapter extends RecyclerView.Adapter<Pre
     private TextView name;
     private TextView desc;
     private Button useBtn;
+    private TextView stepOne;
+    private TextView yourGoal;
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -39,16 +41,19 @@ public class PredefinedQuantitativeGoalsAdapter extends RecyclerView.Adapter<Pre
 
             name = view.findViewById(R.id.name_of_goal_q);
             desc = view.findViewById(R.id.description_of_goal_q);
+            stepOne = view.findViewById(R.id.step_value_to_change);
+            yourGoal = view.findViewById(R.id.goal_to_change);
             useBtn = view.findViewById(R.id.use_pre_quantitative_button);
         }
 
         public TextView getNameOfGoal() {
             return name;
         }
-
         public TextView getDescOfGoal() {
             return desc;
         }
+        public TextView getStepOne(){return stepOne;}
+        public TextView getYourGoal(){return yourGoal;}
     }
 
     public PredefinedQuantitativeGoalsAdapter(PredefinedQuantitativeGoal[] dataSet) {
@@ -69,6 +74,8 @@ public class PredefinedQuantitativeGoalsAdapter extends RecyclerView.Adapter<Pre
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.getNameOfGoal().setText(localDataSet.get(position).getName());
         viewHolder.getDescOfGoal().setText(localDataSet.get(position).getDescription());
+        viewHolder.getYourGoal().setText(localDataSet.get(position).getGoal());
+        viewHolder.getStepOne().setText(localDataSet.get(position).getStep().toString());
     }
 
     @Override
