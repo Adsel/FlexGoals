@@ -4,9 +4,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.graphics.Color;
 import android.text.InputType;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -176,7 +177,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                                     progress
                             ));
                 } else {
-                    modal.showToast("invalid");
+                    modal.showToast(currentView.getContext().getString(R.string.invalid));
                 }
             }
         }
@@ -256,9 +257,9 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         long leftDays = Helper.getLeftDays(localDataSet.get(position).getDate(), localDataSet.get(position).getDays());
 
         if (leftDays == 1) {
-            viewHolder.descriptionDayToChange.setText(leftDays + " dzień");
+            viewHolder.descriptionDayToChange.setText(leftDays + Resources.getSystem().getString(R.string.days));
         } else {
-            viewHolder.descriptionDayToChange.setText(leftDays + " dni");
+            viewHolder.descriptionDayToChange.setText(leftDays + Resources.getSystem().getString(R.string.days));
         }
 
         viewHolder.parent = this;

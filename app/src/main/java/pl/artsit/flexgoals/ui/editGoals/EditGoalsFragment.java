@@ -1,5 +1,6 @@
 package pl.artsit.flexgoals.ui.editGoals;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +44,7 @@ public class EditGoalsFragment extends Fragment implements AddGoalCallback, Goal
 
     @Override
     public void informAboutFailed() {
-        notify("Nie udało się zapisać");
+        notify(Resources.getSystem().getString(R.string.cant_save));
     }
 
     private MainActivity.GOAL_TYPE currentTaskType;

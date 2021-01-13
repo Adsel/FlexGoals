@@ -116,4 +116,6 @@
     <string name="calendar_quantitative_empty">Nie masz zadnych celow ilosciowych</string>
     <string name="calendar_final_empty">Nie masz zadnych celow zaliczeniowych</string>
     <string name="calendar_use_type">Wybierz typ twojego zadania</string>
+    <string name="invalid">niepoprawne</string>
+    <string name="days">Dni</string>
 </resources>

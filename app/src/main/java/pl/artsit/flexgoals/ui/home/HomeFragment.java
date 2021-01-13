@@ -2,6 +2,7 @@ package pl.artsit.flexgoals.ui.home;
 
 import android.animation.ArgbEvaluator;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,7 +126,8 @@ public class HomeFragment extends Fragment implements PredefinedGoalCallback {
 
     @Override
     public void informAboutFailed() {
-        modal.showToast("Failed to load predefined goals");
+
+        modal.showToast(Resources.getSystem().getString(R.string.failed_load_goals));
     }
 
     @Override

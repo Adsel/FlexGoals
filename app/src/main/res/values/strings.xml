@@ -93,6 +93,7 @@
         <item>Final goals</item>
     </string-array>
     <string name="day">Day</string>
+    <string name="days">Days</string>
     <string name="quantitative_activity">quantity</string>
 
     <string name="deleted_quantitative_goal">Deleted quantitative goal!</string>
@@ -108,4 +109,8 @@
     <string name="calendar_quantitative_empty">You don\'t have any quantitative goal</string>
     <string name="calendar_use_type">choose type of your goal</string>
     <string name="menu_home">Home Page</string>
+    <string name="invalid">invalid</string>
+    <string name="failed_update_final_goal">failed update final goal</string>
+    <string name="cant_save">can\'t save</string>
+    <string name="failed_load_goals">Failed to load goals</string>
 </resources>

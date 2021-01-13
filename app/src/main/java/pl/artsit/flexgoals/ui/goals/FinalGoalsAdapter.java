@@ -2,6 +2,7 @@ package pl.artsit.flexgoals.ui.goals;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -97,7 +98,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
 
         @Override
         public void informAboutFailedUpdated() {
-            modal.showToast("Failed update final goal");
+            modal.showToast(Resources.getSystem().getString(R.string.failed_update_final_goal));
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
@@ -211,9 +212,10 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         long leftDays = Helper.getLeftDays(localDataSet.get(position).getDate(), localDataSet.get(position).getDays());
 
         if (leftDays == 1) {
-            viewHolder.descriptionDayToChange.setText(leftDays + " dzień");
+            ClassLoader context;
+            viewHolder.descriptionDayToChange.setText(leftDays + Resources.getSystem().getString(R.string.days));
         } else {
-            viewHolder.descriptionDayToChange.setText(leftDays + " dni");
+            viewHolder.descriptionDayToChange.setText(leftDays + Resources.getSystem().getString(R.string.days));
         }
 
         viewHolder.parent = this;
