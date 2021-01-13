@@ -90,12 +90,16 @@
     <string name="quantitative_progress_dialog_cancel">Anuluj</string>
     <string name="quantitative_progress_modal_saved">Pomyślnie zaliczono!</string>
     <string name="quantitative_progress_modal_failed">Nie udało się zapisać!</string>
-    <string name="quantitative_progress_modal_invalid">Postęp musi być większy od zera!</string>
     <string name="day">Dzień</string>
     <string name="quantitative_activity">ilość</string>
     <string name="log_out">wyloguj</string>
-
+   <!-- <string name="quantitative_progress_modal_invalid">"Progress must be greater than zero! "</string> -->
     <string name="deleted_quantitative_goal">Usunięto cel ilościowy!</string>
     <string name="deleted_final_goal">Usunięto cel zaliczeniowy!</string>
     <string name="failed_delete_goal">Nie udało się usunąć celu!</string>
+
+    <string name="bravo_title">Brawo!!!</string>
+    <string name="end_goal">Ukończyłeś cel</string>
+    <string name="go_to_results">Przejdź do wyników</string>
+    <string name="close">Zamknij</string>
 </resources>

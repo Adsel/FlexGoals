@@ -1,6 +1,8 @@
 package pl.artsit.flexgoals.ui.addGoals;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.graphics.BlendMode;
 import android.graphics.Color;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -34,7 +37,9 @@ import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.shared.Helper;
 
-public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.ViewHolder> {
+import static pl.artsit.flexgoals.shared.Helper.GOAL_FINISHED;
+
+public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.ViewHolder>  {
     private static final char PROGRESS_DONE = '1';
     private List<FinalGoalFlag> localDataSet;
 
@@ -55,8 +60,12 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         private Button deleteButton;
         private final ModalWidgets modal;
         private FinalGoalsAdapter parent;
+        private ConstraintLayout constraintLayout;
+        private Button acceptButton;
+        private LinearLayout item;
 
-        public ViewHolder(final View view, FinalGoalsAdapter finalGoalsAdapter) {
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        public ViewHolder(final View view) {
             super(view);
 
             nameOfGoal = view.findViewById(R.id.name_of_goal);
@@ -67,6 +76,8 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             deleteButton = view.findViewById(R.id.delete_button);
             modal = new ModalWidgets(view.getContext());
             currentView = view;
+            acceptButton = view.findViewById(R.id.accept_button);
+            item = view.findViewById(R.id.item_linear);
 
             addActions();
         }
@@ -101,11 +112,24 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             modal.showToast("Failed update final goal");
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         private void addActions() {
             currentView.setOnClickListener((View v) -> {
-                MainActivity.previewFinalGoal = finalGoal;
-                Intent intent = new Intent(currentView.getContext(), PreviewFinalActivity.class);
-                currentView.getContext().startActivity(intent);
+                if (finalGoal.getFlag() == GOAL_FINISHED){
+                    Dialog myDialog = new Dialog(currentView.getContext());
+                    myDialog.setContentView(R.layout.end_task);
+                    Button myResults = myDialog.findViewById(R.id.ended_dialog_results);
+                    Button close = myDialog.findViewById(R.id.ended_dialog_close);
+                    myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    myDialog.show();
+                    myResults.setOnClickListener(view -> {
+                        goToPreview();
+                    });
+
+                    close.setOnClickListener(view -> myDialog.hide());
+                } else {
+                    goToPreview();
+                }
             });
 
             currentView.findViewById(R.id.edit_button).setOnClickListener((View v) -> {
@@ -163,6 +187,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
     }
 
     // Create new views (invoked by the layout manager)
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
