@@ -60,7 +60,7 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/less_violet_element"
             android:fontFamily="@font/open_sans"
-            android:text="Uzyj"
+            android:text="@string/usage"
             android:textAllCaps="false"
             android:textSize="14sp"
             android:textStyle="bold"

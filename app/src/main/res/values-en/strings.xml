@@ -30,6 +30,7 @@
     <string name="add_goals_type">"Choose Type "</string>
     <string name="add_goals_add_title">"Add a title "</string>
     <string name="add_goals_add_goal_target">Set quantitative target</string>
+    <string name="usage">Use</string>
     <string name="add_goals_add_desc">Add description</string>
     <string name="add_goals_add_days">"Add the number of days "</string>
     <string name="add_goals_add_goal_content">"Add goal content "</string>
