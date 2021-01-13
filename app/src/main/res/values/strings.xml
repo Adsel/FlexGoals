@@ -101,5 +101,11 @@
 
     <string name="pre_your_goal">Your goal</string>
     <string name="pre_description_of_goal">Description</string>
+    <string name="calendar_prev">prev</string>
+    <string name="calendar_next">next</string>
+    <string name="calendar_clickChange">click me to change type</string>
+    <string name="calendar_final_empty">You don\'t have any final goal</string>
+    <string name="calendar_quantitative_empty">You don\'t have any quantitative goal</string>
+    <string name="calendar_use_type">choose type of your goal</string>
     <string name="menu_home">Home Page</string>
 </resources>

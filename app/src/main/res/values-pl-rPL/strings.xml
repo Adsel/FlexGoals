@@ -110,4 +110,10 @@
     <string name="pre_description_of_goal">Opis</string>
 
     <string name="step_goal">Krok</string>
+    <string name="calendar_prev">poprzedni</string>
+    <string name="calendar_next">następny</string>
+    <string name="calendar_clickChange">nacisnij aby zmienić typ</string>
+    <string name="calendar_quantitative_empty">Nie masz zadnych celow ilosciowych</string>
+    <string name="calendar_final_empty">Nie masz zadnych celow zaliczeniowych</string>
+    <string name="calendar_use_type">Wybierz typ twojego zadania</string>
 </resources>
