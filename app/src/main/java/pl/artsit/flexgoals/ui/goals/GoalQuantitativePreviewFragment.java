@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.addGoals;
+package pl.artsit.flexgoals.ui.goals;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
@@ -15,7 +16,9 @@ import pl.artsit.flexgoals.http.services.FinalGoalService;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
+import pl.artsit.flexgoals.shared.Helper;
 
 public class StatisticsFragment extends Fragment implements GoalGetCallback {
     private TextView statisticQuantityCount;
@@ -26,10 +29,18 @@ public class StatisticsFragment extends Fragment implements GoalGetCallback {
 
         ((TextView) root.findViewById(R.id.textViewStatisticUsername)).setText(MainActivity.currentUser.getLogin());
         ((TextView) root.findViewById(R.id.textViewStatisticEmail)).setText(MainActivity.currentUser.getEmail());
-        ((TextView) root.findViewById(R.id.textViewStatisticPoints)).setText(MainActivity.currentUser.getPoints().toString());
+        ((TextView) root.findViewById(R.id.textViewStatisticPointsU)).setText(MainActivity.currentUser.getPoints().toString());
 
-        statisticQuantityCount = root.findViewById(R.id.textViewStatisticPoints);
+        statisticQuantityCount = root.findViewById(R.id.StatisticQuantityCount);
         statisticFinalCount = root.findViewById(R.id.StatisticFinalCount);
+
+        (root.findViewById(R.id.buttonF)).setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.nav_final_goals);
+        });
+
+        (root.findViewById(R.id.buttonQ)).setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(R.id.nav_quantitative_goals);
+        });
 
         new FinalGoalService().getFinalGoals(this, MainActivity.currentUser);
         new QuantitativeGoalService().getQuantitativeGoals(this, MainActivity.currentUser);
@@ -44,7 +55,15 @@ public class StatisticsFragment extends Fragment implements GoalGetCallback {
 
     @Override
     public void drawFinalGoals(FinalGoalFlag[] finalGoals) {
+        Integer left = 0;
 
+        for (FinalGoalFlag goal: finalGoals) {
+            if (goal.getFlag() != Helper.GOAL_FINISHED) {
+                left++;
+            }
+        }
+
+        statisticFinalCount.setText(left.toString());
     }
 
     @Override
@@ -58,32 +77,21 @@ public class StatisticsFragment extends Fragment implements GoalGetCallback {
     }
 
     @Override
-    // TODO: after reformating FinalGoalFlag structure
     public void drawQuantitativeGoals(QuantitativeGoalFlag[] quantitativeGoals) {
         Integer left = 0;
 
-//        for (QuantitativeGoal quantitativeGoal: quantitativeGoals) {
-//            if (quantitativeGoal.getFlag() != Helper.GOAL_FINISHED) {
-//                left++;
-//            }
-//        }
+        for (QuantitativeGoalFlag goal: quantitativeGoals) {
+            if (goal.getFlag() != Helper.GOAL_FINISHED) {
+                left++;
+            }
+        }
 
         statisticQuantityCount.setText(left.toString());
     }
 
 
-    // TODO: after reformating FinalGoalFlag structure
     @Override
     public void drawQuantitativeProgress() {
-        Integer left = 0;
-
-//        for (QuantitativeGoal quantitativeGoal: quantitativeGoals) {
-//            if (quantitativeGoal.getFlag() != Helper.GOAL_FINISHED) {
-//                left++;
-//            }
-//        }
-
-        statisticFinalCount.setText(left.toString());
     }
 
     @Override

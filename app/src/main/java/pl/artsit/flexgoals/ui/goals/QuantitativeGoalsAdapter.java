@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.addGoals;
+package pl.artsit.flexgoals.ui.goals;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;

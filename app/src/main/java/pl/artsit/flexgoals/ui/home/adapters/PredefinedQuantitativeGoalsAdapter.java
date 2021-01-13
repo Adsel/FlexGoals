@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.home;
+package pl.artsit.flexgoals.ui.home.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,30 +15,32 @@ import java.util.List;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.model.goal.finals.PredefinedFinalGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.PredefinedQuantitativeGoal;
 
-public class PredefinedFinalGoalsAdapter extends RecyclerView.Adapter<PredefinedFinalGoalsAdapter.ViewHolder>  {
-    private List<PredefinedFinalGoal> localDataSet;
+public class PredefinedQuantitativeGoalsAdapter extends RecyclerView.Adapter<PredefinedQuantitativeGoalsAdapter.ViewHolder>  {
+    private List<PredefinedQuantitativeGoal> localDataSet;
     private Context context;
     private View currentView;
     private TextView name;
     private TextView desc;
     private Button useBtn;
-    private TextView finalGoalCon;
+    private TextView stepOne;
+    private TextView yourGoal;
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        private PredefinedFinalGoal predefinedFinalGoal;
+        private PredefinedQuantitativeGoal predefinedQuantitativeGoal;
 
         public ViewHolder(View view) {
             super(view);
 
-            name = view.findViewById(R.id.name_of_goal_f);
-            desc = view.findViewById(R.id.description_of_goal_f);
-            useBtn = view.findViewById(R.id.use_pre_f_button);
-            finalGoalCon = view.findViewById(R.id.final_goal_con);
+            name = view.findViewById(R.id.name_of_goal_q);
+            desc = view.findViewById(R.id.description_of_goal_q);
+            stepOne = view.findViewById(R.id.step_value_to_change);
+            yourGoal = view.findViewById(R.id.goal_to_change);
+            useBtn = view.findViewById(R.id.use_pre_quantitative_button);
 
             useBtn.setOnClickListener(v -> {
-                MainActivity.predefinedFinalGoal = predefinedFinalGoal;
+                MainActivity.predefinedQuantitativeGoal = predefinedQuantitativeGoal;
                 Navigation.findNavController(view).navigate(R.id.nav_add_goal);
             });
         }
@@ -46,37 +48,34 @@ public class PredefinedFinalGoalsAdapter extends RecyclerView.Adapter<Predefined
         public TextView getNameOfGoal() {
             return name;
         }
-
         public TextView getDescOfGoal() {
             return desc;
         }
-        public TextView getFinalGoalCon(){return finalGoalCon;}
+        public TextView getStepOne(){return stepOne;}
+        public TextView getYourGoal(){return yourGoal;}
     }
 
-    public PredefinedFinalGoalsAdapter(PredefinedFinalGoal[] dataSet) {
-        List<PredefinedFinalGoal> data = new ArrayList<>();
+    public PredefinedQuantitativeGoalsAdapter(PredefinedQuantitativeGoal[] dataSet) {
+        List<PredefinedQuantitativeGoal> data = new ArrayList<>();
         for (int i = 0; i < dataSet.length; i++) {
             data.add(dataSet[i]);
         }
         localDataSet = data;
     }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_pre_final_goal, viewGroup, false);
-
+                .inflate(R.layout.item_pre_quantitative_goal, viewGroup, false);
         return new ViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.predefinedFinalGoal = localDataSet.get(position);
+        viewHolder.predefinedQuantitativeGoal = localDataSet.get(position);
         viewHolder.getNameOfGoal().setText(localDataSet.get(position).getName());
         viewHolder.getDescOfGoal().setText(localDataSet.get(position).getDescription());
-        viewHolder.getFinalGoalCon().setText(localDataSet.get(position).getGoal());
-
+        viewHolder.getYourGoal().setText(localDataSet.get(position).getGoal());
+        viewHolder.getStepOne().setText(localDataSet.get(position).getStep().toString());
     }
 
     @Override

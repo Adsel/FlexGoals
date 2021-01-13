@@ -25,6 +25,10 @@ import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.goal.finals.PredefinedFinalGoal;
 import pl.artsit.flexgoals.model.goal.quantitative.PredefinedQuantitativeGoal;
+import pl.artsit.flexgoals.ui.home.adapters.ImageAdapter;
+import pl.artsit.flexgoals.ui.home.adapters.Model;
+import pl.artsit.flexgoals.ui.home.adapters.PredefinedFinalGoalsAdapter;
+import pl.artsit.flexgoals.ui.home.adapters.PredefinedQuantitativeGoalsAdapter;
 
 public class HomeFragment extends Fragment implements PredefinedGoalCallback {
     private Integer[] colors;

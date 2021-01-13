@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.addGoals;
+package pl.artsit.flexgoals.ui.goals;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -15,7 +15,6 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import pl.artsit.flexgoals.MainActivity;

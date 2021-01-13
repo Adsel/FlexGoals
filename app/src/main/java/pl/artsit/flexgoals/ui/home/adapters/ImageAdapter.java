@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.home;
+package pl.artsit.flexgoals.ui.home.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
