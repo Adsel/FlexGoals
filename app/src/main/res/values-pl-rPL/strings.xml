@@ -36,8 +36,10 @@
     <string name="menu_button">menu</string>
     <string name="add_goals_type">Wybierz Rodzaj</string>
     <string name="add_goals_add_title">Dodaj tytuł</string>
+    <string name="add_goals_add_goal_target">Ustaw ilościowy cel</string>
     <string name="add_goals_add_desc">Dodaj opis</string>
     <string name="add_goals_add_days">Dodaj ilość dni</string>
+    <string name="add_goals_add_goal_content">Dodaj treść celu</string>
     <string name="add_goals_add_step">Podaj krok</string>
     <string name="add_goals_add_goal">Dodaj cel</string>
 
