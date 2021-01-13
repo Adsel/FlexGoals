@@ -7,6 +7,10 @@ public class PredefinedFinalGoal {
     private String goal;
     private Integer days;
 
+    public PredefinedFinalGoal() {
+
+    }
+
     public PredefinedFinalGoal(Integer id, String name, String description, String goal, Integer days) {
         this.id = id;
         this.name = name;

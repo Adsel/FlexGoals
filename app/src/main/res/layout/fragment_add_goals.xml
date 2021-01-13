@@ -149,7 +149,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/editTextAddGoalsQTarget"
+                    android:id="@+id/your_new_goal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
@@ -196,7 +196,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/editTextAddGoalsQDays"
+                    android:id="@+id/new_goal_days"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
@@ -252,58 +252,58 @@
                     android:dropDownWidth="match_parent"
                     android:spinnerMode="dropdown" />
 
-                <TextView
-                    android:id="@+id/textViewAddGoalsMessQTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@drawable/edit_round"
-                    android:fontFamily="@font/roboto_light"
-                    android:gravity="center"
-                    android:paddingLeft="30dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="30dp"
-                    android:paddingBottom="5dp"
-                    android:text="@string/add_goals_add_days"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editTextAddGoalsQTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/edit_round_flat"
-                    android:drawablePadding="10dp"
-                    android:elevation="6dp"
-                    android:ems="10"
-                    android:fontFamily="sans-serif-light"
-                    android:hint="@string/add_goals_add_days"
-                    android:importantForAutofill="no"
-                    android:inputType="text"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="10dp"
-                    android:shadowDx="20"
-                    android:shadowDy="20"
-                    android:shadowRadius="20"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textColorHint="@color/colorAccent"
-                    android:textCursorDrawable="@drawable/color_cursor"
-                    android:textSize="18sp"
-                    tools:targetApi="lollipop" />
-
                 <LinearLayout
                     android:id="@+id/LinearLayoutQ"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewAddGoalsMessQTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/edit_round"
+                        android:fontFamily="@font/roboto_light"
+                        android:gravity="center"
+                        android:paddingLeft="30dp"
+                        android:paddingTop="5dp"
+                        android:paddingRight="30dp"
+                        android:paddingBottom="5dp"
+                        android:text="@string/pre_your_goal"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/new_target"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/edit_round_flat"
+                        android:drawablePadding="10dp"
+                        android:elevation="6dp"
+                        android:ems="10"
+                        android:fontFamily="sans-serif-light"
+                        android:hint="@string/add_goals_add_goal_target"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="10dp"
+                        android:shadowDx="20"
+                        android:shadowDy="20"
+                        android:shadowRadius="20"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textColorHint="@color/colorAccent"
+                        android:textCursorDrawable="@drawable/color_cursor"
+                        android:textSize="18sp"
+                        tools:targetApi="lollipop" />
 
                     <TextView
                         android:id="@+id/textViewAddGoalsMessQTitle5"
@@ -325,7 +325,7 @@
                         android:textSize="14sp" />
 
                     <EditText
-                        android:id="@+id/editTextAddGoalsQTitle4"
+                        android:id="@+id/new_goal_step"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="0dp"
