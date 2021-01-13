@@ -5,10 +5,15 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="@string/menu_home"
+            android:visible="true"/>
+        <item
             android:id="@+id/nav_add_goal"
             android:icon="@drawable/ic_baseline_add_circle_24"
             android:title="@string/menu_dodajCel"
-            android:visible="true" > @color/dodajCel</item>
+            android:visible="true"/>
         <item
             android:id="@+id/nav_quantitative_goals"
             android:icon="@drawable/ic_baseline_check_circle_24"

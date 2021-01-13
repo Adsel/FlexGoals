@@ -75,7 +75,11 @@
     <string name="quantitative_progress_dialog_cancel">"Cancel "</string>
     <string name="quantitative_progress_modal_saved">"Successfully Passed! "</string>
     <string name="quantitative_progress_modal_failed">"Failed to save! "</string>
-    <string name="quantitative_progress_modal_invalid">Progress must be greater than zero!</string>
+    <string name="bravo_title">Bravo!!!</string>
+    <string name="end_goal">You have completed the target</string>
+    <string name="go_to_results">Go to the results</string>
+    <string name="close">close</string>
+
 
     <string name="log_out">log out</string>
 
@@ -95,4 +99,5 @@
     <string name="calendar_final_empty">You don\'t have any final goal</string>
     <string name="calendar_quantitative_empty">You don\'t have any quantitative goal</string>
     <string name="calendar_use_type">choose type of your goal</string>
+    <string name="menu_home">Home Page</string>
 </resources>

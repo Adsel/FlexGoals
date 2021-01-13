@@ -1,8 +1,10 @@
 package pl.artsit.flexgoals.ui.addGoals;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.graphics.Color;
 import android.text.InputType;
@@ -12,10 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,6 +46,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     private Button deleteButton;
     private View currentView;
 
+
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
@@ -58,20 +64,28 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         private View currentView;
         private Button acceptButton;
         private TextView finishedText;
+        private ConstraintLayout layout;
+        private RelativeLayout endTask;
         private QuantitativeGoalsAdapter parent;
 
         public ViewHolder(View view) {
             super(view);
 
+            endTask = itemView.findViewById(R.id.end_task);
             nameOfGoal = view.findViewById(R.id.name_of_goal);
             descriptionOfGoal = view.findViewById(R.id.description_of_goal);
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
-            acceptButton = view.findViewById(R.id.accept_quantitative_button);
+            acceptButton = view.findViewById(R.id.accept_quantitative_button_s);
             finishedText = view.findViewById(R.id.view_finished);
             deleteButton = view.findViewById(R.id.delete_button);
             currentView = view;
+
+            deleteButton.setOnClickListener((View v) ->
+                    new QuantitativeGoalService().deleteQuantitativeGoal(this, quantitativeGoal)
+            );
+            layout = view.findViewById(R.id.parent_layout);
 
             addActions();
         }
@@ -100,9 +114,21 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
 
         private void addActions() {
             currentView.setOnClickListener(v -> {
-                MainActivity.previewQuantitativeGoal = quantitativeGoal;
-                Intent intent = new Intent(currentView.getContext(), PreviewQuantitativeActivity.class);
-                currentView.getContext().startActivity(intent);
+                if (quantitativeGoal.getFlag() == Helper.GOAL_FINISHED){
+                    Dialog myDialog = new Dialog(currentView.getContext());
+                    myDialog.setContentView(R.layout.end_task);
+                    Button myResults = myDialog.findViewById(R.id.ended_dialog_results);
+                    Button close = myDialog.findViewById(R.id.ended_dialog_close);
+                    myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    myDialog.show();
+                    myResults.setOnClickListener(view -> {
+                        goToPreview();
+                    });
+
+                    close.setOnClickListener(view -> myDialog.hide());
+                } else {
+                    goToPreview();
+                }
             });
 
             currentView.findViewById(R.id.edit_button).setOnClickListener(v -> {
@@ -111,8 +137,13 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                 Navigation.findNavController(v).navigate(R.id.nav_edit_goal);
             });
 
-            acceptButton.setOnClickListener((View.OnClickListener) v -> makePromptWithGoalAchievement(v, quantitativeGoal));
-            deleteButton.setOnClickListener((View.OnClickListener) v ->  new QuantitativeGoalService().deleteQuantitativeGoal(this, quantitativeGoal));
+            acceptButton.setOnClickListener(v -> makePromptWithGoalAchievement(v, quantitativeGoal));
+        }
+
+        private void goToPreview() {
+            MainActivity.previewQuantitativeGoal = quantitativeGoal;
+            Intent intent = new Intent(currentView.getContext(), PreviewQuantitativeActivity.class);
+            currentView.getContext().startActivity(intent);
         }
 
         private void makePromptWithGoalAchievement(View view, QuantitativeGoalFlag quantitativeGoal) {
@@ -153,7 +184,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                                     progress
                             ));
                 } else {
-                    modal.showToast(context.getString(R.string.quantitative_progress_modal_invalid));
+                    modal.showToast("invalid");
                 }
             }
         }
@@ -204,7 +235,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                 .inflate(R.layout.item_quantitative_goal, viewGroup, false);
         modal = new ModalWidgets(view.getContext());
         context = view.getContext();
-        currentView = view;
 
         return new ViewHolder(view);
     }
@@ -236,7 +266,8 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                 viewHolder.finishedText.setVisibility(View.GONE);
             }
         } else {
-            (viewHolder.currentView.findViewById(R.id.accept_button)).setVisibility(View.VISIBLE);
+            viewHolder.acceptButton.setVisibility(View.VISIBLE);
+            viewHolder.finishedText.setVisibility(View.GONE);
         }
 
         long leftDays = Helper.getLeftDays(localDataSet.get(position).getDate(), localDataSet.get(position).getDays());
