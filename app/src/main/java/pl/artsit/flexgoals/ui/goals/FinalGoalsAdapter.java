@@ -215,7 +215,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             ClassLoader context;
             viewHolder.descriptionDayToChange.setText(leftDays + Resources.getSystem().getString(R.string.days));
         } else {
-            viewHolder.descriptionDayToChange.setText(leftDays + Resources.getSystem().getString(R.string.days));
+            viewHolder.descriptionDayToChange.setText(leftDays + viewHolder.currentView.getContext().getString(R.string.days));
         }
         viewHolder.parent = this;
     }
