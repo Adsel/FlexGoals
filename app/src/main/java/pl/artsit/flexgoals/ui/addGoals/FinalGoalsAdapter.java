@@ -4,6 +4,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.graphics.BlendMode;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,37 +16,52 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
+import pl.artsit.flexgoals.http.goals.DeleteGoalCallback;
 import pl.artsit.flexgoals.http.services.FinalGoalService;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
+import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.shared.Helper;
 
 import static pl.artsit.flexgoals.shared.Helper.GOAL_FINISHED;
 
 public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.ViewHolder>  {
     private static final char PROGRESS_DONE = '1';
-    private FinalGoalFlag[] localDataSet;
+    private List<FinalGoalFlag> localDataSet;
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder implements GoalAchieveCallback{
-        private  TextView nameOfGoal;
+    public static class ViewHolder extends RecyclerView.ViewHolder implements GoalAchieveCallback,
+            DeleteGoalCallback {
+        private TextView nameOfGoal;
         private TextView descriptionOfGoal;
         private ProgressBar progressBar;
         private TextView descriptionDayToChange;
         private TextView getDescriptionToPercentage;
         private FinalGoalFlag finalGoal;
         private View currentView;
-        private ConstraintLayout constraintLayout;
         private Button acceptButton;
+        private Button deleteButton;
+        private final ModalWidgets modal;
+        private FinalGoalsAdapter parent;
+        private ConstraintLayout constraintLayout;
         private LinearLayout item;
 
         @RequiresApi(api = Build.VERSION_CODES.O)
@@ -55,7 +73,8 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             progressBar = view.findViewById(R.id.progress_bar);
             descriptionDayToChange = view.findViewById(R.id.description_day_to_change);
             getDescriptionToPercentage = view.findViewById(R.id.description_to_change_percent);
-            constraintLayout = view.findViewById(R.id.parent_layout);
+            deleteButton = view.findViewById(R.id.delete_button);
+            modal = new ModalWidgets(view.getContext());
             currentView = view;
             acceptButton = view.findViewById(R.id.accept_button);
             item = view.findViewById(R.id.item_linear);
@@ -90,8 +109,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
 
         @Override
         public void informAboutFailedUpdated() {
-            // TODO:
-            // TOAST
+            modal.showToast("Failed update final goal");
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
@@ -124,13 +142,40 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
                     new FinalGoalService().scoreFinalGoal(this, finalGoal.getId())
             );
 
+            deleteButton.setOnClickListener((View v) ->
+                    new FinalGoalService().deleteFinalGoal(this, finalGoal)
+            );
         }
 
         private void goToPreview() {
             MainActivity.previewFinalGoal = finalGoal;
-            Intent intent = new Intent(currentView.getContext(), PreviewFinalActivity.class);
+            Intent intent = new Intent(currentView.getContext(), PreviewQuantitativeActivity.class);
             currentView.getContext().startActivity(intent);
         }
+
+        @Override
+        public void deleteFinalCallback(FinalGoalFlag deletedFinalGoal) {
+            parent.localDataSet.remove(deletedFinalGoal);
+            parent.notifyItemRemoved(getAdapterPosition());
+            parent.notifyDataSetChanged();
+            modal.showToast(currentView.getContext().getString(R.string.deleted_final_goal));
+        }
+
+        @Override
+        public void deleteQuantitativeCallback(QuantitativeGoalFlag quantitativeGoalId) {
+
+        }
+
+        @Override
+        public void informAboutFailedDeleteFinalGoal() {
+            modal.showToast(currentView.getContext().getString(R.string.failed_delete_goal));
+        }
+
+        @Override
+        public void informAboutFailedDeleteQuantitativeGoal() {
+
+        }
+
     }
 
     /**
@@ -140,7 +185,11 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
      * by RecyclerView.
      */
     public FinalGoalsAdapter(FinalGoalFlag[] dataSet) {
-        localDataSet = dataSet;
+        List<FinalGoalFlag> data = new ArrayList<>();
+        for (int i = 0; i < dataSet.length; i++) {
+            data.add(dataSet[i]);
+        }
+        localDataSet = data;
     }
 
     // Create new views (invoked by the layout manager)
@@ -151,50 +200,49 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_final_goal, viewGroup, false);
 
-
         return new ViewHolder(view);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.finalGoal = localDataSet[position];
+        viewHolder.finalGoal = localDataSet.get(position);
         if (viewHolder.finalGoal.getFlag() < 0) {
             viewHolder.currentView.findViewById(R.id.accept_button).setVisibility(View.GONE);
 
             if (viewHolder.finalGoal.getFlag() == Helper.GOAL_FINISHED) {
-
                 viewHolder.currentView.findViewById(R.id.view_finished).setVisibility(View.VISIBLE);
             }
         } else {
             (viewHolder.currentView.findViewById(R.id.accept_button)).setVisibility(View.VISIBLE);
         }
-        viewHolder.getNameOfGoal().setText(localDataSet[position].getName());
-        viewHolder.descriptionOfGoal.setText(localDataSet[position].getDescription());
+        viewHolder.getNameOfGoal().setText(localDataSet.get(position).getName());
+        viewHolder.descriptionOfGoal.setText(localDataSet.get(position).getDescription());
 
-
-        int progressCount = getProgressCount(localDataSet[position].getProgress());
-        int finishCount = getProgressPercentage(progressCount, localDataSet[position].getDays());
+        int progressCount = getProgressCount(localDataSet.get(position).getProgress());
+        int finishCount = getProgressPercentage(progressCount, localDataSet.get(position).getDays());
         if (finishCount > 0) {
             viewHolder.progressBar.setProgress(finishCount);
         } else {
             viewHolder.progressBar.setProgress(1);
         }
-        //viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
+        viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
 
-        long leftDays = Helper.getLeftDays(localDataSet[position].getDate(), localDataSet[position].getDays());
+        long leftDays = Helper.getLeftDays(localDataSet.get(position).getDate(), localDataSet.get(position).getDays());
 
         if (leftDays == 1) {
             viewHolder.descriptionDayToChange.setText(leftDays + " dzień");
         } else {
             viewHolder.descriptionDayToChange.setText(leftDays + " dni");
         }
+
+        viewHolder.parent = this;
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return localDataSet.length;
+        return localDataSet.size();
     }
 
     private int getProgressCount(String progress) {
