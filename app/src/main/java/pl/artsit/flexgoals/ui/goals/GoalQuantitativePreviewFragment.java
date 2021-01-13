@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.addGoals;
+package pl.artsit.flexgoals.ui.goals;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -31,8 +31,6 @@ public class GoalQuantitativePreviewFragment extends Fragment {
 
         return root;
     }
-
-
 
     public void setHeaderBackgroundColor(View view, int color, int drawable, Context context){
         Drawable unwrappedDrawable = AppCompatResources.getDrawable(context, drawable);

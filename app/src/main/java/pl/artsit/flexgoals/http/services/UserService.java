@@ -21,7 +21,6 @@ public class UserService extends HttpClient{
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (!response.isSuccessful()){
-                    System.out.println("Unsuccessfull response code" + response.message());
                     return;
                 }
                 User user = response.body();
@@ -43,24 +42,19 @@ public class UserService extends HttpClient{
     public void registerUser(UserRegistryCallback userRegistryCallback, User user){
         Call<User> call = jsonPlaceholderAPI.registerUser(user);
 
-        System.out.println("STRUCTURE OF USsaveQuaER" + user.toString());
-
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (!response.isSuccessful()){
-                    System.out.println("Unsuccessfull response code");
                     userRegistryCallback.informAboutFailedRegistered();
                     return;
                 }
 
-                // User user = response.body();
                 userRegistryCallback.informAboutSuccessfulRegistered();
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                System.out.println("Failed request");
                 userRegistryCallback.informAboutFailedRegistered();
             }
         });
@@ -73,7 +67,6 @@ public class UserService extends HttpClient{
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (!response.isSuccessful()){
-                    System.out.println("Unsuccessfull response code" + response.message());
                     return;
                 }
                 Integer points = response.body();

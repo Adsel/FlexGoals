@@ -1,4 +1,4 @@
-package pl.artsit.flexgoals.ui.home;
+package pl.artsit.flexgoals.ui.home.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,9 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-
 import java.util.List;
-
 import pl.artsit.flexgoals.R;
 
 public class ImageAdapter extends PagerAdapter {
@@ -25,7 +23,6 @@ public class ImageAdapter extends PagerAdapter {
         this.models = models;
         this.context = context;
     }
-
 
     @Override
     public int getCount() {

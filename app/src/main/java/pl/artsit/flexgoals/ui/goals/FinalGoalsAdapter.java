@@ -1,12 +1,10 @@
-package pl.artsit.flexgoals.ui.addGoals;
+package pl.artsit.flexgoals.ui.goals;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.graphics.BlendMode;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +14,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import pl.artsit.flexgoals.MainActivity;
@@ -44,10 +37,6 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
     private static final char PROGRESS_DONE = '1';
     private List<FinalGoalFlag> localDataSet;
 
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
     public static class ViewHolder extends RecyclerView.ViewHolder implements GoalAchieveCallback,
             DeleteGoalCallback {
         private TextView nameOfGoal;
@@ -109,7 +98,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
 
         @Override
         public void informAboutFailedUpdated() {
-            modal.showToast("Failed update final goal");
+            modal.showToast(Resources.getSystem().getString(R.string.failed_update_final_goal));
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
@@ -178,12 +167,6 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
 
     }
 
-    /**
-     * Initialize the dataset of the Adapter.
-     *
-     * @param dataSet String[] containing the data to populate views to be used
-     * by RecyclerView.
-     */
     public FinalGoalsAdapter(FinalGoalFlag[] dataSet) {
         List<FinalGoalFlag> data = new ArrayList<>();
         for (int i = 0; i < dataSet.length; i++) {
@@ -192,11 +175,9 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         localDataSet = data;
     }
 
-    // Create new views (invoked by the layout manager)
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_final_goal, viewGroup, false);
 
@@ -231,15 +212,15 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         long leftDays = Helper.getLeftDays(localDataSet.get(position).getDate(), localDataSet.get(position).getDays());
 
         if (leftDays == 1) {
-            viewHolder.descriptionDayToChange.setText(leftDays + " dzień");
+            ClassLoader context;
+            viewHolder.descriptionDayToChange.setText(leftDays + Resources.getSystem().getString(R.string.days));
         } else {
-            viewHolder.descriptionDayToChange.setText(leftDays + " dni");
+            viewHolder.descriptionDayToChange.setText(leftDays + Resources.getSystem().getString(R.string.days));
         }
 
         viewHolder.parent = this;
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return localDataSet.size();

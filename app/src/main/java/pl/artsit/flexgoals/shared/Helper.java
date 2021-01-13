@@ -19,7 +19,6 @@ public class Helper {
     private static Date convertDateFromServer(Date dateFromServer) {
         Calendar convertedDate = Calendar.getInstance();
         convertedDate.setTime(dateFromServer);
-        //convertedDate.add(Calendar.MONTH, 1);
 
         return convertedDate.getTime();
     }
