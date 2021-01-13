@@ -36,10 +36,6 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
     private static final char PROGRESS_DONE = '1';
     private List<FinalGoalFlag> localDataSet;
 
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
     public static class ViewHolder extends RecyclerView.ViewHolder implements GoalAchieveCallback,
             DeleteGoalCallback {
         private TextView nameOfGoal;
@@ -170,12 +166,6 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
 
     }
 
-    /**
-     * Initialize the dataset of the Adapter.
-     *
-     * @param dataSet String[] containing the data to populate views to be used
-     * by RecyclerView.
-     */
     public FinalGoalsAdapter(FinalGoalFlag[] dataSet) {
         List<FinalGoalFlag> data = new ArrayList<>();
         for (int i = 0; i < dataSet.length; i++) {
@@ -184,11 +174,9 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         localDataSet = data;
     }
 
-    // Create new views (invoked by the layout manager)
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_final_goal, viewGroup, false);
 
@@ -231,7 +219,6 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         viewHolder.parent = this;
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return localDataSet.size();

@@ -25,7 +25,6 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Locale;
 
-import pl.artsit.flexgoals.http.services.HttpClient;
 import pl.artsit.flexgoals.http.services.UserService;
 import pl.artsit.flexgoals.http.user.UserCallback;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
@@ -39,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
     private AppBarConfiguration mAppBarConfiguration;
     public static User currentUser;
     public static boolean isUser = false;
-
 
     public enum GOAL_TYPE {
         FINAL,
@@ -59,10 +57,7 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TODO
-        setLocale(this,"EN");
-
-        if(MainActivity.isUser) {
+        if (MainActivity.isUser) {
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().hide();
@@ -88,7 +83,6 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
         ((TextView) findViewById(R.id.userName)).setText(currentUser.getLogin());
@@ -124,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
 
 
     public void logOut(View view) {
-
         SharedPreferences sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();

@@ -62,9 +62,6 @@ public class CalendarFragment<T> extends Fragment implements GoalGetCallback {
 
         setCalendarDate(new Date(),new Date());
 
-
-
-
         buttonNext.setOnClickListener(view ->{
             if (typeGoal == 1){
                 if(!finalGoals.isEmpty()){
@@ -156,8 +153,6 @@ public class CalendarFragment<T> extends Fragment implements GoalGetCallback {
                     modalWidgets.showToast(getResources().getText(R.string.calendar_quantitative_empty).toString());
                 }
             }
-
-            //Toast.makeText(getContext(), "list " + calendar.getSelectedDates().toString(), Toast.LENGTH_LONG).show();
         });
         return root;
     }

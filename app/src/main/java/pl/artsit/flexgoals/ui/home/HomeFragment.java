@@ -107,15 +107,7 @@ public class HomeFragment extends Fragment implements PredefinedGoalCallback {
                                 colors[position + 1]
                         )
                     );
-                  /*  viewPager.setBackgroundColor((Integer) argbEvaluator.evaluate(
-                            positionOffset,
-                            colors[position],
-                            colors[position + 1]
-                            )
-                    );*/
-
                 } else {
-                   // viewPager.setBackgroundColor(colors[colors.length - 1]);
                     scrollView.setBackgroundColor(colors[colors.length - 1]);
                 }
             }

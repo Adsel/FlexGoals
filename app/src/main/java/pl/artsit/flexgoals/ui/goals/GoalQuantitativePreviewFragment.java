@@ -32,8 +32,6 @@ public class GoalQuantitativePreviewFragment extends Fragment {
         return root;
     }
 
-
-
     public void setHeaderBackgroundColor(View view, int color, int drawable, Context context){
         Drawable unwrappedDrawable = AppCompatResources.getDrawable(context, drawable);
         Drawable wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable);

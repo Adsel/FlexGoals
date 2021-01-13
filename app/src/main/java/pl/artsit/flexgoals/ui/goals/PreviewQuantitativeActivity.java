@@ -31,15 +31,11 @@ public class PreviewQuantitativeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_preview_quantitative);
         quantitativeGoal = MainActivity.previewQuantitativeGoal;
 
-        // DATA
         BarDataSet dataset = new BarDataSet(getEntries(), getResources().getString(R.string.quantitative_activity));
-
-        // CHART
         BarChart chart = (BarChart)findViewById(R.id.testowo);
         BarData data = new BarData(dataset);
         chart.setData(data);
 
-        // CHART DESCRIPTION AND ADDING LABELS
         Description description = new Description();
         description.setText(getResources().getText(R.string.statistic_quantity).toString());
         chart.setDescription(description);
@@ -53,8 +49,6 @@ public class PreviewQuantitativeActivity extends AppCompatActivity {
         chart.getLegend().setTextColor(getResources().getColor(R.color.colorPrimary));
         chart.setGridBackgroundColor(getResources().getColor(R.color.colorPrimary));
         chart.getDescription().setEnabled(false);
-        // COLORS AND ANIMATION (OF DRAWING CHART)
-
 
         dataset.setValueTextColor(getResources().getColor(R.color.colorPrimary));
         dataset.setColors(getResources().getIntArray(R.array.color_group));
@@ -75,7 +69,6 @@ public class PreviewQuantitativeActivity extends AppCompatActivity {
         ArrayList<BarEntry> entries = new ArrayList<>();
         List<Integer> progress = getProgress(quantitativeGoal.getProgress());
 
-        // TODO: read a progress
         for (int i = 0; i < quantitativeGoal.getDays(); i++) {
             entries.add(
                     new BarEntry(i, progress.get(i))

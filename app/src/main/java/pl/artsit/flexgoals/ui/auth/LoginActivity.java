@@ -20,7 +20,6 @@ import androidx.core.graphics.drawable.DrawableCompat;
 
 import pl.artsit.flexgoals.MainActivity;
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.http.services.HttpClient;
 import pl.artsit.flexgoals.http.services.UserService;
 import pl.artsit.flexgoals.http.user.UserLoginCallback;
 import pl.artsit.flexgoals.model.ModalWidgets;

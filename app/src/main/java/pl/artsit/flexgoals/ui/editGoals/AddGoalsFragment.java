@@ -92,7 +92,6 @@ public class AddGoalsFragment extends Fragment implements AddGoalCallback {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
             }
 
         });

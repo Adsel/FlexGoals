@@ -76,7 +76,6 @@ public class PredefinedFinalGoalsAdapter extends RecyclerView.Adapter<Predefined
         viewHolder.getNameOfGoal().setText(localDataSet.get(position).getName());
         viewHolder.getDescOfGoal().setText(localDataSet.get(position).getDescription());
         viewHolder.getFinalGoalCon().setText(localDataSet.get(position).getGoal());
-
     }
 
     @Override

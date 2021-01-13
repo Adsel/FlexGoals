@@ -39,10 +39,7 @@ public class PreviewFinalActivity extends AppCompatActivity {
         finalGoal = MainActivity.previewFinalGoal;
         pieChart = findViewById(R.id.preview_progressbar);
 
-
-        // TODO:
         List<Integer> progressData = getProgressData();
-
         List<PieEntry> pieEntires = new ArrayList<>();
         pieEntires.add(new PieEntry(
                 progressData.get(0), getString(R.string.goal_preview_final_chart_progress)
@@ -54,14 +51,11 @@ public class PreviewFinalActivity extends AppCompatActivity {
                 progressData.get(1), getString(R.string.goal_preview_final_chart_failed)
         ));
 
-
         PieDataSet dataSet = new PieDataSet(pieEntires,"");
         dataSet.setColors(getResources().getIntArray(R.array.color_group));
         dataSet.setValueTextSize(getResources().getInteger(R.integer.final_chart_size));
         PieData data = new PieData(dataSet);
 
-
-        //Get the chart
         pieChart.setData(data);
         pieChart.invalidate();
         pieChart.setHoleColor(ModalWidgets.getColorWithAlpha(Color.GREEN, 0.0f));
@@ -76,7 +70,7 @@ public class PreviewFinalActivity extends AppCompatActivity {
         pieChart.setDrawSlicesUnderHole(false);
         pieChart.setDrawRoundedSlices(false);
         pieChart.setHoleColor(getResources().getColor(R.color.colorPrimary));
-        //legend attributes
+
         Legend legend = pieChart.getLegend();
         legend.setForm(Legend.LegendForm.CIRCLE);
         legend.setTextSize(getResources().getInteger(R.integer.primary_text_size));

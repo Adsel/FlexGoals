@@ -36,7 +36,6 @@ public class GoalFinalFragment extends Fragment implements GoalGetCallback {
 
         new FinalGoalService().getFinalGoals(this, MainActivity.currentUser);
 
-
         return root;
     }
 
@@ -63,12 +62,8 @@ public class GoalFinalFragment extends Fragment implements GoalGetCallback {
     @Override
     public void drawFinalGoals(FinalGoalFlag[] finalGoals) {
         FinalGoalsAdapter finalGoalsAdapter = new FinalGoalsAdapter(finalGoals);
-
-
         finalGoalRecyclerView.setAdapter(finalGoalsAdapter);
         finalGoalRecyclerView.setVisibility(View.VISIBLE);
-
-
     }
 
     @Override

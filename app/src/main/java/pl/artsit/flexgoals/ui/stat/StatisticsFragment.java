@@ -16,7 +16,6 @@ import pl.artsit.flexgoals.http.services.FinalGoalService;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
-import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.shared.Helper;
 

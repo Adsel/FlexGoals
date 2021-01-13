@@ -45,13 +45,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     private Button deleteButton;
     private View currentView;
 
-
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
-
-
     class ViewHolder extends RecyclerView.ViewHolder implements GoalAchieveCallback,
             DeleteGoalCallback {
         private final TextView nameOfGoal;
@@ -212,12 +205,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         }
     }
 
-    /**
-     * Initialize the dataset of the Adapter.
-     *
-     * @param dataSet String[] containing the data to populate views to be used
-     * by RecyclerView.
-     */
     public QuantitativeGoalsAdapter(QuantitativeGoalFlag[] dataSet) {
         List<QuantitativeGoalFlag> data = new ArrayList<>();
         for (int i = 0; i < dataSet.length; i++) {
@@ -226,10 +213,8 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         localDataSet = data;
     }
 
-    // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_quantitative_goal, viewGroup, false);
         modal = new ModalWidgets(view.getContext());
@@ -238,7 +223,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         return new ViewHolder(view);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
@@ -299,7 +283,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         return progressCount * 100 / (daysCount * step);
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return localDataSet.size();

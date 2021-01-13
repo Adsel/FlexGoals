@@ -22,7 +22,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import pl.artsit.flexgoals.R;
-import pl.artsit.flexgoals.http.services.HttpClient;
 import pl.artsit.flexgoals.http.services.UserService;
 import pl.artsit.flexgoals.http.user.UserRegistryCallback;
 import pl.artsit.flexgoals.model.ModalWidgets;
