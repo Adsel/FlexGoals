@@ -25,6 +25,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Locale;
 
+import pl.artsit.flexgoals.http.services.HttpClient;
 import pl.artsit.flexgoals.http.services.UserService;
 import pl.artsit.flexgoals.http.user.UserCallback;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
     private AppBarConfiguration mAppBarConfiguration;
     public static User currentUser;
     public static boolean isUser = false;
+
 
     public enum GOAL_TYPE {
         FINAL,
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
         }
+
     }
 
     @Override
