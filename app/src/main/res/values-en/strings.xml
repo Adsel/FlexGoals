@@ -83,10 +83,6 @@
      </string-array>
      <string name="day">Day</string>
      <string name="quantitative_activity">quantity</string>
-
-     <string name="deleted_quantitative_goal">Deleted quantitative goal!</string>
-     <string name="deleted_final_goal">Deleted final goal!</string>
-     <string name="failed_delete_goal">Failed to delete goal!</string>
     <string name="menu_home">Home Page</string>
     <string name="go_to_results">Go to the results</string>
     <string name="close">close</string>
