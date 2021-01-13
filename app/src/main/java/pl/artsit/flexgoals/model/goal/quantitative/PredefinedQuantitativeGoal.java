@@ -9,6 +9,10 @@ public class PredefinedQuantitativeGoal {
     private Integer target;
     private Integer step;
 
+    public PredefinedQuantitativeGoal() {
+
+    }
+
     public PredefinedQuantitativeGoal(Integer id, String name, String description, String goal, Integer days, Integer target, Integer step) {
         this.id = id;
         this.name = name;

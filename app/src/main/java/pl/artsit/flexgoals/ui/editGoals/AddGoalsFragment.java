@@ -21,15 +21,18 @@ import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoal;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalData;
+import pl.artsit.flexgoals.model.goal.finals.PredefinedFinalGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalData;
 
 public class AddGoalsFragment extends Fragment implements AddGoalCallback {
-
     private EditText newGoalName;
     private EditText newGoalDesc;
     private EditText newGoalTarget;
     private EditText newGoalDays;
+    private EditText newGoalStep;
+    private EditText newGoalContent;
     private ModalWidgets modal;
     private AddGoalsViewModel addGoalsViewModel;
 
@@ -52,11 +55,12 @@ public class AddGoalsFragment extends Fragment implements AddGoalCallback {
 
         newGoalName = root.findViewById(R.id.newGoalName);
         newGoalDesc = root.findViewById(R.id.editTextAddGoalsQDescription);
-        newGoalTarget = root.findViewById(R.id.editTextAddGoalsQTarget);
-        newGoalDays = root.findViewById(R.id.editTextAddGoalsQDays);
+        newGoalTarget = root.findViewById(R.id.new_target);
+        newGoalDays = root.findViewById(R.id.new_goal_days);
+        newGoalStep = root.findViewById(R.id.new_goal_step);
+        newGoalContent = root.findViewById(R.id.your_new_goal);
         modal = new ModalWidgets(root.getContext());
 
-        View view = this.getView();
         root.findViewById(R.id.buttonAddGoalsSubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,12 +68,15 @@ public class AddGoalsFragment extends Fragment implements AddGoalCallback {
             }
         });
 
-//        ModalWidgets modalWidgets = new ModalWidgets(root.getContext());
-//        modalWidgets.setBackColor(textViewAddingGoalsTitle,R.color.addGoals,R.drawable.title );
-//        modalWidgets.setBackColor(textViewAddGoalsMess1,R.color.addGoals, R.drawable.title);
-//        modalWidgets.setBackColor(editTextAddGoalsMess3,R.color.addGoals, R.drawable.edit_round_flat);
-//        modalWidgets.setBackColor(editTextAddGoalsName,R.color.colorPrimary, R.drawable.edit_round_flat);
-//        modalWidgets.setBackColor(addGoalsName,R.color.addGoals, R.drawable.edit_round_flat);
+        if (MainActivity.predefinedQuantitativeGoal != null) {
+            setPreQuantitativeGoal(MainActivity.predefinedQuantitativeGoal);
+            MainActivity.predefinedQuantitativeGoal = null;
+        } else if (MainActivity.predefinedFinalGoal != null) {
+            root.findViewById(R.id.LinearLayoutQ).setVisibility(View.GONE);
+            spinnerAddGoals.setSelection(1);
+            setPreFinalGoal(MainActivity.predefinedFinalGoal);
+            MainActivity.predefinedFinalGoal = null;
+        }
 
         spinnerAddGoals.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -91,6 +98,23 @@ public class AddGoalsFragment extends Fragment implements AddGoalCallback {
         });
 
         return root;
+    }
+
+    private void setPreFinalGoal(PredefinedFinalGoal preFinalGoal) {
+        currentTaskType = GOAL_TYPE.FINAL;
+        newGoalName.setText(preFinalGoal.getName());
+        newGoalDesc.setText(preFinalGoal.getDescription());
+        newGoalContent.setText(preFinalGoal.getGoal());
+        newGoalDays.setText(preFinalGoal.getDays().toString());
+    }
+
+    private void setPreQuantitativeGoal(PredefinedQuantitativeGoal preQuantitativeGoal) {
+        newGoalTarget.setText(preQuantitativeGoal.getTarget().toString());
+        newGoalName.setText(preQuantitativeGoal.getName());
+        newGoalDesc.setText(preQuantitativeGoal.getDescription());
+        newGoalContent.setText(preQuantitativeGoal.getGoal());
+        newGoalDays.setText(preQuantitativeGoal.getDays().toString());
+        newGoalStep.setText(preQuantitativeGoal.getStep().toString());
     }
 
     public void createGoal(View view) {
