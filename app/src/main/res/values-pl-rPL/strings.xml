@@ -118,4 +118,7 @@
     <string name="calendar_use_type">Wybierz typ twojego zadania</string>
     <string name="invalid">niepoprawne</string>
     <string name="days">Dni</string>
+    <string name="failed_update_final_goal">nieudało się zaktualizować celów</string>
+    <string name="cant_save">nie można zapisać</string>
+    <string name="failed_load_goals">nie udało się wczytać celów</string>
 </resources>
