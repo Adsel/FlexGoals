@@ -1,5 +1,6 @@
 package pl.artsit.flexgoals.ui.editGoals;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,8 @@ import pl.artsit.flexgoals.http.goals.AddGoalCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
 import pl.artsit.flexgoals.http.services.QuantitativeGoalService;
 import pl.artsit.flexgoals.model.ModalWidgets;
-import pl.artsit.flexgoals.model.goal.FinalGoalUpdateData;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoalUpdateData;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalUpdateData;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalUpdateData;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoal;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
@@ -43,7 +44,7 @@ public class EditGoalsFragment extends Fragment implements AddGoalCallback, Goal
 
     @Override
     public void informAboutFailed() {
-        notify("Nie udało się zapisać");
+        notify(Resources.getSystem().getString(R.string.cant_save));
     }
 
     private MainActivity.GOAL_TYPE currentTaskType;

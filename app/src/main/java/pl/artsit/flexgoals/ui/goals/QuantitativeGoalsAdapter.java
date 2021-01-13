@@ -1,12 +1,13 @@
-package pl.artsit.flexgoals.ui.addGoals;
+package pl.artsit.flexgoals.ui.goals;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.graphics.Color;
 import android.text.InputType;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,13 +45,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
     private Context context;
     private Button deleteButton;
     private View currentView;
-
-
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
-
 
     class ViewHolder extends RecyclerView.ViewHolder implements GoalAchieveCallback,
             DeleteGoalCallback {
@@ -184,7 +177,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                                     progress
                             ));
                 } else {
-                    modal.showToast("invalid");
+                    modal.showToast(currentView.getContext().getString(R.string.invalid));
                 }
             }
         }
@@ -213,12 +206,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         }
     }
 
-    /**
-     * Initialize the dataset of the Adapter.
-     *
-     * @param dataSet String[] containing the data to populate views to be used
-     * by RecyclerView.
-     */
     public QuantitativeGoalsAdapter(QuantitativeGoalFlag[] dataSet) {
         List<QuantitativeGoalFlag> data = new ArrayList<>();
         for (int i = 0; i < dataSet.length; i++) {
@@ -227,10 +214,8 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         localDataSet = data;
     }
 
-    // Create new views (invoked by the layout manager)
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_quantitative_goal, viewGroup, false);
         modal = new ModalWidgets(view.getContext());
@@ -239,7 +224,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         return new ViewHolder(view);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
@@ -273,9 +257,9 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         long leftDays = Helper.getLeftDays(localDataSet.get(position).getDate(), localDataSet.get(position).getDays());
 
         if (leftDays == 1) {
-            viewHolder.descriptionDayToChange.setText(leftDays + " dzień");
+            viewHolder.descriptionDayToChange.setText(leftDays + Resources.getSystem().getString(R.string.days));
         } else {
-            viewHolder.descriptionDayToChange.setText(leftDays + " dni");
+            viewHolder.descriptionDayToChange.setText(leftDays + Resources.getSystem().getString(R.string.days));
         }
 
         viewHolder.parent = this;
@@ -300,7 +284,6 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         return progressCount * 100 / (daysCount * step);
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return localDataSet.size();

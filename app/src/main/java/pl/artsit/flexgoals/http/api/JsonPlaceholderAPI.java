@@ -1,7 +1,7 @@
 package pl.artsit.flexgoals.http.api;
 
-import pl.artsit.flexgoals.model.goal.FinalGoalUpdateData;
-import pl.artsit.flexgoals.model.goal.QuantitativeGoalUpdateData;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalUpdateData;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalUpdateData;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
 import pl.artsit.flexgoals.model.goal.finals.PredefinedFinalGoal;

@@ -188,7 +188,7 @@
                                 android:textSize="14sp" />
 
                             <TextView
-                                android:id="@+id/textViewStatisticPoints"
+                                android:id="@+id/textViewStatisticPointsU"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
@@ -201,7 +201,7 @@
                                 android:paddingTop="5dp"
                                 android:paddingRight="30dp"
                                 android:paddingBottom="5dp"
-                                android:text="123"
+                                android:text=""
                                 android:textAllCaps="true"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="36sp"
@@ -260,11 +260,11 @@
                         android:text=""
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"
-                        tools:text="123" />
+                        tools:text="" />
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/buttonF"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -323,11 +323,11 @@
                         android:gravity="center|left"
                         android:textColor="#FFFFFF"
                         android:textSize="18sp"
-                        tools:text="123" />
+                        tools:text="" />
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/buttonQ"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

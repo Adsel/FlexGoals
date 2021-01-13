@@ -6,7 +6,7 @@ import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
 import pl.artsit.flexgoals.http.goals.GoalGetCallback;
 import pl.artsit.flexgoals.http.goals.GoalUpdateCallback;
 import pl.artsit.flexgoals.http.goals.PredefinedGoalCallback;
-import pl.artsit.flexgoals.model.goal.FinalGoalUpdateData;
+import pl.artsit.flexgoals.model.goal.finals.FinalGoalUpdateData;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoal;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalData;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
