@@ -66,12 +66,12 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         private TextView finishedText;
         private ConstraintLayout layout;
         private RelativeLayout endTask;
+        private QuantitativeGoalsAdapter parent;
 
         public ViewHolder(View view) {
             super(view);
-            //---------------
-            endTask = (RelativeLayout) itemView.findViewById(R.id.end_task);
-            //---------------
+
+            endTask = itemView.findViewById(R.id.end_task);
             nameOfGoal = view.findViewById(R.id.name_of_goal);
             descriptionOfGoal = view.findViewById(R.id.description_of_goal);
             progressBar = view.findViewById(R.id.progress_bar);
@@ -81,6 +81,10 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
             finishedText = view.findViewById(R.id.view_finished);
             deleteButton = view.findViewById(R.id.delete_button);
             currentView = view;
+
+            deleteButton.setOnClickListener((View v) ->
+                    new QuantitativeGoalService().deleteQuantitativeGoal(this, quantitativeGoal)
+            );
             layout = view.findViewById(R.id.parent_layout);
 
             addActions();
@@ -180,7 +184,7 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
                                     progress
                             ));
                 } else {
-                    modal.showToast(context.getString(R.string.quantitative_progress_modal_invalid));
+                    modal.showToast("invalid");
                 }
             }
         }
@@ -253,13 +257,15 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
 
         viewHolder.getDescriptionToPercentage.setText(finishCount + "%");
 
+        if (viewHolder.quantitativeGoal.getFlag() < 0) {
+            viewHolder.acceptButton.setVisibility(View.GONE);
 
-        viewHolder.acceptButton.setVisibility(View.GONE);
-
-        if (viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_FINISHED) {
-            viewHolder.finishedText.setVisibility(View.VISIBLE);
+            if (viewHolder.quantitativeGoal.getFlag() == Helper.GOAL_FINISHED) {
+                viewHolder.finishedText.setVisibility(View.VISIBLE);
+            } else {
+                viewHolder.finishedText.setVisibility(View.GONE);
+            }
         } else {
-            viewHolder.acceptButton.setVisibility(View.VISIBLE);
             viewHolder.acceptButton.setVisibility(View.VISIBLE);
             viewHolder.finishedText.setVisibility(View.GONE);
         }

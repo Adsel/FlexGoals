@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -61,7 +62,6 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         private final ModalWidgets modal;
         private FinalGoalsAdapter parent;
         private ConstraintLayout constraintLayout;
-        private Button acceptButton;
         private LinearLayout item;
 
         @RequiresApi(api = Build.VERSION_CODES.O)
@@ -147,6 +147,12 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
             );
         }
 
+        private void goToPreview() {
+            MainActivity.previewFinalGoal = finalGoal;
+            Intent intent = new Intent(currentView.getContext(), PreviewQuantitativeActivity.class);
+            currentView.getContext().startActivity(intent);
+        }
+
         @Override
         public void deleteFinalCallback(FinalGoalFlag deletedFinalGoal) {
             parent.localDataSet.remove(deletedFinalGoal);
@@ -194,7 +200,7 @@ public class FinalGoalsAdapter extends RecyclerView.Adapter<FinalGoalsAdapter.Vi
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_final_goal, viewGroup, false);
 
-        return new ViewHolder(view, this);
+        return new ViewHolder(view);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
