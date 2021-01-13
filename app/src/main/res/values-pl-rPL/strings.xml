@@ -51,7 +51,7 @@
     <string name="goal_preview_final_chart_todo">Do wykonania</string>
 
     <!-- STATISTIC FRAGMENT -->
-    <string name="statistic_header">" Statystyka użytkownika"</string>
+    <string name="statistic_header">Statystyka użytkownika</string>
     <string name="statistic_title">Statystyka</string>
     <string name="statistic_username_title">Użytkownik</string>
     <string name="statistic_email_title">Mail</string>
@@ -96,7 +96,7 @@
     <string name="day">Dzień</string>
     <string name="quantitative_activity">ilość</string>
     <string name="log_out">wyloguj</string>
-   <!-- <string name="quantitative_progress_modal_invalid">"Progress must be greater than zero! "</string> -->
+    <string name="quantitative_progress_modal_invalid">Postep musi byc wiekszy od zera</string>
     <string name="deleted_quantitative_goal">Usunięto cel ilościowy!</string>
     <string name="deleted_final_goal">Usunięto cel zaliczeniowy!</string>
     <string name="failed_delete_goal">Nie udało się usunąć celu!</string>
