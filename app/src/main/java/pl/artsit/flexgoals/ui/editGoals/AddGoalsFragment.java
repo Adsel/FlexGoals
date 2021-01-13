@@ -120,7 +120,7 @@ public class AddGoalsFragment extends Fragment implements AddGoalCallback {
     public void createGoal(View view) {
         String name = newGoalName.getText().toString();
         String description = newGoalDesc.getText().toString();
-        String goal = newGoalTarget.getText().toString();
+        String goal = newGoalContent.getText().toString();
 
         String days = newGoalDays.getText().toString();
 
@@ -140,7 +140,7 @@ public class AddGoalsFragment extends Fragment implements AddGoalCallback {
                 );
                 Navigation.findNavController(view).navigate(R.id.nav_home);
             } else if (this.currentTaskType == GOAL_TYPE.QUANTITATIVE) {
-                String step =newGoalDays.getText().toString();
+                String step = newGoalDays.getText().toString();
                 if (!step.equals("") && Integer.parseInt(step) > 0){
                     new QuantitativeGoalService().addQuantitativeGoal(
                             this, new QuantitativeGoalData(
