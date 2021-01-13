@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/nav_add_goal"
         android:name="pl.artsit.flexgoals.ui.editGoals.AddGoalsFragment"
-        android:label="CHECK THIS "
+        android:label="Adding Goals"
         tools:layout="@layout/fragment_add_goals" />
 
     <fragment

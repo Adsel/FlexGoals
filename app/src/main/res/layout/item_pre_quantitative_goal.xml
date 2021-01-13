@@ -15,7 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/parent_layout"
         android:layout_width="match_parent"
-        android:layout_height="348dp"
+        android:layout_height="match_parent"
         android:background="@drawable/bcg_to_card_view"
         android:minHeight="300dp">
 
@@ -60,7 +60,7 @@
             android:background="@drawable/delete_bcg_card"
             android:fontFamily="@font/open_sans"
             android:gravity="center"
-            android:text="Uzyj"
+            android:text="@string/usage"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="14sp"
@@ -69,7 +69,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/goal_to_change" />
+            app:layout_constraintTop_toBottomOf="@+id/goal_to_change"
+            app:layout_constraintVertical_bias="0.6" />
 
         <TextView
             android:id="@+id/step_goal"

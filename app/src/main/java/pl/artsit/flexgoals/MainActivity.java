@@ -28,6 +28,8 @@ import java.util.Locale;
 import pl.artsit.flexgoals.http.services.UserService;
 import pl.artsit.flexgoals.http.user.UserCallback;
 import pl.artsit.flexgoals.model.goal.finals.FinalGoalFlag;
+import pl.artsit.flexgoals.model.goal.finals.PredefinedFinalGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.PredefinedQuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.model.user.User;
 import pl.artsit.flexgoals.ui.auth.LoginActivity;
@@ -45,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements UserCallback {
     public static GOAL_TYPE previewGoalType;
     public static QuantitativeGoalFlag previewQuantitativeGoal;
     public static FinalGoalFlag previewFinalGoal;
+    public static PredefinedFinalGoal predefinedFinalGoal;
+    public static PredefinedQuantitativeGoal predefinedQuantitativeGoal;
     private DrawerLayout drawer;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)

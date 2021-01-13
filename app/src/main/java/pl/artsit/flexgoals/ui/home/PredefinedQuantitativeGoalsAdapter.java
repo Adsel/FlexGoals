@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import pl.artsit.flexgoals.http.goals.DeleteGoalCallback;
 import pl.artsit.flexgoals.http.goals.GoalAchieveCallback;
 import pl.artsit.flexgoals.model.ModalWidgets;
 import pl.artsit.flexgoals.model.goal.quantitative.PredefinedQuantitativeGoal;
+import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoal;
 import pl.artsit.flexgoals.model.goal.quantitative.QuantitativeGoalFlag;
 import pl.artsit.flexgoals.shared.Helper;
 import pl.artsit.flexgoals.ui.addGoals.FinalGoalsAdapter;
@@ -35,6 +37,7 @@ public class PredefinedQuantitativeGoalsAdapter extends RecyclerView.Adapter<Pre
     private TextView yourGoal;
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        private PredefinedQuantitativeGoal predefinedQuantitativeGoal;
 
         public ViewHolder(View view) {
             super(view);
@@ -44,6 +47,11 @@ public class PredefinedQuantitativeGoalsAdapter extends RecyclerView.Adapter<Pre
             stepOne = view.findViewById(R.id.step_value_to_change);
             yourGoal = view.findViewById(R.id.goal_to_change);
             useBtn = view.findViewById(R.id.use_pre_quantitative_button);
+
+            useBtn.setOnClickListener(v -> {
+                MainActivity.predefinedQuantitativeGoal = predefinedQuantitativeGoal;
+                Navigation.findNavController(view).navigate(R.id.nav_add_goal);
+            });
         }
 
         public TextView getNameOfGoal() {
@@ -72,6 +80,7 @@ public class PredefinedQuantitativeGoalsAdapter extends RecyclerView.Adapter<Pre
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        viewHolder.predefinedQuantitativeGoal = localDataSet.get(position);
         viewHolder.getNameOfGoal().setText(localDataSet.get(position).getName());
         viewHolder.getDescOfGoal().setText(localDataSet.get(position).getDescription());
         viewHolder.getYourGoal().setText(localDataSet.get(position).getGoal());
