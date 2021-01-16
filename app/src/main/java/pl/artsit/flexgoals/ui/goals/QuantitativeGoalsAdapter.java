@@ -257,9 +257,9 @@ public class QuantitativeGoalsAdapter extends RecyclerView.Adapter<QuantitativeG
         long leftDays = Helper.getLeftDays(localDataSet.get(position).getDate(), localDataSet.get(position).getDays());
 
         if (leftDays == 1) {
-            viewHolder.descriptionDayToChange.setText(leftDays + Resources.getSystem().getString(R.string.days));
+            viewHolder.descriptionDayToChange.setText(leftDays + viewHolder.currentView.getContext().getString(R.string.days));
         } else {
-            viewHolder.descriptionDayToChange.setText(leftDays + Resources.getSystem().getString(R.string.days));
+            viewHolder.descriptionDayToChange.setText(leftDays + viewHolder.currentView.getContext().getString(R.string.days));
         }
 
         viewHolder.parent = this;
