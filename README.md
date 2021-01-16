@@ -63,8 +63,8 @@ Cele zaliczeniowe - to cele w których odznaczamy tylko czy zostały one wykonan
 Po kliknięciu w tlo celu uzytkownik zostanie przeniesiony do okna statystyki celu.
 Po ukończeniu celu i kliknięciu na jego pole w liście, użytkownik zostaje poinformowany o zakończeniu i ma możliwość przejścia do wykresu obrazującego postepy.
 
-![](https://raw.githubusercontent.com/Adsel/FlexGoals/feature/FG-X-add-photos/md-image/final_goals_list.png)
-![](https://raw.githubusercontent.com/Adsel/FlexGoals/feature/FG-X-add-photos/md-image/end_goal.png) ![](https://raw.githubusercontent.com/Adsel/FlexGoals/feature/FG-X-add-photos/md-image/progress.png)
+![](https://raw.githubusercontent.com/Adsel/FlexGoals/feature/FG-X-add-photos/md-image/final_goals_list.png) ![](https://raw.githubusercontent.com/Adsel/FlexGoals/feature/FG-X-add-photos/md-image/progress.png) ![](https://raw.githubusercontent.com/Adsel/FlexGoals/feature/FG-X-add-photos/md-image/end_goal.png) 
+
 ### 8. Statistic:
 
 Zawiera opis konta oraz przyciski odsyłające nas do danej listy celów.
@@ -75,7 +75,7 @@ Zawiera opis konta oraz przyciski odsyłające nas do danej listy celów.
 W kalendarzu możemy zobaczyć w jakich dniach jakie cele mamy zaplanowane/wykonane.
 Znajduje się tam podział na cele zaliczeniowe i ilościowe.
 
-![](https://raw.githubusercontent.com/Adsel/FlexGoals/feature/FG-X-add-photos/md-image/calender.png)
+![](https://raw.githubusercontent.com/Adsel/FlexGoals/feature/FG-X-add-photos/md-image/calender.png) ![](https://raw.githubusercontent.com/Adsel/FlexGoals/feature/FG-X-add-photos/md-image/quanti.png)
 
 ### 10. Edit goal:
 
