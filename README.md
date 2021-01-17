@@ -1,23 +1,25 @@
 ![](https://raw.githubusercontent.com/Adsel/FlexGoals/dev/app/src/main/res/drawable/logo2.jpg)
-#Instrukcja korzystania z aplikacji
 
-##Zobacz prezentacje:
-https://www.youtube.com/watch?v=UADhUTjwYOM&feature=youtu.be
+# Instrukcja korzystania z aplikacji
 
-##Instalacja:
+## Zobacz prezentację:
+- https://www.youtube.com/watch?v=NU6xRQbCMu8
+- https://www.youtube.com/watch?v=UADhUTjwYOM
+
+## Instalacja:
 1. Sklonuj pobierz aplikację lub sklonuj: https://github.com/Adsel/FlexGoals/tree/master
 	* Za pomocą Android Studio: ![](https://raw.githubusercontent.com/Adsel/FlexGoals/feature/FG-X-add-photos/md-image/mozliwos%20dodaniaprojektu.png)
 	Po dodaniu aplikacji do programu, należy go odpowiednio skonfigurować oraz włączyć za pomocą
 	"Run -> Run 'app'"
 	* Za pomocą telefonu: Pobierz plik na telefon i zainstaluj https://mega.nz/file/6KoGHQqS#aeLPivbXCyR6oPPf69ER-pSTpZOWIPd5zoGglxECvY4
 
-##Uruchomienie aplikacji:
-1. Kliknij w ikonę aplikacji : 
+## Uruchomienie aplikacji:
+1. Kliknij w ikonę aplikacji: 
 ![](https://raw.githubusercontent.com/Adsel/FlexGoals/feature/FG-X-add-photos/md-image/icon_application.png)
 
 Pojawi się ekran logowania. Aby skorzystać z aplikacji zarejestruj się lub zaloguj jeśli masz już konto.
 
-##Korzystanie z aplikacji i panele:
+## Korzystanie z aplikacji i panele:
 ### 1. Register:
 Wprowadź nazwę użytkownika, e-mail, hasło, powtórz hasło, a następnie kliknij "REGISTER"
 ![](https://raw.githubusercontent.com/Adsel/FlexGoals/feature/FG-X-add-photos/md-image/register_in.png)
