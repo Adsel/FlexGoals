@@ -7,27 +7,68 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.FlexGoals.AppBarOverlay">
+        android:background="@drawable/app_bar">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.FlexGoals.PopupOverlay" />
+            android:layout_height="?attr/actionBarSize">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/roboto_light"
+                android:gravity="center"
+                android:letterSpacing="0.2"
+                android:lineSpacingExtra="10sp"
+                android:text="@string/app_name"
+                android:textAllCaps="true"
+                android:textColor="@color/colorAccent"
+                android:textSize="24sp"
+                android:typeface="monospace"
+                app:drawableStartCompat="@drawable/ic_logo_min"
+                app:drawableTintMode="add" />
+
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#00FFFFFF"
+                android:contentDescription="@string/menu_button"
+                android:cropToPadding="false"
+                android:paddingStart="15dp"
+                android:paddingLeft="15dp"
+                android:onClick="toggleDrawer"
+                app:srcCompat="@drawable/ic_menu_icon"
+                tools:ignore="OnClick,RtlSymmetry,VectorDrawableCompat" />
+
+        </FrameLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
+        android:layout_gravity="bottom|start"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:contentDescription="@string/"
+        app:srcCompat="@android:drawable/ic_dialog_email" />-->
+
+    <include
+        layout="@layout/content_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

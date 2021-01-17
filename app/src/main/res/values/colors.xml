@@ -2,9 +2,71 @@
 <resources>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
+    <color name="purple_400">#705998</color>
     <color name="purple_700">#FF3700B3</color>
+    <color name="colorPink">#E244B8</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+
+
+
     <color name="white">#FFFFFFFF</color>
+
+    <color name="colorPrimaryDark">#404040</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorAccent">#b6b6b6</color>
+    <color name="colorWarn">#be2829</color>
+    <color name="colorCorrect">#37BE28</color>
+    <color name="colorHeaderAction">#a904d1</color>
+
+    <color name="gradientEnd">#616161</color>
+    <color name="gradientStart">#0E0E0E</color>
+
+
+    <color name="dodajCel">#A904D1</color>
+    <color name="celeIlosciowe">#D40D9F</color>
+    <color name="celeZaliczeniowe">#E244B8</color>
+    <color name="statystyka">#490980</color>
+    <color name="kalendarz">#00DCFF</color>
+    <color name="wyloguj">#5248D8</color>
+
+    <color name="addGoals">#a904d1</color>
+
+
+    <color name="color_one">#99FF0033</color>
+    <color name="color_two">#998E001C</color>
+    <color name="color_three">#99350057</color>
+    <color name="color_four">#99009FE3</color>
+    <color name="color_five">#CC00549C</color>
+
+    <array name="color_group">
+        <item>@color/dodajCel</item>
+        <item>@color/kalendarz</item>
+        <item>@color/wyloguj</item>
+        <item>@color/statystyka</item>
+        <item>@color/celeIlosciowe</item>
+        <item>@color/celeZaliczeniowe</item>
+    </array>
+
+
+
+    <color name="main_color">#FF00FF</color>
+    <color name="main2_color">#ACA7CB</color>
+    <color name="main3_color">#474554</color>
+    <color name="main4_color">#616161</color>
+    <color name="main5_color">#7C00CF</color>
+
+    <color name="quantitative_item_primary">#7C00CF</color>
+
+    <color name="calendar_selected_day_bg">#E91E63</color>
+    <color name="calendar_selected_range_bg">#8BC34A</color>
+
+    //this is for HighLighted dates
+    <color name="calendar_unavailable_bg">#F44336</color>
+    <color name="calendar_range_middle_unavailable_bg">#F44336</color>
+
+    // this is for Deactivated dates
+    <color name="calendar_range_middle_deactivated_bg">#673AB7</color>
 </resources>

@@ -8,18 +8,60 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="pl.artsit.flexgoals.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="@string/menu_glowne"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="pl.artsit.flexgoals.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:name="pl.artsit.flexgoals.ui.main.MainFragment"
+        android:label="@string/menu_celeIlosciowe"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
         android:name="pl.artsit.flexgoals.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
+        android:label="@string/menu_celeZaliczeniowe"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_statistic"
+        android:name="pl.artsit.flexgoals.ui.stat.StatisticsFragment"
+        android:label="@string/menu_statystyka"
+        tools:layout="@layout/fragment_statistic" />
+
+    <fragment
+        android:id="@+id/nav_calender"
+        android:name="pl.artsit.flexgoals.ui.calendar.CalendarFragment"
+        android:label="@string/menu_kalendarz"
+        tools:layout="@layout/fragment_calender" />
+
+    <fragment
+        android:id="@+id/nav_add_goal"
+        android:name="pl.artsit.flexgoals.ui.editGoals.AddGoalsFragment"
+        android:label="Adding Goals"
+        tools:layout="@layout/fragment_add_goals" />
+
+    <fragment
+        android:id="@+id/nav_quantitative_goals"
+        android:name="pl.artsit.flexgoals.ui.goals.GoalQuantitativeFragment"
+        android:label="Quantitative Goals "
+        tools:layout="@layout/fragment_goal_quantitative" />
+
+    <fragment
+        android:id="@+id/nav_final_goals"
+        android:name="pl.artsit.flexgoals.ui.goals.GoalFinalFragment"
+        android:label="Final Goals "
+        tools:layout="@layout/fragment_goal_final" />
+
+    <fragment
+        android:id="@+id/nav_goal_preview"
+        android:name="pl.artsit.flexgoals.ui.goals.GoalQuantitativePreviewFragment"
+        android:label="Postep"
+        tools:layout="@layout/fragment_add_goals" />
+
+    <fragment
+        android:id="@+id/nav_edit_goal"
+        android:name="pl.artsit.flexgoals.ui.editGoals.EditGoalsFragment"
+        android:label="@string/menu_edit_goal"
+        tools:layout="@layout/fragment_edit_goals" />
 </navigation>
